@@ -1,4 +1,4 @@
-create table votacao_secao_2010(
+create table votacao_secao_2014(
     DATA_GERACAO STRING,
     HORA_GERACAO STRING,
     ANO_ELEICAO STRING,
@@ -21,10 +21,66 @@ WITH SERDEPROPERTIES (
 'serialization.encoding'='ISO-8859-1'
 )
 STORED AS TEXTFILE;
-Alter table votacao_secao_2010 set location 's3://datascience2016/data/gzip/votacao_secao/2010/';
+Alter table votacao_secao_2014 set location 's3://datascience2016/data/gzip/votacao_secao/2014/';
 
 
-create table legenda_2010(
+create table candidato_2014 
+    (DATA_GERACAO STRING,
+    HORA_GERACAO STRING,
+    ANO_ELEICAO STRING,
+    NUM_TURNO STRING,
+    DESCRICAO_ELEICAO STRING,
+    SIGLA_UF STRING,
+    SIGLA_UE STRING,
+    DESCRICAO_UE STRING,
+    CODIGO_CARGO STRING,
+    DESCRICAO_CARGO STRING,
+    NOME_CANDIDATO STRING,
+    SEQUENCIAL_CANDIDATO STRING,
+    NUMERO_CANDIDATO STRING,
+    CPF_CANDIDATO STRING,
+    NOME_URNA_CANDIDATO STRING,
+    COD_SITUACAO_CANDIDATURA STRING,
+    DES_SITUACAO_CANDIDATURA STRING,
+    NUMERO_PARTIDO STRING,
+    SIGLA_PARTIDO STRING,
+    NOME_PARTIDO STRING,
+    CODIGO_LEGENDA STRING,
+    SIGLA_LEGENDA STRING,
+    COMPOSICAO_LEGENDA STRING,
+    NOME_LEGENDA STRING,
+    CODIGO_OCUPACAO STRING,
+    DESCRICAO_OCUPACAO STRING,
+    DATA_NASCIMENTO STRING,
+    NUM_TITULO_ELEITORAL_CANDIDATO STRING,
+    IDADE_DATA_ELEICAO STRING,
+    CODIGO_SEXO STRING,
+    DESCRICAO_SEXO STRING,
+    COD_GRAU_INSTRUCAO STRING,
+    DESCRICAO_GRAU_INSTRUCAO STRING,
+    CODIGO_ESTADO_CIVIL STRING,
+    DESCRICAO_ESTADO_CIVIL STRING,
+    CODIGO_COR_RACA STRING,
+    DESCRICAO_COR_RACA STRING,
+    CODIGO_NACIONALIDADE STRING,
+    DESCRICAO_NACIONALIDADE STRING,
+    SIGLA_UF_NASCIMENTO STRING,
+    CODIGO_MUNICIPIO_NASCIMENTO STRING,
+    NOME_MUNICIPIO_NASCIMENTO STRING,
+    DESPESA_MAX_CAMPANHA STRING,
+    COD_SIT_TOT_TURNO STRING,
+    DESC_SIT_TOT_TURNO STRING,
+    NM_EMAIL STRING)
+ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde'
+WITH SERDEPROPERTIES (
+'separatorChar' = '\;',
+'quoteChar'     = '\"',
+'serialization.encoding'='ISO-8859-1'
+)
+STORED AS TEXTFILE;
+Alter table candidato_2014 set location 's3://datascience2016/data/gzip/candidatos/candidato_2014.csv.gz';
+
+create table legenda_2014(
     DATA_GERACAO STRING,
     HORA_GERACAO STRING,
     ANO_ELEICAO STRING,
@@ -49,64 +105,122 @@ WITH SERDEPROPERTIES (
 'quoteChar'     = '\"'
 )
 STORED AS TEXTFILE;
-Alter table legenda_2010 set location 's3://datascience2016/data/gzip/legendas/legendas_2010.csv.gz';
+Alter table legenda_2014 set location 's3://datascience2016/data/gzip/legendas/legendas_2014.csv.gz';
 
-create table candidato_2010 
-(DATA_GERACAO STRING,
-HORA_GERACAO STRING,
-ANO_ELEICAO STRING,
-NUM_TURNO STRING,
-DESCRICAO_ELEICAO STRING,
-SIGLA_UF STRING,
-SIGLA_UE STRING,
-DESCRICAO_UE STRING,
-CODIGO_CARGO STRING,
-DESCRICAO_CARGO STRING,
-NOME_CANDIDATO STRING,
-SEQUENCIAL_CANDIDATO STRING,
-NUMERO_CANDIDATO STRING,
-CPF_CANDIDATO STRING,
-NOME_URNA_CANDIDATO STRING,
-COD_SITUACAO_CANDIDATURA STRING,
-DES_SITUACAO_CANDIDATURA STRING,
-NUMERO_PARTIDO STRING,
-SIGLA_PARTIDO STRING,
-NOME_PARTIDO STRING,
-CODIGO_LEGENDA STRING,
-SIGLA_LEGENDA STRING,
-COMPOSICAO_LEGENDA STRING,
-NOME_LEGENDA STRING,
-CODIGO_OCUPACAO STRING,
-DESCRICAO_OCUPACAO STRING,
-DATA_NASCIMENTO STRING,
-NUM_TITULO_ELEITORAL_CANDIDATO STRING,
-IDADE_DATA_ELEICAO STRING,
-CODIGO_SEXO STRING,
-DESCRICAO_SEXO STRING,
-COD_GRAU_INSTRUCAO STRING,
-DESCRICAO_GRAU_INSTRUCAO STRING,
-CODIGO_ESTADO_CIVIL STRING,
-DESCRICAO_ESTADO_CIVIL STRING,
-CODIGO_NACIONALIDADE STRING,
-DESCRICAO_NACIONALIDADE STRING,
-SIGLA_UF_NASCIMENTO STRING,
-CODIGO_MUNICIPIO_NASCIMENTO STRING,
-NOME_MUNICIPIO_NASCIMENTO STRING,
-DESPESA_MAX_CAMPANHA STRING,
-COD_SIT_TOT_TURNO STRING,
-DESC_SIT_TOT_TURNO STRING)
-ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde'
-WITH SERDEPROPERTIES (
-'separatorChar' = '\;',
-'quoteChar'     = '\"',
-'serialization.encoding'='ISO-8859-1'
-)
-STORED AS TEXTFILE;
-Alter table candidato_2010 set location 's3://datascience2016/data/gzip/candidatos/candidato_2010.csv.gz';
+create view votacao_secao_2014_macro as
+select 
+ANO_ELEICAO,
+NUM_TURNO,
+CODIGO_CARGO,
+NUM_VOTAVEL,
+SIGLA_UE,
+CODIGO_MACRO,
+NOME_MACRO,
+sum(cast(QTDE_VOTOS AS INT)) as QTDE_VOTOS
+from (
+select v.*,
+m.CODIGO_MACRO,m.NOME_MACRO
+from votacao_secao_2014 v join aux_municipio as m on m.CODIGO_MUNICIPIO=v.CODIGO_MUNICIPIO
+) as v_s_m group by 
+ANO_ELEICAO,
+NUM_TURNO,
+SIGLA_UE,
+CODIGO_CARGO,
+NUM_VOTAVEL,
+CODIGO_MACRO,
+NOME_MACRO;
 
+create view votacao_secao_2014_uf as
+select 
+ANO_ELEICAO,
+NUM_TURNO,
+CODIGO_CARGO,
+NUM_VOTAVEL,
+SIGLA_UE,
+CODIGO_MACRO,
+NOME_MACRO,
+UF,
+NOME_UF,
+sum(cast(QTDE_VOTOS AS INT)) as QTDE_VOTOS
+from (
+select v.*,
+m.CODIGO_MACRO,m.NOME_MACRO,m.UF,m.NOME_UF 
+from votacao_secao_2014 v join aux_municipio as m on m.CODIGO_MUNICIPIO=v.CODIGO_MUNICIPIO
+) as v_s_m group by ANO_ELEICAO,
+NUM_TURNO,
+CODIGO_CARGO,
+NUM_VOTAVEL,
+SIGLA_UE,
+CODIGO_MACRO,
+NOME_MACRO,
+UF,
+NOME_UF;
 
+create view votacao_secao_2014_meso as
+select 
+ANO_ELEICAO,
+NUM_TURNO,
+CODIGO_CARGO,
+NUM_VOTAVEL,
+SIGLA_UE,
+CODIGO_MACRO,
+NOME_MACRO,
+UF,
+NOME_UF,
+CODIGO_MESO,
+NOME_MESO,
+sum(cast(QTDE_VOTOS AS INT)) as QTDE_VOTOS
+from (
+select v.*,
+m.CODIGO_MACRO,m.NOME_MACRO,m.UF,m.NOME_UF,m.CODIGO_MESO,m.NOME_MESO 
+from votacao_secao_2014 v join aux_municipio as m on m.CODIGO_MUNICIPIO=v.CODIGO_MUNICIPIO
+) as v_s_m group by ANO_ELEICAO,
+NUM_TURNO,
+CODIGO_CARGO,
+NUM_VOTAVEL,
+CODIGO_MACRO,
+NOME_MACRO,
+SIGLA_UE,
+UF,
+NOME_UF,
+CODIGO_MESO,
+NOME_MESO;
 
-create view votacao_secao_2010_macro_candidato as
+create view votacao_secao_2014_micro as
+select 
+ANO_ELEICAO,
+NUM_TURNO,
+CODIGO_CARGO,
+NUM_VOTAVEL,
+SIGLA_UE,
+CODIGO_MACRO,
+NOME_MACRO,
+UF,
+NOME_UF,
+CODIGO_MESO,
+NOME_MESO,
+CODIGO_MICRO,
+NOME_MICRO,
+sum(cast(QTDE_VOTOS AS INT)) as QTDE_VOTOS
+from (
+select v.*,
+m.CODIGO_MACRO,m.NOME_MACRO,m.UF,m.NOME_UF,m.CODIGO_MESO,m.NOME_MESO,m.CODIGO_MICRO,m.NOME_MICRO 
+from votacao_secao_2014 v join aux_municipio as m on m.CODIGO_MUNICIPIO=v.CODIGO_MUNICIPIO
+) as v_s_m group by ANO_ELEICAO,
+NUM_TURNO,
+CODIGO_CARGO,
+NUM_VOTAVEL,
+CODIGO_MACRO,
+UF,
+NOME_UF,
+SIGLA_UE,
+NOME_MACRO,
+CODIGO_MESO,
+NOME_MESO,
+CODIGO_MICRO,
+NOME_MICRO;
+
+create view votacao_secao_2014_macro_candidato as
 select
     c.ANO_ELEICAO,
     c.NUM_TURNO,
@@ -140,8 +254,8 @@ select
     c.DESCRICAO_GRAU_INSTRUCAO,
     c.CODIGO_ESTADO_CIVIL,
     c.DESCRICAO_ESTADO_CIVIL,
-    "#NE#",
-    "#NE#",
+    c.CODIGO_COR_RACA,
+    c.DESCRICAO_COR_RACA,
     c.CODIGO_NACIONALIDADE,
     c.DESCRICAO_NACIONALIDADE,
     c.SIGLA_UF_NASCIMENTO,
@@ -150,19 +264,20 @@ select
     c.DESPESA_MAX_CAMPANHA,
     c.COD_SIT_TOT_TURNO,
     c.DESC_SIT_TOT_TURNO,
-    "#NE#",
+    c.NM_EMAIL,
     v.CODIGO_MACRO,
     v.NOME_MACRO,
     v.QTDE_VOTOS
-from votacao_secao_2010_macro as v
-join candidato_2010 as c
+from votacao_secao_2014_macro as v
+join candidato_2014 as c
 on v.SIGLA_UE=c.SIGLA_UE
 AND v.ANO_ELEICAO=c.ANO_ELEICAO 
 AND v.NUM_TURNO=c.NUM_TURNO
 AND v.CODIGO_CARGO=c.CODIGO_CARGO
 AND v.NUM_VOTAVEL=c.NUMERO_CANDIDATO;
 
-create view votacao_secao_2010_uf_candidato as
+
+create view votacao_secao_2014_uf_candidato as
 select
     c.ANO_ELEICAO,
     c.NUM_TURNO,
@@ -196,8 +311,8 @@ select
     c.DESCRICAO_GRAU_INSTRUCAO,
     c.CODIGO_ESTADO_CIVIL,
     c.DESCRICAO_ESTADO_CIVIL,
-    "#NE#",
-    "#NE#",
+    c.CODIGO_COR_RACA,
+    c.DESCRICAO_COR_RACA,
     c.CODIGO_NACIONALIDADE,
     c.DESCRICAO_NACIONALIDADE,
     c.SIGLA_UF_NASCIMENTO,
@@ -206,23 +321,21 @@ select
     c.DESPESA_MAX_CAMPANHA,
     c.COD_SIT_TOT_TURNO,
     c.DESC_SIT_TOT_TURNO,
-    "#NE#",
+    c.NM_EMAIL,
     v.CODIGO_MACRO,
     v.NOME_MACRO,
     v.UF,
     v.NOME_UF,
     v.QTDE_VOTOS
-from votacao_secao_2010_uf as v
-join candidato_2010 as c
+from votacao_secao_2014_uf as v
+join candidato_2014 as c
 on v.SIGLA_UE=c.SIGLA_UE
 AND v.ANO_ELEICAO=c.ANO_ELEICAO 
 AND v.NUM_TURNO=c.NUM_TURNO
 AND v.CODIGO_CARGO=c.CODIGO_CARGO
 AND v.NUM_VOTAVEL=c.NUMERO_CANDIDATO;
 
-
-
-create view votacao_secao_2010_meso_candidato as
+create view votacao_secao_2014_uf_candidato as
 select
     c.ANO_ELEICAO,
     c.NUM_TURNO,
@@ -256,8 +369,8 @@ select
     c.DESCRICAO_GRAU_INSTRUCAO,
     c.CODIGO_ESTADO_CIVIL,
     c.DESCRICAO_ESTADO_CIVIL,
-    "#NE#",
-    "#NE#",
+    c.CODIGO_COR_RACA,
+    c.DESCRICAO_COR_RACA,
     c.CODIGO_NACIONALIDADE,
     c.DESCRICAO_NACIONALIDADE,
     c.SIGLA_UF_NASCIMENTO,
@@ -266,7 +379,65 @@ select
     c.DESPESA_MAX_CAMPANHA,
     c.COD_SIT_TOT_TURNO,
     c.DESC_SIT_TOT_TURNO,
-    "#NE#",
+    c.NM_EMAIL,
+    v.CODIGO_MACRO,
+    v.NOME_MACRO,
+    v.UF,
+    v.NOME_UF,
+    v.QTDE_VOTOS
+from votacao_secao_2014_uf as v
+join candidato_2014 as c
+on v.SIGLA_UE=c.SIGLA_UE
+AND v.ANO_ELEICAO=c.ANO_ELEICAO 
+AND v.NUM_TURNO=c.NUM_TURNO
+AND v.CODIGO_CARGO=c.CODIGO_CARGO
+AND v.NUM_VOTAVEL=c.NUMERO_CANDIDATO;
+
+create view votacao_secao_2014_meso_candidato as
+select
+    c.ANO_ELEICAO,
+    c.NUM_TURNO,
+    c.DESCRICAO_ELEICAO,
+    c.SIGLA_UE,
+    c.DESCRICAO_UE ,
+    c.CODIGO_CARGO ,
+    c.DESCRICAO_CARGO ,
+    c.NOME_CANDIDATO ,
+    c.SEQUENCIAL_CANDIDATO ,
+    c.NUMERO_CANDIDATO ,
+    c.CPF_CANDIDATO ,
+    c.NOME_URNA_CANDIDATO ,
+    c.COD_SITUACAO_CANDIDATURA ,
+    c.DES_SITUACAO_CANDIDATURA ,
+    c.NUMERO_PARTIDO ,
+    c.SIGLA_PARTIDO ,
+    c.NOME_PARTIDO ,
+    c.CODIGO_LEGENDA ,
+    c.SIGLA_LEGENDA ,
+    c.COMPOSICAO_LEGENDA ,
+    c.NOME_LEGENDA ,
+    c.CODIGO_OCUPACAO,
+    c.DESCRICAO_OCUPACAO,
+    c.DATA_NASCIMENTO,
+    c.NUM_TITULO_ELEITORAL_CANDIDATO,
+    c.IDADE_DATA_ELEICAO,
+    c.CODIGO_SEXO,
+    c.DESCRICAO_SEXO,
+    c.COD_GRAU_INSTRUCAO,
+    c.DESCRICAO_GRAU_INSTRUCAO,
+    c.CODIGO_ESTADO_CIVIL,
+    c.DESCRICAO_ESTADO_CIVIL,
+    c.CODIGO_COR_RACA,
+    c.DESCRICAO_COR_RACA,
+    c.CODIGO_NACIONALIDADE,
+    c.DESCRICAO_NACIONALIDADE,
+    c.SIGLA_UF_NASCIMENTO,
+    c.CODIGO_MUNICIPIO_NASCIMENTO,
+    c.NOME_MUNICIPIO_NASCIMENTO,
+    c.DESPESA_MAX_CAMPANHA,
+    c.COD_SIT_TOT_TURNO,
+    c.DESC_SIT_TOT_TURNO,
+    c.NM_EMAIL,
     v.CODIGO_MACRO,
     v.NOME_MACRO,
     v.CODIGO_MESO,
@@ -274,16 +445,15 @@ select
     v.UF,
     v.NOME_UF,
     v.QTDE_VOTOS
-from votacao_secao_2010_meso as v
-join candidato_2010 as c
+from votacao_secao_2014_meso as v
+join candidato_2014 as c
 on v.SIGLA_UE=c.SIGLA_UE
 AND v.ANO_ELEICAO=c.ANO_ELEICAO 
 AND v.NUM_TURNO=c.NUM_TURNO
 AND v.CODIGO_CARGO=c.CODIGO_CARGO
 AND v.NUM_VOTAVEL=c.NUMERO_CANDIDATO;
 
-
-create view votacao_secao_2010_micro_candidato as
+create view votacao_secao_2014_micro_candidato as
 select
     c.ANO_ELEICAO,
     c.NUM_TURNO,
@@ -317,8 +487,8 @@ select
     c.DESCRICAO_GRAU_INSTRUCAO,
     c.CODIGO_ESTADO_CIVIL,
     c.DESCRICAO_ESTADO_CIVIL,
-    "#NE#",
-    "#NE#",
+    c.CODIGO_COR_RACA,
+    c.DESCRICAO_COR_RACA,
     c.CODIGO_NACIONALIDADE,
     c.DESCRICAO_NACIONALIDADE,
     c.SIGLA_UF_NASCIMENTO,
@@ -327,7 +497,7 @@ select
     c.DESPESA_MAX_CAMPANHA,
     c.COD_SIT_TOT_TURNO,
     c.DESC_SIT_TOT_TURNO,
-    "#NE#",
+    c.NM_EMAIL,
     v.CODIGO_MACRO,
     v.NOME_MACRO,
     v.UF,
@@ -337,8 +507,8 @@ select
     v.CODIGO_MICRO,
     v.NOME_MICRO,
     v.QTDE_VOTOS
-from votacao_secao_2010_micro as v
-join candidato_2010 as c
+from votacao_secao_2014_micro as v
+join candidato_2014 as c
 on v.SIGLA_UE=c.SIGLA_UE
 AND v.ANO_ELEICAO=c.ANO_ELEICAO 
 AND v.NUM_TURNO=c.NUM_TURNO
@@ -346,7 +516,8 @@ AND v.CODIGO_CARGO=c.CODIGO_CARGO
 AND v.NUM_VOTAVEL=c.NUMERO_CANDIDATO;
 
 
-create view votacao_secao_2010_macro_presidente as
+
+create view votacao_secao_2014_macro_presidente as
 select
     c.ANO_ELEICAO,
     c.NUM_TURNO,
@@ -380,8 +551,8 @@ select
     c.DESCRICAO_GRAU_INSTRUCAO,
     c.CODIGO_ESTADO_CIVIL,
     c.DESCRICAO_ESTADO_CIVIL,
-    "#NE#" as CODIGO_COR_RACA,
-    "#NE#" as DESCRICAO_COR_RACA,
+    c.CODIGO_COR_RACA,
+    c.DESCRICAO_COR_RACA,
     c.CODIGO_NACIONALIDADE,
     c.DESCRICAO_NACIONALIDADE,
     c.SIGLA_UF_NASCIMENTO,
@@ -390,7 +561,7 @@ select
     c.DESPESA_MAX_CAMPANHA,
     c.COD_SIT_TOT_TURNO,
     c.DESC_SIT_TOT_TURNO,
-    "#NE#" as NM_EMAIL,
+    c.NM_EMAIL,
     v.CODIGO_MACRO,
     v.NOME_MACRO,
     v.QTDE_VOTOS
@@ -406,7 +577,7 @@ sum(cast(QTDE_VOTOS AS INT)) as QTDE_VOTOS
 from (
 select v.*,
 m.CODIGO_MACRO,m.NOME_MACRO
-from votacao_secao_2010 v join aux_municipio as m on m.CODIGO_MUNICIPIO=v.CODIGO_MUNICIPIO AND v.CODIGO_CARGO="1"
+from votacao_secao_2014 v join aux_municipio as m on m.CODIGO_MUNICIPIO=v.CODIGO_MUNICIPIO AND v.CODIGO_CARGO="1"
 ) as v_s_m group by 
 ANO_ELEICAO,
 NUM_TURNO,
@@ -415,7 +586,7 @@ NUM_VOTAVEL,
 CODIGO_MACRO,
 NOME_MACRO
 ) as v
-join candidato_2010 as c on
+join candidato_2014 as c on
 v.ANO_ELEICAO=c.ANO_ELEICAO 
 AND v.NUM_TURNO=c.NUM_TURNO
 AND v.CODIGO_CARGO="1"
@@ -423,7 +594,7 @@ AND c.CODIGO_CARGO="1"
 AND v.NUM_VOTAVEL=c.NUMERO_CANDIDATO;
 
 
-create view votacao_secao_2010_uf_presidente as
+create view votacao_secao_2014_uf_presidente as
 select
     c.ANO_ELEICAO,
     c.NUM_TURNO,
@@ -457,8 +628,8 @@ select
     c.DESCRICAO_GRAU_INSTRUCAO,
     c.CODIGO_ESTADO_CIVIL,
     c.DESCRICAO_ESTADO_CIVIL,
-    "#NE#" as CODIGO_COR_RACA,
-    "#NE#" as DESCRICAO_COR_RACA,
+    c.CODIGO_COR_RACA,
+    c.DESCRICAO_COR_RACA,
     c.CODIGO_NACIONALIDADE,
     c.DESCRICAO_NACIONALIDADE,
     c.SIGLA_UF_NASCIMENTO,
@@ -467,7 +638,7 @@ select
     c.DESPESA_MAX_CAMPANHA,
     c.COD_SIT_TOT_TURNO,
     c.DESC_SIT_TOT_TURNO,
-    "#NE#" as NM_EMAIL,
+    c.NM_EMAIL,
     v.CODIGO_MACRO,
     v.NOME_MACRO,
     v.UF,
@@ -487,7 +658,7 @@ sum(cast(QTDE_VOTOS AS INT)) as QTDE_VOTOS
 from (
 select v.*,
 m.CODIGO_MACRO,m.NOME_MACRO,m.UF,m.NOME_UF
-from votacao_secao_2010 v join aux_municipio as m on m.CODIGO_MUNICIPIO=v.CODIGO_MUNICIPIO AND v.CODIGO_CARGO="1"
+from votacao_secao_2014 v join aux_municipio as m on m.CODIGO_MUNICIPIO=v.CODIGO_MUNICIPIO AND v.CODIGO_CARGO="1"
 ) as v_s_m group by 
 ANO_ELEICAO,
 NUM_TURNO,
@@ -498,14 +669,14 @@ NOME_MACRO,
 UF,
 NOME_UF
 ) as v
-join candidato_2010 as c on
+join candidato_2014 as c on
 v.ANO_ELEICAO=c.ANO_ELEICAO 
 AND v.NUM_TURNO=c.NUM_TURNO
 AND v.CODIGO_CARGO="1"
 AND c.CODIGO_CARGO="1"
 AND v.NUM_VOTAVEL=c.NUMERO_CANDIDATO;
 
-create view votacao_secao_2010_meso_presidente as
+create view votacao_secao_2014_meso_presidente as
 select
     c.ANO_ELEICAO,
     c.NUM_TURNO,
@@ -539,8 +710,8 @@ select
     c.DESCRICAO_GRAU_INSTRUCAO,
     c.CODIGO_ESTADO_CIVIL,
     c.DESCRICAO_ESTADO_CIVIL,
-    "#NE#" as CODIGO_COR_RACA,
-    "#NE#" as DESCRICAO_COR_RACA,
+    c.CODIGO_COR_RACA,
+    c.DESCRICAO_COR_RACA,
     c.CODIGO_NACIONALIDADE,
     c.DESCRICAO_NACIONALIDADE,
     c.SIGLA_UF_NASCIMENTO,
@@ -549,7 +720,7 @@ select
     c.DESPESA_MAX_CAMPANHA,
     c.COD_SIT_TOT_TURNO,
     c.DESC_SIT_TOT_TURNO,
-    "#NE#" as NM_EMAIL,
+    c.NM_EMAIL,
     v.CODIGO_MACRO,
     v.NOME_MACRO,
     v.UF,
@@ -573,7 +744,7 @@ sum(cast(QTDE_VOTOS AS INT)) as QTDE_VOTOS
 from (
 select v.*,
 m.CODIGO_MACRO,m.NOME_MACRO,m.UF,m.NOME_UF,m.CODIGO_MESO,m.NOME_MESO
-from votacao_secao_2010 v join aux_municipio as m on m.CODIGO_MUNICIPIO=v.CODIGO_MUNICIPIO AND v.CODIGO_CARGO="1"
+from votacao_secao_2014 v join aux_municipio as m on m.CODIGO_MUNICIPIO=v.CODIGO_MUNICIPIO AND v.CODIGO_CARGO="1"
 ) as v_s_m group by 
 ANO_ELEICAO,
 NUM_TURNO,
@@ -586,14 +757,14 @@ NOME_UF,
 CODIGO_MESO,
 NOME_MESO
 ) as v
-join candidato_2010 as c on
+join candidato_2014 as c on
 v.ANO_ELEICAO=c.ANO_ELEICAO 
 AND v.NUM_TURNO=c.NUM_TURNO
 AND v.CODIGO_CARGO="1"
 AND c.CODIGO_CARGO="1"
 AND v.NUM_VOTAVEL=c.NUMERO_CANDIDATO;
 
-create view votacao_secao_2010_micro_presidente as
+create view votacao_secao_2014_micro_presidente as
 select
     c.ANO_ELEICAO,
     c.NUM_TURNO,
@@ -627,8 +798,8 @@ select
     c.DESCRICAO_GRAU_INSTRUCAO,
     c.CODIGO_ESTADO_CIVIL,
     c.DESCRICAO_ESTADO_CIVIL,
-    "#NE#" as CODIGO_COR_RACA,
-    "#NE#" as DESCRICAO_COR_RACA,
+    c.CODIGO_COR_RACA,
+    c.DESCRICAO_COR_RACA,
     c.CODIGO_NACIONALIDADE,
     c.DESCRICAO_NACIONALIDADE,
     c.SIGLA_UF_NASCIMENTO,
@@ -637,7 +808,7 @@ select
     c.DESPESA_MAX_CAMPANHA,
     c.COD_SIT_TOT_TURNO,
     c.DESC_SIT_TOT_TURNO,
-    "#NE#" as NM_EMAIL,
+    c.NM_EMAIL,
     v.CODIGO_MACRO,
     v.NOME_MACRO,
     v.UF,
@@ -665,7 +836,7 @@ sum(cast(QTDE_VOTOS AS INT)) as QTDE_VOTOS
 from (
 select v.*,
 m.CODIGO_MACRO,m.NOME_MACRO,m.UF,m.NOME_UF,m.CODIGO_MESO,m.NOME_MESO,m.CODIGO_MICRO,m.NOME_MICRO
-from votacao_secao_2010 v join aux_municipio as m on m.CODIGO_MUNICIPIO=v.CODIGO_MUNICIPIO AND v.CODIGO_CARGO="1"
+from votacao_secao_2014 v join aux_municipio as m on m.CODIGO_MUNICIPIO=v.CODIGO_MUNICIPIO AND v.CODIGO_CARGO="1"
 ) as v_s_m group by 
 ANO_ELEICAO,
 NUM_TURNO,
@@ -680,7 +851,7 @@ NOME_MESO,
 CODIGO_MICRO,
 NOME_MICRO
 ) as v
-join candidato_2010 as c on
+join candidato_2014 as c on
 v.ANO_ELEICAO=c.ANO_ELEICAO 
 AND v.NUM_TURNO=c.NUM_TURNO
 AND v.CODIGO_CARGO="1"

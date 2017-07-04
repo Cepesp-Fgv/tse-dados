@@ -1,6 +1,6 @@
 # tse-dados
 
-Esse projeto contém os códigos e análises para criação do CEPESPData (www.cepesp.io). O CEPESPData é um repositório que permite o acesso, de forma fácil e confiável, aos resultados e dados eleitorais. O CEPESPData permite a consulta e fácil visualização de resultados e dados eleitorais para todos os cargos, a partir de diferentes agregações geográficas (Brasil, UF, município, micro-região, entre outras), de 1998 a 2014. 
+Esse projeto contém os códigos e análises para criação do CEPESPData (cepesp.io). O CEPESPData é um repositório que permite o acesso, de forma fácil e confiável, aos resultados e dados eleitorais. O CEPESPData permite a consulta e fácil visualização de resultados e dados eleitorais para todos os cargos, a partir de diferentes agregações geográficas (Brasil, UF, município, micro-região, entre outras), de 1998 a 2014. 
 
 Além de facilitar o acesso aos dados eleitorais, temos o objetivo de criar um repositório aberto e transparente. Dessa forma, nossos códigos, análises e testes de consistências dos dados estão disponíveis neste repositório. Estamos desenvolvendo também, um R API e (https://github.com/Cepesp-Fgv/cepesp-r) para auxiliar na consulta dos dados no nosso repositório a partir do R.
 

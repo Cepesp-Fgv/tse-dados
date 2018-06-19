@@ -1,0 +1,629 @@
+# English translations for PROJECT.
+# Copyright (C) 2017 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2017-07-31 00:41-0300\n"
+"PO-Revision-Date: 2017-07-31 00:44-0300\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.4.0\n"
+
+#: templates/home.html:12
+msgid "pages.home.welcome"
+msgstr "Welcome to CepespData"
+
+#: templates/home.html:14
+msgid "pages.home.welcome-description"
+msgstr "The Center of Politics and Economics of the Public Sector (<a href=\"http://cepesp.fgv.br\" target=\"_blank\">CEPESP</a>) of the Getulio Vargas Foundation (<a href=\"http://www.fgv.br\" target=\"_blank\">FGV</a>) makes easy to acess different types of political data sets"
+
+#: templates/home.html:17
+msgid "pages.home.see-more"
+msgstr "See below current data sets"
+
+#: templates/home.html:31
+msgid "pages.home.elections"
+msgstr "Elections by type of political office"
+
+#: templates/home.html:34
+msgid "pages.home.elections-description"
+msgstr "This form allows queries by a specific type of political office. Queries can also be aggregated by parties or geographically"
+
+#: templates/home.html:36 templates/query.html:146
+msgid "pages.home.query"
+msgstr "Make a query"
+
+#: templates/query.html:27
+msgid "pages.query.title"
+msgstr "Electoral results by type of political office"
+
+#: templates/query.html:33
+msgid "pages.query.description"
+msgstr "This form allows queries to electoral data sets by an specific office type. Queries can also be aggregated by parties or geographically."
+
+msgid "pages.votosmun.title"
+msgstr "Electoral Results"
+
+msgid "pages.votosmun.description"
+msgstr "This form allows you to search the election results by specifying an elective position. Searchs can also be aggregated at the regional level."
+
+#: templates/query.html:40
+msgid "pages.query.job"
+msgstr "Type of political office"
+
+#: templates/query.html:53
+msgid "pages.query.regional"
+msgstr "Geographical aggregation"
+
+#: templates/query.html:67
+msgid "pages.query.political"
+msgstr "Political aggregation"
+
+#: templates/query.html:77
+msgid "pages.query.year"
+msgstr "Year"
+
+#: templates/query.html:123 templates/query.html:137
+msgid "pages.query.add"
+msgstr "Add"
+
+#: templates/query.html:169 templates/query.html:196
+msgid "pages.query.add-columns"
+msgstr "Add columns"
+
+#: templates/query.html:173
+msgid "pages.query.clear-filters"
+msgstr "Clear filters"
+
+msgid "pages.query.download-sql"
+msgstr "SQL"
+
+msgid "pages.query.report-error"
+msgstr "Report error"
+
+#: templates/query.html:225
+msgid "pages.query.cancel"
+msgstr "Cancel"
+
+#: templates/query.html:226
+msgid "pages.query.select-default"
+msgstr "Select defaults"
+
+#: templates/query.html:227
+msgid "pages.query.select-all"
+msgstr "Select All"
+
+#: templates/query.html:228
+msgid "pages.query.update-table"
+msgstr "Update Table"
+
+#: templates/layout.html:59
+msgid "layout.menu.home"
+msgstr "Home"
+
+msgid "layout.menu.apps"
+msgstr "Apps"
+
+msgid "layout.menu.queries"
+msgstr "Queries"
+
+#: templates/layout.html:64
+msgid "layout.menu.elections"
+msgstr "Elections by type of political office"
+
+msgid "layout.menu.electoral-result"
+msgstr "Electoral Results"
+
+#: templates/layout.html:69
+msgid "layout.menu.integration"
+msgstr "API Integration"
+
+msgid "descriptions.ANO_ELEICAO"
+msgstr "Ano da eleição"
+
+msgid "descriptions.NUM_TURNO"
+msgstr "Número do turno"
+
+msgid "descriptions.DESCRICAO_ELEICAO"
+msgstr "Descrição da eleição"
+
+msgid "descriptions.SIGLA_UE"
+msgstr "Sigla da Unidade Eleitoral (Em caso de eleição majoritária é a sigla da UF que o candidato concorre (texto) e em caso de eleição municipal é o código TSE do município (número)). Assume os valores especiais BR, ZZ e VT para de signar, respectivamente, o Brasil, Exterior e Voto em Trânsito"
+
+msgid "descriptions.DESCRICAO_UE"
+msgstr "Descrição da Unidade Eleitoral"
+
+msgid "descriptions.CODIGO_CARGO"
+msgstr "Código do cargo a que o candidato concorre"
+
+msgid "descriptions.DESCRICAO_CARGO"
+msgstr "Descrição do cargo a que o candidato concorre"
+
+msgid "descriptions.NOME_CANDIDATO"
+msgstr "Nome completo do candidato"
+
+msgid "descriptions.SEQUENCIAL_CANDIDATO"
+msgstr "Número sequencial do candidato gerado internamente pelos sistemas eleitorais. Não é o número de campanha do candidato."
+
+msgid "descriptions.NUMERO_CANDIDATO"
+msgstr "Número do candidato na urna"
+
+msgid "descriptions.CPF_CANDIDATO"
+msgstr "CPF do candidato"
+
+msgid "descriptions.NOME_URNA_CANDIDATO"
+msgstr "Nome de urna do candidato"
+
+msgid "descriptions.COD_SITUACAO_CANDIDATURA"
+msgstr "Código da situação de candidatura"
+
+msgid "descriptions.DES_SITUACAO_CANDIDATURA"
+msgstr "Descrição da situação de candidatura"
+
+msgid "descriptions.NUMERO_PARTIDO"
+msgstr "Número do partido"
+
+msgid "descriptions.SIGLA_PARTIDO"
+msgstr "Sigla do partido"
+
+msgid "descriptions.NOME_PARTIDO"
+msgstr "Nome do partido"
+
+msgid "descriptions.CODIGO_LEGENDA"
+msgstr "Código sequencial da legenda gerado pela Justiça Eleitoral"
+
+msgid "descriptions.SIGLA_LEGENDA"
+msgstr "Sigla da legenda"
+
+msgid "descriptions.COMPOSICAO_LEGENDA"
+msgstr "Composição da legenda"
+
+msgid "descriptions.NOME_LEGENDA"
+msgstr "Nome da legenda"
+
+msgid "descriptions.CODIGO_OCUPACAO"
+msgstr "Código da ocupação do candidato"
+
+msgid "descriptions.DESCRICAO_OCUPACAO"
+msgstr "Descrição da ocupação do candidato"
+
+msgid "descriptions.DATA_NASCIMENTO"
+msgstr "Data de nascimento do candidato"
+
+msgid "descriptions.NUM_TITULO_ELEITORAL_CANDIDATO"
+msgstr "Número do título eleitoral do candidato"
+
+msgid "descriptions.IDADE_DATA_ELEICAO"
+msgstr "Idade do candidato da data da eleição"
+
+msgid "descriptions.CODIGO_SEXO"
+msgstr "Código do sexo do candidato"
+
+msgid "descriptions.DESCRICAO_SEXO"
+msgstr "Descrição do sexo do candidato"
+
+msgid "descriptions.COD_GRAU_INSTRUCAO"
+msgstr "Código do grau de instrução do candidato. Gerado internamente pelos sistemas eleitorais"
+
+msgid "descriptions.DESCRICAO_GRAU_INSTRUCAO"
+msgstr "Descrição do grau de instrução do candidato"
+
+msgid "descriptions.CODIGO_ESTADO_CIVIL"
+msgstr "Código do estado civil do candidato"
+
+msgid "descriptions.DESCRICAO_ESTADO_CIVIL"
+msgstr "Descrição do estado civil do candidato"
+
+msgid "descriptions.CODIGO_COR_RACA"
+msgstr "Código da cor/raça do candidato (auto declaração)"
+
+msgid "descriptions.DESCRICAO_COR_RACA"
+msgstr "Descrição da cor/raça do candidato (auto declaração)"
+
+msgid "descriptions.CODIGO_NACIONALIDADE"
+msgstr "Código da nacionalidade do candidato"
+
+msgid "descriptions.DESCRICAO_NACIONALIDADE"
+msgstr "Descrição da nacionalidade do candidato"
+
+msgid "descriptions.SIGLA_UF_NASCIMENTO"
+msgstr "Sigla da UF de nascimento do candidato"
+
+msgid "descriptions.COD_MUN_TSE_NASCIMENTO"
+msgstr "Código TSE do município da nascimento do candidato"
+
+msgid "descriptions.NOME_MUNICIPIO_NASCIMENTO"
+msgstr "Nome do município de nascimento do candidato"
+
+msgid "descriptions.DESPESA_MAX_CAMPANHA"
+msgstr "Despesa máxima de campanha declarada pelo partido para aquele cargo. Valores em Reais."
+
+msgid "descriptions.COD_SIT_TOT_TURNO"
+msgstr "Código da situação de totalização do candidato naquele turno"
+
+msgid "descriptions.DESC_SIT_TOT_TURNO"
+msgstr "Descrição da situação de totalização do candidato naquele turno"
+
+msgid "descriptions.QTDE_VOTOS"
+msgstr "Quantidade de votos apurados na seção para o votável"
+
+msgid "descriptions.SIGLA_COLIGACAO"
+msgstr "Sigla da coligação"
+
+msgid "descriptions.NOME_COLIGACAO"
+msgstr "Nome da coligação"
+
+msgid "descriptions.NM_EMAIL"
+msgstr "E-mail para comunicação com o candidato"
+
+msgid "descriptions.TIPO_LEGENDA"
+msgstr "Informa se o candidato concorre por \"legenda\" ou \"partido isolado\""
+
+msgid "descriptions.COMPOSICAO_COLIGACAO"
+msgstr "Composição da coligação"
+
+msgid "descriptions.SEQUENCIAL_COLIGACAO"
+msgstr "Número sequencial da coligação, gerado internamente pelos sistemas eleitorais."
+
+msgid "descriptions.UF"
+msgstr "Sigla da Unidade da federação"
+
+msgid "descriptions.NOME_UF"
+msgstr "Nome da Unidade da federação"
+
+msgid "descriptions.QTD_APTOS"
+msgstr ""
+
+msgid "descriptions.QTD_COMPARECIMENTO"
+msgstr ""
+
+msgid "descriptions.QTD_ABSTENCOES"
+msgstr ""
+
+msgid "descriptions.QT_VOTOS_NOMINAIS"
+msgstr ""
+
+msgid "descriptions.QT_VOTOS_LEGENDA"
+msgstr ""
+
+msgid "descriptions.QT_VOTOS_NULOS"
+msgstr ""
+
+msgid "descriptions.QT_VOTOS_BRANCOS"
+msgstr ""
+
+msgid "descriptions.QT_VOTOS_ANULADOS_APU_SEP"
+msgstr ""
+
+msgid "descriptions.DATA_GERACAO"
+msgstr "Data de geração do arquivo (data da extração)"
+
+msgid "descriptions.HORA_GERACAO"
+msgstr "Hora de geração do arquivo (hora da extração) - Horário de Brasília"
+
+msgid "descriptions.EMAIL_CANDIDATO"
+msgstr "Email do candidato"
+
+msgid "descriptions.SIGLA_UF"
+msgstr "Sigla da Unidade da federação"
+
+msgid "columns.ANO_ELEICAO"
+msgstr "YEAR_ELECTION"
+
+msgid "columns.NUM_TURNO"
+msgstr "ROUND_NUM"
+
+msgid "columns.DESCRICAO_ELEICAO"
+msgstr "ELECTION_DESCRIPTION"
+
+msgid "columns.SIGLA_UE"
+msgstr "ELECTORAL_UNIT_ABBREVIATION"
+
+msgid "columns.DESCRICAO_UE"
+msgstr "ELECTORAL_UNIT_DESCRIPTION"
+
+msgid "columns.CODIGO_CARGO"
+msgstr "POSITION_CODE"
+
+msgid "columns.DESCRICAO_CARGO"
+msgstr "POSITION_DESCRIPTION"
+
+msgid "columns.NOME_CANDIDATO"
+msgstr "CANDIDATE_NAME"
+
+msgid "columns.SEQUENCIAL_CANDIDATO"
+msgstr "CANDIDATE_SEQUENTIAL"
+
+msgid "columns.NUMERO_CANDIDATO"
+msgstr "CANDIDATE_NUMBER"
+
+msgid "columns.CPF_CANDIDATO"
+msgstr "CANDIDATE_CPF"
+
+msgid "columns.NOME_URNA_CANDIDATO"
+msgstr "CANDIDATE_BALLOT_NAME"
+
+msgid "columns.COD_SITUACAO_CANDIDATURA"
+msgstr "CANDIDATE_SITUATION_CODE"
+
+msgid "columns.DES_SITUACAO_CANDIDATURA"
+msgstr "CANDIDATE_SITUATION_DESC"
+
+msgid "columns.NUMERO_PARTIDO"
+msgstr "PARTY_NUMBER"
+
+msgid "columns.SIGLA_PARTIDO"
+msgstr "PARTY_ABBREVIATION"
+
+msgid "columns.NOME_PARTIDO"
+msgstr "PARTY_NAME"
+
+msgid "columns.CODIGO_LEGENDA"
+msgstr "PARTY_LABEL_CODE"
+
+msgid "columns.SIGLA_LEGENDA"
+msgstr "PARTY_LABEL_ABBREVIATION"
+
+msgid "columns.COMPOSICAO_LEGENDA"
+msgstr "PARTY_LABEL_COMPOSITION"
+
+msgid "columns.NOME_LEGENDA"
+msgstr "PARTY_LABEL_NAME"
+
+msgid "columns.CODIGO_OCUPACAO"
+msgstr "CANDIDATE_OCCUPATION_CODE"
+
+msgid "columns.DESCRICAO_OCUPACAO"
+msgstr "CANDIDATE_OCCUPATION_DESC"
+
+msgid "columns.DATA_NASCIMENTO"
+msgstr "DATE_OF_BIRTH"
+
+msgid "columns.NUM_TITULO_ELEITORAL_CANDIDATO"
+msgstr "CANDIDATE_ELECTORAL_ID"
+
+msgid "columns.IDADE_DATA_ELEICAO"
+msgstr "CANDIDATE_AGE"
+
+msgid "columns.CODIGO_SEXO"
+msgstr "GENDER_CODE"
+
+msgid "columns.DESCRICAO_SEXO"
+msgstr "GENDER_DESCRIPTION"
+
+msgid "columns.COD_GRAU_INSTRUCAO"
+msgstr "CANDIDATE_EDUCATION_CODE"
+
+msgid "columns.DESCRICAO_GRAU_INSTRUCAO"
+msgstr "CANDIDATE_EDUCATION_DESCRIPTION"
+
+msgid "columns.CODIGO_ESTADO_CIVIL"
+msgstr "MARITAL_STATUS_CODE"
+
+msgid "columns.DESCRICAO_ESTADO_CIVIL"
+msgstr "MARITAL_STATUS_DESCRIPTION"
+
+msgid "columns.CODIGO_COR_RACA"
+msgstr "RACE_CODE"
+
+msgid "columns.DESCRICAO_COR_RACA"
+msgstr "RACE_DESCRIPTION"
+
+msgid "columns.CODIGO_NACIONALIDADE"
+msgstr "NATIONALITY_CODE"
+
+msgid "columns.DESCRICAO_NACIONALIDADE"
+msgstr "NATIONALITY_DESCRIPTION"
+
+msgid "columns.SIGLA_UF_NASCIMENTO"
+msgstr "BIRTH_STATE_ABBREVIATION"
+
+msgid "columns.COD_MUN_TSE_NASCIMENTO"
+msgstr "BIRTH_MUNICIPALITY_CODE"
+
+msgid "columns.CODIGO_MUNICIPIO_NASCIMENTO"
+msgstr "BIRTH_MUNICIPALITY_CODE"
+
+msgid "columns.NOME_MUNICIPIO_NASCIMENTO"
+msgstr "BIRTH_MUNICIPALITY_NAME"
+
+msgid "columns.DESPESA_MAX_CAMPANHA"
+msgstr "MAX_CAMPAIGN_EXPENSES"
+
+msgid "columns.COD_SIT_TOT_TURNO"
+msgstr "ROUND_TOT_SIT_CODE"
+
+msgid "columns.DESC_SIT_TOT_TURNO"
+msgstr "ROUND_TOT_SIT_NAME"
+
+msgid "columns.NM_EMAIL"
+msgstr "NM_EMAIL"
+
+msgid "columns.TIPO_LEGENDA"
+msgstr "PARTY_LABEL_TYPE"
+
+msgid "columns.SIGLA_COLIGACAO"
+msgstr "COALITION_ABBREVIATION"
+
+msgid "columns.NOME_COLIGACAO"
+msgstr "COALITION_NAME"
+
+msgid "columns.COMPOSICAO_COLIGACAO"
+msgstr "COALITION_COMPOSITION"
+
+msgid "columns.SEQUENCIA_COLIGACAO"
+msgstr "COALITION_SEQUENTIAL"
+
+msgid "columns.CODIGO_MACRO"
+msgstr "MACRO_REGION_CODE"
+
+msgid "columns.NOME_MACRO"
+msgstr "MACRO_REGION_NAME"
+
+msgid "columns.UF"
+msgstr "FEDERATION_UNIT"
+
+msgid "columns.NOME_UF"
+msgstr "FEDERATION_UNIT_NAME"
+
+msgid "columns.CODIGO_MESO"
+msgstr "MESO_REGION_CODE"
+
+msgid "columns.NOME_MESO"
+msgstr "MESO_REGION_NAME"
+
+msgid "columns.CODIGO_MICRO"
+msgstr "MICRO_REGION_CODE"
+
+msgid "columns.NOME_MICRO"
+msgstr "MICRO_REGION_NAME"
+
+msgid "columns.COD_MUN_TSE"
+msgstr "MUNICIPALITY_CODE"
+
+msgid "columns.COD_MUN_IBGE"
+msgstr "IBGE_CODE"
+
+msgid "columns.NOME_MUNICIPIO"
+msgstr "MUNICIPALITY_NAME"
+
+msgid "columns.NUM_ZONA"
+msgstr "ELECTORAL_ZONE_NUMBER"
+
+msgid "columns.NUM_SECAO"
+msgstr "ELECTORAL_SECTION_NUMBER"
+
+msgid "columns.QTDE_VOTOS"
+msgstr "VOTES_AMOUNT"
+
+msgid "columns.QTD_APTOS"
+msgstr "QTD_APTOS"
+
+msgid "columns.QTD_COMPARECIMENTO"
+msgstr "QTD_COMPARECIMENTO"
+
+msgid "columns.QTD_ABSTENCOES"
+msgstr "QTD_ABSTENCOES"
+
+msgid "columns.QT_VOTOS_NOMINAIS"
+msgstr "QT_VOTOS_NOMINAIS"
+
+msgid "columns.QT_VOTOS_LEGENDA"
+msgstr "QT_VOTOS_LEGENDA"
+
+msgid "columns.QT_VOTOS_NULOS"
+msgstr "QT_VOTOS_NULOS"
+
+msgid "columns.QT_VOTOS_BRANCOS"
+msgstr "QT_VOTOS_BRANCOS"
+
+msgid "columns.QT_VOTOS_ANULADOS_APU_SEP"
+msgstr "QT_VOTOS_ANULADOS_APU_SEP"
+
+msgid "columns.DATA_GERACAO"
+msgstr "DATA_GERACAO"
+
+msgid "columns.HORA_GERACAO"
+msgstr "HORA_GERACAO"
+
+msgid "columns.SIGLA_UF"
+msgstr "SIGLA_UF"
+
+msgid "columns.SEQUENCIAL_COLIGACAO"
+msgstr "SEQUENCIAL_COLIGACAO"
+
+msgid "columns.EMAIL_CANDIDATO"
+msgstr "CANDIDATE_EMAIL"
+
+msgid "query.job.1"
+msgstr "President"
+
+msgid "query.job.3"
+msgstr "Governor"
+
+msgid "query.job.5"
+msgstr "Senator"
+
+msgid "query.job.6"
+msgstr "Federal Representative"
+
+msgid "query.job.7"
+msgstr "State Representative"
+
+msgid "query.job.8"
+msgstr "Deputy District"
+
+msgid "query.job.11"
+msgstr "Mayor"
+
+msgid "query.job.13"
+msgstr "City Council"
+
+msgid "query.regional.0"
+msgstr "Brazil"
+
+msgid "query.regional.2"
+msgstr "Federal Unit"
+
+msgid "query.regional.6"
+msgstr "Municipality"
+
+msgid "query.regional.7"
+msgstr "Municipality-Zone"
+
+msgid "query.regional.8"
+msgstr "Electoral Zone"
+
+msgid "query.regional.9"
+msgstr "Ballot Box"
+
+msgid "query.regional.1"
+msgstr "Macroregion"
+
+msgid "query.regional.4"
+msgstr "Mesoregion"
+
+msgid "query.regional.5"
+msgstr "Microregion"
+
+msgid "query.political.2"
+msgstr "Candidate"
+
+msgid "query.political.1"
+msgstr "Political Party"
+
+msgid "query.political.3"
+msgstr "Coalition"
+
+msgid "query.political.4"
+msgstr "Consolidated Election"
+
+msgid "pages.about.title"
+msgstr "About"
+
+msgid "layout.menu.candidates"
+msgstr "Candidates"
+
+msgid "pages.home.candidates"
+msgstr "Candidates"
+
+msgid "pages.home.candidates-description"
+msgstr "Some description"
+
+msgid "layout.menu.political-parties"
+msgstr "Political parties"
+
+msgid "pages.home.political-parties"
+msgstr "Political parties"
+
+msgid "pages.home.political-parties-description"
+msgstr "Some description"

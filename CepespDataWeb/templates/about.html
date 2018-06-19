@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+
+                <h1>{{ gettext('pages.about.title') }}</h1>
+
+                <p class="text-muted">
+                    O CepespData é uma plataforma de acesso a dados eleitorais desenvolvida pelo Centro de Política e
+                    Economia do Setor Público (CEPESP) da Fundação Getulio Vargas (FGV) com apoio da FAPESP ao projeto
+                    As Instituições Políticas Subnacionais: Um Estudo Comparativo dos Estados Brasileiros (processo:
+                    2013/15658-1) e do Tribunal Superior Eleitoral - TSE.
+                </p>
+
+                <p class="text-muted">
+                    As bases de dados utilizadas são disponibilizadas pelo TSE em seu repositório de dados eleitorais.
+                    Os arquivos de resultado eleitoral desagregados em nível de seção eleitoral (votação por seção
+                    eleitoral) foram relacionados com arquivos de candidatos e legendas, tendo sido realizado tratamento
+                    nos dados (disponível em <a href="https://github.com/Cepesp-Fgv" target="_blank">https://github.com/Cepesp-Fgv</a>) que garante a integridade dos mesmos. Este
+                    tratamento, por exemplo, não permite que votos fossem multiplicados ou excluídos devido à repetições
+                    ou inconsistências originais as bases de candidatos e legendas do TSE.
+                </p>
+                <p class="text-muted">
+                    A opção por se trabalhar com a votação por seção eleitoral resulta da opção por privilegiar a
+                    vontade do eleitor, uma vez que esse é o único arquivo em que o TSE não atualiza o resultado
+                    conforme decisões judiciais posteriores ao dia da eleição. Esses dados, portanto, são a
+                    representação mais próxima do que ocorreu nas eleições. Esta opção implica em diferenças entre os
+                    resultados nas bases do CepespData e análises utilizando os resultados agregados por município e
+                    zona; pois, neste último caso, o TSE frequentemente atualiza os resultados com base em julgamentos
+                    posteriores à publicação dos resultados da eleição (por exemplo, com o indeferimento de uma
+                    candidatura).
+                </p>
+
+                <p class="text-muted">
+                    Finalmente, um persistente trabalho para reforçar a consistência dos dados garante que a diferença
+                    de votos reportada pelas bases do CepespData nunca sejam superior a 1% aos resultados reportados
+                    pelo TSE, tomando como base a disponibilização dos resultados eleitorais por seção, no respositório
+                    de dados eleitorais.
+                </p>
+
+                <p class="text-muted">
+                    Pessoas que Contribuíram:
+                </p>
+
+                <ul>
+                    <li>Abraao Lacerda</li>
+                    <li>Arthur Fisch</li>
+                    <li>Ciro Biderman</li>
+                    <li>Frederico Ramos</li>
+                    <li>George Avelino</li>
+                    <li>Jonathan Phillips</li>
+                    <li>Lara Mesquita</li>
+                    <li>Natália Salgado Bueno</li>
+                    <li>William Colen</li>
+                    <li>Wesley Seidel</li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

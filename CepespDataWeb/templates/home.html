@@ -1,0 +1,81 @@
+{% extends "layout.html" %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{{ 'css/home.css'|asset }}">
+{% endblock %}
+
+{% block content %}
+    <div class="home-header">
+        <div class="container text-center">
+            <div class="col-md-12">
+                <h1>{{ gettext('pages.home.welcome') }}</h1>
+                <h2>
+                    {{ gettext('pages.home.welcome-description')|safe }}<br>
+                </h2>
+                <h2>{{ gettext('pages.home.see-more') }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="portlet light text-center">
+                    <div class="card-icon">
+                        <i class="icon-layers font-blue theme-font"></i>
+                    </div>
+                    <div class="card-title" style="height: 50px">
+                        <span>{{ gettext('pages.home.elections') }}</span>
+                    </div>
+                    <div class="card-desc margin-bottom-40" style="height: 110px">
+                        <span>{{ gettext('pages.home.elections-description') }}</span>
+                    </div>
+                    <a class="btn btn-primary" href="/consulta/tse">{{ gettext('pages.home.query') }}</a>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="portlet light text-center">
+                    <div class="card-icon">
+                        <i class="icon-layers font-blue theme-font"></i>
+                    </div>
+                    <div class="card-title" style="height: 50px">
+                        <span>{{ gettext('pages.votosmun.title') }}</span>
+                    </div>
+                    <div class="card-desc margin-bottom-40" style="height: 110px">
+                        <span>{{ gettext('pages.votosmun.description') }}</span>
+                    </div>
+                    <a class="btn btn-primary" href="/consulta/votos">{{ gettext('pages.home.query') }}</a>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="portlet light text-center">
+                    <div class="card-icon">
+                        <i class="icon-layers font-blue theme-font"></i>
+                    </div>
+                    <div class="card-title" style="height: 50px">
+                        <span>{{ gettext('pages.home.candidates') }}</span>
+                    </div>
+                    <div class="card-desc margin-bottom-40" style="height: 110px">
+                        {{ gettext('pages.home.candidates-description') }}
+                    </div>
+                    <a class="btn btn-primary" href="/consulta/candidatos">{{ gettext('pages.home.query') }}</a>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="portlet light text-center">
+                    <div class="card-icon">
+                        <i class="icon-layers font-blue theme-font"></i>
+                    </div>
+                    <div class="card-title" style="height: 50px">
+                        <span>{{ gettext('pages.home.political-parties') }}</span>
+                    </div>
+                    <div class="card-desc margin-bottom-40" style="height: 110px">
+                        {{ gettext('pages.home.political-parties-description') }}
+                    </div>
+                    <a class="btn btn-primary" href="/consulta/legendas">{{ gettext('pages.home.query') }}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,14 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+.idea
+*.mo
+DS_Store
+
+/Legendas/input
+/Legendas/output
+/Candidatos/input
+/Candidatos/output
+/Banco_TSE_Votacao_Secao/data/

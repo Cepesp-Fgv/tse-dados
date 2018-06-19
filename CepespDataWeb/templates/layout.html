@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>CEPESP Data</title>
+
+    <link href="{{ 'favicon.ico'|asset }}" rel="shortcut icon"/>
+
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet"
+          type="text/css">
+    <link href="{{ 'plugins/font-awesome/css/font-awesome.min.css'|asset }}" rel="stylesheet"
+          type="text/css"/>
+    <link href="{{ 'plugins/simple-line-icons/simple-line-icons.min.css'|asset }}"
+          rel="stylesheet" type="text/css"/>
+    <link href="{{ 'plugins/bootstrap/css/bootstrap.min.css'|asset }}" rel="stylesheet"
+          type="text/css"/>
+    <link href="{{ 'plugins/uniform/css/uniform.default.css'|asset }}" rel="stylesheet"
+          type="text/css"/>
+    <link rel="stylesheet" type="text/css"
+          href="{{ 'plugins/bootstrap-toastr/toastr.min.css'|asset }}"/>
+
+    {% block styles %}{% endblock %}
+
+    <link href="{{ 'css/components-md.css'|asset }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ 'css/plugins-md.css'|asset }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ 'css/layout.css'|asset }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ 'css/themes/light.css'|asset }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ 'css/custom.css'|asset }}" rel="stylesheet" type="text/css"/>
+
+    <!--<script src="//code.tidio.co/t7dmlj8zxrgcjcsvqfjf0vsqbuladmzw.js"></script>-->
+</head>
+<body class="page-md page-header-fixed page-sidebar-closed-hide-logo">
+
+<nav class="md-shadow-z-1-i navbar navbar-default navbar-fixed-top">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">
+
+            <img src="{{ 'images/logoCepespData.png'|asset }}" alt="Cepesp Data"/>
+
+        </a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse pull-right">
+        <ul class="nav navbar-nav">
+            <li {% if page == 0 %}class="active"{% endif %}>
+                <a class="nav-link" href="/">
+                    <i class="fa fa-home"></i> {{ gettext('layout.menu.home') }}
+                </a>
+            </li>
+            <li {% if page == 2 %}class="active"{% endif %}>
+                <a class="nav-link" href="/sobre">
+                    <i class="fa fa-question-circle"></i> {{ gettext('pages.about.title') }}
+                </a>
+            </li>
+            <li class="dropdown {% if page in [1, 2, 3, 4, 5] %}active{% endif %}">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    {{ gettext('layout.menu.queries') }}
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="/consulta/candidatos">{{ gettext('layout.menu.candidates') }}</a></li>
+                    <li><a href="/consulta/legendas">{{ gettext('layout.menu.political-parties') }}</a></li>
+                    <li><a href="/consulta/votos">{{ gettext('layout.menu.electoral-result') }}</a></li>
+                    <li>
+                        <a href="/consulta/tse">
+                            {{ gettext('layout.menu.elections') }}
+                            <span class="label label-info">BETA</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    {{ gettext('layout.menu.integration') }}
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="https://github.com/Cepesp-Fgv/cepesp-r" target="_blank">R</a></li>
+                    <li><a href="https://github.com/Cepesp-Fgv/cepesp-python" target="_blank">Python</a></li>
+                    <li><a href="https://github.com/Cepesp-Fgv/cepesp-rest" target="_blank">REST</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    {{ gettext('layout.menu.apps') }}
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="http://spatial2.cepesp.io/" target="_blank">Spatial 2</a></li>
+                    <li><a href="http://spatial3.cepesp.io/" target="_blank">Spatial Parties</a></li>
+                </ul>
+            </li>
+            {% if lang == 'pt' %}
+                <li style="border-left: 1px solid #adadad">
+                    <a class="nav-link" href="/lang/en">
+                        <img src="{{ 'images/flags/en.png'|asset }}" width="20px" alt=""/>
+                    </a>
+                </li>
+            {% elif lang == 'en' %}
+                <li style="border-left: 1px solid #adadad">
+                    <a class="nav-link" href="/lang/pt">
+                        <img src="{{ 'images/flags/pt-br.png'|asset }}" width="20px" alt=""/>
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </div><!--/.nav-collapse -->
+</nav>
+
+
+<div class="clearfix"></div>
+
+{% block header %}{% endblock %}
+
+<div class="page-container">
+
+    <div class="page-content-wrapper">
+        <div class="page-content">
+
+            {% block content %}{% endblock %}
+
+        </div>
+    </div>
+
+</div>
+
+<div class="page-footer">
+    <div class="page-footer-inner">
+        © FGV CEPESP 2013-2017
+    </div>
+</div>
+<!--[if lt IE 9]>
+    <script src="../../assets/global/plugins/respond.min.js"></script>
+    <script src="../../assets/global/plugins/excanvas.min.js"></script>
+    <![endif]-->
+<!-- Google Analytics -->
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-119313792-1', 'auto');
+ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+<script src="{{ 'plugins/jquery.min.js'|asset }}" type="text/javascript"></script>
+<script src="{{ 'plugins/jquery-migrate.min.js'|asset }}" type="text/javascript"></script>
+<!-- IMPORTANT! Load jquery-ui.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+<script src="{{ 'plugins/jquery-ui/jquery-ui.min.js'|asset }}" type="text/javascript"></script>
+<script src="{{ 'plugins/bootstrap/js/bootstrap.min.js'|asset }}" type="text/javascript"></script>
+<script src="{{ 'plugins/jquery-slimscroll/jquery.slimscroll.min.js'|asset }}"
+        type="text/javascript"></script>
+<script src="{{ 'plugins/jquery.blockui.min.js'|asset }}" type="text/javascript"></script>
+<script src="{{ 'plugins/jquery.cokie.min.js'|asset }}" type="text/javascript"></script>
+<script src="{{ 'plugins/uniform/jquery.uniform.min.js'|asset }}" type="text/javascript"></script>
+<script src="{{ 'js/metronic.js'|asset }}" type="text/javascript"></script>
+<script src="{{ 'js/layout.js'|asset }}" type="text/javascript"></script>
+{% block scripts %}{% endblock %}
+<script>
+    jQuery(document).ready(function () {
+        Metronic.init(); // init metronic core components
+        Layout.init(); // init current layout
+    });
+</script>
+</body>
+</html>

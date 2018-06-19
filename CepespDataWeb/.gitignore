@@ -1,0 +1,12 @@
+.idea/
+.virtualenv/
+!storage/aux_municipio.csv
+**/*.pyc
+**/*.DS_Store
+__pycache__/
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/config.yml
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

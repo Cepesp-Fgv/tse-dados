@@ -32,7 +32,7 @@ Muitos dos dados originais utilizados aqui podem ser encontrados em no Repositó
    - [Adicionar Cargos Extras (2014)](https://github.com/Cepesp-Fgv/tse-dados/wiki/Corre%C3%A7%C3%B5es-em-Pr%C3%A9-Processamento#adicionar-cargos-extras-2014)
    - [Correção Descrição Eleição (2014)](https://github.com/Cepesp-Fgv/tse-dados/wiki/Corre%C3%A7%C3%B5es-em-Pr%C3%A9-Processamento#corre%C3%A7%C3%A3o-descri%C3%A7%C3%A3o-elei%C3%A7%C3%A3o-2014)
    - [Correção Descrição Eleição (2010)](https://github.com/Cepesp-Fgv/tse-dados/wiki/Corre%C3%A7%C3%B5es-em-Pr%C3%A9-Processamento#corre%C3%A7%C3%A3o-descri%C3%A7%C3%A3o-elei%C3%A7%C3%A3o-2010)
-   - [Padronização do Código Situação Turno](Chttps://github.com/Cepesp-Fgv/tse-dados/wiki/Corre%C3%A7%C3%B5es-em-Pr%C3%A9-Processamento#padroniza%C3%A7%C3%A3o-do-c%C3%B3digo-situa%C3%A7%C3%A3o-turno)
+   - [Padronização do Código Situação Turno](https://github.com/Cepesp-Fgv/tse-dados/wiki/Corre%C3%A7%C3%B5es-em-Pr%C3%A9-Processamento#padroniza%C3%A7%C3%A3o-do-c%C3%B3digo-situa%C3%A7%C3%A3o-turno)
    - [Corrigir Sequencia Coligação (2014)](https://github.com/Cepesp-Fgv/tse-dados/wiki/Corre%C3%A7%C3%B5es-em-Pr%C3%A9-Processamento#corrigir-sequencia-coliga%C3%A7%C3%A3o-2014)
    - [Corrigir Sequencia Coligação (2010)](https://github.com/Cepesp-Fgv/tse-dados/wiki/Corre%C3%A7%C3%B5es-em-Pr%C3%A9-Processamento#corrigir-sequencia-coliga%C3%A7%C3%A3o-2010)
    - [Corrigir Código Cor Raça](https://github.com/Cepesp-Fgv/tse-dados/wiki/Corre%C3%A7%C3%B5es-em-Pr%C3%A9-Processamento#corrigir-c%C3%B3digo-cor-ra%C3%A7a)

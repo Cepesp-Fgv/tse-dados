@@ -21,7 +21,8 @@ python -c "from web.tests.run import test; test()"
 python -c "from etl.run import run; run()"
 ```
 
-# Run ETL Tests (Local Web Server should be running)
+# Run ETL Tests
+#### Local Web Server should be running
 ```
 python -c "from etl.run import run; run()"
 ```

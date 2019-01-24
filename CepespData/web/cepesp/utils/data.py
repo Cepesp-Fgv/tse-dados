@@ -13,7 +13,7 @@ def unique_list(l):
 
 def get_years(job):
     if job in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]:
-        return [2014, 2010, 2006, 2002, 1998]
+        return [2018, 2014, 2010, 2006, 2002, 1998]
     elif job in [11, 12, 13]:
         return [2016, 2012, 2008, 2004, 2000]
 

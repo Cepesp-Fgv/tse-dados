@@ -27,7 +27,7 @@ class FixProcess:
 
     def get_item_df(self, item, i):
         path = self.get_item_file(item, i)
-        return pd.read_csv(path, sep=';', dtype=str, low_memory=False)
+        return pd.read_csv(path, sep=';', dtype=str)
 
     def save_fix_df(self, item, df, i):
         path = os.path.join(self.output, self.fix_name(i), item['name'])

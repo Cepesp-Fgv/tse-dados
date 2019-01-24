@@ -15,20 +15,14 @@
 
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet"
           type="text/css">
-    <link href="{{ 'plugins/font-awesome/css/font-awesome.min.css'|asset }}" rel="stylesheet"
-          type="text/css"/>
-    <link href="{{ 'plugins/simple-line-icons/simple-line-icons.min.css'|asset }}"
-          rel="stylesheet" type="text/css"/>
-    <link href="{{ 'plugins/bootstrap/css/bootstrap.min.css'|asset }}" rel="stylesheet"
-          type="text/css"/>
-    <link href="{{ 'plugins/uniform/css/uniform.default.css'|asset }}" rel="stylesheet"
-          type="text/css"/>
-    <link rel="stylesheet" type="text/css" href="{{ 'plugins/bootstrap-toastr/toastr.min.css'|asset }}"/>
+    <link href="{{ 'plugins/font-awesome/css/font-awesome.min.css'|asset }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ 'plugins/bootstrap/css/bootstrap.min.css'|asset }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ 'plugins/bootstrap-toastr/toastr.min.css'|asset }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ 'plugins/datatable/dataTables.bootstrap.css'|asset }}" rel="stylesheet" type="text/css"/>
 
     {% block styles %}{% endblock %}
 
-    <link href="{{ 'css/components-md.css'|asset }}" rel="stylesheet" type="text/css"/>
-    <link href="{{ 'css/plugins-md.css'|asset }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ 'css/components-md-v9.css'|asset }}" rel="stylesheet" type="text/css"/>
     <link href="{{ 'css/layout.css'|asset }}" rel="stylesheet" type="text/css"/>
     <link href="{{ 'css/themes/light.css'|asset }}" rel="stylesheet" type="text/css"/>
     <link href="{{ 'css/custom.css'|asset }}" rel="stylesheet" type="text/css"/>
@@ -57,10 +51,15 @@
                     <i class="fa fa-home"></i> {{ gettext('layout.menu.home') }}
                 </a>
             </li>
-            <li {% if page == 5 %}class="active"{% endif %}>
-                <a class="nav-link" href="/sobre">
-                    <i class="fa fa-question-circle"></i> {{ gettext('pages.about.title') }}
+            <li class="dropdown {% if page == 5 %}active{% endif %}">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    {{ gettext('pages.about.title') }}
+                    <span class="caret"></span>
                 </a>
+                <ul class="dropdown-menu">
+                    <li><a href="/sobre">{{ gettext('layout.menu.cepespdata') }}</a></li>
+                    <li><a href="http://workshop.cepesp.io/" target="_blank">{{ gettext('layout.menu.workshop') }}</a></li>
+                </ul>
             </li>
             <li class="dropdown {% if page in [1, 2, 3, 4] %}active{% endif %}">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -141,13 +140,10 @@
 
 <div class="page-footer">
     <div class="page-footer-inner">
-        © FGV CEPESP 2013-2017
+        © FGV CEPESP 2013-2018
     </div>
 </div>
-<!--[if lt IE 9]>
-    <script src="../../assets/global/plugins/respond.min.js"></script>
-    <script src="../../assets/global/plugins/excanvas.min.js"></script>
-    <![endif]-->
+
 <!-- Google Analytics -->
 <script>
     (function (i, s, o, g, r, a, m) {
@@ -166,24 +162,14 @@
     ga('send', 'pageview');
 </script>
 <!-- End Google Analytics -->
-<script src="{{ 'plugins/jquery.min.js'|asset }}" type="text/javascript"></script>
-<script src="{{ 'plugins/jquery-migrate.min.js'|asset }}" type="text/javascript"></script>
-<!-- IMPORTANT! Load jquery-ui.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
-<script src="{{ 'plugins/jquery-ui/jquery-ui.min.js'|asset }}" type="text/javascript"></script>
-<script src="{{ 'plugins/bootstrap/js/bootstrap.min.js'|asset }}" type="text/javascript"></script>
-<script src="{{ 'plugins/jquery-slimscroll/jquery.slimscroll.min.js'|asset }}"
-        type="text/javascript"></script>
-<script src="{{ 'plugins/jquery.blockui.min.js'|asset }}" type="text/javascript"></script>
-<script src="{{ 'plugins/jquery.cokie.min.js'|asset }}" type="text/javascript"></script>
-<script src="{{ 'plugins/uniform/jquery.uniform.min.js'|asset }}" type="text/javascript"></script>
-<script src="{{ 'js/metronic.js'|asset }}" type="text/javascript"></script>
-<script src="{{ 'js/layout.js'|asset }}" type="text/javascript"></script>
+<script src="{{ 'plugins/jquery/jquery.min.js'|asset }}"></script>
+<script src="{{ 'plugins/bootstrap/js/bootstrap.min.js'|asset }}"></script>
+<script src="{{ 'plugins/bootstrap-toastr/toastr.min.js'|asset }}"></script>
+<script src="{{ 'plugins/fileDownload/jquery.fileDownload.js'|asset }}"></script>
+<script src="{{ 'plugins/datatable/jquery.dataTables.min.js'|asset }}"></script>
+<script src="{{ 'plugins/datatable/dataTables.bootstrap.js'|asset }}"></script>
+
 {% block scripts %}{% endblock %}
-<script>
-    $(function () {
-        Metronic.init(); // init metronic core components
-        Layout.init(); // init current layout
-    });
-</script>
+
 </body>
 </html>

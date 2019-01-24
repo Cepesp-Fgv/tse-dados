@@ -13,9 +13,9 @@ class FixSequencial2014Legendas:
         return df
 
     def test(self, client):
-        df = client.get_coalitions(year=2014, job=3, columns=['SEQUENCIAL_COLIGACAO'])
+        df = client.get_legendas(year=2014, job=3, columns=['SEQUENCIAL_COLIGACAO'])
         df = df[df['TIPO_LEGENDA'] == 'PARTIDO ISOLADO']
 
         assert len(df[df['NOME_COLIGACAO'] == '#NE#']) == 0, "wrong NOME_COLIGACAO"
-        assert len(df[df['SEQUENCIAL_COLIGACAO'] == '#NE#']) == 0, "wrong SEQUENCIAL_COLIGACAO"
+        assert len(df[df['SEQUENCIA_COLIGACAO'] == '#NE#']) == 0, "wrong SEQUENCIAL_COLIGACAO"
 

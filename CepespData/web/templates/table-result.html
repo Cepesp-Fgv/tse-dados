@@ -1,0 +1,60 @@
+<div class="portlet box blue" id="table-area" style="display: none">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="fa fa-globe"></i> {{ gettext('query.results') }}
+        </div>
+        <div class="actions">
+            <a href="https://github.com/Cepesp-Fgv/tse-dados/issues" target="_blank"
+               class="btn btn-default">
+                <i class="fa fa-github"></i>
+                {{ gettext('pages.query.report-error') }}
+            </a>
+            <button class="btn btn-default table-tools" id="download-sql-btn">
+                <i class="fa fa-database"></i>
+                {{ gettext('pages.query.download-sql') }}
+            </button>
+            <button class="btn btn-primary table-tools" data-target="#columns-modal" data-toggle="modal">
+                <i class="fa fa-list"></i>
+                {{ gettext('pages.query.add-columns') }}
+            </button>
+            <button class="btn btn-primary table-tools" id="clear-btn" disabled>
+                <i class="fa fa-pencil"></i>
+                {{ gettext('pages.query.clear-filters') }}
+            </button>
+            <button class="btn btn-success table-tools" id="donwload-btn" disabled>
+                <i class="glyphicon glyphicon-download-alt"></i>
+                CSV
+            </button>
+            <a href="javascript:" class="btn btn-default btn-icon-only fullscreen" data-original-title=""
+               title=""></a>
+        </div>
+    </div>
+    {% if show %}
+    <div class="portlet-body">
+        <table class="table table-striped table-bordered table-hover" id="query-table"></table>
+
+        <div id="progress-message" class="callout callout-info" style="display: none">
+            <i class="fa fa-spinner fa-pulse fa-fw" style="color: #069"></i>
+            {{ gettext('query.loading') }}
+
+            <div class="progress" style='margin: 10px auto'>
+                <div class="progress-bar progress-bar-striped active" role="progressbar" style="width: 100%"></div>
+            </div>
+        </div>
+
+        <div id="error-message" class="callout callout-danger" style="display: none">
+            {{ gettext('query.error') }} <br/>
+            <button onclick="window.location.href=window.location.href" class="btn btn-primary margin-top-10">
+                <i class="fa fa-refresh margin-right-10"></i>Recarregar
+            </button>
+        </div>
+
+        <div id="busy-message" class="callout callout-danger" style="display: none">
+            {{ gettext('query.busy') }} <br/>
+            <button onclick="window.location.href=window.location.href" class="btn btn-primary margin-top-10">
+                <i class="fa fa-refresh margin-right-10"></i>Recarregar
+            </button>
+        </div>
+    </div>
+    {% endif %}
+</div>

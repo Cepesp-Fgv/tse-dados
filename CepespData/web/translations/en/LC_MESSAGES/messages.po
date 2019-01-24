@@ -128,6 +128,12 @@ msgstr "Electoral Maps"
 msgid "layout.menu.electoral-maps.spatial2"
 msgstr "Federal Representative Candidates"
 
+msgid "layout.menu.cepespdata"
+msgstr "Cepesp Data"
+
+msgid "layout.menu.workshop"
+msgstr "Workshop"
+
 #: templates/layout.html:64
 msgid "layout.menu.elections"
 msgstr "Elections by type of political office"
@@ -284,6 +290,9 @@ msgid "descriptions.COMPOSICAO_COLIGACAO"
 msgstr "Composição da coligação"
 
 msgid "descriptions.SEQUENCIAL_COLIGACAO"
+msgstr "Número sequencial da coligação, gerado internamente pelos sistemas eleitorais."
+
+msgid "descriptions.SEQUENCIA_COLIGACAO"
 msgstr "Número sequencial da coligação, gerado internamente pelos sistemas eleitorais."
 
 msgid "descriptions.UF"
@@ -553,8 +562,17 @@ msgstr "SIGLA_UF"
 msgid "columns.SEQUENCIAL_COLIGACAO"
 msgstr "SEQUENCIAL_COLIGACAO"
 
+msgid "columns.SEQUENCIA_COLIGACAO"
+msgstr "SEQUENCIA_COLIGACAO"
+
 msgid "columns.EMAIL_CANDIDATO"
 msgstr "CANDIDATE_EMAIL"
+
+msgid "columns.ID_CANDIDATO"
+msgstr "ID_CANDIDATO"
+
+msgid "columns.ID_LEGENDA"
+msgstr "ID_LEGENDA"
 
 msgid "query.job.1"
 msgstr "President"
@@ -641,7 +659,7 @@ msgid "pages.home.candidates"
 msgstr "Candidates"
 
 msgid "pages.home.candidates-description"
-msgstr "Some description"
+msgstr "This form allows you to search the profile information of candidates and their electoral status."
 
 msgid "layout.menu.political-parties"
 msgstr "Political parties"
@@ -650,4 +668,31 @@ msgid "pages.home.political-parties"
 msgstr "Political parties"
 
 msgid "pages.home.political-parties-description"
-msgstr "Some description"
+msgstr "This form allows you to search the composition of electoral coalitions at the national, state, and local levels."
+
+msgid "pages.about.p1"
+msgstr "CEPESPData is a platform to access Brazilian electoral data developed by the Center of Politics and Economics of the Public Sector at the Getulio Vargas Foundation (CEPESP-FGV) with support from the São Paulo Research Foundation (FAPESP)- through the sponsoring of the research project Subnational Political Institutions: A Comparative Study of the Brazilian States (2013/15658-1)- and the Brazilian Electoral Supreme Court (TSE)."
+
+msgid "pages.about.p2"
+msgstr "All databases found in CepespData were originally made available by the TSE on its public data repository. In order to assure data integrity, all procedures to clean and process the data are registered on GitHub (available at <a href=\"https://github.com/Cepesp-Fgv\" target=\"_blank\">https://github.com/Cepesp-Fgv</a>). These procedures, for example, do not allow the number of votes to be miscounted or excluded due to repetitions and inconsistencies in TSE’s original databases."
+
+msgid "pages.about.p3"
+msgstr "Electoral results found in CEPESPData are based on TSE’s electoral section (polling station) data files. The decision to work with votes disaggregated by polling stations was made in order to maintain the voters’ original preferences given it is the only database from the TSE in which the number of votes is not updated according to judicial decisions made after election day, such as the annulment of candidacies. Consequently, the data from polling stations is the closest representation of the electoral process. The decision to use the data at this level means there could be differences between analysis that use CEPESPData and analysis that use municipal or zone-aggregated data files provided by the TSE given the court often updates the results after post-election judicial rulings."
+
+msgid "pages.about.p4"
+msgstr "Finally, a persistent effort to improve data consistency ensures that differences in the number of votes found in CEPESPData's databases never exceed %(percentage)s of the numbers found in the TSE's original polling station data available in their repository."
+
+msgid "pages.about.p5"
+msgstr "People who have contributed to the project:"
+
+msgid "query.results"
+msgstr "Results"
+
+msgid "query.loading"
+msgstr "Requesting data... Please, wait a minute."
+
+msgid "query.error"
+msgstr "Whoops! There was a problem with your request... <br/> Try again later."
+
+msgid "query.busy"
+msgstr "Were're still processing this request... <br/> Try again later."

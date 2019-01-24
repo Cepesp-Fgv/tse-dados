@@ -29,7 +29,7 @@ class DescricaoEleicaoFix2014:
     def test(self, client):
         for j in [1, 3, 5, 6, 7, 8]:
             cand_df = client.get_candidates(year=2014, job=j)
-            legendas_df = client.get_coalitions(year=2014, job=j)
+            legendas_df = client.get_legendas(year=2014, job=j)
             votos_df = client.get_votes(year=2014, job=j, regional_aggregation=0,
                                         columns=['DESCRICAO_ELEICAO', 'QTDE_VOTOS'])
 
@@ -39,7 +39,7 @@ class DescricaoEleicaoFix2014:
 
         for j in [2, 4, 9, 10]:
             cand_df = client.get_candidates(year=2014, job=j)
-            legendas_df = client.get_coalitions(year=2014, job=j)
+            legendas_df = client.get_legendas(year=2014, job=j)
 
             assert self._count_df(cand_df) == 0, "candidatos, 2014, job %d" % j
             assert self._count_df(legendas_df) == 0, "legendas, 2014, job %d" % j

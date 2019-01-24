@@ -12,7 +12,7 @@ class TSESpider(scrapy.Spider):
     def parse(self, response):
         for link in response.css('a::attr(href)'):
             href = link.extract()
-            if href.find('.zip') != -1:
+            if href.find('.zip') != -1 and href.find('.sha1') == -1:
                 item = TSEFileItem.create(href)
                 if self.is_valid(item):
                     yield item
@@ -20,9 +20,13 @@ class TSESpider(scrapy.Spider):
                 yield response.follow(link, self.parse)
 
     def is_valid(self, item):
+        found_db = False
         for db in self.settings.get('DATABASES'):
-            if db not in item['path']:
-                return False
+            if db in item['path']:
+                found_db = True
+
+        if not found_db:
+            return False
 
         if item['year'] not in self.settings.get('YEARS'):
             return False

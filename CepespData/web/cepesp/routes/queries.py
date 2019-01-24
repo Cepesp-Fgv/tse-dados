@@ -1,21 +1,18 @@
 from flask import session, request, render_template
 
-from web.cepesp.candidatos.options import CandidatosOptions
-from web.cepesp.legendas.options import LegendasOptions
-from web.cepesp.tse.options import TSEVotosOptions
+from web.cepesp.athena.options import AthenaQueryOptions
 from web.cepesp.utils.data import get_years
 from web.cepesp.utils.mun import get_uf_list, get_mun_list
 from web.cepesp.utils.session import get_locale
-from web.cepesp.votos.options import VotosMunOptions
 
 
 def consulta_tse():
     session['back'] = request.path
-    options = TSEVotosOptions()
+    options = AthenaQueryOptions('tse')
     show = len(list(request.args.values())) > 0
 
     return render_template(
-        "query.html",
+        "tse.html",
         options=options,
         page=1,
         show=show,
@@ -28,7 +25,7 @@ def consulta_tse():
 
 def consulta_candidatos():
     session['back'] = request.path
-    options = CandidatosOptions()
+    options = AthenaQueryOptions('candidatos')
     show = len(list(request.args.values())) > 0
 
     return render_template(
@@ -44,7 +41,7 @@ def consulta_candidatos():
 
 def consulta_legendas():
     session['back'] = request.path
-    options = LegendasOptions()
+    options = AthenaQueryOptions('legendas')
     show = len(list(request.args.values())) > 0
 
     return render_template(
@@ -60,11 +57,11 @@ def consulta_legendas():
 
 def consulta_votos():
     session['back'] = request.path
-    options = VotosMunOptions()
+    options = AthenaQueryOptions('votos')
     show = len(list(request.args.values())) > 0
 
     return render_template(
-        "votosmun.html",
+        "votos.html",
         options=options,
         page=4,
         show=show,

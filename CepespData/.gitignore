@@ -1,5 +1,6 @@
 .idea/
 .virtualenv/
+.venv/
 **/*.pyc
 **/*.DS_Store
 __pycache__/
@@ -10,3 +11,5 @@ __pycache__/
 !.elasticbeanstalk/config.yml
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+
+.ipynb_checkpoints/

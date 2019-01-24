@@ -36,7 +36,7 @@ msgstr "Consultar resultado de eleições por cargo"
 
 #: templates/home.html:34
 msgid "pages.home.elections-description"
-msgstr "Este formulário permite efetuar consultas às bases de dados relativas as eleições especificando um cargo eletivo. As consultas podem ser também agregadas por partido e nível regional."
+msgstr "Consulta às bases de dados relativas as eleições especificando um cargo eletivo. As consultas podem ser também agregadas por partido e nível regional."
 
 #: templates/home.html:36 templates/query.html:146
 msgid "pages.home.query"
@@ -54,7 +54,7 @@ msgid "pages.votosmun.title"
 msgstr "Consultar votos por eleição"
 
 msgid "pages.votosmun.description"
-msgstr "Este formulário permite efetuar consultas aos resultados eleitorais especificando um cargo eletivo. As consultas podem ser também agregadas por nível regional."
+msgstr "Consulta aos resultados eleitorais especificando um cargo eletivo. As consultas podem ser também agregadas por nível regional."
 
 #: templates/query.html:40
 msgid "pages.query.job"
@@ -127,6 +127,12 @@ msgstr "Mapas Eleitorais"
 
 msgid "layout.menu.electoral-maps.spatial2"
 msgstr "Candidatos a deputado federal"
+
+msgid "layout.menu.cepespdata"
+msgstr "Cepesp Data"
+
+msgid "layout.menu.workshop"
+msgstr "Workshop"
 
 #: templates/layout.html:64
 msgid "layout.menu.elections"
@@ -284,6 +290,9 @@ msgid "descriptions.COMPOSICAO_COLIGACAO"
 msgstr "Composição da coligação"
 
 msgid "descriptions.SEQUENCIAL_COLIGACAO"
+msgstr "Número sequencial da coligação, gerado internamente pelos sistemas eleitorais."
+
+msgid "descriptions.SEQUENCIA_COLIGACAO"
 msgstr "Número sequencial da coligação, gerado internamente pelos sistemas eleitorais."
 
 msgid "descriptions.QTD_APTOS"
@@ -556,8 +565,17 @@ msgstr "SIGLA_UF"
 msgid "columns.SEQUENCIAL_COLIGACAO"
 msgstr "SEQUENCIAL_COLIGACAO"
 
+msgid "columns.SEQUENCIA_COLIGACAO"
+msgstr "SEQUENCIA_COLIGACAO"
+
 msgid "columns.EMAIL_CANDIDATO"
 msgstr "EMAIL_CANDIDATO"
+
+msgid "columns.ID_CANDIDATO"
+msgstr "ID_CANDIDATO"
+
+msgid "columns.ID_LEGENDA"
+msgstr "ID_LEGENDA"
 
 msgid "query.job.1"
 msgstr "Presidente"
@@ -654,3 +672,30 @@ msgstr "Consultar coligações"
 
 msgid "pages.home.political-parties-description"
 msgstr "Consulta à composição das coligações em nível nacional, estadual e municipal"
+
+msgid "pages.about.p1"
+msgstr "O CepespData é uma plataforma de acesso a dados eleitorais desenvolvida pelo Centro de Política e Economia do Setor Público (CEPESP) da Fundação Getulio Vargas (FGV) com apoio da FAPESP ao projeto As Instituições Políticas Subnacionais: Um Estudo Comparativo dos Estados Brasileiros (processo: 2013/15658-1) e do Tribunal Superior Eleitoral - TSE."
+
+msgid "pages.about.p2"
+msgstr "As bases de dados utilizadas são disponibilizadas pelo TSE em seu repositório de dados eleitorais. Os arquivos de resultado eleitoral desagregados em nível de seção eleitoral (votação por seção eleitoral) foram relacionados com arquivos de candidatos e legendas, tendo sido realizado tratamento nos dados (disponível em <a href=\"https://github.com/Cepesp-Fgv\" target=\"_blank\">https://github.com/Cepesp-Fgv</a>) que garante a integridade dos mesmos. Este tratamento, por exemplo, não permite que votos fossem multiplicados ou excluídos devido à repetições ou inconsistências originais as bases de candidatos e legendas do TSE."
+
+msgid "pages.about.p3"
+msgstr "A opção por se trabalhar com a votação por seção eleitoral resulta da opção por privilegiar a vontade do eleitor, uma vez que esse é o único arquivo em que o TSE não atualiza o resultado conforme decisões judiciais posteriores ao dia da eleição. Esses dados, portanto, são a representação mais próxima do que ocorreu nas eleições. Esta opção implica em diferenças entre os resultados nas bases do CepespData e análises utilizando os resultados agregados por município e zona; pois, neste último caso, o TSE frequentemente atualiza os resultados com base em julgamentos posteriores à publicação dos resultados da eleição (por exemplo, com o indeferimento de uma candidatura)."
+
+msgid "pages.about.p4"
+msgstr "Finalmente, um persistente trabalho para reforçar a consistência dos dados garante que as diferenças de votos reportada pelas bases do CepespData nunca sejam superior a %(percentage)s aos resultados reportados pelo TSE, tomando como base a disponibilização dos resultados eleitorais por seção, no respositório de dados eleitorais."
+
+msgid "pages.about.p5"
+msgstr "Pessoas que contribuíram:"
+
+msgid "query.results"
+msgstr "Resultados"
+
+msgid "query.loading"
+msgstr "Efetuando a consulta. Aguarde por alguns instantes..."
+
+msgid "query.error"
+msgstr "Ops! Ocorreu um problema com a sua consulta... <br/> Tente novamente mais tarde."
+
+msgid "query.busy"
+msgstr "Ainda estamos processando essa consulta... <br/> Tente novamente mais tarde."

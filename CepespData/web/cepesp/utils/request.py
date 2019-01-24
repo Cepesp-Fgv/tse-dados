@@ -3,7 +3,6 @@ from typing import Type
 from flask import request
 
 from web.cepesp.utils.data import get_years
-from web.cepesp.utils.session import session_selected_columns, set_session_selected_columns
 
 
 def request_get_list(key, item_type: Type = str, split=None, default=None):
@@ -37,13 +36,13 @@ def request_selected_columns():
 def get_selected_columns(default_columns, available_columns):
     columns = request_selected_columns()
 
-    if len(columns) == 0:
-        columns = session_selected_columns(available_columns)
+    # if len(columns) == 0:
+    #     columns = session_selected_columns(available_columns)
 
     if len(columns) == 0:
         columns = default_columns
 
-    set_session_selected_columns(columns)
+    # set_session_selected_columns(columns)
 
     return columns
 
@@ -74,3 +73,9 @@ def get_request_filters(selected_columns):
                     filters[name] = str(search)
 
     return filters
+
+
+def request_wants_json():
+    best = request.accept_mimetypes.best_match(['application/json', 'text/html', 'text/csv'])
+
+    return 'application/json' in [best, request.content_type]

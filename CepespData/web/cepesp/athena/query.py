@@ -1,76 +1,56 @@
-import hashlib
-import json
-import os
-
-from web.cepesp.athena.builder import AthenaQueryBuilder
+from web.cepesp.athena.builders import AthenaBuilder
+from web.cepesp.athena.cache import AthenaCacheHandler
 from web.cepesp.athena.client import AthenaDatabaseClient
-from web.cepesp.athena.options import AthenaQueryOptions
-from web.cepesp.utils.data import apply_order_by, apply_translations
+from web.cepesp.config import APP_ENV
+from web.cepesp.utils.data import apply_translations
+
+
+class QueryNotFoundException(Exception):
+    def __init__(self, query_id):
+        super().__init__(f"Query not found. ({query_id})")
 
 
 class AthenaQuery:
 
     def __init__(self):
-        self.options = AthenaQueryOptions()
-        self.client = AthenaDatabaseClient("cepesp", "cepesp-athena", "results")
-        self.builder = AthenaQueryBuilder(**self.options.__dict__)
-        self.cache_path = os.path.join(os.path.dirname(__file__), '../../static/cache/athena.json')
+        self.client = AthenaDatabaseClient("cepesp_" + APP_ENV, "cepesp-athena", "results")
+        self.cache = AthenaCacheHandler()
 
-    def get(self, nrows=None, skiprows=0):
-        query = self.builder.build()
-        query_id = self._get_cache(query)
+    def build_query(self, options):
+        return AthenaBuilder(**options).build()
 
-        if query_id is None:
-            query_id = self.client.execute_and_wait(query)
-            self._save_cache(query, query_id)
+    def get_info(self, options, wait=False):
+        query_id = options['query_id'] if 'query_id' in options else None
+        if query_id:
+            info = self.cache.get(query_id)
+        else:
+            query = self.build_query(options)
+            query_id = self.client.execute(query, wait)
+            info = self.cache.get_or_save(query, query_id, options['name'])
 
-        df = self.client.read(query_id, nrows, skiprows)
+        if info is None:
+            raise QueryNotFoundException(query_id)
 
-        df = df.rename(columns={
-            'EMAIL_CANDIDATO': 'NM_EMAIL'
-        })
+        return info
 
-        df = df[self.options.selected_columns]
-        df = apply_order_by(df, self.options.selected_columns, self.options.order_by_columns)
-        df = apply_translations(df, self.options.selected_columns)
+    def _get_athena_id(self, options, wait=False):
+        info = self.get_info(options, wait)
+        return info['athena_id']
+
+    def get_df(self, options, wait=False):
+        athena_id = self._get_athena_id(options, wait)
+        df = self.client.read(athena_id, options['length'], options['start'])
+        df = apply_translations(df, df.columns.tolist())
 
         return df
 
-    def get_stream(self):
-        query = self.builder.build()
-        query_id = self._get_cache(query)
+    def get_stream(self, options, wait=False):
+        athena_id = self._get_athena_id(options, wait)
 
-        if query_id is None:
-            query_id = self.client.execute_and_wait(query)
-            self._save_cache(query, query_id)
+        return self.client.get_stream(athena_id)
 
-        return self.client.get_stream(query_id)
+    def get_status(self, options, wait=False):
+        athena_id = self._get_athena_id(options, wait)
+        status, reason = self.client.status(athena_id)
 
-    def _get_cache(self, query):
-        data = self._read_cache()
-        hs = self._hash(query)
-
-        if hs in data.keys():
-            return data[hs]
-        else:
-            return None
-
-    def _hash(self, query):
-        return hashlib.sha1(query.encode('utf-8')).hexdigest()
-
-    def _save_cache(self, query, query_id):
-        data = self._read_cache()
-        hs = self._hash(query)
-        data[hs] = query_id
-
-        with open(self.cache_path, 'w+') as fp:
-            json.dump(data, fp)
-
-    def _read_cache(self):
-        if os.path.exists(self.cache_path):
-            with open(self.cache_path, 'r') as fp:
-                data = json.load(fp)
-        else:
-            data = {}
-
-        return data
+        return {'status': status, 'message': reason}

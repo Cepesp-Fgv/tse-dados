@@ -19,7 +19,7 @@ class AthenaDatabaseClient:
         self.s3 = boto3.client('s3', region_name='us-east-1', aws_access_key_id=AWS_ACCESS_KEY_ID,
                                aws_secret_access_key=AWS_SECRET_ACCESS_KEY)
 
-    def execute(self, query):
+    def execute(self, query, wait=False):
         response = self.athena.start_query_execution(
             QueryString=query,
             QueryExecutionContext={
@@ -29,28 +29,33 @@ class AthenaDatabaseClient:
                 'OutputLocation': f"s3://{self.output_bucket}/{self.output_directory}",
             }
         )
+        qid = response['QueryExecutionId']
+        print(query)
 
-        return response['QueryExecutionId']
+        if wait:
+            status = self.wait_finished(qid)
+            if status[0] == 'FAILED':
+                raise AthenaQueryFailed(query, status[1])
 
-    def execute_and_wait(self, query, sleep=5):
-        qid = self.execute(query)
+        return qid
+
+    def wait_finished(self, qid):
         status = ('RUNNING', None)
         count = 0
+        sleep = 1
         while status[0] in ['RUNNING', 'QUEUED']:
+            time.sleep(sleep)
+            count += sleep
+
             try:
                 status = self.status(qid)
             except ClientError:
                 status = ('RUNNING', None)
-                time.sleep(sleep * 2)
-            time.sleep(sleep)
-            count += 1
 
-        print('execution time %d seconds' % (count * sleep))
+            sleep = sleep * 2
 
-        if status[0] == 'FAILED':
-            raise AthenaQueryFailed(query, status[1])
-
-        return qid
+        print(f'{qid} took {count}s')
+        return status
 
     def status(self, query_id):
         response = self.athena.batch_get_query_execution(

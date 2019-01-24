@@ -20,6 +20,7 @@ class CrawlTSEDataProcess:
             'YEARS': years,
             'DATABASES': [
                 "odsele/votacao_secao",
+                "eleicoes/eleicoes2012/votosecao"
             ],
             'JOBS': jobs,
 

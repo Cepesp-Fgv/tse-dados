@@ -36,22 +36,30 @@ class ProcessItemPipeline:
         "QTDE_VOTOS"
     ]
 
-    def __init__(self, source, output):
+    def __init__(self, source, output, years):
         self.source = source
         self.output = output
+        self.years = years
 
     @classmethod
     def from_crawler(cls, crawler):
         return cls(
             source=crawler.settings.get('FILES_STORE'),
             output=crawler.settings.get('PROCESSED_STORE'),
+            years=crawler.settings.get('YEARS'),
         )
 
     def process_item(self, item, spider):
-        file_name = item['name'].replace('.zip', '.txt')
-        output_path = os.path.join(self.output, item['name'].replace('.zip', '.gz'))
+        if item['year'] == 2012:
+            uf = item['uf']
+            turn = item['turn']
+            name = f'votacao_secao_2012_{uf}_{turn}.gz'
+        else:
+            name = item['name'].replace('.zip', '.gz')
 
-        if not os.path.exists(output_path):
+        output_path = os.path.join(self.output, name)
+
+        if not os.path.exists(output_path) and item['year'] in self.years:
             if len(item['files']) == 0:
                 raise DropItem("No file downloaded")
 
@@ -62,12 +70,35 @@ class ProcessItemPipeline:
                 os.makedirs(directory)
 
             with zipfile.ZipFile(file_path) as z:
-                try:
-                    with z.open(file_name) as f:
-                        df = pd.read_csv(f, sep=';', dtype=str, encoding='latin1', names=self.columns)
-                        df.to_csv(output_path, compression='gzip', sep=';', encoding='utf-8', index=False,
-                                  quoting=QUOTE_ALL)
-                except KeyError as e:
-                    raise DropItem(str(e))
+                for file in z.namelist():
+                    if '.txt' in file or '.csv' in file:
+                        self.extract_data(z, file, output_path, item['year'] == 2018)
 
         return item
+
+    def extract_data(self, z, file_name, output_path, header=False):
+        with z.open(file_name) as f:
+            if header:
+                df = pd.read_csv(f, sep=';', dtype=str, encoding='latin1', header=0)
+                df.rename(columns={
+                    "DT_GERACAO": "DATA_GERACAO",
+                    "HH_GERACAO": "HORA_GERACAO",
+                    "DS_ELEICAO": "DESCRICAO_ELEICAO",
+                    "NR_TURNO": "NUM_TURNO",
+                    "SG_UF": "SIGLA_UF",
+                    "SG_UE": "SIGLA_UE",
+                    "NM_UE": "NOME_UE",
+                    "CD_MUNICIPIO": "COD_MUN_TSE",
+                    "NM_MUNICIPIO": "NOME_MUNICIPIO",
+                    "NR_ZONA": "NUM_ZONA",
+                    "NR_SECAO": "NUM_SECAO",
+                    "CD_CARGO": "CODIGO_CARGO",
+                    "DS_CARGO": "DESCRICAO_CARGO",
+                    "NR_VOTAVEL": "NUMERO_CANDIDATO",
+                    "QT_VOTOS": "QTDE_VOTOS",
+                    "NM_VOTAVEL": "NOME_CANDIDATO"
+                }, inplace=True)
+            else:
+                df = pd.read_csv(f, sep=';', dtype=str, encoding='latin1', names=self.columns)
+
+            df.to_csv(output_path, compression='gzip', sep=';', encoding='utf-8', index=False, quoting=QUOTE_ALL)

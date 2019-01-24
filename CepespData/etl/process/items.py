@@ -15,9 +15,9 @@ def extract_uf(url):
 
 
 def extract_database(url):
-    reg = r'(votacao_secao|cand|legenda)'
+    reg = r'(votosecao|votacao_secao|cand|legenda)'
     match = re.search(reg, url).group(0)
-    if match == 'votacao_secao':
+    if match == 'votacao_secao' or match == 'votosecao':
         return 'votos'
     elif match == 'cand':
         return 'candidatos'
@@ -58,7 +58,6 @@ class SourceFileItem(scrapy.Item):
 class TSEFileItem(scrapy.Item):
     path = scrapy.Field()
     name = scrapy.Field()
-    aggregation = scrapy.Field()
     table = scrapy.Field()
     year = scrapy.Field()
     uf = scrapy.Field()
@@ -71,9 +70,8 @@ class TSEFileItem(scrapy.Item):
         item['year'] = extract_year(item['name'])
 
         if item['name'].startswith('vot'):
-            item['aggregation'] = extract_reg(item['path'])
             item['uf'] = extract_uf(item['name'])
-            item['table'] = "votos_%s" % item['aggregation']
+            item['table'] = "votos"
 
         elif item['name'].startswith("cand"):
             item['table'] = "candidatos"

@@ -1,14 +1,15 @@
-# Byte-compiled / optimized / DLL files
+.idea/
+.virtualenv/
+.venv/
+**/*.pyc
+**/*.DS_Store
 __pycache__/
-*.py[cod]
-*$py.class
+.env
 
-.idea
-*.mo
-DS_Store
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/config.yml
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
 
-/Legendas/input
-/Legendas/output
-/Candidatos/input
-/Candidatos/output
-/Banco_TSE_Votacao_Secao/data/
+.ipynb_checkpoints/

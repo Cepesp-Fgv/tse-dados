@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{{ 'css/home.css'|asset }}">
+{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <h1><b>{{ code }}</b> - Ops! Não foi possível processar seu pedido...</h1>
+        <p>Tente novamente mais tarde.</p>
+        {% if message %}
+        <p><b>{{ message }}</b></p>
+        {% endif %}
+    </div>
+
+{% endblock %}

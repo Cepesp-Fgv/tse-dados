@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+
+                <h1>{{ gettext('pages.about.title') }}</h1>
+
+                <p class="text-muted">
+                    {{ gettext('pages.about.p1') }}
+                </p>
+
+                <p class="text-muted">
+                    {{ gettext('pages.about.p2') }}
+                </p>
+                <p class="text-muted">
+                    {{ gettext('pages.about.p3') }}
+                </p>
+
+                <p class="text-muted">
+                    {{ gettext('pages.about.p4', percentage='1%') }}
+                </p>
+
+                <p class="text-muted">
+                    {{ gettext('pages.about.p5', percentage='1%') }}
+                </p>
+
+                <ul>
+                    <!-- <li>Luiz Gabriel</li> -->
+                    <li>Abraao Lacerda</li>
+                    <li>Arthur Fisch</li>
+                    <li>Ciro Biderman</li>
+                    <li>Frederico Ramos</li>
+                    <li>George Avelino</li>
+                    <li>Jonathan Phillips</li>
+                    <li>Lara Mesquita</li>
+                    <li>Natália Salgado Bueno</li>
+                    <li>William Colen</li>
+                    <li>Wesley Seidel</li>
+                    <li>Rebeca Carvalho</li>
+                    <li>Rafael Coelho</li>
+                    <li>Gabriela Campos</li>
+                    <li>Mauricio Izumi</li>
+                    <li>Guilherme Russo</li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

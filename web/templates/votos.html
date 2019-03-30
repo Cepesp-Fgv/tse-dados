@@ -1,0 +1,214 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="portlet light">
+                <div class="portlet-title">
+                    <div class="caption font-green-haze">
+                        <i class="icon-briefcase"></i>
+                        <span class="caption-subject bold uppercase">
+                            {{ gettext('pages.votosmun.title') }}
+                        </span>
+                    </div>
+                </div>
+                <div class="portlet-body form">
+
+                    <p>{{ gettext('pages.votosmun.description') }}</p>
+
+                    <form action="/consulta/votos" method="get">
+
+                        <div class="form-body">
+                            <div class="row">
+                                <div class="form-group col-md-3 col-xs-12">
+                                    <label for="job-input">{{ gettext('pages.query.job') }}:</label>
+                                    <select name="cargo" id="job-input" class="form-control" required>
+                                        <option value="1" {% if options.job == 1 %}
+                                                selected{% endif %}>{{ gettext('query.job.1') }}</option>
+                                        <option value="3" {% if options.job == 3 %}
+                                                selected{% endif %}>{{ gettext('query.job.3') }}</option>
+                                        <option value="5" {% if options.job == 5 %}
+                                                selected{% endif %}>{{ gettext('query.job.5') }}</option>
+                                        <option value="6" {% if options.job == 6 %}
+                                                selected{% endif %}>{{ gettext('query.job.6') }}</option>
+                                        <option value="7" {% if options.job == 7 %}
+                                                selected{% endif %}>{{ gettext('query.job.7') }}</option>
+                                        <option value="11" {% if options.job == 11 %}
+                                                selected{% endif %}>{{ gettext('query.job.11') }}</option>
+                                        <option value="13" {% if options.job == 13 %}
+                                                selected{% endif %}>{{ gettext('query.job.13') }}</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-3 col-xs-12">
+                                    <label for="regionalAggregation-input">{{ gettext('pages.query.regional') }}:</label>
+                                    <select name="agregacao_regional" id="regionalAggregation-input"
+                                            class="form-control" required>
+                                        <option value="0" {% if options.reg == 0 %}
+                                                selected{% endif %}>{{ gettext('query.regional.0') }}</option>
+                                        <option value="2" {% if options.reg == 2 %}
+                                                selected{% endif %}>{{ gettext('query.regional.2') }}</option>
+                                        <option value="6" {% if options.reg == 6 %}
+                                                selected{% endif %}>{{ gettext('query.regional.6') }}</option>
+                                        <option value="7" {% if options.reg == 7 %}
+                                                selected{% endif %}>{{ gettext('query.regional.7') }}</option>
+                                        <option value="8" {% if options.reg == 8 %}
+                                                selected{% endif %}>{{ gettext('query.regional.8') }}</option>
+                                        <option value="1" {% if options.reg == 1 %}
+                                                selected{% endif %}>{{ gettext('query.regional.1') }}</option>
+                                        <option value="4" {% if options.reg == 4 %}
+                                                selected{% endif %}>{{ gettext('query.regional.4') }}</option>
+                                        <option value="5" {% if options.reg == 5 %}
+                                                selected{% endif %}>{{ gettext('query.regional.5') }}</option>
+                                        <option value="9" {% if options.reg == 9 %}
+                                                selected{% endif %}>{{ gettext('query.regional.9') }}</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-3 col-xs-12">
+                                    <label for="year-input">{{ gettext('pages.query.year') }}:</label>
+                                    <select name="anos[]" id="year-input" class="form-control" multiple required>
+                                        {% for x in years %}
+                                            <option value="{{ x }}"{% if x in options.years %}
+                                                    selected{% endif %}>{{ x }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-3 col-xs-12" id="filter-uf">
+                                    <label for="filter-uf-input">{{ gettext('pages.query.filter-by') }}:
+                                        <b>UF</b></label>
+                                    <select name="uf_filter" id="filter-uf-input" class="form-control">
+                                        <option value="">UF</option>
+                                        {% for uf in uf_list %}
+                                            <option value="{{ uf }}"
+                                                    {% if uf == options.uf_filter %}selected{% endif %}>{{ uf }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div id="brancos-nulos-region">
+
+
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="md-checkbox">
+                                        <input type="checkbox" name="brancos" id="brancos-input" class="md-check"
+                                               value="1" {% if options.brancos %}checked{% endif %}>
+                                        <label for="brancos-input">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span>
+                                            {{ gettext('pages.query.add') }} <b>VOTOS BRANCOS</b>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="md-checkbox">
+                                        <input type="checkbox" name="nulos" id="nulos-input" class="md-check" value="1"
+                                               {% if options.nulos %}checked{% endif %}>
+                                        <label for="nulos-input">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span>
+                                            {{ gettext('pages.query.add') }} <b>VOTOS NULOS</b>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="form-actions">
+                            <button class="btn blue">{{ gettext('pages.home.query') }}</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+            {% include "table-result.html" %}
+
+        </div>
+    </div>
+
+
+    <!-- columns modal -->
+    <div id="columns-modal" class="modal fade" role="dialog" tabindex="-1">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">
+                        {{ gettext('pages.query.add-columns') }}
+                    </h4>
+                </div>
+                <form action="/consulta/votos" method="get">
+
+                    <div class="modal-body">
+
+                        <input type="hidden" name="cargo" id="modal-cargo-input" value="{{ options.cargo }}"/>
+                        <input type="hidden" name="agregacao_regional" value="{{ options.reg }}"/>
+                        <input type="hidden" name="anos" id="modal-anos-input" value="{{ options.years|join(',') }}"/>
+                        <input type="hidden" name="mun_filter"
+                               value="{{ options.mun_filter if options.mun_filter else '' }}"/>
+                        <input type="hidden" name="uf_filter"
+                               value="{{ options.uf_filter if options.uf_filter else '' }}"/>
+
+                        <div id="selected-columns-message"></div>
+
+                        <div class="row">
+                            {% for column in options.all_columns %}
+                                {% if column != 'NOME_COLIGACAO' %}
+                                    <div class="col-md-4">
+                                        <div class="md-checkbox">
+                                            <input type="checkbox" name="c[]" id="columns-{{ loop.index0 }}"
+                                                   class="md-check"
+                                                   value="{{ column }}"
+                                                   {% if column in options.selected_columns %}checked{% endif %}>
+                                            <label for="columns-{{ loop.index0 }}">
+                                                <span></span>
+                                                <span class="check"></span>
+                                                <span class="box"></span>
+                                                <b>{{ gettext('columns.' + column) }}</b><br/>
+                                                <small class="text-success">{{ gettext('descriptions.' + column) }}</small>
+                                            </label>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" data-dismiss="modal"
+                                class="btn btn-default">{{ gettext('pages.query.cancel') }}</button>
+                        <button type="button" class="btn green-haze"
+                                id="select-default">{{ gettext('pages.query.select-default') }}</button>
+                        <button type="button" class="btn green"
+                                id="select-all">{{ gettext('pages.query.select-all') }}</button>
+                        <button type="submit" class="btn blue">{{ gettext('pages.query.update-table') }}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ 'js/cepesp-query-v7.js'|asset }}"></script>
+    <script type="text/javascript">
+        var COLUMNS = {{ options.selected_columns|tojson }};
+        var DEFAULT_COLUMNS = {{ options.default_columns|tojson }};
+        var TRANSLATED_COLUMNS = {{ options.translated_columns|tojson }};
+        var TABLE = 'votos';
+
+        {% if show %}
+            populateTable();
+        {% endif %}
+    </script>
+{% endblock %}

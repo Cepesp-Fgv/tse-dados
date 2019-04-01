@@ -37,5 +37,3 @@ Muitos dos dados originais utilizados aqui podem ser encontrados em no Repositó
    - [Corrigir Sequencia Coligação (2010)](https://github.com/Cepesp-Fgv/tse-dados/wiki/Corre%C3%A7%C3%B5es-em-Pr%C3%A9-Processamento#corrigir-sequencia-coliga%C3%A7%C3%A3o-2010)
    - [Corrigir Código Cor Raça](https://github.com/Cepesp-Fgv/tse-dados/wiki/Corre%C3%A7%C3%B5es-em-Pr%C3%A9-Processamento#corrigir-c%C3%B3digo-cor-ra%C3%A7a)
    - [Corrigir Email Candidato](https://github.com/Cepesp-Fgv/tse-dados/wiki/Corre%C3%A7%C3%B5es-em-Pr%C3%A9-Processamento#corrigir-email-candidato)
- - [Pós-Processamento](https://github.com/Cepesp-Fgv/tse-dados/wiki/P%C3%B3s-processamento)
- - [Pré-processamento](https://github.com/Cepesp-Fgv/tse-dados/wiki/Pr%C3%A9-processamento)

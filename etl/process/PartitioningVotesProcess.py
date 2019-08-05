@@ -203,7 +203,7 @@ class PartitioningVotesProcess:
     def handle(self, item):
         df = pd.read_csv(item['path'], sep=';', dtype=str)
         df['QTDE_VOTOS'] = pd.to_numeric(df['QTDE_VOTOS'], errors='coerce')
-        df.fillnan('#NE#')
+        df.fillna('#NE#')
 
         for (aggregation, columns) in self.columns.items():
             if aggregation < 9:

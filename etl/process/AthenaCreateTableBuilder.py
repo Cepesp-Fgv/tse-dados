@@ -24,7 +24,8 @@ class AthenaCreateTableBuilder:
               '{self.location}'
             TBLPROPERTIES (
               'compressionType'='gzip', 
-              'skip.header.line.count'='1'
+              'skip.header.line.count'='1',
+              'serialization.null.format' = ''
             )
         '''
 

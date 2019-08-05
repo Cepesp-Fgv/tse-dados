@@ -1,0 +1,76 @@
+.home-header {
+  background-color: #fff;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url("/static/images/home-bg-v2.jpg");
+  height: auto;
+  padding-top: 80px;
+
+  h2 {
+    margin-bottom: 30px;
+    color: #1f366a;
+    font-size: 25px;
+    line-height: 28px;
+    font-weight: bolder;
+    margin-top: 20px;
+    font-family: "Arial Black", sans-serif;
+  }
+
+  h4 {
+    min-height: 35px;
+    color: #1f366a;
+    font-size: 16px;
+  }
+
+  .home-link {
+    display: flex;
+    flex-direction: row;
+    color: #000;
+    margin-top: 20px;
+
+    &:hover {
+      text-decoration: none;
+    }
+
+    .home-link-header {
+      width: 60px;
+      text-align: center;
+
+      img {
+        margin-right: 10px;
+        height: 30px;
+      }
+    }
+
+    .home-link-body {
+      flex-direction: column;
+
+      h6 {
+        font-size: 14px;
+        margin-bottom: 0;
+      }
+
+      .see-more {
+        padding-top: 2px;
+        padding-right: 25px;
+        background-size: 15px;
+        background: url("/static/images/icons/blue-arrow.png") no-repeat 100% 50%;
+        font-family: 'Gotham Medium', sans-serif;
+        color: #1897d5;
+        font-size: 11px;
+        line-height: 14px;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+    }
+
+  }
+
+  @include media-breakpoint-up(sm) {
+    .no-padding-left {
+      padding-left: 0;
+    }
+  }
+
+}

@@ -24,41 +24,153 @@ msgstr "Welcome to CepespData"
 
 #: templates/home.html:14
 msgid "pages.home.welcome-description"
-msgstr "The Center of Politics and Economics of the Public Sector (<a href=\"http://cepesp.fgv.br\" target=\"_blank\">CEPESP</a>) of the Getulio Vargas Foundation (<a href=\"http://www.fgv.br\" target=\"_blank\">FGV</a>) makes easy to acess different types of political data sets"
+msgstr "The Center for Politics and Economics of the Public Sector (CEPESP) of the Getulio Vargas Foundation (FGV) provides access to Brazilian electoral data through a user friendly platform called CepespData website. CepespData’s main objective is to facilitate access to the data originally made available by the Brazilian Superior Electoral Court (TSE) in their online repository. CepespData was developed with financial support from the São Paulo State Foundation for Research (FAPESP) to the project The Subnational Political Institutions: A Comparative Study of the Brazilian States (process number: 2013/15658-1) and institutional support from the Brazilian Superior Electoral Court (TSE)."
+
+msgid "pages.others.welcome"
+msgstr "Disaggregated electoral data"
+
+msgid "pages.others.welcome-description"
+msgstr "Raw data from TSE are available in three separated data bases: total votes per round or run-off, candidates' demographic profiles and electoral coalitions composition. Cepespdata/FGV makes these bases available separatedly below."
+
+msgid "pages.about-secretaries.title"
+msgstr "Sobre o Banco de Dados sobre os Secretariados Estaduais"
 
 #: templates/home.html:17
 msgid "pages.home.see-more"
-msgstr "See below current data sets"
+msgstr "See more"
+
+msgid "pages.home.soon"
+msgstr "Available soon"
+
+msgid "pages.home.elections"
+msgstr "Elections"
+
+msgid "pages.home.electoral_results"
+msgstr "Electoral results"
+
+msgid "pages.home.electoral_results.description"
+msgstr "Browse candidates' demographic profile for the selected electoral position. Regional aggregation available."
+
+msgid "pages.home.summary_of_elections"
+msgstr "Summary of elections"
+
+msgid "pages.home.summary_of_elections.description"
+msgstr "Browse summary of electoral results to the selected position (number of registered voters, number of actual voters, number of abstent voters, number of blank votes, number of null votes, number of nominal votes and party-coalition votes)."
+
+msgid "pages.home.disaggregated_data"
+msgstr "Disaggregated Data"
+
+msgid "pages.home.disaggregated_data.description"
+msgstr "Browse independent datasets on candidates' profiles, electoral coalitions and electoral results."
+
+msgid "pages.home.accountability"
+msgstr "Accountability"
+
+msgid "pages.home.parties"
+msgstr "Parties"
+
+msgid "pages.home.apps"
+msgstr "Apps"
+
+msgid "pages.home.candidates_assets"
+msgstr "Candidates' assets"
+
+msgid "pages.home.candidates_assets.description"
+msgstr "Browse candidates' declared assets in each electoral year."
+
+msgid "pages.home.campaign_donations"
+msgstr "Campaign donations"
+
+msgid "pages.home.campaign_expenses"
+msgstr "Campaign expenses"
+
+msgid "pages.home.party_affiliation"
+msgstr "Party affiliation"
+
+msgid "pages.home.party_affiliation.description"
+msgstr "Browse party affiliation lists. Available by party and state."
+
+msgid "pages.home.state_secretaries"
+msgstr "State secretaries"
+
+msgid "pages.home.state_secretaries.description"
+msgstr "Browse state governments' secretaries demographic and background information by political term (government duration)"
+
+msgid "pages.home.party_committees"
+msgstr "Party committees"
+
+msgid "pages.home.electoral_indices"
+msgstr "Electoral indices"
+
+msgid "pages.home.electoral_indices.description"
+msgstr "Platform to generate geographical and political analysis indices (fractionalization, fragmentation, effective number of parties,  legislative turnover rate, Gallagher index, Absention and null voting)."
+
+msgid "pages.home.careers"
+msgstr "Careers"
+
+msgid "pages.home.careers.description"
+msgstr "Platform to show all electoral positions to which a candidate has run or occupied since 1998 and demographic profiles."
+
+msgid "pages.home.electoral_maps"
+msgstr "Electoral maps"
+
+msgid "pages.home.electoral_maps.description"
+msgstr "Platform to generate maps with number or proportion of votes per candidate or party, plots of Moran's I and G Index and  G Index  tables."
+
+msgid "pages.others.votes"
+msgstr "Votes"
+
+msgid "pages.others.candidates_profiles"
+msgstr "Candidates profiles"
+
+msgid "pages.others.electoral_coalitions"
+msgstr "Electoral coalitions"
+
+msgid "pages.others.votes.description"
+msgstr "Total votes per position. Regional aggregation available."
+
+msgid "pages.others.candidates_profiles.description"
+msgstr "Candidates' demographics"
+
+msgid "pages.others.electoral_coalitions.description"
+msgstr "Electoral coalitions at all federal levels by year and position"
 
 #: templates/home.html:31
-msgid "pages.home.elections"
-msgstr "Elections by type of political office"
+msgid "pages.elections.title"
+msgstr "Electoral results by office"
 
 #: templates/home.html:34
-msgid "pages.home.elections-description"
-msgstr "This form allows queries by a specific type of political office. Queries can also be aggregated by parties or geographically"
+msgid "pages.elections.description"
+msgstr "Browse different electoral datasets by office. Aggregations of votes can be done at different levels."
 
 #: templates/home.html:36 templates/query.html:146
 msgid "pages.home.query"
-msgstr "Make a query"
-
-#: templates/query.html:27
-msgid "pages.query.title"
-msgstr "Electoral results by type of political office"
-
-#: templates/query.html:33
-msgid "pages.query.description"
-msgstr "This form allows queries to electoral data sets by an specific office type. Queries can also be aggregated by parties or geographically."
+msgstr "Browse"
 
 msgid "pages.votosmun.title"
-msgstr "Electoral Results"
+msgstr "Votes"
 
 msgid "pages.votosmun.description"
-msgstr "This form allows you to search the election results by specifying an elective position. Searchs can also be aggregated at the regional level."
+msgstr "Browse electoral results by office. Aggregations of votes can be done at different levels."
+
+msgid "pages.assets.title"
+msgstr "Candidates’ assets"
+
+msgid "pages.assets.description"
+msgstr "Browse candidates’ assets declared in each election. An optional filter for state is available."
+
+msgid "pages.filiados.title"
+msgstr "Party affiliation data"
+
+msgid "pages.filiados.description"
+msgstr "Browse party affiliates. Optional filter for state is available."
 
 #: templates/query.html:40
+msgid "pages.query.office"
+msgstr "Office"
+
 msgid "pages.query.job"
-msgstr "Type of political office"
+msgstr "Position"
 
 #: templates/query.html:53
 msgid "pages.query.regional"
@@ -74,7 +186,7 @@ msgstr "Year"
 
 #: templates/query.html:123 templates/query.html:137
 msgid "pages.query.add"
-msgstr "Add"
+msgstr "Include"
 
 msgid "pages.query.only-elected"
 msgstr "Only Elected"
@@ -83,12 +195,30 @@ msgstr "Only Elected"
 msgid "pages.query.add-columns"
 msgstr "Add columns"
 
+msgid "pages.query.blank-votes"
+msgstr "BLANK VOTES"
+
+msgid "pages.query.null-votes"
+msgstr "NULL VOTES"
+
 #: templates/query.html:173
 msgid "pages.query.clear-filters"
 msgstr "Clear filters"
 
 msgid "pages.query.filter-by"
 msgstr "Filter by"
+
+msgid "pages.query.filter-by-uf"
+msgstr "State"
+
+msgid "pages.query.optional"
+msgstr "Optional"
+
+msgid "pages.query.uf"
+msgstr "State"
+
+msgid "pages.query.party"
+msgstr "Party"
 
 msgid "pages.query.download-sql"
 msgstr "SQL"
@@ -131,52 +261,47 @@ msgstr "Federal Representative Candidates"
 msgid "layout.menu.cepespdata"
 msgstr "Cepesp Data"
 
-msgid "layout.menu.workshop"
-msgstr "Workshop"
+msgid "layout.menu.tutorial"
+msgstr "Tutorial"
 
 #: templates/layout.html:64
-msgid "layout.menu.elections"
-msgstr "Elections by type of political office"
-
-msgid "layout.menu.electoral-result"
-msgstr "Electoral Results"
 
 #: templates/layout.html:69
 msgid "layout.menu.integration"
-msgstr "API Integration"
+msgstr "API"
 
 msgid "descriptions.ANO_ELEICAO"
-msgstr "Ano da eleição"
+msgstr "Election year"
 
 msgid "descriptions.NUM_TURNO"
 msgstr "Número do turno"
 
 msgid "descriptions.DESCRICAO_ELEICAO"
-msgstr "Descrição da eleição"
+msgstr "Election detail"
 
 msgid "descriptions.SIGLA_UE"
-msgstr "Sigla da Unidade Eleitoral (Em caso de eleição majoritária é a sigla da UF que o candidato concorre (texto) e em caso de eleição municipal é o código TSE do município (número)). Assume os valores especiais BR, ZZ e VT para de signar, respectivamente, o Brasil, Exterior e Voto em Trânsito"
+msgstr "Electoral unity (District) code"
 
 msgid "descriptions.DESCRICAO_UE"
 msgstr "Descrição da Unidade Eleitoral"
 
 msgid "descriptions.CODIGO_CARGO"
-msgstr "Código do cargo a que o candidato concorre"
+msgstr "Position code"
 
 msgid "descriptions.DESCRICAO_CARGO"
-msgstr "Descrição do cargo a que o candidato concorre"
+msgstr "Position description"
 
 msgid "descriptions.NOME_CANDIDATO"
-msgstr "Nome completo do candidato"
+msgstr "Candidate's name"
 
 msgid "descriptions.SEQUENCIAL_CANDIDATO"
-msgstr "Número sequencial do candidato gerado internamente pelos sistemas eleitorais. Não é o número de campanha do candidato."
+msgstr "Candidate ID generated by CepespData"
 
 msgid "descriptions.NUMERO_CANDIDATO"
-msgstr "Número do candidato na urna"
+msgstr "Candidate's running number"
 
 msgid "descriptions.CPF_CANDIDATO"
-msgstr "CPF do candidato"
+msgstr "Candidate's Individual Taxpayer Registration Number"
 
 msgid "descriptions.NOME_URNA_CANDIDATO"
 msgstr "Nome de urna do candidato"
@@ -188,10 +313,10 @@ msgid "descriptions.DES_SITUACAO_CANDIDATURA"
 msgstr "Descrição da situação de candidatura"
 
 msgid "descriptions.NUMERO_PARTIDO"
-msgstr "Número do partido"
+msgstr "Party number"
 
 msgid "descriptions.SIGLA_PARTIDO"
-msgstr "Sigla do partido"
+msgstr "Party code"
 
 msgid "descriptions.NOME_PARTIDO"
 msgstr "Nome do partido"
@@ -218,7 +343,7 @@ msgid "descriptions.DATA_NASCIMENTO"
 msgstr "Data de nascimento do candidato"
 
 msgid "descriptions.NUM_TITULO_ELEITORAL_CANDIDATO"
-msgstr "Número do título eleitoral do candidato"
+msgstr "Candidate's voter ID"
 
 msgid "descriptions.IDADE_DATA_ELEICAO"
 msgstr "Idade do candidato da data da eleição"
@@ -230,10 +355,10 @@ msgid "descriptions.DESCRICAO_SEXO"
 msgstr "Descrição do sexo do candidato"
 
 msgid "descriptions.COD_GRAU_INSTRUCAO"
-msgstr "Código do grau de instrução do candidato. Gerado internamente pelos sistemas eleitorais"
+msgstr "Degree of education"
 
 msgid "descriptions.DESCRICAO_GRAU_INSTRUCAO"
-msgstr "Descrição do grau de instrução do candidato"
+msgstr "Higher education course"
 
 msgid "descriptions.CODIGO_ESTADO_CIVIL"
 msgstr "Código do estado civil do candidato"
@@ -260,16 +385,16 @@ msgid "descriptions.COD_MUN_TSE_NASCIMENTO"
 msgstr "Código TSE do município da nascimento do candidato"
 
 msgid "descriptions.NOME_MUNICIPIO_NASCIMENTO"
-msgstr "Nome do município de nascimento do candidato"
+msgstr "Municipality of birth of the candidate/secretary"
 
 msgid "descriptions.DESPESA_MAX_CAMPANHA"
 msgstr "Despesa máxima de campanha declarada pelo partido para aquele cargo. Valores em Reais."
 
 msgid "descriptions.COD_SIT_TOT_TURNO"
-msgstr "Código da situação de totalização do candidato naquele turno"
+msgstr "Election result code"
 
 msgid "descriptions.DESC_SIT_TOT_TURNO"
-msgstr "Descrição da situação de totalização do candidato naquele turno"
+msgstr "Election result description"
 
 msgid "descriptions.QTDE_VOTOS"
 msgstr "Quantidade de votos apurados na seção para o votável"
@@ -301,6 +426,9 @@ msgstr "Sigla da Unidade da federação"
 msgid "descriptions.NOME_UF"
 msgstr "Nome da Unidade da federação"
 
+msgid "descriptions.UF_NASCIMENTO"
+msgstr "State of birth of the secretary"
+
 msgid "descriptions.QTD_APTOS"
 msgstr ""
 
@@ -326,16 +454,127 @@ msgid "descriptions.QT_VOTOS_ANULADOS_APU_SEP"
 msgstr ""
 
 msgid "descriptions.DATA_GERACAO"
-msgstr "Data de geração do arquivo (data da extração)"
+msgstr "Date of generation of dataset"
 
 msgid "descriptions.HORA_GERACAO"
-msgstr "Hora de geração do arquivo (hora da extração) - Horário de Brasília"
+msgstr "Time of generation of dataset"
 
 msgid "descriptions.EMAIL_CANDIDATO"
 msgstr "Email do candidato"
 
 msgid "descriptions.SIGLA_UF"
-msgstr "Sigla da Unidade da federação"
+msgstr "State code"
+
+msgid "descriptions.NOME_MACRO"
+msgstr "Macroregion name - IBGE division into regions"
+
+msgid "descriptions.COD_MUN_IBGE"
+msgstr "Municipality code - informed by IBGE"
+
+msgid "descriptions.NOME_MUNICIPIO"
+msgstr "Name of municipality - informed by TSE"
+
+msgid "descriptions.CODIGO_MESO"
+msgstr "Code of mesoregion - IBGE division into regions"
+
+msgid "descriptions.NOME_MESO"
+msgstr "Code of mesoregion - IBGE division into regions"
+
+msgid "descriptions.COD_MUN_TSE"
+msgstr "Municipality code - informed by TSE"
+
+msgid "descriptions.NOME_MICRO"
+msgstr "Name of microregion - IBGE division into regions"
+
+msgid "descriptions.CODIGO_MACRO"
+msgstr "Code of macroregion - IBGE division into regions"
+
+msgid "descriptions.CODIGO_MICRO"
+msgstr "Code of microregion - IBGE division into regions"
+
+msgid "descriptions.ID_LEGENDA"
+msgstr ""
+
+msgid "descriptions.CD_TIPO_BEM_CANDIDATO"
+msgstr "Code of type of asset"
+
+msgid "descriptions.DS_TIPO_BEM_CANDIDATO"
+msgstr "Description of the type of asset of the candidate according to TSE"
+
+msgid "descriptions.DETALHE_BEM"
+msgstr "Detail of the description of the asset"
+
+msgid "descriptions.VALOR_BEM"
+msgstr "Value of the asset (R $ - nominal values)"
+
+msgid "descriptions.DATA_ULTIMA_ATUALIZACAO"
+msgstr "Date of last update of the declaration of assets"
+
+msgid "descriptions.HORA_ULTIMA_ATUALIZACAO"
+msgstr "Time of last update of the declaration of assets"
+
+msgid "descriptions.ID_CANDIDATO"
+msgstr "Candidate ID generated by CepespData"
+
+msgid "descriptions.NOME_SECRETARIO"
+msgstr "Name of secretary"
+
+msgid "descriptions.NOME_SECRETARIO"
+msgstr "Name of secretary"
+
+msgid "descriptions.RG"
+msgstr "Secretary's Identity Card"
+
+msgid "descriptions.SEXO"
+msgstr ""
+
+msgid "descriptions.TRABALHAVA_NA_SECRETARIA_NO_MOMENTO_DA_NOMEACAO"
+msgstr "If the secretary already worked at the department when he was appointed (Y / N)"
+
+msgid "descriptions.MOTIVO_CANCELAMENTO"
+msgstr "Cancellation reason"
+
+msgid "descriptions.DATA_REGULARIZACAO"
+msgstr "Date of regularization"
+
+msgid "descriptions.DATA_CANCELAMENTO"
+msgstr "Date of Cancellation"
+
+msgid "descriptions.DATA_DESFILIACAO"
+msgstr "Date of disaffiliation"
+
+msgid "descriptions.DATA_PROCESSAMENTO"
+msgstr "Membership Processing Date"
+
+msgid "descriptions.TIPO_REGISTRO"
+msgstr "Record type"
+
+msgid "descriptions.SITUACAO_REGISTRO"
+msgstr "Registration status"
+
+msgid "descriptions.DATA_FILIACAO"
+msgstr "Date of affiliation"
+
+msgid "descriptions.NUM_SECAO"
+msgstr "Number of Electoral Section that member is registered"
+
+msgid "descriptions.NUM_ZONA"
+msgstr "Number of the Electoral Zone that the member is registered"
+
+msgid "descriptions.DATA_EXTRACAO"
+msgstr "Last update date of dataset"
+
+msgid "descriptions.HORA_EXTRACAO"
+msgstr "Last update time of dataset"
+
+msgid "descriptions.NOME_FILIADO"
+msgstr "Affiliate Name"
+
+msgid "descriptions.PROFISSAO_ANTES_DE_NOMEADO"
+msgstr "Profession of secretary before appointment"
+
+msgid "descriptions.ORGAO_EM_QUE_TRABALHAVA"
+msgstr "If the secretary was a civil servant, the depeartment it worked"
 
 msgid "columns.ANO_ELEICAO"
 msgstr "YEAR_ELECTION"
@@ -595,6 +834,139 @@ msgstr "DATA_ULTIMA_ATUALIZACAO"
 msgid "columns.HORA_ULTIMA_ATUALIZACAO"
 msgstr "HORA_ULTIMA_ATUALIZACAO"
 
+msgid "columns.NOME_FILIADO"
+msgstr "NOME_FILIADO"
+
+msgid "columns.DATA_EXTRACAO"
+msgstr "DATA_EXTRACAO"
+
+msgid "columns.SITUACAO_REGISTRO"
+msgstr "SITUACAO_REGISTRO"
+
+msgid "columns.DATA_DESFILIACAO"
+msgstr "DATA_DESFILIACAO"
+
+msgid "columns.MOTIVO_CANCELAMENTO"
+msgstr "MOTIVO_CANCELAMENTO"
+
+msgid "columns.HORA_EXTRACAO"
+msgstr "HORA_EXTRACAO"
+
+msgid "columns.TIPO_REGISTRO"
+msgstr "TIPO_REGISTRO"
+
+msgid "columns.DATA_CANCELAMENTO"
+msgstr "DATA_CANCELAMENTO"
+
+msgid "columns.NUMERO_INSCRICAO"
+msgstr "NUMERO_INSCRICAO"
+
+msgid "columns.DATA_FILIACAO"
+msgstr "DATA_FILIACAO"
+
+msgid "columns.DATA_PROCESSAMENTO"
+msgstr "DATA_PROCESSAMENTO"
+
+msgid "columns.DATA_REGULARIZACAO"
+msgstr "DATA_REGULARIZACAO"
+
+
+msgid "columns.STATUS"
+msgstr "STATUS"
+
+msgid "columns.NOME_SECRETARIO"
+msgstr "NOME_SECRETARIO"
+
+msgid "columns.RG"
+msgstr "RG"
+
+msgid "columns.RG"
+msgstr "SEXO"
+
+msgid "columns.CPF"
+msgstr "CPF"
+
+msgid "columns.NOME_MUNICIPIO_NASCIMENTO"
+msgstr "NOME_MUNICIPIO_NASCIMENTO"
+
+msgid "columns.UF_NASCIMENTO"
+msgstr "UF_NASCIMENTO"
+
+msgid "columns.CARGO"
+msgstr "CARGO"
+
+msgid "columns.ORGAO_OCUPADO"
+msgstr "ORGAO_OCUPADO"
+
+msgid "columns.UF_ORGAO_OCUPADO"
+msgstr "UF_ORGAO_OCUPADO"
+
+msgid "columns.CURSO_MESTRADO"
+msgstr "CURSO_MESTRADO"
+
+msgid "columns.CURSO_DOUTORADO"
+msgstr "CURSO_DOUTORADO"
+
+msgid "columns.JA_ERA_FUNCIONARIO_PUBLICO"
+msgstr "JA_ERA_FUNCIONARIO_PUBLICO"
+
+msgid "columns.NIVEL_DE_GOVERNO"
+msgstr "NIVEL_DE_GOVERNO"
+
+msgid "columns.TRABALHAVA_NA_SECRETARIA_NO_MOMENTO_DA_NOMEACAO"
+msgstr "TRABALHAVA_NA_SECRETARIA_NO_MOMENTO_DA_NOMEACAO"
+
+msgid "columns.ORGAO_EM_QUE_TRABALHAVA"
+msgstr "ORGAO_EM_QUE_TRABALHAVA"
+
+msgid "columns.ANO_INGRESSO_ORGAO"
+msgstr "ANO_INGRESSO_ORGAO"
+
+msgid "columns.MES_INGRESSO_ORGAO"
+msgstr "MES_INGRESSO_ORGAO"
+
+msgid "columns.PROFISSAO_ANTES_DE_NOMEADO"
+msgstr "PROFISSAO_ANTES_DE_NOMEADO"
+
+msgid "columns.ID_SECRETARIO"
+msgstr "ID_SECRETARIO"
+
+msgid "columns.ORGAO_NOME"
+msgstr "ORGAO_NOME"
+
+msgid "columns.TITULO_DE_ELEITOR"
+msgstr "TITULO_DE_ELEITOR"
+
+msgid "columns.ID_CARGO"
+msgstr "ID_CARGO"
+
+msgid "columns.ID_ORGAO"
+msgstr "ID_ORGAO"
+
+msgid "columns.DATA_ASSUMIU"
+msgstr "DATA_ASSUMIU"
+
+msgid "columns.DATA_DEIXOU"
+msgstr "DATA_DEIXOU"
+
+msgid "columns.MOTIVO_SAIDA"
+msgstr "MOTIVO_SAIDA"
+
+msgid "columns.ORIGEM_FILIACAO"
+msgstr "ORIGEM_FILIACAO"
+
+msgid "columns.RACA_RAIS"
+msgstr "RACA_RAIS"
+
+msgid "columns.CODIGO_MUNICIPIO"
+msgstr "CODIGO_MUNICIPIO"
+
+msgid "columns.SEXO"
+msgstr "SEXO"
+
+msgid "pages.secretarios.government_period"
+msgstr "Government Period"
+
 msgid "query.job.1"
 msgstr "President"
 
@@ -671,46 +1043,34 @@ msgid "query.political.4"
 msgstr "Consolidated Election"
 
 msgid "pages.about.title"
-msgstr "About"
+msgstr "About us"
 
-msgid "layout.menu.candidates"
-msgstr "Candidates"
+msgid "pages.candidates.title"
+msgstr "Candidates’ profiles"
 
-msgid "pages.home.candidates"
-msgstr "Candidates"
+msgid "pages.candidates.description"
+msgstr "candidates’ sociodemographic characteristics and eligibility."
 
-msgid "pages.home.candidates-description"
-msgstr "This form allows you to search the profile information of candidates and their electoral status."
+msgid "pages.secretarios.title"
+msgstr "Secretaries"
 
-msgid "layout.menu.political-parties"
-msgstr "Political parties"
+msgid "pages.secretarios.description"
+msgstr "Browse the list of state secretaries by 4-year period and state. Read more about the data <a href=\"/about-state-secretaries\">here</a>."
 
-msgid "pages.home.political-parties"
-msgstr "Political parties"
+msgid "pages.political-parties.title"
+msgstr "Electoral coalitions"
 
-msgid "pages.home.political-parties-description"
-msgstr "This form allows you to search the composition of electoral coalitions at the national, state, and local levels."
-
-msgid "pages.about.p1"
-msgstr "CEPESPData is a platform to access Brazilian electoral data developed by the Center of Politics and Economics of the Public Sector at the Getulio Vargas Foundation (CEPESP-FGV) with support from the São Paulo Research Foundation (FAPESP)- through the sponsoring of the research project Subnational Political Institutions: A Comparative Study of the Brazilian States (2013/15658-1)- and the Brazilian Electoral Supreme Court (TSE)."
-
-msgid "pages.about.p2"
-msgstr "All databases found in CepespData were originally made available by the TSE on its public data repository. In order to assure data integrity, all procedures to clean and process the data are registered on GitHub (available at <a href=\"https://github.com/Cepesp-Fgv\" target=\"_blank\">https://github.com/Cepesp-Fgv</a>). These procedures, for example, do not allow the number of votes to be miscounted or excluded due to repetitions and inconsistencies in TSE’s original databases."
-
-msgid "pages.about.p3"
-msgstr "Electoral results found in CEPESPData are based on TSE’s electoral section (polling station) data files. The decision to work with votes disaggregated by polling stations was made in order to maintain the voters’ original preferences given it is the only database from the TSE in which the number of votes is not updated according to judicial decisions made after election day, such as the annulment of candidacies. Consequently, the data from polling stations is the closest representation of the electoral process. The decision to use the data at this level means there could be differences between analysis that use CEPESPData and analysis that use municipal or zone-aggregated data files provided by the TSE given the court often updates the results after post-election judicial rulings."
-
-msgid "pages.about.p4"
-msgstr "Finally, a persistent effort to improve data consistency ensures that differences in the number of votes found in CEPESPData's databases never exceed %(percentage)s of the numbers found in the TSE's original polling station data available in their repository."
-
-msgid "pages.about.p5"
-msgstr "People who have contributed to the project:"
+msgid "pages.political-parties.description"
+msgstr "Browse electoral coalitions’ composition at national, state and municipal levels"
 
 msgid "query.results"
 msgstr "Results"
 
 msgid "query.loading"
 msgstr "Requesting data... Please, wait a minute."
+
+msgid "query.done"
+msgstr "The query is done! Downloading result..."
 
 msgid "query.error"
 msgstr "Whoops! There was a problem with your request... <br/> Try again later."

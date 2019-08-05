@@ -1,4 +1,4 @@
-class LegendasColumnsSelector:
+class CoalitionsColumnsSelector:
 
     def columns(self):
         return [
@@ -23,8 +23,8 @@ class LegendasColumnsSelector:
         ]
 
     def visible_columns(self):
-        return ['ANO_ELEICAO', 'NUM_TURNO', 'SIGLA_UF', 'SIGLA_UE', 'CODIGO_CARGO', 'NUMERO_PARTIDO',
-                'SIGLA_PARTIDO', 'COMPOSICAO_COLIGACAO', 'TIPO_LEGENDA']
+        return ['ANO_ELEICAO', 'NUM_TURNO', 'SIGLA_UE', 'DESCRICAO_CARGO', 'TIPO_LEGENDA', 'NUMERO_PARTIDO',
+                'SIGLA_PARTIDO', 'COMPOSICAO_COLIGACAO']
 
     def order_by_columns(self):
         return ['ANO_ELEICAO', 'SIGLA_UF', 'SIGLA_UE', 'CODIGO_CARGO', 'NUMERO_PARTIDO']

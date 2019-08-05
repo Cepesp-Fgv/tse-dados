@@ -1,0 +1,52 @@
+<div id="columns-modal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{ gettext('pages.query.add-columns') }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+
+                <div id="selected-columns-message"></div>
+
+                <div class="row columns-modal-list">
+                    {% for column in options.all_columns %}
+                        <div class="col-md-4">
+                            <div class="custom-control custom-checkbox mt-2" style="overflow-wrap: break-word">
+                                <input type="checkbox" class="custom-control-input" name="c[]"
+                                       value="{{ column }}"
+                                       id="columns-{{ loop.index0 }}"
+                                       {% if column in options.selected_columns %}checked{% endif %}>
+                                <label class="custom-control-label d-block"
+                                       for="columns-{{ loop.index0 }}">{{ gettext('columns.' + column) }}</label>
+                                {% if gettext('descriptions.' + column) != 'descriptions.' + column %}
+                                <small class="text-muted d-block">{{ gettext('descriptions.' + column) }}</small>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-outline-default">
+                    {{ gettext('pages.query.cancel') }}
+                </button>
+                <button type="button" class="btn btn-outline-info" id="select-default">
+                    {{ gettext('pages.query.select-default') }}
+                </button>
+                {% if options.all_columns|length < 30 %}
+                    <button type="button" class="btn btn-outline-success" id="select-all">
+                        {{ gettext('pages.query.select-all') }}
+                    </button>
+                {% endif %}
+                <button type="submit" class="btn btn-success">
+                    <i class="fa fa-play mr-2"></i>
+                    {{ gettext('pages.query.update-table') }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

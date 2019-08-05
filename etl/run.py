@@ -1,4 +1,6 @@
 import os
+import sys
+import traceback
 
 from etl.config import JOBS, YEARS, OUTPUT, AUX_MUN, FIXES, DATABASES, UF
 from etl.crawler.process import CrawlTSEDataProcess
@@ -12,6 +14,7 @@ from etl.process.PartitioningBemCandidatoProcess import PartitioningBemCandidato
 from etl.process.DetalheVotSecProcess import DetalheVotSecProcess
 from etl.process.PartitioningDetalheProcess import PartitioningDetalheProcess
 from etl.process.BemCandidatoProcess import BemCandidatoProcess
+from etl.process.PartitioningFiliadosProcess import PartitioningFiliadosProcess
 from etl.process.items import SourceFileItem, TSEFileItem
 
 
@@ -20,12 +23,12 @@ def check(item):
         if item['database'] == 'votos' and len(UF) > 0 and item['uf'] not in UF:
             return False
 
-        return item['year'] in YEARS and item['database'] in DATABASES
+        return (item['year'] in YEARS or item['year'] == -1) and item['database'] in DATABASES
     else:
         if item['table'] == 'votos' and len(UF) > 0 and item['uf'] not in UF:
             return False
 
-        return item['year'] in YEARS
+        return item['year'] in YEARS or item['year'] == -1
 
 
 def process(output_files, process_class, item_class, *args):
@@ -36,8 +39,8 @@ def process(output_files, process_class, item_class, *args):
             print(item)
             try:
                 p.handle(item)
-            except Exception as e:
-                print(e.__class__.__name__, e)
+            except Exception:
+                traceback.print_exc(10, sys.stdout)
 
     return p
 
@@ -75,24 +78,33 @@ def run():
     votsec = process(output_files, VotesVotsecProcess, SourceFileItem, AUX_MUN, cand.output, leg.output,
                      os.path.join(OUTPUT, 'joined/votos'))
 
-    print("Partitionning Bem Candidato")
-    process(bem.output_files(), PartitioningBemCandidatoProcess, SourceFileItem,
-            os.path.join(OUTPUT, 'final/bem_candidato'))
+    print("Partitionning Filiados")
+    process(output_files, PartitioningFiliadosProcess, SourceFileItem,
+            os.path.join(OUTPUT, 'final/filiados'))
 
-    print("Partitioning Files - Candidates")
-    process(cand.output_files(), PartitioningDimensionsProcess, TSEFileItem, JOBS,
-            os.path.join(OUTPUT, 'final/candidatos'))
+    if "candidatos" in DATABASES:
+        print("Partitioning Files - Candidates")
+        process(cand.output_files(), PartitioningDimensionsProcess, TSEFileItem, JOBS,
+                os.path.join(OUTPUT, 'final/candidatos'))
 
-    print("Partitioning Files - Legendas")
-    process(leg.output_files(), PartitioningDimensionsProcess, TSEFileItem, JOBS,
+    if "bem_candidato" in DATABASES:
+        print("Partitionning Bem Candidato")
+        process(bem.output_files(), PartitioningBemCandidatoProcess, SourceFileItem,
+                os.path.join(OUTPUT, 'final/bem_candidato'))
+
+    if "legendas" in DATABASES:
+        print("Partitioning Files - Legendas")
+        process(leg.output_files(), PartitioningDimensionsProcess, TSEFileItem, JOBS,
             os.path.join(OUTPUT, 'final/legendas'))
 
-    print("Partitioning Files - Votes")
-    process(votsec.output_files(), PartitioningVotesProcess, TSEFileItem, JOBS, os.path.join(OUTPUT, 'final/votos'))
+    if "votos" in DATABASES:
+        print("Partitioning Files - Votes")
+        process(votsec.output_files(), PartitioningVotesProcess, TSEFileItem, JOBS, os.path.join(OUTPUT, 'final/votos'))
 
-    print("Partitioning Files - Detalhe")
-    process(detalhe.output_files(), PartitioningDetalheProcess, TSEFileItem, JOBS,
-            os.path.join(OUTPUT, 'final/detalhe'))
+    if "detalhe" in DATABASES:
+        print("Partitioning Files - Detalhe")
+        process(detalhe.output_files(), PartitioningDetalheProcess, TSEFileItem, JOBS,
+                os.path.join(OUTPUT, 'final/detalhe'))
 
 
 if __name__ == "__main__":

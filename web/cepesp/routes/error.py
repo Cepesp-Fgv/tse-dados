@@ -1,3 +1,4 @@
+import bugsnag
 import flask
 from flask import render_template
 from werkzeug.exceptions import HTTPException
@@ -13,6 +14,8 @@ def handle_error(e):
 
     if APP_DEBUG and code >= 500:
         logging.exception(message)
+
+    bugsnag.notify(e)
 
     if request_wants_json():
         return flask.jsonify({'error': message, 'code': code}), code

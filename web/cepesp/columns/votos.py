@@ -1,4 +1,4 @@
-class VotosMunColumnsSelector:
+class VotesColumnsSelector:
     columns_list = {
 
         # BR
@@ -199,11 +199,7 @@ class VotosMunColumnsSelector:
         return self.columns_list[self.reg] + ["ID_CANDIDATO", "ID_LEGENDA"]
 
     def visible_columns(self):
-        if self.reg == 9:
-            return ["ANO_ELEICAO", "NUM_TURNO", "DESCRICAO_ELEICAO", "UF", "COD_MUN_TSE", "NUM_ZONA",
-                    "NUM_SECAO", "CODIGO_CARGO", "NUMERO_CANDIDATO", "QTDE_VOTOS"]
-
-        columns = ["ANO_ELEICAO"]
+        columns = ["ANO_ELEICAO", "NUM_TURNO", "NUMERO_CANDIDATO"]
 
         if self.reg == 5:
             columns += ["NOME_MICRO"]
@@ -220,7 +216,7 @@ class VotosMunColumnsSelector:
         elif self.reg == 8:
             columns += ["UF", "NUM_ZONA"]
 
-        columns += ["NUMERO_CANDIDATO", "NUM_TURNO", "DESCRICAO_CARGO", "QTDE_VOTOS"]
+        columns += ["DESCRICAO_CARGO", "QTDE_VOTOS"]
 
         return columns
 

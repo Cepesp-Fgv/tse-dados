@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="row mt-4">
+    <div class="col-md-12">
+
+        <h1>About us</h1>
+
+        <p class="text-muted">
+            CepespData is an online platform that makes available the Brazilian electoral data. CepespData was
+            developed by the Getulio Vargas Foundation’s Center for Politics and Economics of the Public Sector
+            Studies (Cepesp/FGV) with the financial support from the São Paulo State Foundation for Research
+            (FAPESP) to the project The Subnational Political Institutions: A Comparative Study of the Brazilian
+            States (process number: 2013/15658-1) and with institutional support from the Brazilian Superior
+            Electoral Court (TSE).
+        </p>
+
+        <p class="text-muted">
+            The Brazilian electoral data is originally made available through the TSE online
+            repository. The documentation on the data cleaning procedures can be accessed on Cepesp public
+            repository on GitHub (https://github.com/Cepesp-Fgv), which guarantees data integrity, transparency and
+            collaboration with all users.
+        </p>
+
+        <p class="text-muted">
+            People involved (now and before):
+        </p>
+
+        <ul>
+            <!-- <li>Luiz Gabriel</li> -->
+            <li>Abraão Lacerda</li>
+            <li>Arthur Fisch</li>
+            <li>Ciro Biderman</li>
+            <li>Eliana Lins Morandi</li>
+            <li>Frederico Ramos</li>
+            <li>Gabriela Campos</li>
+            <li>George Avelino</li>
+            <li>Guilherme Russo</li>
+            <li>Jonathan Phillips</li>
+            <li>Lara Mesquita</li>
+            <li>Marina Merlo</li>
+            <li>Mauricio Izumi</li>
+            <li>Natália Salgado Bueno</li>
+            <li>Rafael Coelho</li>
+            <li>Rebeca Carvalho</li>
+            <li>Wesley Seidel</li>
+            <li>William Colen</li>
+        </ul>
+
+        <h3>Methodological Note</h3>
+
+        <p class="text-muted">
+            Electoral results found in CEPESPData are based on TSE’s electoral section (polling station) data files.
+            This aggregation level was chosen as our base level given they are the only TSE files that are not altered
+            after post-electoral court decisions. Consequently, these files are the ones that best reflect the voters’
+            will and what occurred on election day. This implies slight differences between electoral results analysis
+            with CepespData/FGV and with TSE data aggregated by municipality or electoral zone. In addition, our team
+            has run analysis to guarantee that differences between CepespData/FGV and TSE published results for the
+            electoral section aggregation level never exceeds 1%, ensuring the consistency of our data.
+        </p>
+
+    </div>
+</div>
+
+{% endblock %}

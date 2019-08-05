@@ -1,5 +1,6 @@
 from botocore.exceptions import ClientError
 from flask import request, jsonify
+from flask_babel import gettext
 from werkzeug.exceptions import BadRequest, NotFound
 
 from web.cepesp.athena.client import AthenaQueryFailed
@@ -9,25 +10,6 @@ from web.cepesp.config import API_PYTHON_VERSION, API_R_VERSION, APP_ENV
 from web.cepesp.routes.lang import lang
 from web.cepesp.utils.analytics import track_event
 from web.cepesp.utils.output import ResponseConverter
-
-def tse_api():
-    return athena_api('tse')
-
-
-def candidatos_api():
-    return athena_api('candidatos')
-
-
-def legendas_api():
-    return athena_api('legendas')
-
-
-def votos_api():
-    return athena_api('votos')
-
-
-def bem_candidato_api():
-    return athena_api('bem_candidato')
 
 
 def athena_api(table):
@@ -65,6 +47,18 @@ def athena_result_api():
     options = AthenaResultOptions()
     options.validate()
     return _athena_response(options.to_dict())
+
+
+def columns_api():
+    lang(request.args.get('lang', 'pt'))
+
+    options = AthenaQueryOptions()
+    return jsonify({
+        'columns': options.all_columns,
+        'translated_columns': {c: gettext('columns.' + c) for c in options.all_columns},
+        'default_columns': options.default_columns,
+        'descriptions': {c: gettext('descriptions.' + c) for c in options.all_columns}
+    })
 
 
 def _athena_response(options, wait=False):

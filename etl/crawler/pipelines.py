@@ -62,7 +62,7 @@ class ProcessItemPipeline:
         "ANO_ELEICAO",
         "DESCRICAO_ELEICAO",
         "SIGLA_UF",
-        "SQ_CANDIDATO",
+        "SEQUENCIAL_CANDIDATO",
         "CD_TIPO_BEM_CANDIDATO",
         "DS_TIPO_BEM_CANDIDATO",
         "DETALHE_BEM",
@@ -81,7 +81,8 @@ class ProcessItemPipeline:
         "VR_BEM_CANDIDATO": "VALOR_BEM",
         "DS_BEM_CANDIDATO": "DETALHE_BEM",
         "DT_ULTIMA_ATUALIZACAO": "DATA_ULTIMA_ATUALIZACAO",
-        "HH_ULTIMA_ATUALIZACAO": "HORA_ULTIMA_ATUALIZACAO"
+        "HH_ULTIMA_ATUALIZACAO": "HORA_ULTIMA_ATUALIZACAO",
+        "SQ_CANDIDATO": "SEQUENCIAL_CANDIDATO"
     }
 
     detalhe = [
@@ -129,6 +130,28 @@ class ProcessItemPipeline:
         "QT_VOTOS_PENDENTES": "QT_VOTOS_ANULADOS_APU_SEP",
     }
 
+    rename_filiados = {
+        "DATA DA EXTRACAO": "DATA_EXTRACAO",
+        "HORA DA EXTRACAO": "HORA_EXTRACAO",
+        "NUMERO DA INSCRICAO": "NUMERO_INSCRICAO",
+        "NOME DO FILIADO": "NOME_FILIADO",
+        "SIGLA DO PARTIDO": "SIGLA_PARTIDO",
+        "NOME DO PARTIDO": "NOME_PARTIDO",
+        "UF": "UF",
+        "CODIGO DO MUNICIPIO": "COD_MUN_TSE",
+        "NOME DO MUNICIPIO": "NOME_MUNICIPIO",
+        "ZONA ELEITORAL": "NUM_ZONA",
+        "SECAO ELEITORAL": "NUM_SECAO",
+        "DATA DA FILIACAO": "DATA_FILIACAO",
+        "SITUACAO DO REGISTRO": "SITUACAO_REGISTRO",
+        "TIPO DO REGISTRO": "TIPO_REGISTRO",
+        "DATA DO PROCESSAMENTO": "DATA_PROCESSAMENTO",
+        "DATA DA DESFILIACAO": "DATA_DESFILIACAO",
+        "DATA DO CANCELAMENTO": "DATA_CANCELAMENTO",
+        "DATA DA REGULARIZACAO": "DATA_REGULARIZACAO",
+        "MOTIVO DO CANCELAMENTO": "MOTIVO_CANCELAMENTO"
+    }
+
     def __init__(self, source, output, years):
         self.source = source
         self.output = output
@@ -162,39 +185,47 @@ class ProcessItemPipeline:
             else:
                 self._extract_files(file_path, columns=self.detalhe)
 
-        elif 'votos' in item['name']:
+        elif 'votacao' in item['name']:
 
             if item['year'] == 2018:
                 self._extract_files(file_path, rename=self.rename_2018)
             else:
                 self._extract_files(file_path, columns=self.columns)
 
+        elif 'filiados' in item['name']:
+
+            self._extract_files(file_path, rename=self.rename_filiados, filter_contains='filiados_')
+
         else:
             self._extract_files(file_path)
 
         return item
 
-    def _extract_files(self, file_path, sep=';', columns=None, rename=None):
+    def _extract_files(self, file_path, sep=';', columns=None, rename=None, filter_contains=None):
         with zipfile.ZipFile(file_path) as z:
             for file in z.namelist():
-                file_new = re.sub(r'(\.txt|\.csv)', '.gz', file)
-                output_path = os.path.join(self.output, file_new)
+                if (filter_contains is None or filter_contains in file) \
+                        and (file.endswith('.txt') or file.endswith('.csv')):
 
-                if not os.path.exists(output_path) and (file.endswith('.txt') or file.endswith('.csv')):
+                    file_new = re.sub(r'(\.txt|\.csv)', '.gz', file)
+                    file_new = file_new.split('/')[-1]  # skip inner directories
+                    output_path = os.path.join(self.output, file_new)
 
-                    directory = os.path.dirname(output_path)
-                    if not os.path.isdir(directory):
-                        os.makedirs(directory)
+                    if not os.path.exists(output_path):
 
-                    with z.open(file) as f:
+                        directory = os.path.dirname(output_path)
+                        if not os.path.isdir(directory):
+                            os.makedirs(directory)
 
-                        if columns is None or len(columns) == 0:
-                            df = pd.read_csv(f, sep=sep, dtype=str, encoding='latin1', header=0)
-                        else:
-                            df = pd.read_csv(f, sep=sep, dtype=str, encoding='latin1', names=columns)
+                        with z.open(file) as f:
 
-                        if rename is not None:
-                            df.rename(columns=rename, inplace=True)
+                            if columns is None or len(columns) == 0:
+                                df = pd.read_csv(f, sep=sep, dtype=str, encoding='latin1', header=0)
+                            else:
+                                df = pd.read_csv(f, sep=sep, dtype=str, encoding='latin1', names=columns)
 
-                        df.to_csv(output_path, compression='gzip', sep=';', encoding='utf-8', index=False,
-                                  quoting=QUOTE_ALL)
+                            if rename is not None:
+                                df.rename(columns=rename, inplace=True)
+
+                            df.to_csv(output_path, compression='gzip', sep=';', encoding='utf-8', index=False,
+                                      quoting=QUOTE_ALL)

@@ -14,7 +14,7 @@ class CreateAthenaTables:
         'QT_VOTOS_BRANCOS',
         'QT_VOTOS_NULOS',
         'QT_VOTOS_LEGENDA',
-        'QT_VOTOS_ANULADOS_APU_SEP',
+        'QT_VOTOS_ANULADOS_APU_SEP'
     ]
     aggregations = {2: 'uf', 4: 'meso', 5: 'micro', 6: 'mun', 7: 'munzona', 8: 'zona', 9: 'votsec'}
 
@@ -304,7 +304,8 @@ class CreateAthenaTables:
             "ANO_ELEICAO",
             "DESCRICAO_ELEICAO",
             "SIGLA_UF",
-            "SQ_CANDIDATO",
+            "SIGLA_UE",
+            "SEQUENCIAL_CANDIDATO",
             "CD_TIPO_BEM_CANDIDATO",
             "DS_TIPO_BEM_CANDIDATO",
             "DETALHE_BEM",
@@ -500,6 +501,74 @@ class CreateAthenaTables:
             folder = f"votos/{name}"
             self._create_table(table, columns + ['ID_CANDIDATO', 'ID_LEGENDA'], folder, ['p_ano', 'p_cargo', 'p_uf'])
 
+    def create_filiados(self):
+        # <editor-fold desc="self._create_table('filiados', [...])" defaultstate="collapsed">
+        self._create_table("filiados", [
+            "DATA_EXTRACAO",
+            "HORA_EXTRACAO",
+            "NUMERO_INSCRICAO",
+            "NOME_FILIADO",
+            "SIGLA_PARTIDO",
+            "NOME_PARTIDO",
+            "UF",
+            "COD_MUN_TSE",
+            "NOME_MUNICIPIO",
+            "NUM_ZONA",
+            "NUM_SECAO",
+            "DATA_FILIACAO",
+            "SITUACAO_REGISTRO",
+            "TIPO_REGISTRO",
+            "DATA_PROCESSAMENTO",
+            "DATA_DESFILIACAO",
+            "DATA_CANCELAMENTO",
+            "DATA_REGULARIZACAO",
+            "MOTIVO_CANCELAMENTO"
+        ], "filiados", ['p_partido', 'p_uf'])
+        # </editor-fold>
+
+    def create_secretarios(self):
+        # <editor-fold desc="self._create_table('secretarios', [...])" defaultstate="collapsed">
+        self._create_table('secretarios', [
+            "STATUS",
+            "NOME_SECRETARIO",
+            "RG",
+            "SEXO",
+            "NOME_MUNICIPIO_NASCIMENTO",
+            "UF_NASCIMENTO",
+            "CARGO",
+            "ORGAO_OCUPADO",
+            "UF_ORGAO_OCUPADO",
+            "COD_GRAU_INSTRUCAO",
+            "DESCRICAO_GRAU_INSTRUCAO",
+            "CURSO_MESTRADO",
+            "CURSO_DOUTORADO",
+            "JA_ERA_FUNCIONARIO_PUBLICO",
+            "NIVEL_DE_GOVERNO",
+            "TRABALHAVA_NA_SECRETARIA_NO_MOMENTO_DA_NOMEACAO",
+            "ORGAO_EM_QUE_TRABALHAVA",
+            "ANO_INGRESSO_ORGAO",
+            "MES_INGRESSO_ORGAO",
+            "PROFISSAO_ANTES_DE_NOMEADO",
+            "UF",
+            "ID_SECRETARIO",
+            "CPF",
+            "TITULO_DE_ELEITOR",
+            "ORGAO_NOME",
+            "ID_CARGO",
+            "ID_ORGAO",
+            "DATA_ASSUMIU",
+            "DATA_DEIXOU",
+            "MOTIVO_SAIDA",
+            "ORIGEM_FILIACAO",
+            "SIGLA_PARTIDO",
+            "NOME_PARTIDO",
+            "CODIGO_MUNICIPIO",
+            "NOME_MUNICIPIO",
+            "RACA_RAIS",
+            "DATA_NASCIMENTO"
+        ], 'secretarios')
+        # </editor-fold>
+
     def _get_column_type(self, col):
         return 'bigint' if col in self.int_columns else 'string'
 
@@ -534,6 +603,9 @@ class CreateAthenaTables:
 class LoadAthenaPartitions:
     uf_list = ['AC', 'AL', 'AM', 'AP', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MG', 'MS', 'MT', 'PA', 'PB', 'PE', 'PI',
                'PR', 'RJ', 'RN', 'RO', 'RR', 'RS', 'SC', 'SE', 'SP', 'TO', 'BR', 'VT', 'ZZ']
+    parties = ["avante", "dc", "dem", "mdb", "novo", "patri", "pc_do_b", "pcb", "pco", "pdt", "phs", "pmb", "pmn",
+               "pode", "pp", "ppl", "pps", "pr", "prb", "pros", "prp", "prtb", "psb", "psc", "psd", "psdb", "psl",
+               "psol", "pstu", "pt", "ptb", "ptc", "pv", "rede", "solidariedade"]
 
     def __init__(self, database, source_folder, bucket, years, jobs):
         self.years = years
@@ -587,6 +659,15 @@ class LoadAthenaPartitions:
                     partitions.append({'p_ano': year, 'p_cargo': job})
 
                     self._load_partition(table, table.replace('_', '/'), partitions)
+
+    def load_filiados(self):
+        for party in self.parties:
+            partitions = []
+
+            for uf in self.uf_list:
+                partitions.append({'p_partido': party, 'p_uf': uf})
+
+            self._load_partition("filiados", "filiados", partitions)
 
     def load_bem_candidato(self):
         for year in self.years:

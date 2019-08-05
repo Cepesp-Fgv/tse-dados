@@ -1,4 +1,4 @@
-from peewee import MySQLDatabase, Model, TextField, CharField, DateTimeField, AutoField, SQL
+from peewee import MySQLDatabase, Model, TextField, CharField, DateTimeField, AutoField
 
 from web.cepesp.config import DB_DATABASE, DB_USERNAME, DB_PASSWORD, DB_HOST, DB_PORT
 
@@ -18,9 +18,28 @@ class CacheEntry(BaseModel):
     sql = TextField()
     name = CharField()
     env = CharField()
+    last_status = CharField()
     athena_id = CharField()
     created_at = DateTimeField()
 
 
 def migrate():
+    open_connection()
     database_client.create_tables([CacheEntry])
+    close_connection()
+
+
+def open_connection():
+    try:
+        database_client.connect(reuse_if_open=True)
+    except Exception as e:
+        print(e)
+        pass
+
+
+def close_connection():
+    try:
+        database_client.close()
+    except Exception as e:
+        print(e)
+        pass

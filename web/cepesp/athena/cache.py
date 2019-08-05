@@ -4,33 +4,22 @@ import os
 from datetime import datetime
 
 from web.cepesp.config import APP_ENV
-from web.cepesp.database import CacheEntry, database_client
+from web.cepesp.database import CacheEntry, open_connection, close_connection
 
 
 class DatabaseCacheHandler:
-
-    def open(self):
-        try:
-            database_client.connect(reuse_if_open=True)
-        except:
-            pass
-
-    def close(self):
-        try:
-            database_client.close()
-        except:
-            pass
 
     def get(self, query_id):
         if query_id is None:
             return None
 
         try:
-            self.open()
+            open_connection()
             entry = CacheEntry.get(CacheEntry.id == query_id)
-            self.close()
+            close_connection()
             return self._output(entry)
-        except:
+        except Exception as e:
+            print(e)
             return None
 
     def get_from_query(self, query):
@@ -38,15 +27,16 @@ class DatabaseCacheHandler:
             return None
 
         try:
-            self.open()
-            entry = CacheEntry.get(CacheEntry.sql == query)
-            self.close()
+            open_connection()
+            entry = CacheEntry.get((CacheEntry.sql == query) & (CacheEntry.env == APP_ENV))
+            close_connection()
             return self._output(entry)
-        except:
+        except Exception as e:
+            print(e)
             return None
 
     def save(self, query, athena_id, query_name=None):
-        self.open()
+        open_connection()
         entry, exists = CacheEntry.get_or_create(
             sql=query,
             athena_id=athena_id,
@@ -54,20 +44,31 @@ class DatabaseCacheHandler:
             env=APP_ENV,
             created_at=datetime.now()
         )
-        self.close()
+        close_connection()
         return self._output(entry)
+
+    def update_status(self, query_id, status):
+        try:
+            open_connection()
+            CacheEntry.update(last_status=status).where(CacheEntry.id == query_id).execute()
+            close_connection()
+        except Exception as e:
+            print(e)
+            return None
 
     def remove(self, qid):
         try:
-            self.open()
+            open_connection()
             q = CacheEntry.delete().where(CacheEntry.id == qid)
             q.execute()
-            self.close()
-        except:
+            close_connection()
+        except Exception as e:
+            print(e)
             pass
 
     def _output(self, entry):
-        return {'id': entry.id, 'athena_id': entry.athena_id, 'sql': entry.sql, 'name': entry.name}
+        return {'id': entry.id, 'athena_id': entry.athena_id, 'sql': entry.sql, 'name': entry.name,
+                'last_status': entry.last_status}
 
 
 class LocalCacheHandler:
@@ -91,6 +92,9 @@ class LocalCacheHandler:
 
     def hash(self, query):
         return hashlib.md5(str(query).encode('utf8')).hexdigest()
+
+    def update_status(self, query_id, status):
+        pass
 
     def save(self, query, athena_id, query_name=None):
         query_id = self.hash(query)

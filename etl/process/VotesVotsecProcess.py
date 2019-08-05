@@ -73,7 +73,7 @@ class VotesVotsecProcess:
         df = self.join_legendas(item, df, leg)
         self._validate_size('legendas', size, df)
 
-        if item['uf'] != 'ZZ':
+        if item['uf'] not in ['ZZ', 'BR', 'VT']:
             df = self.join_legendas_uf(df, leg)
             self._validate_size('legendas', size, df)
 

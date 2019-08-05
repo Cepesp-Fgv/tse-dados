@@ -1,4 +1,7 @@
-class TSEVotosColumnsSelector:
+from os import path
+
+
+class ElectionsColumnsSelector:
     columns_candidato_list = {
 
         # BR
@@ -533,8 +536,8 @@ class TSEVotosColumnsSelector:
             'ANO_ELEICAO',
             'NUM_TURNO',
             'DESCRICAO_ELEICAO',
-            'SIGLA_UE',
-            'DESCRICAO_UE',
+            #'SIGLA_UE',
+            #'DESCRICAO_UE',
             'CODIGO_CARGO',
             'DESCRICAO_CARGO',
             'NUMERO_PARTIDO',
@@ -1155,9 +1158,10 @@ class TSEVotosColumnsSelector:
 
     }
 
-    def __init__(self, pol, reg):
-        self.reg = reg
-        self.pol = pol
+    def __init__(self, pol, reg, job=1):
+        self.job = int(job)
+        self.reg = int(reg)
+        self.pol = int(pol)
 
     def columns(self):
         if self.pol == 2:
@@ -1170,7 +1174,12 @@ class TSEVotosColumnsSelector:
             return self.columns_detalhe_list[self.reg]
 
     def visible_columns(self):
-        columns = ['ANO_ELEICAO', 'NUM_TURNO']
+        columns = ['ANO_ELEICAO']
+
+        if self.job in [1, 3, 11]:
+            columns += ['NUM_TURNO']
+
+        columns += ['DESCRICAO_CARGO']
 
         if self.reg == 5:
             columns += ['NOME_MICRO']
@@ -1181,21 +1190,21 @@ class TSEVotosColumnsSelector:
         elif self.reg == 1:
             columns += ['NOME_MACRO']
         elif self.reg == 6:
-            columns += ['UF', 'COD_MUN_TSE', 'NOME_MUNICIPIO']
+            columns += ['UF', 'COD_MUN_IBGE', 'NOME_MUNICIPIO']
         elif self.reg == 7:
-            columns += ['UF', 'COD_MUN_TSE', 'NOME_MUNICIPIO', 'NUM_ZONA']
+            columns += ['UF', 'COD_MUN_IBGE', 'NOME_MUNICIPIO', 'NUM_ZONA']
         elif self.reg == 8:
             columns += ['UF', 'NUM_ZONA']
         elif self.reg == 9:
             columns += ['NUM_ZONA', 'NUM_SECAO']
 
-        columns += ['CODIGO_CARGO', 'DESCRICAO_CARGO']
+        columns += ['DESCRICAO_CARGO']
 
         if self.pol == 2:
             columns += ['NUMERO_PARTIDO', 'SIGLA_PARTIDO', 'NOME_CANDIDATO', 'NUMERO_CANDIDATO',
                         'NUM_TITULO_ELEITORAL_CANDIDATO', 'DESC_SIT_TOT_TURNO', 'CPF_CANDIDATO']
         elif self.pol == 1:
-            columns += ['SIGLA_PARTIDO']
+            columns += ['NUMERO_PARTIDO', 'SIGLA_PARTIDO']
         elif self.pol == 3:
             columns += ['COMPOSICAO_COLIGACAO']
         elif self.pol == 4:

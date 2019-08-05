@@ -1,5 +1,7 @@
 import os
 from _csv import QUOTE_ALL
+from glob import glob
+import pandas as pd
 
 from utils.data import resolve_conflicts
 
@@ -10,8 +12,9 @@ class BemCandidatoProcess:
         "HORA_GERACAO",
         "ANO_ELEICAO",
         "DESCRICAO_ELEICAO",
+        "SIGLA_UE",
         "SIGLA_UF",
-        "SQ_CANDIDATO",
+        "SEQUENCIAL_CANDIDATO",
         "CD_TIPO_BEM_CANDIDATO",
         "DS_TIPO_BEM_CANDIDATO",
         "DETALHE_BEM",
@@ -31,9 +34,13 @@ class BemCandidatoProcess:
     def handle(self, item):
         chunk = 0
         cand = self.get_candidates(item['year'])
+        cand = cand[cand['NUM_TURNO'] == "1"]
 
         for df in pd.read_csv(item['path'], sep=';', dtype=str, chunksize=100000):
-            self.join_cand(df, cand)
+            before = len(df)
+            df = self.join_cand(df, cand)
+            if len(df) > before:
+                raise Exception('Duplicated bem_candidato')
 
             df = df[self.columns]
             self._save(df, item, chunk)
@@ -45,7 +52,7 @@ class BemCandidatoProcess:
         return os.path.join(self.output, item['name'])
 
     def join_cand(self, df, cand):
-        idx = ['SEQUENCIAL_CANDIDATO']
+        idx = ["SEQUENCIAL_CANDIDATO", "SIGLA_UF"]
         cand = cand.drop_duplicates(idx)
 
         df = df.set_index(idx)

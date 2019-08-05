@@ -9,3 +9,5 @@ requests
 s3fs
 peewee
 pymysql
+blinker
+bugsnag

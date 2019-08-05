@@ -1,0 +1,51 @@
+<li class="nav-item{% if page == 0 %} active{% endif %}">
+    <a class="nav-link" href="/">
+        {{ gettext('layout.menu.home') }}
+    </a>
+</li>
+
+<li class="nav-item dropdown{% if page == 1 %} active{% endif %}">
+    <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" data-toggle="dropdown"
+       aria-haspopup="true" aria-expanded="false">
+        {{ gettext('pages.about.title') }}
+    </a>
+    <div class="dropdown-menu" aria-labelledby="aboutDropdown">
+        <a class="dropdown-item" href="/sobre">{{ gettext('layout.menu.cepespdata') }}</a>
+        <a class="dropdown-item" href="http://workshop.cepesp.io/" target="_blank">{{ gettext('layout.menu.tutorial') }}</a>
+    </div>
+</li>
+
+<li class="nav-item dropdown{% if page in [2,3,4,5,6,7,8] %} active{% endif %}">
+    <a class="nav-link dropdown-toggle" href="#" id="queriesDropdown" data-toggle="dropdown"
+       aria-haspopup="true" aria-expanded="false">
+        {{ gettext('layout.menu.queries') }}
+    </a>
+    <div class="dropdown-menu" aria-labelledby="queriesDropdown">
+        <a class="dropdown-item{% if page == 2 %} active{% endif %}" href="/consulta/tse">{{ gettext('pages.elections.title') }}</a>
+        <a class="dropdown-item{% if page == 3 %} active{% endif %}" href="/consulta/candidatos">{{ gettext('pages.candidates.title') }}</a>
+        <a class="dropdown-item{% if page == 4 %} active{% endif %}" href="/consulta/legendas">{{ gettext('pages.political-parties.title') }}</a>
+        <a class="dropdown-item{% if page == 5 %} active{% endif %}" href="/consulta/votos">{{ gettext('pages.votosmun.title') }}</a>
+        <a class="dropdown-item{% if page == 6 %} active{% endif %}" href="/consulta/bem_candidato">{{ gettext('pages.assets.title') }}</a>
+        <a class="dropdown-item{% if page == 7 %} active{% endif %}" href="/consulta/filiados">{{ gettext('pages.filiados.title') }}</a>
+        <a class="dropdown-item{% if page == 8 %} active{% endif %}" href="/consulta/secretarios">{{ gettext('pages.secretarios.title') }}</a>
+    </div>
+</li>
+
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="integrationDropdown" data-toggle="dropdown"
+       aria-haspopup="true" aria-expanded="false">
+        {{ gettext('layout.menu.integration') }}
+    </a>
+    <div class="dropdown-menu" aria-labelledby="integrationDropdown">
+        <a class="dropdown-item" href="https://github.com/Cepesp-Fgv/cepesp-r" target="_blank">R</a>
+        <a class="dropdown-item" href="https://github.com/Cepesp-Fgv/cepesp-python" target="_blank">Python</a>
+        <a class="dropdown-item" href="https://github.com/Cepesp-Fgv/cepesp-rest"
+           target="_blank">REST</a>
+    </div>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link" href="http://spatial2.cepesp.io" target="_blank">
+        {{ gettext('layout.menu.electoral-maps') }}
+    </a>
+</li>

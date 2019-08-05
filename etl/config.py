@@ -2,6 +2,7 @@ import os
 
 from dotenv import load_dotenv
 
+from etl.fixes.FixBemValor import FixBemValor
 from etl.fixes.AppendExtraJobs2014 import AppendExtraJobs2014
 from etl.fixes.DescricaoEleicaoFix2010 import DescricaoEleicaoFix2010
 from etl.fixes.DescricaoEleicaoFix2014 import DescricaoEleicaoFix2014
@@ -13,6 +14,7 @@ from etl.fixes.FixSequenciaColigacao2010 import FixSequenciaColigacao2010
 from etl.fixes.FixSequencial2014Legendas import FixSequencial2014Legendas
 from etl.fixes.FixTituloEleitor import FixTituloEleitor
 from etl.fixes.SiglaUEFix import SiglaUEFix
+from etl.fixes.BemCandidatoSiglaUEFix import BemCandidatoSiglaUEFix
 from etl.fixes.SitTotTurnoFix import *
 
 base = os.path.dirname(__file__)
@@ -20,9 +22,9 @@ load_dotenv(dotenv_path=os.path.join(base, '../.env'))
 
 OUTPUT = os.path.join(base, 'output')
 AUX_MUN = os.path.join(base, 'aux_mun_code.csv.gz')
-YEARS = [1998, 2000, 2002, 2004, 2006, 2008, 2010, 2012, 2014, 2016, 2018]
-JOBS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13]
-DATABASES = ["bem_candidato"]
+YEARS = [2000]
+JOBS = [11]
+DATABASES = ["detalhe"]
 UF = []
 FIXES = [
     AppendExtraJobs2014(os.path.join(base, 'candidatos_2014_semvotos.gz')),
@@ -49,5 +51,7 @@ FIXES = [
     SitTotTurnoFix2016(),
     SitTotTurnoFix2018(),
 
-    SiglaUEFix()
+    SiglaUEFix(),
+    FixBemValor(),
+    BemCandidatoSiglaUEFix()
 ]

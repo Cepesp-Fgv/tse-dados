@@ -210,25 +210,39 @@ class PartitioningDetalheProcess:
 
     def handle(self, item):
         df = pd.read_csv(item['path'], sep=';', dtype=str)
-        for c in self.sum_cols:
-            df[c] = pd.to_numeric(df[c], errors='coerce')
-        df.fillna('#NE#')
+        df.fillna('#NE#', inplace=True)
+
+        self.fix_numeric(df)
 
         for (aggregation, columns) in self.columns.items():
-            if aggregation < 9:
-                group = list(set(columns) - self.sum_cols)
-                group_df = df.groupby(group, as_index=False).sum()
-                group_df = group_df[columns]
-            else:
-                group_df = df[columns]
+            try:
+                if aggregation < 9:
+                    group = list(set(columns) - self.sum_cols)
+                    group_df = df.groupby(group, as_index=False).sum()
+                    group_df = group_df[columns]
+                else:
+                    group_df = df[columns]
 
-            for job in self.jobs:
-                if not os.path.exists(self._output(item, aggregation, job)):
-                    job_df = group_df[group_df['CODIGO_CARGO'] == str(job)]
-                    if not job_df.empty:
-                        self._save(job_df, item, aggregation, job)
+                for job in self.jobs:
+                    if not os.path.exists(self._output(item, aggregation, job)):
+                        job_df = group_df[group_df['CODIGO_CARGO'] == str(job)]
+                        if not job_df.empty:
+                            self._save(job_df, item, aggregation, job)
+            except e:
+                print("Failed on reg", aggregation)
+                raise e
+
+    def fix_numeric(self, df):
+        for c in df.columns.tolist():
+            if c in self.sum_cols:
+                df.loc[(df[c] == '') | df[c].isnull(), c] = '0'
+                df[c] = pd.to_numeric(df[c], errors='coerce')
+            else:
+                df.loc[(df[c] == '') | df[c].isnull(), c] = '#NE#'
 
     def _save(self, df, item, aggregation, job):
+        self.fix_numeric(df)
+
         output_path = self._output(item, aggregation, job)
 
         directory = os.path.dirname(output_path)

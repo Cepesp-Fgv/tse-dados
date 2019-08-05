@@ -1,4 +1,4 @@
-class CandidatosColumnsSelector:
+class CandidatesColumnsSelector:
 
     def columns(self):
         return [
@@ -52,9 +52,8 @@ class CandidatosColumnsSelector:
         ]
 
     def visible_columns(self):
-        return ['ANO_ELEICAO', 'NUM_TURNO', 'DESCRICAO_ELEICAO', 'SIGLA_UF', 'SIGLA_UE', 'CODIGO_CARGO',
-                'NUMERO_PARTIDO', 'SIGLA_PARTIDO', 'NUMERO_CANDIDATO', 'DES_SITUACAO_CANDIDATURA',
-                'DESC_SIT_TOT_TURNO']
+        return ['ANO_ELEICAO', 'NUM_TURNO', 'SIGLA_UE', 'DESCRICAO_CARGO', 'NUMERO_CANDIDATO', 'CPF_CANDIDATO',
+                'NOME_URNA_CANDIDATO', 'SIGLA_PARTIDO', 'DESCRICAO_SEXO', 'DESC_SIT_TOT_TURNO']
 
     def order_by_columns(self):
         return ['ANO_ELEICAO', 'SIGLA_UF', 'SIGLA_UE', 'CODIGO_CARGO', 'NUMERO_CANDIDATO']

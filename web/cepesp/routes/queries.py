@@ -2,7 +2,7 @@ from flask import session, request, render_template
 
 from web.cepesp.athena.options import AthenaQueryOptions
 from web.cepesp.utils.data import get_years
-from web.cepesp.utils.mun import get_uf_list, get_mun_list
+from web.cepesp.utils.mun import get_uf_list, get_mun_list, get_nomes_secretarios_list
 from web.cepesp.utils.session import get_locale
 
 
@@ -14,7 +14,7 @@ def consulta_tse():
     return render_template(
         "tse.html",
         options=options,
-        page=1,
+        page=2,
         show=show,
         years=get_years(options.job),
         uf_list=get_uf_list(),
@@ -31,7 +31,7 @@ def consulta_candidatos():
     return render_template(
         "candidatos.html",
         options=options,
-        page=2,
+        page=3,
         show=show,
         years=get_years(options.job),
         uf_list=get_uf_list(),
@@ -47,7 +47,7 @@ def consulta_legendas():
     return render_template(
         "legendas.html",
         options=options,
-        page=3,
+        page=4,
         show=show,
         years=get_years(options.job),
         uf_list=get_uf_list(),
@@ -63,7 +63,7 @@ def consulta_votos():
     return render_template(
         "votos.html",
         options=options,
-        page=4,
+        page=5,
         show=show,
         years=get_years(options.job),
         uf_list=get_uf_list(),
@@ -83,5 +83,40 @@ def consulta_bem_candidato():
         show=show,
         years=[2018, 2016, 2014, 2012, 2010, 2008, 2006],
         uf_list=get_uf_list(),
+        lang=get_locale()
+    )
+
+
+def consulta_filiados():
+    session['back'] = request.path
+    options = AthenaQueryOptions('filiados')
+    show = len(list(request.args.values())) > 0
+
+    return render_template(
+        "filiados.html",
+        options=options,
+        page=7,
+        show=show,
+        parties=["avante", "dc", "dem", "mdb", "novo", "patri", "pc_do_b", "pcb", "pco", "pdt", "phs", "pmb", "pmn",
+               "pode", "pp", "ppl", "pps", "pr", "prb", "pros", "prp", "prtb", "psb", "psc", "psd", "psdb", "psl",
+               "psol", "pstu", "pt", "ptb", "ptc", "pv", "rede", "solidariedade"],
+        uf_list=get_uf_list(),
+        lang=get_locale()
+    )
+
+
+def consulta_secretarios():
+    session['back'] = request.path
+    options = AthenaQueryOptions('secretarios')
+    show = len(list(request.args.values())) > 0
+
+    return render_template(
+        "secretarios.html",
+        options=options,
+        page=8,
+        show=show,
+        names_list=get_nomes_secretarios_list(),
+        uf_list=get_uf_list(),
+        periods=["1998-2002", "2002-2006", "2006-2010", "2010-2014", "2014-2018"],
         lang=get_locale()
     )

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<!--[if IE 8]> <html lang="pt" class="ie8 no-js"> <![endif]-->
-<!--[if IE 9]> <html lang="pt" class="ie9 no-js"> <![endif]-->
+<!--[if IE 8]> <html lang="{{ lang }}" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="{{ lang }}" class="ie9 no-js"> <![endif]-->
 <!--[if !IE]><!-->
-<html lang="pt">
+<html lang="{{ lang }}">
 <!--<![endif]-->
 <head>
     <meta charset="utf-8">
@@ -14,136 +14,68 @@
     <link href="{{ 'favicon.ico'|asset }}" rel="shortcut icon"/>
 
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet"
-          type="text/css">
-    <link href="{{ 'plugins/font-awesome/css/font-awesome.min.css'|asset }}" rel="stylesheet" type="text/css"/>
-    <link href="{{ 'plugins/bootstrap/css/bootstrap.min.css'|asset }}" rel="stylesheet" type="text/css"/>
-    <link href="{{ 'plugins/bootstrap-toastr/toastr.min.css'|asset }}" rel="stylesheet" type="text/css"/>
-    <link href="{{ 'plugins/datatable/dataTables.bootstrap.css'|asset }}" rel="stylesheet" type="text/css"/>
+          type="text/css"/>
+    <link href="{{ 'css/app.css'|asset }}" rel="stylesheet" type="text/css"/>
 
     {% block styles %}{% endblock %}
-
-    <link href="{{ 'css/components-md-v9.css'|asset }}" rel="stylesheet" type="text/css"/>
-    <link href="{{ 'css/layout.css'|asset }}" rel="stylesheet" type="text/css"/>
-    <link href="{{ 'css/themes/light.css'|asset }}" rel="stylesheet" type="text/css"/>
-    <link href="{{ 'css/custom.css'|asset }}" rel="stylesheet" type="text/css"/>
-
-    <!--<script src="//code.tidio.co/t7dmlj8zxrgcjcsvqfjf0vsqbuladmzw.js"></script>-->
 </head>
-<body class="page-md">
+<body>
 
-<nav class="md-shadow-z-1-i navbar navbar-default">
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
+<nav class="navbar navbar-expand-lg navbar-light fixed-top">
+    <div class="container">
         <a class="navbar-brand" href="/">
-            <img src="{{ 'images/logoCepespData.png'|asset }}" alt="Cepesp Data"/>
+            <img src="{{ 'images/logo_cepesp.png'|asset }}" alt="Cepesp Data"/>
         </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+
+                {% include "partials/navigation.html" %}
+
+                <li class="nav-item nav-item-float">
+                    <a class="nav-link d-inline-block" href="/pt">
+                        <img src="{{ 'images/flags/pt-br.png'|asset }}" width="18px" alt=""/>
+                    </a>
+
+                    <a class="nav-link d-inline-block mr-4" href="/en">
+                        <img src="{{ 'images/flags/en.png'|asset }}" width="18px" alt=""/>
+                    </a>
+
+                    <a href="http://cepesp.io/" class="btn btn-outline-primary">
+                        Ir para o Cepesp
+                    </a>
+                </li>
+
+            </ul>
+        </div>
     </div>
-    <div id="navbar" class="navbar-collapse collapse">
-        <ul class="nav navbar-nav navbar-right">
-            <li {% if page == 0 %}class="active"{% endif %}>
-                <a class="nav-link" href="/">
-                    <i class="fa fa-home"></i> {{ gettext('layout.menu.home') }}
-                </a>
-            </li>
-            <li class="dropdown {% if page == 5 %}active{% endif %}">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    {{ gettext('pages.about.title') }}
-                    <span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a href="/sobre">{{ gettext('layout.menu.cepespdata') }}</a></li>
-                    <li><a href="http://workshop.cepesp.io/" target="_blank">{{ gettext('layout.menu.workshop') }}</a></li>
-                </ul>
-            </li>
-            <li class="dropdown {% if page in [1, 2, 3, 4] %}active{% endif %}">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    {{ gettext('layout.menu.queries') }}
-                    <span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a href="/consulta/candidatos">{{ gettext('layout.menu.candidates') }}</a></li>
-                    <li><a href="/consulta/legendas">{{ gettext('layout.menu.political-parties') }}</a></li>
-                    <li><a href="/consulta/votos">{{ gettext('layout.menu.electoral-result') }}</a></li>
-                    <li><a href="/consulta/bem_candidato">Bens do Candidato</a></li>
-                    <li>
-                        <a href="/consulta/tse">
-                            {{ gettext('layout.menu.elections') }}
-                            <span class="label label-info">BETA</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    {{ gettext('layout.menu.integration') }}
-                    <span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a href="https://github.com/Cepesp-Fgv/cepesp-r" target="_blank">R</a></li>
-                    <li><a href="https://github.com/Cepesp-Fgv/cepesp-python" target="_blank">Python</a></li>
-                    <li><a href="https://github.com/Cepesp-Fgv/cepesp-rest" target="_blank">REST</a></li>
-                </ul>
-            </li>
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    {{ gettext('layout.menu.apps') }}
-                    <span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a href="http://spatial2.cepesp.io/" target="_blank">Spatial 2</a></li>
-                    <li><a href="http://spatial3.cepesp.io/" target="_blank">Spatial Parties</a></li>
-                </ul>
-            </li>
-            <li>
-                <a class="nav-link" href="http://spatial2.cepesp.io/" target="_blank">
-                    {{ gettext('layout.menu.electoral-maps') }}
-                </a>
-            </li>
-            {% if lang == 'pt' %}
-                <li style="border-left: 1px solid #adadad">
-                    <a class="nav-link" href="/lang/en">
-                        <img src="{{ 'images/flags/en.png'|asset }}" width="20px" alt=""/>
-                    </a>
-                </li>
-            {% elif lang == 'en' %}
-                <li style="border-left: 1px solid #adadad">
-                    <a class="nav-link" href="/lang/pt">
-                        <img src="{{ 'images/flags/pt-br.png'|asset }}" width="20px" alt=""/>
-                    </a>
-                </li>
-            {% endif %}
-        </ul>
-    </div><!--/.nav-collapse -->
 </nav>
 
-
-<div class="clearfix"></div>
+<div class="navbar-fix"></div>
 
 {% block header %}{% endblock %}
 
-<div class="page-container">
+<div class="container">
 
-    <div class="page-content-wrapper">
-        <div class="page-content">
+    {% block content %}{% endblock %}
 
-            {% block content %}{% endblock %}
+</div>
 
+<div class="bg-white mt-4">
+    <div class="container p-4">
+        <img src="{{ 'images/logo_cepesp.png'|asset }}" height="48px" alt="Cepesp Data"/>
+    </div>
+
+    <footer class="border-top border-gray-light pt-3 pb-3">
+        <div class="container">
+            <small class="text-muted">&copy; 2019 CEPESP All rights reserved.</small>
         </div>
-    </div>
-
+    </footer>
 </div>
 
-<div class="page-footer">
-    <div class="page-footer-inner">
-        © FGV CEPESP 2013-2018
-    </div>
-</div>
 
 <!-- Google Analytics -->
 <script>
@@ -163,12 +95,7 @@
     ga('send', 'pageview');
 </script>
 <!-- End Google Analytics -->
-<script src="{{ 'plugins/jquery/jquery.min.js'|asset }}"></script>
-<script src="{{ 'plugins/bootstrap/js/bootstrap.min.js'|asset }}"></script>
-<script src="{{ 'plugins/bootstrap-toastr/toastr.min.js'|asset }}"></script>
-<script src="{{ 'plugins/fileDownload/jquery.fileDownload.js'|asset }}"></script>
-<script src="{{ 'plugins/datatable/jquery.dataTables.min.js'|asset }}"></script>
-<script src="{{ 'plugins/datatable/dataTables.bootstrap.js'|asset }}"></script>
+<script src="{{ 'js/app.js'|asset }}"></script>
 
 {% block scripts %}{% endblock %}
 

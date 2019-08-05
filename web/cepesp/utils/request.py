@@ -1,8 +1,28 @@
+import re
+
 from typing import Type
 
 from flask import request
 
 from web.cepesp.utils.data import get_years
+
+rx = re.compile(r'[!?\\/\-\&\*\%\$\#\"\']+', flags=re.M | re.I)
+
+
+def escape(value):
+    return rx.sub('', value)
+
+
+def trim(value):
+    return re.sub('(\r|\n| )+', ' ', value).strip()
+
+
+def request_get(key, default=None, item_type: Type = str):
+    value = request.args.get(key)
+    if value:
+        return item_type(escape(value))
+    else:
+        return default
 
 
 def request_get_list(key, item_type: Type = str, split=None, default=None):
@@ -10,13 +30,13 @@ def request_get_list(key, item_type: Type = str, split=None, default=None):
 
     value = request.args.getlist(key)
     if value and len(items) == 0:
-        items = [item_type(item) for item in value if split not in item]
+        items = [item_type(escape(item)) for item in value if split not in item]
 
     value = request.args.get(key)
     if split and value:
         value = value.split(split)
         if len(value) > len(items):
-            items = [item_type(item) for item in value]
+            items = [item_type(escape(item)) for item in value]
 
     if default and len(items) == 0:
         return default
@@ -29,6 +49,8 @@ def request_selected_columns():
 
     if len(columns) == 0:
         columns = request_get_list("c", split=',')
+
+    columns = [escape(c) for c in columns]
 
     return columns
 

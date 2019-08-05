@@ -1,69 +1,188 @@
 {% extends "layout.html" %}
 
-{% block styles %}
-    <link rel="stylesheet" href="{{ 'css/home.css'|asset }}">
-{% endblock %}
-
-{% block content %}
+{% block header %}
     <div class="home-header">
-        <div class="container text-center">
-            <div class="col-md-12">
-                <h1>{{ gettext('pages.home.welcome') }}</h1>
-                <h2>
-                    {{ gettext('pages.home.welcome-description')|safe }}<br>
-                </h2>
-                <h2>{{ gettext('pages.home.see-more') }}</h2>
-            </div>
-        </div>
-    </div>
-
     <div class="container">
         <div class="row">
-            <div class="col-md-3">
-                <div class="portlet light text-center">
-                    <div class="card-title" style="height: 50px; margin-top: 20px">
-                        <span>{{ gettext('pages.home.elections') }}</span>
+            <div class="col-md-12">
+                <img src="{{ 'images/logoFapesp.png'|asset }}" alt="" height="25px"/>
+                <h2>CEPESP DATA</h2>
+                <div class="row">
+                    <div class="col-md-10">
+                        <p class="text-justify">
+                            {{ gettext('pages.home.welcome-description') }}
+                        </p>
+
+                        <div class="row" style="margin-top: 80px">
+                            <div class="col-md-4 col-lg-3" style="margin-top: 20px">
+                                <h4>{{ gettext('pages.home.elections') }}</h4>
+
+                                <a href="/consulta/tse" class="home-link"
+                                   data-toggle="tooltip" data-placement="left"
+                                   title="{{ gettext('pages.home.electoral_results.description') }}">
+                                    <div class="home-link-header">
+                                        <img src="{{ 'images/icons/electoral_results_v2.png'|asset }}" alt=""/>
+                                    </div>
+                                    <div class="home-link-body">
+                                        <h6>{{ gettext('pages.home.electoral_results') }}</h6>
+                                        <span class="see-more">{{ gettext('pages.home.see-more') }}</span>
+                                    </div>
+                                </a>
+
+                                <a href="/consulta/tse?agregacao_politica=4" class="home-link"
+                                   data-toggle="tooltip" data-placement="left"
+                                   title="{{ gettext('pages.home.summary_of_elections.description') }}">
+                                    <div class="home-link-header">
+                                        <img src="{{ 'images/icons/summary_of_elections_v2.png'|asset }}" alt=""/>
+                                    </div>
+                                    <div class="home-link-body">
+                                        <h6>{{ gettext('pages.home.summary_of_elections') }}</h6>
+                                        <span class="see-more">{{ gettext('pages.home.see-more') }}</span>
+                                    </div>
+                                </a>
+
+                                <a href="/others" class="home-link" data-toggle="tooltip" data-placement="left"
+                                   title="{{ gettext('pages.home.disaggregated_data.description') }}">
+                                    <div class="home-link-header">
+                                        <img src="{{ 'images/icons/disaggregated_data_v2.png'|asset }}" alt=""/>
+                                    </div>
+                                    <div class="home-link-body">
+                                        <h6>{{ gettext('pages.home.disaggregated_data') }}</h6>
+                                        <span class="see-more">{{ gettext('pages.home.see-more') }}</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-4 col-lg-3" style="margin-top: 20px">
+                                <h4>{{ gettext('pages.home.accountability') }}</h4>
+
+                                <a href="/consulta/bem_candidato" class="home-link"
+                                   data-toggle="tooltip" data-placement="left"
+                                   title="{{ gettext('pages.home.candidates_assets.description') }}">
+                                    <div class="home-link-header">
+                                        <img src="{{ 'images/icons/candidates_assets_v2.png'|asset }}" alt=""/>
+                                    </div>
+                                    <div class="home-link-body">
+                                        <h6>{{ gettext('pages.home.candidates_assets') }}</h6>
+                                        <span class="see-more">{{ gettext('pages.home.see-more') }}</span>
+                                    </div>
+                                </a>
+
+                                <a href="#" class="home-link">
+                                    <div class="home-link-header">
+                                        <img src="{{ 'images/icons/campaign_donations_v2.png'|asset }}" alt=""/>
+                                    </div>
+                                    <div class="home-link-body">
+                                        <h6>{{ gettext('pages.home.campaign_donations') }}</h6>
+                                        <span class="see-more">
+                                            (<span class="text-uppercase">{{ gettext('pages.home.soon') }}</span>)<br>
+                                            {{ gettext('pages.home.see-more') }}
+                                        </span>
+                                    </div>
+                                </a>
+
+                                <a href="#" class="home-link">
+                                    <div class="home-link-header">
+                                        <img src="{{ 'images/icons/campaign_expenses_v2.png'|asset }}" alt=""/>
+                                    </div>
+                                    <div class="home-link-body">
+                                        <h6>{{ gettext('pages.home.campaign_expenses') }}</h6>
+                                        <span class="see-more">
+                                            (<span class="text-uppercase">{{ gettext('pages.home.soon') }}</span>)<br>
+                                            {{ gettext('pages.home.see-more') }}
+                                        </span>
+                                    </div>
+                                </a>
+
+                            </div>
+                            <div class="col-md-4 col-lg-3" style="margin-top: 20px">
+                                <h4>{{ gettext('pages.home.parties') }}</h4>
+
+                                <a href="/consulta/filiados" class="home-link"
+                                   data-toggle="tooltip" data-placement="left"
+                                   title="{{ gettext('pages.home.party_affiliation.description') }}">
+                                    <div class="home-link-header">
+                                        <img src="{{ 'images/icons/party_affiliation_v2.png'|asset }}" alt=""/>
+                                    </div>
+                                    <div class="home-link-body">
+                                        <h6>{{ gettext('pages.home.party_affiliation') }}</h6>
+                                        <span class="see-more">{{ gettext('pages.home.see-more') }}</span>
+                                    </div>
+                                </a>
+
+                                <a href="/consulta/secretarios" class="home-link"
+                                   data-toggle="tooltip" data-placement="left"
+                                   title="{{ gettext('pages.home.state_secretaries.description') }}"
+                                >
+                                    <div class="home-link-header">
+                                        <img src="{{ 'images/icons/state_secretaries_v2.png'|asset }}" alt=""/>
+                                    </div>
+                                    <div class="home-link-body">
+                                        <h6>{{ gettext('pages.home.state_secretaries') }}</h6>
+                                        <span class="see-more">{{ gettext('pages.home.see-more') }}</span>
+                                    </div>
+                                </a>
+
+                                <a href="#" class="home-link">
+                                    <div class="home-link-header">
+                                        <img src="{{ 'images/icons/party_committees_v2.png'|asset }}" alt=""/>
+                                    </div>
+                                    <div class="home-link-body">
+                                        <h6>{{ gettext('pages.home.party_committees') }}</h6>
+                                        <span class="see-more">
+                                            (<span class="text-uppercase">{{ gettext('pages.home.soon') }}</span>)<br>
+                                            {{ gettext('pages.home.see-more') }}
+                                        </span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-4 col-lg-3 no-padding-left" style="margin-top: 20px">
+                                <h4>{{ gettext('pages.home.apps') }}</h4>
+
+                                <a href="http://shiny.cepesp.io/cepesp_indicadores/" class="home-link"
+                                   data-toggle="tooltip" data-placement="left"
+                                   title="{{ gettext('pages.home.electoral_indices.description') }}"
+                                   target="_blank">
+                                    <div class="home-link-header">
+                                        <img src="{{ 'images/icons/electoral_indices_v2.png'|asset }}" alt=""/>
+                                    </div>
+                                    <div class="home-link-body">
+                                        <h6>{{ gettext('pages.home.electoral_indices') }}</h6>
+                                        <span class="see-more">{{ gettext('pages.home.see-more') }}</span>
+                                    </div>
+                                </a>
+
+                                <a href="http://shiny.cepesp.io/cepesp_carreiras" class="home-link"
+                                   data-toggle="tooltip" data-placement="left"
+                                   title="{{ gettext('pages.home.careers.description') }}"
+                                   target="_blank">
+                                    <div class="home-link-header">
+                                        <img src="{{ 'images/icons/careers_v2.png'|asset }}" alt=""/>
+                                    </div>
+                                    <div class="home-link-body">
+                                        <h6>{{ gettext('pages.home.careers') }}</h6>
+                                        <span class="see-more">{{ gettext('pages.home.see-more') }}</span>
+                                    </div>
+                                </a>
+
+                                <a href="http://spatial2.cepesp.io" class="home-link"
+                                   data-toggle="tooltip" data-placement="left"
+                                   title="{{ gettext('pages.home.electoral_maps.description') }}"
+                                   target="_blank">
+                                    <div class="home-link-header">
+                                        <img src="{{ 'images/icons/electoral_maps_v2.png'|asset }}" alt=""/>
+                                    </div>
+                                    <div class="home-link-body">
+                                        <h6>{{ gettext('pages.home.electoral_maps') }}</h6>
+                                        <span class="see-more">{{ gettext('pages.home.see-more') }}</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        </p>
                     </div>
-                    <div class="card-desc margin-bottom-40" style="height: 110px">
-                        <span>{{ gettext('pages.home.elections-description') }}</span>
-                    </div>
-                    <a class="btn btn-primary" href="/consulta/tse">{{ gettext('pages.home.query') }}</a>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="portlet light text-center">
-                    <div class="card-title" style="height: 50px; margin-top: 20px">
-                        <span>{{ gettext('pages.votosmun.title') }}</span>
-                    </div>
-                    <div class="card-desc margin-bottom-40" style="height: 110px">
-                        <span>{{ gettext('pages.votosmun.description') }}</span>
-                    </div>
-                    <a class="btn btn-primary" href="/consulta/votos">{{ gettext('pages.home.query') }}</a>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="portlet light text-center">
-                    <div class="card-title" style="height: 50px; margin-top: 20px">
-                        <span>{{ gettext('pages.home.candidates') }}</span>
-                    </div>
-                    <div class="card-desc margin-bottom-40" style="height: 110px">
-                        <span>{{ gettext('pages.home.candidates-description') }}</span>
-                    </div>
-                    <a class="btn btn-primary" href="/consulta/candidatos">{{ gettext('pages.home.query') }}</a>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="portlet light text-center">
-                    <div class="card-title" style="height: 50px; margin-top: 20px">
-                        <span>{{ gettext('pages.home.political-parties') }}</span>
-                    </div>
-                    <div class="card-desc margin-bottom-40" style="height: 110px">
-                        <span>{{ gettext('pages.home.political-parties-description') }}</span>
-                    </div>
-                    <a class="btn btn-primary" href="/consulta/legendas">{{ gettext('pages.home.query') }}</a>
+
                 </div>
             </div>
         </div>
     </div>
-
 {% endblock %}

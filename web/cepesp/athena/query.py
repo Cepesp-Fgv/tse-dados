@@ -1,4 +1,6 @@
-from web.cepesp.athena.builders import AthenaBuilder
+import time
+
+from web.cepesp.athena.builders.factory import build_query
 from web.cepesp.athena.cache import DatabaseCacheHandler, LocalCacheHandler
 from web.cepesp.athena.client import AthenaDatabaseClient
 from web.cepesp.config import APP_ENV, ATHENA_CACHE
@@ -22,15 +24,14 @@ class AthenaQuery:
         else:
             self.cache = None
 
-    def build_query(self, options):
-        return AthenaBuilder(**options).build()
-
     def get_info(self, options, wait=False):
         query_id = options['query_id'] if 'query_id' in options else None
+        time.sleep(1)
+
         if query_id:
             info = self.cache.get(query_id)
         else:
-            query = self.build_query(options)
+            query = build_query(**options)
             info = self.cache.get_from_query(query)
 
             if info is None:
@@ -61,11 +62,17 @@ class AthenaQuery:
         return self.client.get_stream(athena_id)
 
     def get_status(self, options, wait=False):
-        athena_id = self._get_athena_id(options, wait)
-        status, reason = self.client.status(athena_id)
-
-        if status == "FAILED":
+        try:
             info = self.get_info(options, wait)
-            self.cache.remove(info['id'])
+
+            if 'last_status' in info and info['last_status'] in ["SUCCEEDED", "FAILED"]:
+                status = info['last_status']
+                reason = None
+            else:
+                status, reason = self.client.status(info['athena_id'])
+                self.cache.update_status(info['id'], status)
+        except QueryNotFoundException:
+            status = 'RUNNING'
+            reason = 'Query not found.'
 
         return {'status': status, 'message': reason}

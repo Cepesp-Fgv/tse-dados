@@ -1,4 +1,5 @@
 static/cache/*
+node_modules/
 
 tests_*.txt
 testes_*.txt

@@ -1,6 +1,6 @@
 from etl.process.CreateAthenaTables import CreateAthenaTables, LoadAthenaPartitions
 
-APP_ENV = 'master'
+APP_ENV = 'test'
 ATHENA_DATABASE = 'cepesp_' + APP_ENV
 ATHENA_BUCKET = 'cepesp-athena'
 ATHENA_BUCKET_FOLDER = 'source-' + APP_ENV
@@ -27,6 +27,12 @@ def create(*tables):
     if "votos" in tables or len(tables) == 0:
         creator.create_votos()
 
+    if "filiados" in tables or len(tables) == 0:
+        creator.create_filiados()
+
+    if "secretarios" in tables or len(tables) == 0:
+        creator.create_secretarios()
+
 
 def partitions(*tables):
     print("Loading partitions - Athena")
@@ -46,6 +52,9 @@ def partitions(*tables):
 
     if "detalhe" in tables or len(tables) == 0:
         loader.load_detalhe()
+
+    if "filiados" in tables or len(tables) == 0:
+        loader.load_filiados()
 
 
 if __name__ == "__main__":

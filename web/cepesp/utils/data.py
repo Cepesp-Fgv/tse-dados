@@ -78,6 +78,7 @@ def resolve_conflicts(df, prefer='_x', drop='_y') -> pd.DataFrame:
     return df.rename(columns=renames).drop(drops, axis=1)
 
 
+
 COD_SIT = {
     1998: [2, 4],
     2000: [1, 2, 4],

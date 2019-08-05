@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+
+{% block header %}
+    <div class="home-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-10">
+                        <h3>{{ gettext('pages.others.welcome') }}</h3>
+
+                        <p class="text-justify">
+                            {{ gettext('pages.others.welcome-description') }}
+                        </p>
+
+                        <div class="row" style="margin-top: 100px">
+                            <div class="col-md-4">
+
+                                <a href="/consulta/votos" class="home-link"
+                                   data-toggle="tooltip" data-placement="left"
+                                   title="{{ gettext('pages.others.votes.description') }}">
+                                    <div class="home-link-header">
+                                        <img src="{{ 'images/icons/votes_v2.png'|asset }}" alt=""/>
+                                    </div>
+                                    <div class="home-link-body">
+                                        <h6>{{ gettext('pages.others.votes') }}</h6>
+                                        <span class="see-more">{{ gettext('pages.home.see-more') }}</span>
+                                    </div>
+                                </a>
+
+                                <a href="/consulta/candidatos" class="home-link"
+                                   data-toggle="tooltip" data-placement="left"
+                                   title="{{ gettext('pages.others.candidates_profiles.description') }}">
+                                    <div class="home-link-header">
+                                        <img src="{{ 'images/icons/candidates_profiles_v2.png'|asset }}" alt=""/>
+                                    </div>
+                                    <div class="home-link-body">
+                                        <h6>{{ gettext('pages.others.candidates_profiles') }}</h6>
+                                        <span class="see-more">{{ gettext('pages.home.see-more') }}</span>
+                                    </div>
+                                </a>
+
+                                <a href="/consulta/legendas" class="home-link"
+                                   data-toggle="tooltip" data-placement="left"
+                                   title="{{ gettext('pages.others.electoral_coalitions.description') }}">
+                                    <div class="home-link-header">
+                                        <img src="{{ 'images/icons/electoral_coalitions_v2.png'|asset }}" alt=""/>
+                                    </div>
+                                    <div class="home-link-body">
+                                        <h6>{{ gettext('pages.others.electoral_coalitions') }}</h6>
+                                        <span class="see-more">{{ gettext('pages.home.see-more') }}</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

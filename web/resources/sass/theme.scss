@@ -1,0 +1,202 @@
+body {
+  font-family: $font-family-sans-serif !important;
+  background-color: $gray-300 !important;
+}
+
+.navbar {
+  background-color: #fff;
+  padding-top: 26px;
+  padding-bottom: 26px;
+
+  .navbar-brand img {
+    height: 48px;
+  }
+
+  @include media-breakpoint-down(md) {
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    .navbar-brand img {
+      height: 40px;
+    }
+  }
+
+  @include media-breakpoint-down(sm) {
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+    .navbar-brand img {
+      height: 30px;
+    }
+  }
+
+  .navbar-toggler {
+    border: none;
+
+    &:focus {
+      outline: 0;
+      color: $primary;
+    }
+  }
+}
+
+.hidden-sm {
+  @include media-breakpoint-down(md) {
+    display: none;
+  }
+}
+
+.navbar-nav {
+  position: relative;
+
+  .nav-item {
+
+    .dropdown-toggle::after {
+      @include fa-icon();
+      content: $fa-var-chevron-down;
+      border: none;
+      font-size: 10px;
+      margin-top: 2px;
+      margin-left: 0;
+    }
+
+    &.active .nav-link {
+      color: $primary !important;
+    }
+
+    .nav-link {
+      text-transform: uppercase;
+      font-size: $nav-font-size !important;
+      font-weight: bolder;
+      padding-left: 0.4rem;
+      padding-right: 0.4rem;
+      transition: all .3s;
+      color: #000;
+
+      eckout
+      &:hover {
+        color: $primary !important;
+      }
+    }
+
+    &.nav-item-float {
+
+      .btn-outline-primary {
+        display: none;
+      }
+
+      .nav-link {
+        padding-left: 0.3rem;
+        padding-right: 0.3rem;
+      }
+
+      @include media-breakpoint-up(lg) {
+        position: absolute;
+        top: -40px;
+        right: 0;
+        margin-left: 10px;
+
+        .btn-outline-primary {
+          right: 0;
+          width: 170px;
+          padding: 10px 15px;
+          border-style: none solid solid;
+          border-width: 0 1px 1px;
+          border-radius: 0 0 3px 3px;
+          color: $primary;
+          font-size: 11px;
+          line-height: 12px;
+          text-transform: uppercase;
+          display: inline-block !important;
+
+          &:hover {
+            color: #fff;
+          }
+        }
+      }
+
+    }
+  }
+}
+
+
+.navbar-fix {
+  height: 100px;
+  display: block;
+  clear: both;
+  float: none;
+
+  @include media-breakpoint-down(md) {
+    height: 70px;
+  }
+
+  @include media-breakpoint-down(sm) {
+    height: 40px;
+  }
+}
+
+.border-gray-light {
+  border: $gray-400;
+}
+
+@include media-breakpoint-up(md) {
+  .modal-dialog {
+    max-width: 80%;
+  }
+}
+
+/* Datatable loading */
+
+.dataTables_wrapper {
+  position: relative;
+}
+
+.dataTables_processing {
+  display: none !important;
+  opacity: 0 !important;
+  transform: scale(0, 0) !important;
+}
+
+/* Auto Complete */
+
+.algolia-autocomplete {
+  width: 100%;
+}
+
+.algolia-autocomplete .aa-input, .algolia-autocomplete .aa-hint {
+  width: 100%;
+}
+
+.algolia-autocomplete .aa-hint {
+  color: #999;
+}
+
+.algolia-autocomplete .aa-dropdown-menu {
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid $gray-400;
+  border-top: none;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 0 1rem;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+
+  .aa-suggestion {
+    cursor: pointer;
+    padding: 5px 1rem;
+
+    &.aa-cursor {
+      background-color: #B2D7FF;
+    }
+
+    p {
+      padding: 0;
+      margin: 0;
+    }
+
+    em {
+      font-weight: bold;
+      font-style: normal;
+    }
+
+  }
+}

@@ -23,8 +23,8 @@ class CrawlTSEDataProcess:
                 #"odsele/votacao_secao",
                 #"eleicoes/eleicoes2012/votosecao",
                 #"bem_candidato",
-                #"odsele/detalhe_votacao_secao",
-                "eleitorado/filiados"
+                "odsele/detalhe_votacao_secao",
+                #"eleitorado/filiados"
             ],
 
             'ITEM_PIPELINES': {

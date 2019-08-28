@@ -1,0 +1,38 @@
+# Como visualizar dados no R
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      eval = FALSE)
+```
+
+## Gráficos
+
+### Gráfico de Barras
+
+Primeiro, instale os pacotes necessários:
+
+```{r}
+install.packages(c("ggplot2", "sf", "ggthemes"))
+```
+
+Em seguida, precisamos fazer a requisição da nossa tabela.
+
+```{r}
+library(cepespR)
+library(dplyr)
+library(ggplot2)
+
+cand_2014 <- get_candidates(2014, 6)
+```
+
+Em seguinda, iremos filtrar o nosso banco para utilizar a função `ggplot`. Dentro da função `ggplot`, repare no parâmetro `mapping` que recebe a função `aes`. Dentro de `aes`, o parâmetro `x` recebe o nome da variável que queremos utilizar para montar no nosso __gráfico de barras__.
+
+```{r}
+cand_2014 %>% 
+  filter(DES_SITUACAO_CANDIDATURA %in% c("DEFERIDO", "DEFERIDO COM RECURSO")) %>% 
+  ggplot(mapping = aes(x = DESCRICAO_SEXO)) +
+  geom_bar() +
+  theme_minimal()
+```
+
+Você pode substituir `DESCRICAO_SEXO` por outras variáeis: `DESCRICAO_COR_RACA`, `DESCRICAO_GRAU_INSTRUCAO`, `DESCRICAO_ESTADO_CIVIL`.

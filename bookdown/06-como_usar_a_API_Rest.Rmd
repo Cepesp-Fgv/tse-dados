@@ -1,0 +1,97 @@
+# Como usar a API REST
+
+A [API Rest](https://github.com/Cepesp-Fgv/cepesp-rest) é outra forma de acessar os dados do CepespData e pode ser utilizada em diferentes _softwares_ ou programas.
+
+Aqui vamos mostrar como fazer a requisição usando apenas o navegador, o _web browser_, e usando o **R**.
+
+## Estrutura das resquisições
+
+A estrutura da consulta no browser é: 
+
+    cepesp.io/api/consulta/athena/query?table=<TABELA>&<ARGUMENTOS>
+
+O argumento `table` indica qual é a base de dados que se deseja acessar: `tse` (banco **Resultado de eleições por cargo**), `candidatos` (banco **Perfil de candidatos**), `legendas` (**Coligações**), `votos` (banco de **Votos**), `bem_candidato` (**Bens de candidatos**), `secretarios` (**Secretários**) ou `filiados` (**Filiados**).
+
+Os demais argumentos (`<ARGUMENTOS>` acima) possíveis são: 
+
+| Argumentos                    | Bases de dados que suportam este argumento      |
+|-------------------------------|-------------------------------------------------|
+| anos                          | tse, candidatos, legendas, votos, bem_candidato |
+| cargo                         | tse, candidatos, legendas, votos                |
+| agregacao_regional            | tse, votos                                      |
+| agregacao_politica            | tse                                             |
+| uf_filter                     | tse, votos, bem_candidato, filiados             |
+| mun_filter                    | tse, votos                                      |
+| only_elected                  | tse, candidatos                                 |
+| brancos                       | tse, votos                                      |
+| nulos                         | tse, votos                                      |
+| name_filter                   | secretarios                                     |
+| goverment_period              | secretarios                                     |
+| party                         | filiados                                        |
+
+Além disso, caso as colunas desejadas não estajam na lista de colunas-padrão da consulta de determinado banco, é possível selecionar colunas acrescentando o texto `&c[]=<COLUNA>` ao final do link de requisição, e/ou filtrar colunas, acrescentando o texto `&filters[<COLUNA>]=<VALOR>`. *Atenção: garanta que a coluna a ser filtrada foi devidamente selecionada.*
+
+Por exemplo, para filtrar candidatos(as) à Presidência em 2018 que se declaram pretos(as), utilizamos o seguinte link: 
+
+    cepesp.io/api/consulta/athena/query?table=candidatos&anos=2014&cargo=1&c[]=ANO_ELEICAO&c[]=NUM_TURNO&c[]=SIGLA_UE&c[]=DESCRICAO_CARGO&c[]=SIGLA_PARTIDO&c[]=NUMERO_CANDIDATO&c[]=CPF_CANDIDATO&c[]=NOME_URNA_CANDIDATO&c[]=DESCRICAO_SEXO&c[]=DESCRICAO_COR_RACA&c[]=DESC_SIT_TOT_TURNO&filters[DESCRICAO_COR_RACA]=PRETA
+    
+É possível acessar a lista de colunas disponíveis para cada banco de dados no nosso [dicionário de variáveis](http://www.cepespdata.io/static/docs/cepespdata_dicionario_publico.xlsx) ou no [nosso GitHub](https://github.com/Cepesp-Fgv/tse-dados/wiki/Colunas).
+
+### API Rest no navegador
+
+Quando se insere o link conforme a estrutura descrita acima no navegador, a requisição deve ser bem-sucedida. Isso pode ser verificado por meio do aviso `last_status:"SUCCEEDED"` que deverá aparecer no canto superior esquerdo tela. 
+
+Neste caso, guarde o número do `id` devolvido pela consulta. No caso da consulta do exemplo cima: `id: 7738`.
+
+Finalmente, faça o download da requisição em formato CSV inserindo o link `cepesp.io/api/consulta/athena/result?id=<ID>&ignore_version=true` em seu navegador, mas substituindo o termo `<ID>` pelo número de `id` recuperado na consulta acima. No nosso exemplo: `7738`. Ou seja, neste caso, o link a ser inserido seria:
+
+    cepesp.io/api/consulta/athena/result?id=7738&ignore_version=true
+
+### API Rest no R
+
+Utilizar a API Rest no R permite importar dados de forma mais automática e estruturada, diretamente para o ambiente **R**, onde eles podem ser manipulados de acordo com seu interesse. 
+
+Para usar a API Rest por meio do R, você vai precisar instalar os pacotes `httr` e `jasonlite`.
+
+```{r, eval=FALSE}
+install.packages("httr")
+install.packages("jsonlite")
+```
+
+Em seguida, vamos requerir a utilização dos pacotes:
+
+```{r, eval=FALSE}
+require("httr")
+require("jsonlite")
+```
+
+E depois fazer a requisição utilizando a estrutura descrita acima em **Estrutura das resquisições**. Vamos usar um exemplo:
+
+```{r, eval=FALSE}
+
+# Definindo link da requisição:
+link <- "cepesp.io/api/consulta/athena/query?table=candidatos&anos=2014&cargo=1&c[]=ANO_ELEICAO&c[]=NUM_TURNO&c[]=SIGLA_UE&c[]=DESCRICAO_CARGO&c[]=SIGLA_PARTIDO&c[]=NUMERO_CANDIDATO&c[]=CPF_CANDIDATO&c[]=NOME_URNA_CANDIDATO&c[]=DESCRICAO_SEXO&c[]=DESCRICAO_COR_RACA&c[]=DESC_SIT_TOT_TURNO&filters[DESCRICAO_COR_RACA]=PRETA"
+
+# Fazendo requisição:
+call <- httr::GET("cepesp.io/api/consulta/athena/query?table=candidatos&anos=2014&cargo=1&c[]=ANO_ELEICAO&c[]=NUM_TURNO&c[]=SIGLA_UE&c[]=DESCRICAO_CARGO&c[]=SIGLA_PARTIDO&c[]=NUMERO_CANDIDATO&c[]=CPF_CANDIDATO&c[]=NOME_URNA_CANDIDATO&c[]=DESCRICAO_SEXO&c[]=DESCRICAO_COR_RACA&c[]=DESC_SIT_TOT_TURNO&filters[DESCRICAO_COR_RACA]=PRETA")
+
+# Transformando a lista em texto:
+call_text <- httr::content(call, 'text')
+
+# Abrindo a nossa lista JSON:
+call_json <- fromJSON(call_text, flatten = TRUE) 
+View(call_json) # Aqui conseguimos acessar o id que contém a nossa requisição, que pode ser acessado no:
+call_json$id
+
+# Assim vamos importar o banco desejado inserindo o nosso id na requisição do resultado da consulta:
+requis <- httr::GET(paste0('cepesp.io/api/consulta/athena/result?id=',call_json$id,'&ignore_version=true'))
+
+# Transformando a requisição em formato de banco de dados:
+requis_df <- httr::content(requis, 'parsed')
+
+```
+
+Assim, o objeto final `requis_df` deve conter o banco de dados desejado, que pode ser manipulado dentro do seu ambiente R e salvo conforme interesse. Veja as seções 3 e 4 deste tutorial para mais detalhes sobre a utilização do R.
+
+Para mais detalhes sobre a API Rest do CepespData/FGV, consulte nossa página no [GitHub](https://github.com/Cepesp-Fgv/cepesp-rest/).
+

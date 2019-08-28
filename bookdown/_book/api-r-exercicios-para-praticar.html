@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>5 API R: Exercícios para praticar | Como usar o CepespData/FGV</title>
+  <meta name="description" content="5 API R: Exercícios para praticar | Como usar o CepespData/FGV">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="5 API R: Exercícios para praticar | Como usar o CepespData/FGV" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="5 API R: Exercícios para praticar | Como usar o CepespData/FGV" />
+  
+  
+  
+
+<meta name="author" content="Equipe CepespData/FGV">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="como-usar-a-api-r.html">
+<link rel="next" href="como-manipular-os-dados-no-r.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> O CepespData</a></li>
+<li class="chapter" data-level="2" data-path="como-usar-o-site.html"><a href="como-usar-o-site.html"><i class="fa fa-check"></i><b>2</b> Como usar o site</a><ul>
+<li class="chapter" data-level="2.1" data-path="como-usar-o-site.html"><a href="como-usar-o-site.html#bancos-de-dados-disponiveis-no-site-do-cepespdata"><i class="fa fa-check"></i><b>2.1</b> Bancos de dados disponíveis no site do Cepespdata</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="como-usar-o-site.html"><a href="como-usar-o-site.html#resultados-de-eleicoes-por-cargo"><i class="fa fa-check"></i><b>2.1.1</b> Resultados de eleições por cargo</a></li>
+<li class="chapter" data-level="2.1.2" data-path="como-usar-o-site.html"><a href="como-usar-o-site.html#perfil-dos-candidatos"><i class="fa fa-check"></i><b>2.1.2</b> Perfil dos candidatos</a></li>
+<li class="chapter" data-level="2.1.3" data-path="como-usar-o-site.html"><a href="como-usar-o-site.html#coligacoes"><i class="fa fa-check"></i><b>2.1.3</b> Coligações</a></li>
+<li class="chapter" data-level="2.1.4" data-path="como-usar-o-site.html"><a href="como-usar-o-site.html#votos"><i class="fa fa-check"></i><b>2.1.4</b> Votos</a></li>
+<li class="chapter" data-level="2.1.5" data-path="como-usar-o-site.html"><a href="como-usar-o-site.html#resumo-das-eleicoes"><i class="fa fa-check"></i><b>2.1.5</b> Resumo das eleições</a></li>
+<li class="chapter" data-level="2.1.6" data-path="como-usar-o-site.html"><a href="como-usar-o-site.html#bens-de-candidatos"><i class="fa fa-check"></i><b>2.1.6</b> Bens de Candidatos</a></li>
+<li class="chapter" data-level="2.1.7" data-path="como-usar-o-site.html"><a href="como-usar-o-site.html#filiados"><i class="fa fa-check"></i><b>2.1.7</b> Filiados</a></li>
+<li class="chapter" data-level="2.1.8" data-path="como-usar-o-site.html"><a href="como-usar-o-site.html#secretarios"><i class="fa fa-check"></i><b>2.1.8</b> Secretários</a></li>
+<li class="chapter" data-level="2.1.9" data-path="como-usar-o-site.html"><a href="como-usar-o-site.html#bancos-a-serem-disponibilizados"><i class="fa fa-check"></i><b>2.1.9</b> Bancos a serem disponibilizados</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="como-usar-o-site.html"><a href="como-usar-o-site.html#ferramentas"><i class="fa fa-check"></i><b>2.2</b> Ferramentas</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="como-usar-o-site.html"><a href="como-usar-o-site.html#selecao-dos-anos"><i class="fa fa-check"></i><b>2.2.1</b> Seleção dos Anos</a></li>
+<li class="chapter" data-level="2.2.2" data-path="como-usar-o-site.html"><a href="como-usar-o-site.html#selecao-de-colunas"><i class="fa fa-check"></i><b>2.2.2</b> Seleção de colunas</a></li>
+<li class="chapter" data-level="2.2.3" data-path="como-usar-o-site.html"><a href="como-usar-o-site.html#filtro-de-colunas"><i class="fa fa-check"></i><b>2.2.3</b> Filtro de colunas</a></li>
+<li class="chapter" data-level="2.2.4" data-path="como-usar-o-site.html"><a href="como-usar-o-site.html#agregacao-politica"><i class="fa fa-check"></i><b>2.2.4</b> Agregação Política</a></li>
+<li class="chapter" data-level="2.2.5" data-path="como-usar-o-site.html"><a href="como-usar-o-site.html#agregacao-regional"><i class="fa fa-check"></i><b>2.2.5</b> Agregação Regional</a></li>
+<li class="chapter" data-level="2.2.6" data-path="como-usar-o-site.html"><a href="como-usar-o-site.html#download-dos-dados"><i class="fa fa-check"></i><b>2.2.6</b> Download dos dados</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="o-que-e-o-r.html"><a href="o-que-e-o-r.html"><i class="fa fa-check"></i><b>3</b> O que é o R?</a><ul>
+<li class="chapter" data-level="3.1" data-path="o-que-e-o-r.html"><a href="o-que-e-o-r.html#instalando-o-r-e-o-rstudio"><i class="fa fa-check"></i><b>3.1</b> Instalando o R e o RStudio</a></li>
+<li class="chapter" data-level="3.2" data-path="o-que-e-o-r.html"><a href="o-que-e-o-r.html#onde-estudar-r"><i class="fa fa-check"></i><b>3.2</b> Onde estudar R?</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="como-usar-a-api-r.html"><a href="como-usar-a-api-r.html"><i class="fa fa-check"></i><b>4</b> Como usar a API R</a><ul>
+<li class="chapter" data-level="4.1" data-path="como-usar-a-api-r.html"><a href="como-usar-a-api-r.html#instalando-o-cepespr"><i class="fa fa-check"></i><b>4.1</b> Instalando o CepespR</a></li>
+<li class="chapter" data-level="4.2" data-path="como-usar-a-api-r.html"><a href="como-usar-a-api-r.html#explorando-as-funcoes-do-cepespr"><i class="fa fa-check"></i><b>4.2</b> Explorando as funções do <em>cepespR</em></a><ul>
+<li class="chapter" data-level="4.2.1" data-path="como-usar-a-api-r.html"><a href="como-usar-a-api-r.html#perfil-dos-candidatos-get_candidates"><i class="fa fa-check"></i><b>4.2.1</b> Perfil dos candidatos <code>get_candidates</code></a></li>
+<li class="chapter" data-level="4.2.2" data-path="como-usar-a-api-r.html"><a href="como-usar-a-api-r.html#votos-por-eleicao-get_votes"><i class="fa fa-check"></i><b>4.2.2</b> Votos por eleição <code>get_votes</code></a></li>
+<li class="chapter" data-level="4.2.3" data-path="como-usar-a-api-r.html"><a href="como-usar-a-api-r.html#coligacoes-get_coalitions"><i class="fa fa-check"></i><b>4.2.3</b> Coligações <code>get_coalitions</code></a></li>
+<li class="chapter" data-level="4.2.4" data-path="como-usar-a-api-r.html"><a href="como-usar-a-api-r.html#resultado-de-eleicoes-por-cargo-get_elections"><i class="fa fa-check"></i><b>4.2.4</b> Resultado de eleições por cargo <code>get_elections</code></a></li>
+<li class="chapter" data-level="4.2.5" data-path="como-usar-a-api-r.html"><a href="como-usar-a-api-r.html#filiados-get_filiates"><i class="fa fa-check"></i><b>4.2.5</b> Filiados <code>get_filiates</code></a></li>
+<li class="chapter" data-level="4.2.6" data-path="como-usar-a-api-r.html"><a href="como-usar-a-api-r.html#bens-de-candidatos-get_assets"><i class="fa fa-check"></i><b>4.2.6</b> Bens de candidatos <code>get_assets</code></a></li>
+<li class="chapter" data-level="4.2.7" data-path="como-usar-a-api-r.html"><a href="como-usar-a-api-r.html#secretarios-get_secretaries"><i class="fa fa-check"></i><b>4.2.7</b> Secretários <code>get_secretaries</code></a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="como-usar-a-api-r.html"><a href="como-usar-a-api-r.html#utilizando-codigos-ao-inves-de-nomes"><i class="fa fa-check"></i><b>4.3</b> Utilizando códigos ao invés de nomes</a></li>
+<li class="chapter" data-level="4.4" data-path="como-usar-a-api-r.html"><a href="como-usar-a-api-r.html#filtrando-resultados"><i class="fa fa-check"></i><b>4.4</b> Filtrando resultados</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="como-usar-a-api-r.html"><a href="como-usar-a-api-r.html#selecionando-partidos-candidatos-e-estados"><i class="fa fa-check"></i><b>4.4.1</b> Selecionando partidos, candidatos e Estados</a></li>
+<li class="chapter" data-level="4.4.2" data-path="como-usar-a-api-r.html"><a href="como-usar-a-api-r.html#selecionando-colunas"><i class="fa fa-check"></i><b>4.4.2</b> Selecionando colunas</a></li>
+<li class="chapter" data-level="4.4.3" data-path="como-usar-a-api-r.html"><a href="como-usar-a-api-r.html#informacoes-para-mais-de-um-ano"><i class="fa fa-check"></i><b>4.4.3</b> Informações para mais de um ano</a></li>
+<li class="chapter" data-level="4.4.4" data-path="como-usar-a-api-r.html"><a href="como-usar-a-api-r.html#informacoes-para-mais-de-um-cargo"><i class="fa fa-check"></i><b>4.4.4</b> Informações para mais de um cargo</a></li>
+<li class="chapter" data-level="4.4.5" data-path="como-usar-a-api-r.html"><a href="como-usar-a-api-r.html#cache-das-consultas"><i class="fa fa-check"></i><b>4.4.5</b> Cache das consultas</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="como-usar-a-api-r.html"><a href="como-usar-a-api-r.html#sobrevoando-os-dados"><i class="fa fa-check"></i><b>4.5</b> Sobrevoando os dados</a></li>
+<li class="chapter" data-level="4.6" data-path="como-usar-a-api-r.html"><a href="como-usar-a-api-r.html#salvando-os-resultados"><i class="fa fa-check"></i><b>4.6</b> Salvando os resultados</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="api-r-exercicios-para-praticar.html"><a href="api-r-exercicios-para-praticar.html"><i class="fa fa-check"></i><b>5</b> API R: Exercícios para praticar</a><ul>
+<li class="chapter" data-level="5.1" data-path="api-r-exercicios-para-praticar.html"><a href="api-r-exercicios-para-praticar.html#respostas-aos-exercicios"><i class="fa fa-check"></i><b>5.1</b> Respostas aos exercícios</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="como-manipular-os-dados-no-r.html"><a href="como-manipular-os-dados-no-r.html"><i class="fa fa-check"></i><b>6</b> Como manipular os dados no R</a><ul>
+<li class="chapter" data-level="6.1" data-path="como-manipular-os-dados-no-r.html"><a href="como-manipular-os-dados-no-r.html#filtrar"><i class="fa fa-check"></i><b>6.1</b> Filtrar</a></li>
+<li class="chapter" data-level="6.2" data-path="como-manipular-os-dados-no-r.html"><a href="como-manipular-os-dados-no-r.html#selecionar-e-ordenar"><i class="fa fa-check"></i><b>6.2</b> Selecionar e Ordenar</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="como-visualizar-dados-no-r.html"><a href="como-visualizar-dados-no-r.html"><i class="fa fa-check"></i><b>7</b> Como visualizar dados no R</a><ul>
+<li class="chapter" data-level="7.1" data-path="como-visualizar-dados-no-r.html"><a href="como-visualizar-dados-no-r.html#graficos"><i class="fa fa-check"></i><b>7.1</b> Gráficos</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="como-visualizar-dados-no-r.html"><a href="como-visualizar-dados-no-r.html#grafico-de-barras"><i class="fa fa-check"></i><b>7.1.1</b> Gráfico de Barras</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="como-usar-a-api-rest.html"><a href="como-usar-a-api-rest.html"><i class="fa fa-check"></i><b>8</b> Como usar a API REST</a><ul>
+<li class="chapter" data-level="8.1" data-path="como-usar-a-api-rest.html"><a href="como-usar-a-api-rest.html#estrutura-das-resquisicoes"><i class="fa fa-check"></i><b>8.1</b> Estrutura das resquisições</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="como-usar-a-api-rest.html"><a href="como-usar-a-api-rest.html#api-rest-no-navegador"><i class="fa fa-check"></i><b>8.1.1</b> API Rest no navegador</a></li>
+<li class="chapter" data-level="8.1.2" data-path="como-usar-a-api-rest.html"><a href="como-usar-a-api-rest.html#api-rest-no-r"><i class="fa fa-check"></i><b>8.1.2</b> API Rest no R</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="documentos-auxiliares.html"><a href="documentos-auxiliares.html"><i class="fa fa-check"></i><b>9</b> Documentos auxiliares</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Como usar o CepespData/FGV</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="api-r-exercicios-para-praticar" class="section level1">
+<h1><span class="header-section-number">5</span> API R: Exercícios para praticar</h1>
+<p>Você também pode <a href="http://www.cepespdata.io/static/docs/API_CEPESPData_abraji2019.pdf">clicar aqui</a> para fazer download do documento PDF com os exercícios abaixo.</p>
+<p><strong>Questão 1.</strong> Para cada uma das questões numeradas abaixo, responda:</p>
+<ul>
+<li><p>Qual função do <strong>cepespR</strong> você utilizaria?</p></li>
+<li><p>Quais são os parâmetros que você deve informar?</p></li>
+<li><p>Seria preciso fazer outras operações no banco? Quais?</p>
+<p><strong>1.1.</strong> Quantos votos na legenda o PSL teve em 2018 para Deputado Federal? E em 2014? Houve aumento?</p>
+<p><strong>1.2.</strong> Quantas governadoras foram eleitas nas últimas quatro eleições?</p>
+<p><strong>1.3.</strong> Quantas mulheres negras (pretas ou pardas) concorreram ao cargo de prefeita em 2016 no Brasil?</p>
+<p><strong>1.4.</strong> Quantas pessoas que eram filiadas ao PCO no Estado de Alagoas se desfiliaram do partido ou tiveram sua filiação cancelada?</p>
+<p><strong>1.5.</strong> Considerando os candidatos a vereador no Rio Grande do Sul em 2012, qual é o partido com o maior valor total de bens declarados?</p></li>
+</ul>
+<p><strong>Trabalhando com outras bases de dados a partir do código do IBGE</strong></p>
+<p>Uma das vantagens de utilizar os dados eleitorais do CepespData é já ter pronta a compatibilização entre o código do município do TSE e o código das regiões administrativas do IBGE.</p>
+<p>Assim, podemos juntar os dados eleitorais do CepespData com qualquer outro que tenha o código do IBGE em poucas linhas de programação.</p>
+<p>Nesse exemplo, vamos explorar como juntar os dados do CepespData com os <a href="http://dados.gov.br/dataset/bolsa-familia-misocial">dados dos beneficiários do Programa Bolsa Família em 2016</a> e das <a href="https://www.ibge.gov.br/estatisticas/sociais/populacao/9103-estimativas-de-populacao.html?=&amp;t=downloads">estimativas populacionais do IBGE enviadas ao TCU de 2016</a>.</p>
+<p>Os dados pré-processados em <code>.csv</code> podem ser baixados <a href="https://drive.google.com/open?id=1lZUEJrmlaOTONBGI_3aUZPnMlA_rp3jD">clicando aqui</a>.</p>
+<p>A pergunta que queremos responder é:</p>
+<p><strong>Questão 2.</strong> Existe correlação entre a porcentagem de votos do PT num município e a porcentagem de famílias do Programa Bolsa Família em 2016?</p>
+<p><em>Lembrando: que correlação não é a mesma coisa que causa! O foco aqui é o trabalho com os dados e não as conclusões. Para afirmar que o Programa Bolsa Família melhora o resultado eleitoral do PT, precisaríamos de uma análise muito mais sofisticada que a proposta nesse exercício.</em></p>
+<p>Passo a passo:</p>
+<p>2.1. Baixe os dados do Programa Bolsa FamÍlia (<code>pbf_2016.csv</code>) e abra no R. Dica: veja como utilizar a função <code>read.csv2()</code>. Inspecione quais são as variáveis no banco.</p>
+<p>2.2. Baixe os dados da população do IBGE (<code>pop_ibge_2016.csv</code>) e abra no R. Inspecione quais são as variáveis no banco.</p>
+<p>2.3. Utilizando o <strong>cepespR</strong>, construa um banco de dados que tenha a quantidade de votos por município por partido para o cargo de prefeito no ano de 2016.</p>
+<p>2.4. Crie uma variável que indique a porcentagem de votos recebida por partido por município.</p>
+<p>2.5. Junte o banco de população com os dados do Bolsa Família utilizando o código do IBGE. <em>Dica: Verifique se o tipo da variável do código do IBGE nos dos bancos são iguais. Caso contrário, uniformize-as. Também veja quantos dígitos o código possui – em alguns bancos, o código do IBGE vem com o dígito verificador, que pode ser descartado sem problemas. Se for preciso descartá-lo, procure como usar a função</em> <code>substr()</code>. <em>Guarde em uma nova variável este código de município com um dígito a menos.</em></p>
+<p>2.6. Verifique se o <em>join</em> foi feito corretamente explorando o banco com o comando <code>summary()</code>. Não podemos ter NA’s!</p>
+<p>2.7. Nesse novo banco, crie uma variável que indique o número de famílias benefiárias a cada 1000 habitantes.</p>
+<p>2.8. Agora, junte o banco com a variável do item 7 ao banco com as porcentagens de voto. <em>Dica: lembre-se de usar a variável do código do IBGE com o mesmo número de digitos.</em></p>
+<p>2.9. Faça um gráfico de dispersão simples usando a função <code>plot()</code> entre as variáveis de famílias beneficiárias e a porcentagem de votos para candidatos do PT. Parece haver correlação?</p>
+<div id="respostas-aos-exercicios" class="section level2">
+<h2><span class="header-section-number">5.1</span> Respostas aos exercícios</h2>
+<p>Você também pode <a href="http://www.cepespdata.io/static/docs/API_CEPESPData_abraji2019_respostas.pdf">clicar aqui</a> para fazer download do documento PDF com as respostas abaixo.</p>
+<p>1.1. Quantos votos na legenda o PSL teve em 2018 para Deputado Federal? E em 2014? Houve aumento?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lista.colunas &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="st">&quot;ANO_ELEICAO&quot;</span>,<span class="st">&quot;NUMERO_CANDIDATO&quot;</span>,<span class="st">&quot;QTDE_VOTOS&quot;</span>)
+
+votosPSL &lt;-<span class="st"> </span><span class="kw">get_elections</span>(<span class="dt">year=</span><span class="st">&quot;2014,2018&quot;</span>,
+                          <span class="dt">position=</span><span class="st">&quot;Deputado Federal&quot;</span>,
+                          <span class="dt">regional_aggregation=</span><span class="st">&quot;Brasil&quot;</span>,
+                          <span class="dt">candidate_number =</span> <span class="st">&quot;17&quot;</span>,
+                          <span class="dt">columns_list =</span> lista.colunas)
+<span class="kw">print</span>(votosPSL)</code></pre></div>
+<p>1.2. Quantas governadoras foram eleitas nas últimas quatro eleições?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lista.colunas &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="st">&quot;ANO_ELEICAO&quot;</span>,<span class="st">&quot;SIGLA_UE&quot;</span>,<span class="st">&quot;NUMERO_CANDIDATO&quot;</span>,<span class="st">&quot;QTDE_VOTOS&quot;</span>,<span class="st">&quot;DESCRICAO_SEXO&quot;</span>)
+
+governadoras &lt;-<span class="st"> </span><span class="kw">get_elections</span>(<span class="dt">year=</span><span class="st">&quot;2006,2010,2014,2018&quot;</span>,
+                              <span class="dt">position=</span><span class="st">&quot;Governador&quot;</span>,
+                              <span class="dt">regional_aggregation=</span><span class="st">&quot;Brasil&quot;</span>,
+                              <span class="dt">only_elected =</span> T,
+                              <span class="dt">columns_list =</span> lista.colunas)
+
+governadoras <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(DESCRICAO_SEXO) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">n =</span> <span class="kw">n</span>())</code></pre></div>
+<p>1.3. Quantas mulheres negras (pretas ou pardas) concorreram ao cargo de prefeita em 2016 no Brasil?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lista.colunas &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="st">&quot;ANO_ELEICAO&quot;</span>,<span class="st">&quot;DESCRICAO_COR_RACA&quot;</span>,<span class="st">&quot;QTDE_VOTOS&quot;</span>,<span class="st">&quot;DESCRICAO_SEXO&quot;</span>)
+
+prefeitasnegras &lt;-<span class="st"> </span><span class="kw">get_elections</span>(<span class="dt">year=</span><span class="st">&quot;2016&quot;</span>,
+                                 <span class="dt">position=</span><span class="st">&quot;Prefeito&quot;</span>,
+                                 <span class="dt">columns_list =</span> lista.colunas)
+
+prefeitasnegras <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(DESCRICAO_COR_RACA <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;PRETA&quot;</span>,<span class="st">&quot;PARDA&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(DESCRICAO_SEXO,DESCRICAO_COR_RACA) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">n =</span> <span class="kw">n</span>())</code></pre></div>
+<p>1.4. Quantas pessoas que eram filiadas ao PCO no Estado de Alagoas se desfiliaram do partido ou tiveram sua filiação cancelada?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">filiadosAL &lt;-<span class="st"> </span><span class="kw">get_filiates</span>(<span class="dt">state=</span><span class="st">&#39;AL&#39;</span>,<span class="dt">party =</span><span class="st">&#39;PCO&#39;</span>)
+
+filiadosAL <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(SITUACAO_REGISTRO) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">n =</span> <span class="kw">n</span>())</code></pre></div>
+<p>1.5. Considerando os candidatos a vereador no Rio Grande do Sul em 2012, qual é o partido com o maior valor total de bens declarados?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lista.colunas &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="st">&quot;NUMERO_PARTIDO&quot;</span>,<span class="st">&quot;SIGLA_PARTIDO&quot;</span>,<span class="st">&quot;VALOR_BEM&quot;</span>)
+
+bens_vereadores &lt;-<span class="st"> </span><span class="kw">get_assets</span>(<span class="dt">year=</span><span class="dv">2012</span>,
+                              <span class="dt">state =</span> <span class="st">&quot;RS&quot;</span>,
+                              <span class="dt">columns_list =</span> lista.colunas)
+
+bens_vereadores <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">valor =</span> <span class="kw">gsub</span>(<span class="st">&quot;[.]&quot;</span>,<span class="st">&quot;&quot;</span>,VALOR_BEM), <span class="co">#remove o ponto do numeral</span>
+         <span class="dt">valor =</span> <span class="kw">as.numeric</span>(<span class="kw">sub</span>(<span class="st">&quot;,&quot;</span>, <span class="st">&quot;.&quot;</span>, valor))) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#transforma a v?rgula em ponto </span>
+<span class="st">  </span><span class="kw">group_by</span>(SIGLA_PARTIDO) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">total =</span> <span class="kw">sum</span>(valor)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">top_n</span>(<span class="dv">1</span>,total)</code></pre></div>
+<p><strong>2. Trabalhando com outras bases de dados a partir do código do IBGE</strong></p>
+<p>2.1. Baixe os dados do Programa Bolsa Família (<code>pbf_2016.csv</code>) e abra no R. Dica: veja como utilizar a função <code>read.csv2()</code>. Inspecione quais são as variáveis no banco.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pbf &lt;-<span class="st"> </span><span class="kw">read.csv2</span>(<span class="st">&quot;pbf_2016.csv&quot;</span>,<span class="dt">stringsAsFactors =</span> F)
+<span class="kw">glimpse</span>(pbf)</code></pre></div>
+<p>2.2. Baixe os dados da população do IBGE (<code>pop_ibge_2016.csv</code>) e abra no R. Inspecione quais são as variáveis no banco.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pop &lt;-<span class="st"> </span><span class="kw">read.csv2</span>(<span class="st">&quot;pop_ibge_2016.csv&quot;</span>,<span class="dt">stringsAsFactors =</span> F)
+<span class="kw">glimpse</span>(pop)</code></pre></div>
+<p>2.3. Utilizando o <strong>cepespR</strong>, construa um banco de dados que tenha a quantidade de votos por município por partido para o cargo de prefeito no ano de 2016.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lista.colunas &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="st">&quot;NUMERO_CANDIDATO&quot;</span>,<span class="st">&quot;QTDE_VOTOS&quot;</span>,<span class="st">&quot;COD_MUN_IBGE&quot;</span>)
+
+votos &lt;-<span class="st"> </span><span class="kw">get_votes</span>(<span class="dt">year=</span><span class="dv">2016</span>,
+                   <span class="dt">position =</span> <span class="st">&quot;Prefeito&quot;</span>,
+                   <span class="dt">columns_list =</span> lista.colunas)</code></pre></div>
+<p>2.4. Crie uma variável que indique a porcentagem de votos recebida por partido por município.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Fazendo os totais de votos por município:</span>
+votos_totais &lt;-<span class="st"> </span>votos <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(COD_MUN_IBGE) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">votosmun =</span> <span class="kw">sum</span>(QTDE_VOTOS))
+
+<span class="co"># Juntando os totais e criando a variável com a porcentagem:</span>
+votos &lt;-<span class="st"> </span>votos <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">left_join</span>(votos_totais,<span class="dt">by=</span><span class="st">&quot;COD_MUN_IBGE&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">pct_votos =</span> <span class="dv">100</span><span class="op">*</span>(QTDE_VOTOS<span class="op">/</span>votosmun))
+
+<span class="kw">summary</span>(votos<span class="op">$</span>pct_votos)</code></pre></div>
+<p>2.5. Junte o banco de população com os dados do Bolsa Família utilizando o código do IBGE. <em>Dica: Verifique se o tipo da variável do código do IBGE nos dos bancos são iguais. Caso contrário, uniformize-as. Também veja quantos dígitos o código possui – em alguns bancos, o código do IBGE vem com o dígito verificador, que pode ser descartado sem problemas. Se for preciso descartá-lo, procure como usar a função</em> <code>substr()</code> <em>e guarde-a numa nova variável.</em></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Vendo como é a variável do código do IBGE de cada um dos bancos:</span>
+<span class="kw">summary</span>(pbf<span class="op">$</span>cod_ibge)
+<span class="kw">summary</span>(pop<span class="op">$</span>cod_mun)
+<span class="co"># Ambas são numéricas, mas há diferença no número de dígitos.</span>
+<span class="co"># O banco com os dados da população possui um dígito a mais. </span>
+
+<span class="co"># Criando uma nova variável do código com 6 dígitos, para ficar igual ao do PBF:</span>
+pop &lt;-<span class="st"> </span>pop <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">cod_mun2 =</span> <span class="kw">as.numeric</span>(<span class="kw">substr</span>(cod_mun, <span class="dt">start =</span> <span class="dv">1</span>, <span class="dt">stop =</span> <span class="dv">6</span>)))
+
+<span class="co"># Fazendo o join:</span>
+bd_join &lt;-<span class="st"> </span>pop <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">left_join</span>(pbf, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;cod_mun2&quot;</span> =<span class="st"> &quot;cod_ibge&quot;</span>))</code></pre></div>
+<p>2.6. Verifique se o <em>join</em> foi feito corretamente explorando o banco com o comando <code>summary()</code>. Não podemos ter NA’s!</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Testando se não perdemos ou ganhamos linhas no join:</span>
+<span class="kw">nrow</span>(bd_join) <span class="op">==</span><span class="st"> </span><span class="kw">nrow</span>(pbf)
+<span class="kw">nrow</span>(bd_join) <span class="op">==</span><span class="st"> </span><span class="kw">nrow</span>(pop)
+
+<span class="co"># Checando se todas as variáveis estão completas:</span>
+<span class="kw">summary</span>(bd_join)</code></pre></div>
+<p>2.7. Nesse novo banco, crie uma variável que indique o número de famílias benefiárias a cada 1000 habitantes.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bd_join &lt;-<span class="st"> </span>bd_join <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">familias_1000hab =</span> (qtd_familias_beneficiarias_bolsa_familia<span class="op">/</span>pop_estimada)<span class="op">*</span><span class="dv">1000</span>)
+
+<span class="kw">summary</span>(bd_join<span class="op">$</span>familias_1000hab)</code></pre></div>
+<p>2.8. Agora, junte o banco com a variável do item 7 ao banco com as porcentagens de voto. <em>Dica: lembre-se de usar a variável do código do IBGE com o mesmo número de digitos.</em></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">votos_completo &lt;-<span class="st"> </span>votos <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">cod_mun =</span> COD_MUN_IBGE) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">left_join</span>(bd_join, <span class="dt">by=</span><span class="st">&quot;cod_mun&quot;</span>)
+
+<span class="kw">nrow</span>(votos_completo) <span class="op">==</span><span class="st"> </span><span class="kw">nrow</span>(votos)</code></pre></div>
+<p>2.9. Faça um gráfico de dispersão simples usando a função <code>plot()</code> entre as variáveis de famílias beneficiárias e a porcentagem de votos para candidatos do PT. Parece haver correlação?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">votosPT &lt;-<span class="st"> </span>votos_completo <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(NUMERO_CANDIDATO <span class="op">==</span><span class="st"> </span><span class="dv">13</span>)
+
+<span class="kw">plot</span>(votosPT<span class="op">$</span>familias_1000hab,votosPT<span class="op">$</span>pct_votos)</code></pre></div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="como-usar-a-api-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="como-manipular-os-dados-no-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,492 @@
+# Como usar a API R
+
+```{r, echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F, results = 'hide', eval = F)
+```
+
+O __cepespR__ é um pacote criado para auxiliar o acesso dos usuários a API do CepespData/FGV. Por meio dessa ferramenta, é possível realizar requisições de maneira mais rápida e estruturada aos dados eleitorais presentes no nosso repositório.
+
+Nesta seção, vamos demonstrar algumas funcionalidades básicas do __cepespR__, assim como alguns exemplos de requisições e análises que podem ser feitas em poucos minutos no R. Também apresentaremos algumas operações simples com os dados com o pacote _dplyr_, em especial para mostrar como trabalhar com o dados do CepespData com outros bancos.
+
+Seguindo a rotina de códigos abaixo, o usuário, ao final deste tutorial, poderá ter as consultas salvas com sucesso em formato compatível com outros softwares de dados, como Excel e o SPSS.
+
+## Instalando o CepespR
+
+O pacote __cepespR__ está hospedado em [nosso github](https://github.com/Cepesp-Fgv/cepesp-r), então para instalá-lo, é preciso rodar o código abaixo apenas uma vez. Também vamos instalar o pacote _dplyr_ para nos auxiliar nas operações com os dados.
+
+```{r, eval = FALSE}
+# Instalando o cepespR:
+if (!require("devtools")) install.packages("devtools")
+devtools::install_github("Cepesp-Fgv/cepesp-r") 
+
+# Instalando o dplyr:
+install.packages("dplyr")
+```
+
+Em caso de troca de computador, é preciso instalar novamente o __cepespR__, mas recomendamos atualizá-lo sempre que possível, para garantir acesso às funções atualizadas -- lembrando que estamos ainda em fase de desenvolvimento do repositório do CepespData/FGV, de modo que novas funções são criadas no __cepespR__ sempre que um novo banco de dados é incluído em nosso repositório.
+
+Uma vez instalado o __cepespR__, o pacote é ativado mediante a função `library`. Lembre-se que é preciso executar essa função toda vez que iniciar o R, senão as funções do __cepespR__ não irão funcionar. Isso também vale para o pacote _dplyr_ e qualquer outro que seja necessário em sua sessão.
+
+```{r, eval = FALSE}
+library(cepespR)
+library(dplyr)
+```
+
+## Explorando as funções do _cepespR_
+
+Existem 7 requisições disponíveis hoje no pacote __cepespR__. Todas têm como parâmetros obrigatórios o ano (parâmetro `year`) e o cargo (parâmetro `position`)  disputado e recebem como padrão os dados por município. 
+Cada função recebe um *data.frame* -- isto é, um banco de dados -- com as colunas já formatadas no tipo de variável correto, por exemplo, *numeric* ou *character*. (Veja [aqui](https://swcarpentry.github.io/r-novice-inflammation/13-supp-data-structures/) uma referência sobre os tipos de dado no R). 
+
+No nomento da requisição, é preciso indicar um objeto para salvar este *data.frame* no seu ambiente no R. Por exemplo:
+
+```{r, eval = FALSE}
+minha_requisicao <- get_candidates(year = 2018, position = 'Presidente')
+```
+
+No código acima, atribuímos ao novo objeto `minha_requisicao` o banco de dados obtido na requisição feita por meio da função `get_candidates` do pacote __cepespR__.
+
+Opcionalmente, as funções recebem parâmetros que auxiliam no filtro dos dados. 
+Os parâmetros podem ser indicados tanto em português quanto em inglês. Para mais detalhes, consulte [a nossa documentação no GitHub](https://github.com/Cepesp-Fgv/cepesp-r).
+
+### Perfil dos candidatos `get_candidates`
+
+A função `get_candidates` retorna uma tabela com informações sobre características individuais dos candidatos. Com ela, é possível obter, por exemplo, informações sobre partido, cor/raça, idade, gênero, ou outra informação que diga respeito ao candidato. 
+
+Para utilizá-la, você deve informar um __ano__ e uma __posição__. De modo geral, ela terá a seguinte estrutura:
+
+```{r, eval = FALSE}
+base_de_dados <- get_candidates(year = <Ano escolhido>, position = <cargo escolhido>).
+```
+
+No exemplo abaixo, faremos uma consulta para os candidatos à __presidência__ durante as eleições de __2014__. Repare que a função `get_candidates` salva a tabela no objeto `candpres_14`. Esse passo é importante uma vez que, caso seja de interesse utilizar essa tabela depois, faremos referência ao nome `candpres_14`.
+
+```{r, eval = FALSE}
+candpres_14 <- get_candidates(year = 2014, position = "Presidente")
+```
+
+Para visualizar os dados da tabela criada, usamos a função `View` e dentro dos parênteses colocamos o nome da nossa tabela. No caso, utilizamos `candpres_14`.
+
+```{r, eval = FALSE}
+View(candpres_14)
+```
+
+Outro atributo da função `get_candidates` que podemos usar para filtrar os dados é o `only_elected`. Quando `only_elected = TRUE` (ou `only_elected = T`), a função nos retorna apenas os candidatos que foram eleitos naquele ano, para o cargo desejado indicado.
+
+Por exemplo, podemos obter os deputados federais do PSL eleitos em 2018:
+
+```{r,warning=F,message=F,eval=FALSE}
+deputadosPSL2018 <- get_candidates(year=2018, # Obrigatório: ano da eleição
+                                  position="Deputado Federal", #Obrigatório: cargo disputado
+                                  only_elected = T, # Opcional: receber apenas os eleitos
+                                  party = 17) # Opcional: receber apenas os candidatos do PT
+``` 
+
+### Votos por eleição `get_votes`
+
+Recupera quantos votos cada candidato recebeu em determinada eleição. É obrigatório informar o ano (`year`) e o cargo (`position`), recebendo como padrão a votação por município de todos os candidatos que receberam votos naquele ano e cargo. 
+
+No exemplo abaixo, podemos ver uma requisição para os votos para __presidente__, em __2018__, com agregação regional configurada para __municípios__.
+
+```{r, eval = FALSE}
+vtpres_18_mun <- get_votes(year = 2018, position = "Presidente", regional_aggregation = "Municipio")
+
+View(vtpres_18_mun)
+```
+
+E se estivéssemos interessados em ver os votos de um candidato específico por estado (unidade da federação)? Opcionalmente, podemos pedir os dados agregados por estado:
+
+```{r,warning=F,message=F,eval=FALSE}
+votos_pres18_PT <- get_votes(year=2018, # Obrigatório: ano da eleição.
+                             position="Presidente", # Obrigatório: cargo disputado.
+                             candidate_number = 13, # Opcional: filtra o candidato de nº13, ou seja, do PT.
+                             regional_aggregation="Estado") # Opcional: votos agregados por estado.
+```
+
+### Coligações `get_coalitions`
+
+Caso o interesse seja pelas coligações realizadas por diferentes partidos, podemos utilizar a função `get_coalitions`.
+
+É importante ter em mente que o banco de dados sobre coligações fornecido pelo TSE apresenta diversas inconsistências. Por exemplo, estão presentes no banco tanto coligações que concorreram quanto aquelas que, por algum motivo, não puderam concorrer. Sabendo disso, indicamos que essas informações sejam utilizadas com cuidado. 
+
+De modo geral, caso deseje obter informações sobre coligações, é mais seguro utilizar a função `get_elections`, como iremos demonstrar mais para frente, pois o tratamento realizado na montagem deste último banco corrige o problema descrito acima.
+
+O funcionamento de `get_coalitions` é similar ao de `get_candidates`. Basta fornecer uma __posição__ e um __ano__ para acessar as informações desejadas.
+
+```{r, eval = FALSE}
+base_de_dados <- get_coalitions(year = <Ano escolhido>, position = <cargo escolhido>).
+```
+
+Por exemplo, caso seja de interesse as coligações realizadas para __prefeitura__ durante as eleições de __2016__, basta informar esses parâmetros e executar a função.
+
+```{r, eval = FALSE}
+colpres_14 <- get_coalitions(year = 2016, position = "Prefeito")
+```
+
+Novamente, para ter uma visão geral da tabela devolvida pela função, podemos utilizar a função `View`.
+
+```{r, eval = FALSE}
+View(colpres_14)
+```
+
+Suponhamos que agora estamos interessados nas coligações da eleição para __presidente__ em __2002__. Neste caso, a função será escrita assim:
+
+```{r, eval = FALSE}
+colpres_02 <- get_coalitions(year = 2002, position = "Presidente")
+View(colpres_02)
+```
+
+### Resultado de eleições por cargo `get_elections`
+
+Além das consultas disponíveis no TSE, é possível fazer uma consulta integrada das eleições. Esta consulta agrega informações de _candidatos_, _coligações_ e _votos_. Trata-se de um dos diferenciais do CepespData/FGV frente a outras fontes.
+
+Para obter detalhes a respeito de uma eleição usando a função `get_elections` é preciso especificar obrigatoriamente __ano__ e __cargo__:
+
+```{r, eval = FALSE}
+elpres_14 <- get_elections(year = 2014, # Obrigatório especificar o ano.
+                           position = "Presidente") # Obrigatório especificar o cargo.
+
+View(elpres_14)
+```
+
+Esta função permite também consultar o resultado por diferentes agregações políticas: `Candidato`, `Partido`, `Coligação` e `Consolidado da Eleição`. Cada uma delas agrega os votos e outras informações. Por exemplo, caso seja feita um requisição para agregação política `Partido`, será retornado os votos obtidos e a coligação da qual o partido fez parte, além de outras informações.
+
+A agregação política `Consolidado da Eleição` possui informações um tanto quanto diferente das outras. Ela não retorna os votos de um candidato, partido ou coligação. Nela, você pode encontrar dados de __comparecimento__, __votos válidos__, __votos brancos e nulos__. Veja:
+
+```{r message=FALSE, warning=FALSE, paged.print=TRUE}
+elpres_14_2 <- get_elections(year = 2014, # Obrigatório.
+                             position = "Presidente", # Obrigatório.
+                             regional_aggregation = "Estado", # Opcional: dados agregados por estado. Quando este parâmetro não é informado, retorna dados agregados por município.
+                             political_aggregation = "Consolidado") # Opcional: agregação política Consolidado da Eleição. Quando não informado este parâmetro, a requisição retorna dados agregados por candidato.
+
+View(elpres_14_2)
+```
+
+### Filiados `get_filiates`
+
+Retorna os dados dos filiados conforme declarado pelos partidos. É preciso informar o __estado__ (parâmetro `state`) e o __partido__ (parâmetro `party`) do qual se deseja consultar a lista de filiados. 
+
+Exemplo: filiados ao partido NOVO no estado da Bahia:
+
+```{r,warning=F,message=F,eval=FALSE}
+novoBA <- get_filiates(state="BA", # Obrigatório. Sigla do Estado.
+                       party = "NOVO") # Obrigatório. Sigla do partido.
+```
+
+Estes dados foram atualizados pela última vez em nosso repositório em novembro de 2018 e será atualizado anualmente.
+
+### Bens de candidatos `get_assets`
+
+Recupera os bens declarados ao TSE pelos candidatos em cada eleição. Neste caso, o único parâmetro obrigatório é o __ano__ (`year`). 
+
+Exemplo: Bens declarados pelos candidatos do Piauí em 2018:
+
+```{r,warning=F,message=F,eval=FALSE}
+
+bensPiaui2018 <- get_assets(year = 2018, # Obrigatório: ano da eleição
+                            state = "PI") # Opcional: receber apenas dados do estado do Piauí. Quando não informato este parâmetro, retorna os bens declarados por todos candidatos no país em 2018.
+```
+
+
+### Secretários `get_secretaries`
+
+A função `get_secretaries` recupera informações sobre ocupantes de cargos do primeiro escalão dos governos estaduais e do Distrito Federal. (Para mais informações sobre esses dados, inéditos do CepespData/FGV, [clique aqui](http://cepespdata.io/about-state-secretaries)).
+
+Nessa função, o único parâmetro obrigatório é o __estado__ (`state`). É possível ainda filtrar o banco por nome do(a) secretário(a) e/ou período de governo no momento da requisição, preenchendo os parâmetros `name` e `period`, respectivamente.
+
+Exemplo: Todas as secretáias e secretários estaduais de São Paulo entre 1998 e 2002:
+
+```{r,warning=F,message=F,eval=FALSE}
+secSP <- get_secretaries(state = "SP", # Obrigatório: Estado. 
+                         name = NULL, # Obrigatório. NULL para receber todos ou parte do nome para fitrar.
+                         period = "1998-2002") # Opcional: indicar o quadriênio de interesse.
+```
+
+Caso não seja informado o parâmetro `period`, a consulta retornará todos os períodos disponíveis.
+
+## Utilizando códigos ao invés de nomes
+
+Ao invés de escrever os nomes das posições desejadas, uma alternativa é fornecer o código do cargo. Essa solução pode se demonstrar mais rápida com o tempo, uma vez que escrever os nomes é relativamente mais demorado e, caso digitado errado, levará a um erro durante a execução da função.
+
+Os códigos estão disponíveis na nossa página do [GitHub](https://github.com/Cepesp-Fgv/cepesp-rest/blob/master/EleicoesPorCargo_BETA.md).
+
+Vamos ver um exemplo. Suponhamos que estamos interessados nas eleições para prefeito ocorridas em __2012__. O código do cargo para prefeito é __11__.  Sabendo disso, basta fornecer os valores desejados para a função e executá-la.
+
+```{r, eval = FALSE}
+candpref_12 <- get_candidates(year = 2012, position = 11)
+View(candpref_12)
+```
+
+## Filtrando resultados
+
+Por padrão, as funções do __cepespR__ retornam todas colunas disponíveis como também todos os partidos, candidatos e estados. A fim de reduzir o tamanho da tabela, é possível selecionar valores específicos para essas consultas e, assim, obter resultados menores e mais fáceis de se trabalhar.
+
+### Selecionando partidos, candidatos e Estados
+
+Para limitar os resultados a valores específicos (um estado, um partido ou um candidato, por exemplo), basta acrescentar os parâmetros `state`, `party` ou `candidate_number` e alterá-los de acordo com o interesse.
+
+Variável           | Parâmetro       |
+-------------------|-----------------|
+Estado             | state           |
+Partido            | party           |
+Número do Candidato| candidate_number|
+
+Para mostrar apenas os resultados do Rio Grande do Sul (RS), por exemplo, acrescente o parâmetro `state`.
+
+```{r, eval = FALSE}
+elpres_14_RS <- get_elections(year=2014,
+                              position="Presidente", 
+                              regional_aggregation="Estado",
+                              political_aggregation="Partido", 
+                              state="RS")
+
+View(elpres_14_RS)
+```
+
+Para mostrar apenas os resultados referentes ao PT (13), por exemplo, acrescente o parâmetro `party`.
+
+```{r, eval = FALSE}
+elpres_14_PT <- get_elections(year=2014, # Obrigatório: ano da eleição.
+                              position="Presidente", # Obrigatório: cargo disputado.
+                              regional_aggregation="Estado", # Opcional: votos agregados por estado.
+                              political_aggregation="Partido", # Opcional: votos agregados por partido.
+                              party="13") # Opcional: filtro para partido.
+
+View(elpres_14_PT)
+```
+
+Para mostrar apenas os resultados referentes ao candidato 2511, por exemplo, acrescente o parâmetro `candidate_number`. Vamos escrever os parâmetros usando os códigos. Para o cargo de deputado federal, o código é 6; para a agregação regional por UF, o código é 2; e para a agregação política por candidato, o código é 2:
+
+```{r, eval = FALSE}
+eldepfed_2511 <- get_elections(year=2014, # Obrigatório: ano da eleição.
+                               position=6, # Obrigatório: cargo disputado.
+                               regional_aggregation=2, # Opcional: votos agregados por estado.
+                               political_aggregation=2, # Opcional: votos agregados por candidato.
+                               candidate_number=2511) # Opcional: filtro para candidato.
+
+View(eldepfed_2511)
+```
+
+Outro exemplo: obter o total de votos que os candidatos a prefeito eleitos pelo MDB no Rio de Janeiro.
+
+```{r,warning=F,message=F,eval=FALSE}
+prefeitosMDBrio <- get_elections(year=2012, # Obrigatório: ano da eleição.
+                                 position="Prefeito", # Obrigatório: cargo disputado.
+                                 regional_aggregation="Estado", # Opcional: votos agregados por estado.
+                                 political_aggregation="Partido", # Opcional: votos agregados por partido.
+                                 state = "RJ", # Opcional: receber apenas dados do estado do RJ.
+                                 party = 15, # Opcional: receber apenas dados do MDB.
+                                 only_elected = T) # Opcional: receber apenas os eleitos.
+``` 
+
+
+### Selecionando colunas
+
+Por padrão, as funções do __cepespR__ retornam todas as colunas disponíveis, mas é possível limitar o tamanho das tabelas para apenas a quantidade de variáveis desejadas.
+
+**Passo 1: Visualizar quais são as colunas-padrão**
+
+Existem duas maneiras de realizar esse procedimento. Em primeiro lugar, você pode acessar a nossa página do [GitHub](https://github.com/Cepesp-Fgv/cepesp-rest) e selecionar a consulta desejada. Lá você poderá ver quais colunas são retornadas para cada requisição e escolher as pretendidas. Em segunda lugar, é possível realizar esse procedimento dentro do `R`, mediante a função `names`.
+
+Na função `get_candidates`, por exemplo, as colunas padrões são:
+
+```{r, eval = FALSE}
+names(get_candidates(year = 2014, position = "Presidente"))
+```
+
+Note que uma lista de 46 colunas apareceu no seu console. E para as outras funções?
+
+```{r, eval = FALSE}
+#Lista as colunas da função get_coalitions
+names(get_coalitions(year = 2014, position = "Presidente"))
+
+#Lista as colunas da função get_votes
+names(get_votes(year = 2014, position = "Presidente"))
+
+#Lista as colunas da função get_elections
+names(get_elections(year = 2014, position = "Presidente"))
+```
+
+E assim sucessivamente. Você também pode ver todas as colunas disponíveis para cada banco de dados do CepespData no nosso [Dicionário de Variáveis](http://cepespdata.io/static/docs/cepespdata_dicionario_publico.xlsx).
+
+**Passo 2: Criar uma lista com o nome das colunas que desejamos**
+
+Se queremos analisar os dados referentes aos votos, por exemplo, poderíamos reduzir nosso banco de dados às seguintes colunas:
+
+```{r, eval = FALSE}
+minhas_colunas <- list("NUMERO_CANDIDATO", "UF", "QTDE_VOTOS", "COD_MUN_IBGE")
+```
+
+**Passo 3: Acrescentar o parâmetro `columns_list` a nossa função**
+
+Indicamos a lista criada com o nome das colunas:
+
+```{r, eval = FALSE}
+vtpres_14_new <- get_votes(year = "2014", # Obrigatório: indicar o ano da eleição.
+                           position = "Presidente", # Obrigatório: indicar o cargo de interesse.
+                           regional_aggregation = "Municipio", # Opcional: dados agregados por município.
+                           columns_list = minhas_colunas) # Opcional: restringir a requisiçãi às colunas de interesse.
+
+View(vtpres_14_new)
+```
+
+Repare que, em primeiro lugar, criamos um objeto chamado `minhas_colunas`, contendo os nomes das variáveis de nosso interesse. Em seguida, indicamos este novo objeto `minhas_colunas` no parâmetro `columns_list` dentro da função `get_votes`.
+
+Outra maneira de selecionar as colunas de interesse é através da função `subset`. Para isto, basta:
+
+```{r, eval = FALSE}
+elpres_14_ <- subset(elpres_14_2, select = c("ANO_ELEICAO", "QT_VOTOS_BRANCOS", "QT_VOTOS_NULOS"))
+
+View(elpres_14_)
+```
+
+Note que a função foi escrita na seguinte ordem: 
+
+    <nome do novo banco de dados> <- subset(<nome do antigo data frame>, select = c(<nomes das colunas de interesse>))
+
+### Informações para mais de um ano
+
+Todas as requisições aceitam que se consulte mais de um ano de uma vez. Para isso, basta informar entre parênteses os anos a serem consultados e separá-los por vírgulas -- tomando o cuidado de informar anos eleitorais válidos. 
+
+Exemplo: Todos os prefeitos eleitos pelo PMDB no Rio de Janeiro entre 2008 e 2016:
+
+```{r,warning=F,message=F,eval=FALSE}
+prefsPMDBrio <- get_elections(year="2008,2012,2016", # Indica os três anos que queremos
+                                   position="Prefeito",
+                                   regional_aggregation="Municipality",
+                                   political_aggregation="Candidate",
+                                   state = "RJ",
+                                   party = "15",
+                                   only_elected = T)
+```
+
+### Informações para mais de um cargo
+
+Para conseguir os resultados para mais de um cargo, é preciso fazer um _for loop_ para cada um dos cargos e empilhar os resultados no formato de um banco de dados (`data.frame`). Essa mesma lógica se aplica também para recuperar os dados de mais de um partido ou mais de um estado (uma UF) na função `get_filiates`. 
+
+Exemplo: Todos os prefeitos e vereadores eleitos pelo PMDB no Rio de Janeiro entre 2008 e 2012:
+
+```{r,warning=F,message=F,eval=FALSE}
+# Criando um vetor com cada cargo requisitado separado por v?rgula e entre aspas:
+lista.cargos <- c("Vereador","Prefeito") 
+
+# Criando um dataframe vazio para receber os dados:
+bancocompleto <- data.frame() 
+
+# Pedindo para que a requisição seja feita para cargo da lista, um por vez, até o final da lista:
+for(cargo in lista.cargos){  
+  # Salvando a requisição num banco temporário:
+  bancotemporario <- get_elections(year="2008,2012,2016", # Requisição de dados para os três anos de interesse.
+                                   position=cargo, # Será preenchido com um cargo da lista de cargos por vez.
+                                   regional_aggregation="Municipality", # Dados agregados por município.
+                                   political_aggregation="Candidate", # Dados agregados por candidato.
+                                   state = "RJ", # Requisição apenas dos candidatos do estado do Rio de Janeiro.
+                                   party = "15", # Requisição apenas dos candidatos do PMDB.
+                                   only_elected = T) # Filtrar: apenas candidatos eleitos
+  
+  # Empilhando os dados temporários no banco de dados completo:   
+  bancocompleto <- rbind(bancocompleto,bancotemporario) 
+
+  # Removendo o banco temporário com os dados parciais:
+  rm(bancotemporario) 
+}
+```
+
+### Cache das consultas
+
+A cada consulta feita na API, o banco de dados pedido será construído e baixado em sua máquina. Para limitar a banda consumida e agilizar as requisições mais comuns, é possível salvar uma cópia dos dados em sua máquina. (Você poderá deletá-la manualmente depois, caso queira atualizar a requisição).
+
+Para isso, basta incluir o parâmetro `cached = T` ao final de qualquer uma das funções disponíveis. Assim, uma cópia dos dados será salva em "/static/cache" no seu diretório de trabalho e estará disponível automaticamente quando repetir a consulta. Por exemplo:
+
+```{r,warning=F,message=F,eval=FALSE}
+
+pslAC<- get_filiates(state="AC",
+                     party = "PSL",
+                     cached = T) # Parâmetro cached marcado como "TRUE" -- salva uma cópia no seu computador.
+```
+
+## Sobrevoando os dados
+
+Uma das vantagem de se utilizar o R é que podemos criar tabelas de frequência com uma certa facilidade, útil para sobrevoar rapidamente variáveis qualitativas (categóricas). 
+
+Caso você queira, por exemplo, ver a distribuição de __gênero__ (DESCRICAO_SEXO) ou de __partidos__ (SIGLA_PARTIDO) entre todos os candidatos, podemos utilizar a função `table` da seguinte maneira:
+
+```{r, eval = FALSE}
+table(candpres_14$DESCRICAO_SEXO)
+table(candpres_14$SIGLA_PARTIDO)
+```
+
+Suponha agora que você tem interesse na quantidade de candidatas do sexo feminino para as eleições a prefeito de 2016. A função abaixo retorna a frequência absoluta de homens e mulheres:
+
+```{r, eval = FALSE}
+elpref_16 <- get_elections(year=2016, position="Prefeito", regional_aggregation="Municipio", political_aggregation="Candidato")
+
+table(elpref_16$DESCRICAO_SEXO)
+```
+
+E para as eleições a deputado federal em 2014? Quantas mulheres se candidataram neste ano? Veja:
+
+```{r, eval = FALSE}
+eldepfed_14 <- get_elections(year=2014, 
+                             position="Deputado Federal", 
+                             regional_aggregation="Estado",
+                             political_aggregation="Candidato")
+
+table(eldepfed_14$DESCRICAO_SEXO)
+```
+
+Outra função que pode ser executada para análises rápidas é a `summary`. Com ela, podemos obter a média, o desvio-padrão e outros estatísticas descritivas de uma variável quantitativa. No exemplo abaixo, temos a __média de idade__ (IDADE_DATA_ELEICAO) dos candidatos.
+
+```{r, eval = FALSE}
+summary(candpres_14$IDADE_DATA_ELEICAO)
+```
+
+Note que a função foi escrita assim: 
+
+    table(<nome do data frame>$<variável do data frame em que estou interessado>)
+
+Para variáveis quantitativas (contínuas), podemos usar a função `summary`. Esta função retorna média, mediana, mínimo e máximo das variáveis. Veja: 
+
+Suponhamos que estamos interessados na média das idades dos candidatos nas eleições a presidente de 2014. Veja:
+
+```{r, eval = FALSE}
+summary(elpres_14$IDADE_DATA_ELEICAO)
+```
+
+Note que a função `summary` funciona de maneira similar a `table`: 
+
+    summary( <nome do data frame>$<nome da variável do data frame em que estou interessado>)
+
+## Salvando os resultados
+
+Para salvar os _data frames_ gerados neste script em formato `.csv`, basta usar a função abaixo `write.csv2`. 
+
+A função está organizada da seguinte maneira: 
+
+    write.csv2( <nome do data frame que quero exportar>, <nome que quero dar ao meu arquivo>.csv)
+
+Por exemplo:
+
+```{r, eval = FALSE}
+write.csv2(elpres_14, "eleicoes_presidente_2014.csv")
+```
+
+Você também pode salvar os arquivos em outros formatos, como arquivos próprios de **SPSS** e **Stata**. Para isso, vamos usar os pacotes `haven`.
+
+Instalando o pacote:
+
+```{r, eval = FALSE}
+install.packages("haven")
+```
+
+Salvando o arquivo:
+
+```{r, eval = FALSE}
+# Salvando o arquivo em SAV (para SPSS):
+haven::write_sav(data = elpres_14, # Indicando qual objeto do meu ambiente R quero salvar
+                 path = "eleicoes_presidente_2014.sav") # Indicando em que pasta e com que nome salvar o arquivo.
+
+# Salvando o arquivo em DTA (para Stata):
+haven::write_dta(data = elpres_14, # Indicando qual objeto do meu ambiente R quero salvar
+                 path = "eleicoes_presidente_2014.sav", # Indicando em que pasta e com que nome salvar o arquivo.
+                 version = 14) # Indicando a versão do Stata com a qual meu arquivo deve ser compatível
+```

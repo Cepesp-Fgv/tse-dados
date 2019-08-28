@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>4 Como usar a API R | Como usar o CepespData/FGV</title>
+  <meta name="description" content="4 Como usar a API R | Como usar o CepespData/FGV">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="4 Como usar a API R | Como usar o CepespData/FGV" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4 Como usar a API R | Como usar o CepespData/FGV" />
+  
+  
+  
+
+<meta name="author" content="Equipe CepespData/FGV">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="o-que-e-o-r.html">
+<link rel="next" href="api-r-exercicios-para-praticar.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> O CepespData</a></li>
+<li class="chapter" data-level="2" data-path="como-usar-o-site.html"><a href="como-usar-o-site.html"><i class="fa fa-check"></i><b>2</b> Como usar o site</a><ul>
+<li class="chapter" data-level="2.1" data-path="como-usar-o-site.html"><a href="como-usar-o-site.html#bancos-de-dados-disponiveis-no-site-do-cepespdata"><i class="fa fa-check"></i><b>2.1</b> Bancos de dados disponíveis no site do Cepespdata</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="como-usar-o-site.html"><a href="como-usar-o-site.html#resultados-de-eleicoes-por-cargo"><i class="fa fa-check"></i><b>2.1.1</b> Resultados de eleições por cargo</a></li>
+<li class="chapter" data-level="2.1.2" data-path="como-usar-o-site.html"><a href="como-usar-o-site.html#perfil-dos-candidatos"><i class="fa fa-check"></i><b>2.1.2</b> Perfil dos candidatos</a></li>
+<li class="chapter" data-level="2.1.3" data-path="como-usar-o-site.html"><a href="como-usar-o-site.html#coligacoes"><i class="fa fa-check"></i><b>2.1.3</b> Coligações</a></li>
+<li class="chapter" data-level="2.1.4" data-path="como-usar-o-site.html"><a href="como-usar-o-site.html#votos"><i class="fa fa-check"></i><b>2.1.4</b> Votos</a></li>
+<li class="chapter" data-level="2.1.5" data-path="como-usar-o-site.html"><a href="como-usar-o-site.html#resumo-das-eleicoes"><i class="fa fa-check"></i><b>2.1.5</b> Resumo das eleições</a></li>
+<li class="chapter" data-level="2.1.6" data-path="como-usar-o-site.html"><a href="como-usar-o-site.html#bens-de-candidatos"><i class="fa fa-check"></i><b>2.1.6</b> Bens de Candidatos</a></li>
+<li class="chapter" data-level="2.1.7" data-path="como-usar-o-site.html"><a href="como-usar-o-site.html#filiados"><i class="fa fa-check"></i><b>2.1.7</b> Filiados</a></li>
+<li class="chapter" data-level="2.1.8" data-path="como-usar-o-site.html"><a href="como-usar-o-site.html#secretarios"><i class="fa fa-check"></i><b>2.1.8</b> Secretários</a></li>
+<li class="chapter" data-level="2.1.9" data-path="como-usar-o-site.html"><a href="como-usar-o-site.html#bancos-a-serem-disponibilizados"><i class="fa fa-check"></i><b>2.1.9</b> Bancos a serem disponibilizados</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="como-usar-o-site.html"><a href="como-usar-o-site.html#ferramentas"><i class="fa fa-check"></i><b>2.2</b> Ferramentas</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="como-usar-o-site.html"><a href="como-usar-o-site.html#selecao-dos-anos"><i class="fa fa-check"></i><b>2.2.1</b> Seleção dos Anos</a></li>
+<li class="chapter" data-level="2.2.2" data-path="como-usar-o-site.html"><a href="como-usar-o-site.html#selecao-de-colunas"><i class="fa fa-check"></i><b>2.2.2</b> Seleção de colunas</a></li>
+<li class="chapter" data-level="2.2.3" data-path="como-usar-o-site.html"><a href="como-usar-o-site.html#filtro-de-colunas"><i class="fa fa-check"></i><b>2.2.3</b> Filtro de colunas</a></li>
+<li class="chapter" data-level="2.2.4" data-path="como-usar-o-site.html"><a href="como-usar-o-site.html#agregacao-politica"><i class="fa fa-check"></i><b>2.2.4</b> Agregação Política</a></li>
+<li class="chapter" data-level="2.2.5" data-path="como-usar-o-site.html"><a href="como-usar-o-site.html#agregacao-regional"><i class="fa fa-check"></i><b>2.2.5</b> Agregação Regional</a></li>
+<li class="chapter" data-level="2.2.6" data-path="como-usar-o-site.html"><a href="como-usar-o-site.html#download-dos-dados"><i class="fa fa-check"></i><b>2.2.6</b> Download dos dados</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="o-que-e-o-r.html"><a href="o-que-e-o-r.html"><i class="fa fa-check"></i><b>3</b> O que é o R?</a><ul>
+<li class="chapter" data-level="3.1" data-path="o-que-e-o-r.html"><a href="o-que-e-o-r.html#instalando-o-r-e-o-rstudio"><i class="fa fa-check"></i><b>3.1</b> Instalando o R e o RStudio</a></li>
+<li class="chapter" data-level="3.2" data-path="o-que-e-o-r.html"><a href="o-que-e-o-r.html#onde-estudar-r"><i class="fa fa-check"></i><b>3.2</b> Onde estudar R?</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="como-usar-a-api-r.html"><a href="como-usar-a-api-r.html"><i class="fa fa-check"></i><b>4</b> Como usar a API R</a><ul>
+<li class="chapter" data-level="4.1" data-path="como-usar-a-api-r.html"><a href="como-usar-a-api-r.html#instalando-o-cepespr"><i class="fa fa-check"></i><b>4.1</b> Instalando o CepespR</a></li>
+<li class="chapter" data-level="4.2" data-path="como-usar-a-api-r.html"><a href="como-usar-a-api-r.html#explorando-as-funcoes-do-cepespr"><i class="fa fa-check"></i><b>4.2</b> Explorando as funções do <em>cepespR</em></a><ul>
+<li class="chapter" data-level="4.2.1" data-path="como-usar-a-api-r.html"><a href="como-usar-a-api-r.html#perfil-dos-candidatos-get_candidates"><i class="fa fa-check"></i><b>4.2.1</b> Perfil dos candidatos <code>get_candidates</code></a></li>
+<li class="chapter" data-level="4.2.2" data-path="como-usar-a-api-r.html"><a href="como-usar-a-api-r.html#votos-por-eleicao-get_votes"><i class="fa fa-check"></i><b>4.2.2</b> Votos por eleição <code>get_votes</code></a></li>
+<li class="chapter" data-level="4.2.3" data-path="como-usar-a-api-r.html"><a href="como-usar-a-api-r.html#coligacoes-get_coalitions"><i class="fa fa-check"></i><b>4.2.3</b> Coligações <code>get_coalitions</code></a></li>
+<li class="chapter" data-level="4.2.4" data-path="como-usar-a-api-r.html"><a href="como-usar-a-api-r.html#resultado-de-eleicoes-por-cargo-get_elections"><i class="fa fa-check"></i><b>4.2.4</b> Resultado de eleições por cargo <code>get_elections</code></a></li>
+<li class="chapter" data-level="4.2.5" data-path="como-usar-a-api-r.html"><a href="como-usar-a-api-r.html#filiados-get_filiates"><i class="fa fa-check"></i><b>4.2.5</b> Filiados <code>get_filiates</code></a></li>
+<li class="chapter" data-level="4.2.6" data-path="como-usar-a-api-r.html"><a href="como-usar-a-api-r.html#bens-de-candidatos-get_assets"><i class="fa fa-check"></i><b>4.2.6</b> Bens de candidatos <code>get_assets</code></a></li>
+<li class="chapter" data-level="4.2.7" data-path="como-usar-a-api-r.html"><a href="como-usar-a-api-r.html#secretarios-get_secretaries"><i class="fa fa-check"></i><b>4.2.7</b> Secretários <code>get_secretaries</code></a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="como-usar-a-api-r.html"><a href="como-usar-a-api-r.html#utilizando-codigos-ao-inves-de-nomes"><i class="fa fa-check"></i><b>4.3</b> Utilizando códigos ao invés de nomes</a></li>
+<li class="chapter" data-level="4.4" data-path="como-usar-a-api-r.html"><a href="como-usar-a-api-r.html#filtrando-resultados"><i class="fa fa-check"></i><b>4.4</b> Filtrando resultados</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="como-usar-a-api-r.html"><a href="como-usar-a-api-r.html#selecionando-partidos-candidatos-e-estados"><i class="fa fa-check"></i><b>4.4.1</b> Selecionando partidos, candidatos e Estados</a></li>
+<li class="chapter" data-level="4.4.2" data-path="como-usar-a-api-r.html"><a href="como-usar-a-api-r.html#selecionando-colunas"><i class="fa fa-check"></i><b>4.4.2</b> Selecionando colunas</a></li>
+<li class="chapter" data-level="4.4.3" data-path="como-usar-a-api-r.html"><a href="como-usar-a-api-r.html#informacoes-para-mais-de-um-ano"><i class="fa fa-check"></i><b>4.4.3</b> Informações para mais de um ano</a></li>
+<li class="chapter" data-level="4.4.4" data-path="como-usar-a-api-r.html"><a href="como-usar-a-api-r.html#informacoes-para-mais-de-um-cargo"><i class="fa fa-check"></i><b>4.4.4</b> Informações para mais de um cargo</a></li>
+<li class="chapter" data-level="4.4.5" data-path="como-usar-a-api-r.html"><a href="como-usar-a-api-r.html#cache-das-consultas"><i class="fa fa-check"></i><b>4.4.5</b> Cache das consultas</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="como-usar-a-api-r.html"><a href="como-usar-a-api-r.html#sobrevoando-os-dados"><i class="fa fa-check"></i><b>4.5</b> Sobrevoando os dados</a></li>
+<li class="chapter" data-level="4.6" data-path="como-usar-a-api-r.html"><a href="como-usar-a-api-r.html#salvando-os-resultados"><i class="fa fa-check"></i><b>4.6</b> Salvando os resultados</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="api-r-exercicios-para-praticar.html"><a href="api-r-exercicios-para-praticar.html"><i class="fa fa-check"></i><b>5</b> API R: Exercícios para praticar</a><ul>
+<li class="chapter" data-level="5.1" data-path="api-r-exercicios-para-praticar.html"><a href="api-r-exercicios-para-praticar.html#respostas-aos-exercicios"><i class="fa fa-check"></i><b>5.1</b> Respostas aos exercícios</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="como-manipular-os-dados-no-r.html"><a href="como-manipular-os-dados-no-r.html"><i class="fa fa-check"></i><b>6</b> Como manipular os dados no R</a><ul>
+<li class="chapter" data-level="6.1" data-path="como-manipular-os-dados-no-r.html"><a href="como-manipular-os-dados-no-r.html#filtrar"><i class="fa fa-check"></i><b>6.1</b> Filtrar</a></li>
+<li class="chapter" data-level="6.2" data-path="como-manipular-os-dados-no-r.html"><a href="como-manipular-os-dados-no-r.html#selecionar-e-ordenar"><i class="fa fa-check"></i><b>6.2</b> Selecionar e Ordenar</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="como-visualizar-dados-no-r.html"><a href="como-visualizar-dados-no-r.html"><i class="fa fa-check"></i><b>7</b> Como visualizar dados no R</a><ul>
+<li class="chapter" data-level="7.1" data-path="como-visualizar-dados-no-r.html"><a href="como-visualizar-dados-no-r.html#graficos"><i class="fa fa-check"></i><b>7.1</b> Gráficos</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="como-visualizar-dados-no-r.html"><a href="como-visualizar-dados-no-r.html#grafico-de-barras"><i class="fa fa-check"></i><b>7.1.1</b> Gráfico de Barras</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="como-usar-a-api-rest.html"><a href="como-usar-a-api-rest.html"><i class="fa fa-check"></i><b>8</b> Como usar a API REST</a><ul>
+<li class="chapter" data-level="8.1" data-path="como-usar-a-api-rest.html"><a href="como-usar-a-api-rest.html#estrutura-das-resquisicoes"><i class="fa fa-check"></i><b>8.1</b> Estrutura das resquisições</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="como-usar-a-api-rest.html"><a href="como-usar-a-api-rest.html#api-rest-no-navegador"><i class="fa fa-check"></i><b>8.1.1</b> API Rest no navegador</a></li>
+<li class="chapter" data-level="8.1.2" data-path="como-usar-a-api-rest.html"><a href="como-usar-a-api-rest.html#api-rest-no-r"><i class="fa fa-check"></i><b>8.1.2</b> API Rest no R</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="documentos-auxiliares.html"><a href="documentos-auxiliares.html"><i class="fa fa-check"></i><b>9</b> Documentos auxiliares</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Como usar o CepespData/FGV</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="como-usar-a-api-r" class="section level1">
+<h1><span class="header-section-number">4</span> Como usar a API R</h1>
+<p>O <strong>cepespR</strong> é um pacote criado para auxiliar o acesso dos usuários a API do CepespData/FGV. Por meio dessa ferramenta, é possível realizar requisições de maneira mais rápida e estruturada aos dados eleitorais presentes no nosso repositório.</p>
+<p>Nesta seção, vamos demonstrar algumas funcionalidades básicas do <strong>cepespR</strong>, assim como alguns exemplos de requisições e análises que podem ser feitas em poucos minutos no R. Também apresentaremos algumas operações simples com os dados com o pacote <em>dplyr</em>, em especial para mostrar como trabalhar com o dados do CepespData com outros bancos.</p>
+<p>Seguindo a rotina de códigos abaixo, o usuário, ao final deste tutorial, poderá ter as consultas salvas com sucesso em formato compatível com outros softwares de dados, como Excel e o SPSS.</p>
+<div id="instalando-o-cepespr" class="section level2">
+<h2><span class="header-section-number">4.1</span> Instalando o CepespR</h2>
+<p>O pacote <strong>cepespR</strong> está hospedado em <a href="https://github.com/Cepesp-Fgv/cepesp-r">nosso github</a>, então para instalá-lo, é preciso rodar o código abaixo apenas uma vez. Também vamos instalar o pacote <em>dplyr</em> para nos auxiliar nas operações com os dados.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Instalando o cepespR:</span>
+<span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&quot;devtools&quot;</span>)) <span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)
+devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;Cepesp-Fgv/cepesp-r&quot;</span>) 
+
+<span class="co"># Instalando o dplyr:</span>
+<span class="kw">install.packages</span>(<span class="st">&quot;dplyr&quot;</span>)</code></pre></div>
+<p>Em caso de troca de computador, é preciso instalar novamente o <strong>cepespR</strong>, mas recomendamos atualizá-lo sempre que possível, para garantir acesso às funções atualizadas – lembrando que estamos ainda em fase de desenvolvimento do repositório do CepespData/FGV, de modo que novas funções são criadas no <strong>cepespR</strong> sempre que um novo banco de dados é incluído em nosso repositório.</p>
+<p>Uma vez instalado o <strong>cepespR</strong>, o pacote é ativado mediante a função <code>library</code>. Lembre-se que é preciso executar essa função toda vez que iniciar o R, senão as funções do <strong>cepespR</strong> não irão funcionar. Isso também vale para o pacote <em>dplyr</em> e qualquer outro que seja necessário em sua sessão.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(cepespR)
+<span class="kw">library</span>(dplyr)</code></pre></div>
+</div>
+<div id="explorando-as-funcoes-do-cepespr" class="section level2">
+<h2><span class="header-section-number">4.2</span> Explorando as funções do <em>cepespR</em></h2>
+<p>Existem 7 requisições disponíveis hoje no pacote <strong>cepespR</strong>. Todas têm como parâmetros obrigatórios o ano (parâmetro <code>year</code>) e o cargo (parâmetro <code>position</code>) disputado e recebem como padrão os dados por município. Cada função recebe um <em>data.frame</em> – isto é, um banco de dados – com as colunas já formatadas no tipo de variável correto, por exemplo, <em>numeric</em> ou <em>character</em>. (Veja <a href="https://swcarpentry.github.io/r-novice-inflammation/13-supp-data-structures/">aqui</a> uma referência sobre os tipos de dado no R).</p>
+<p>No nomento da requisição, é preciso indicar um objeto para salvar este <em>data.frame</em> no seu ambiente no R. Por exemplo:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">minha_requisicao &lt;-<span class="st"> </span><span class="kw">get_candidates</span>(<span class="dt">year =</span> <span class="dv">2018</span>, <span class="dt">position =</span> <span class="st">&#39;Presidente&#39;</span>)</code></pre></div>
+<p>No código acima, atribuímos ao novo objeto <code>minha_requisicao</code> o banco de dados obtido na requisição feita por meio da função <code>get_candidates</code> do pacote <strong>cepespR</strong>.</p>
+<p>Opcionalmente, as funções recebem parâmetros que auxiliam no filtro dos dados. Os parâmetros podem ser indicados tanto em português quanto em inglês. Para mais detalhes, consulte <a href="https://github.com/Cepesp-Fgv/cepesp-r">a nossa documentação no GitHub</a>.</p>
+<div id="perfil-dos-candidatos-get_candidates" class="section level3">
+<h3><span class="header-section-number">4.2.1</span> Perfil dos candidatos <code>get_candidates</code></h3>
+<p>A função <code>get_candidates</code> retorna uma tabela com informações sobre características individuais dos candidatos. Com ela, é possível obter, por exemplo, informações sobre partido, cor/raça, idade, gênero, ou outra informação que diga respeito ao candidato.</p>
+<p>Para utilizá-la, você deve informar um <strong>ano</strong> e uma <strong>posição</strong>. De modo geral, ela terá a seguinte estrutura:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">base_de_dados &lt;-<span class="st"> </span><span class="kw">get_candidates</span>(<span class="dt">year =</span> <span class="op">&lt;</span>Ano escolhido<span class="op">&gt;</span>, <span class="dt">position =</span> <span class="op">&lt;</span>cargo escolhido<span class="op">&gt;</span>).</code></pre></div>
+<p>No exemplo abaixo, faremos uma consulta para os candidatos à <strong>presidência</strong> durante as eleições de <strong>2014</strong>. Repare que a função <code>get_candidates</code> salva a tabela no objeto <code>candpres_14</code>. Esse passo é importante uma vez que, caso seja de interesse utilizar essa tabela depois, faremos referência ao nome <code>candpres_14</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">candpres_<span class="dv">14</span> &lt;-<span class="st"> </span><span class="kw">get_candidates</span>(<span class="dt">year =</span> <span class="dv">2014</span>, <span class="dt">position =</span> <span class="st">&quot;Presidente&quot;</span>)</code></pre></div>
+<p>Para visualizar os dados da tabela criada, usamos a função <code>View</code> e dentro dos parênteses colocamos o nome da nossa tabela. No caso, utilizamos <code>candpres_14</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">View</span>(candpres_<span class="dv">14</span>)</code></pre></div>
+<p>Outro atributo da função <code>get_candidates</code> que podemos usar para filtrar os dados é o <code>only_elected</code>. Quando <code>only_elected = TRUE</code> (ou <code>only_elected = T</code>), a função nos retorna apenas os candidatos que foram eleitos naquele ano, para o cargo desejado indicado.</p>
+<p>Por exemplo, podemos obter os deputados federais do PSL eleitos em 2018:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">deputadosPSL2018 &lt;-<span class="st"> </span><span class="kw">get_candidates</span>(<span class="dt">year=</span><span class="dv">2018</span>, <span class="co"># Obrigatório: ano da eleição</span>
+                                  <span class="dt">position=</span><span class="st">&quot;Deputado Federal&quot;</span>, <span class="co">#Obrigatório: cargo disputado</span>
+                                  <span class="dt">only_elected =</span> T, <span class="co"># Opcional: receber apenas os eleitos</span>
+                                  <span class="dt">party =</span> <span class="dv">17</span>) <span class="co"># Opcional: receber apenas os candidatos do PT</span></code></pre></div>
+</div>
+<div id="votos-por-eleicao-get_votes" class="section level3">
+<h3><span class="header-section-number">4.2.2</span> Votos por eleição <code>get_votes</code></h3>
+<p>Recupera quantos votos cada candidato recebeu em determinada eleição. É obrigatório informar o ano (<code>year</code>) e o cargo (<code>position</code>), recebendo como padrão a votação por município de todos os candidatos que receberam votos naquele ano e cargo.</p>
+<p>No exemplo abaixo, podemos ver uma requisição para os votos para <strong>presidente</strong>, em <strong>2018</strong>, com agregação regional configurada para <strong>municípios</strong>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vtpres_18_mun &lt;-<span class="st"> </span><span class="kw">get_votes</span>(<span class="dt">year =</span> <span class="dv">2018</span>, <span class="dt">position =</span> <span class="st">&quot;Presidente&quot;</span>, <span class="dt">regional_aggregation =</span> <span class="st">&quot;Municipio&quot;</span>)
+
+<span class="kw">View</span>(vtpres_18_mun)</code></pre></div>
+<p>E se estivéssemos interessados em ver os votos de um candidato específico por estado (unidade da federação)? Opcionalmente, podemos pedir os dados agregados por estado:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">votos_pres18_PT &lt;-<span class="st"> </span><span class="kw">get_votes</span>(<span class="dt">year=</span><span class="dv">2018</span>, <span class="co"># Obrigatório: ano da eleição.</span>
+                             <span class="dt">position=</span><span class="st">&quot;Presidente&quot;</span>, <span class="co"># Obrigatório: cargo disputado.</span>
+                             <span class="dt">candidate_number =</span> <span class="dv">13</span>, <span class="co"># Opcional: filtra o candidato de nº13, ou seja, do PT.</span>
+                             <span class="dt">regional_aggregation=</span><span class="st">&quot;Estado&quot;</span>) <span class="co"># Opcional: votos agregados por estado.</span></code></pre></div>
+</div>
+<div id="coligacoes-get_coalitions" class="section level3">
+<h3><span class="header-section-number">4.2.3</span> Coligações <code>get_coalitions</code></h3>
+<p>Caso o interesse seja pelas coligações realizadas por diferentes partidos, podemos utilizar a função <code>get_coalitions</code>.</p>
+<p>É importante ter em mente que o banco de dados sobre coligações fornecido pelo TSE apresenta diversas inconsistências. Por exemplo, estão presentes no banco tanto coligações que concorreram quanto aquelas que, por algum motivo, não puderam concorrer. Sabendo disso, indicamos que essas informações sejam utilizadas com cuidado.</p>
+<p>De modo geral, caso deseje obter informações sobre coligações, é mais seguro utilizar a função <code>get_elections</code>, como iremos demonstrar mais para frente, pois o tratamento realizado na montagem deste último banco corrige o problema descrito acima.</p>
+<p>O funcionamento de <code>get_coalitions</code> é similar ao de <code>get_candidates</code>. Basta fornecer uma <strong>posição</strong> e um <strong>ano</strong> para acessar as informações desejadas.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">base_de_dados &lt;-<span class="st"> </span><span class="kw">get_coalitions</span>(<span class="dt">year =</span> <span class="op">&lt;</span>Ano escolhido<span class="op">&gt;</span>, <span class="dt">position =</span> <span class="op">&lt;</span>cargo escolhido<span class="op">&gt;</span>).</code></pre></div>
+<p>Por exemplo, caso seja de interesse as coligações realizadas para <strong>prefeitura</strong> durante as eleições de <strong>2016</strong>, basta informar esses parâmetros e executar a função.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">colpres_<span class="dv">14</span> &lt;-<span class="st"> </span><span class="kw">get_coalitions</span>(<span class="dt">year =</span> <span class="dv">2016</span>, <span class="dt">position =</span> <span class="st">&quot;Prefeito&quot;</span>)</code></pre></div>
+<p>Novamente, para ter uma visão geral da tabela devolvida pela função, podemos utilizar a função <code>View</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">View</span>(colpres_<span class="dv">14</span>)</code></pre></div>
+<p>Suponhamos que agora estamos interessados nas coligações da eleição para <strong>presidente</strong> em <strong>2002</strong>. Neste caso, a função será escrita assim:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">colpres_<span class="dv">02</span> &lt;-<span class="st"> </span><span class="kw">get_coalitions</span>(<span class="dt">year =</span> <span class="dv">2002</span>, <span class="dt">position =</span> <span class="st">&quot;Presidente&quot;</span>)
+<span class="kw">View</span>(colpres_<span class="dv">02</span>)</code></pre></div>
+</div>
+<div id="resultado-de-eleicoes-por-cargo-get_elections" class="section level3">
+<h3><span class="header-section-number">4.2.4</span> Resultado de eleições por cargo <code>get_elections</code></h3>
+<p>Além das consultas disponíveis no TSE, é possível fazer uma consulta integrada das eleições. Esta consulta agrega informações de <em>candidatos</em>, <em>coligações</em> e <em>votos</em>. Trata-se de um dos diferenciais do CepespData/FGV frente a outras fontes.</p>
+<p>Para obter detalhes a respeito de uma eleição usando a função <code>get_elections</code> é preciso especificar obrigatoriamente <strong>ano</strong> e <strong>cargo</strong>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">elpres_<span class="dv">14</span> &lt;-<span class="st"> </span><span class="kw">get_elections</span>(<span class="dt">year =</span> <span class="dv">2014</span>, <span class="co"># Obrigatório especificar o ano.</span>
+                           <span class="dt">position =</span> <span class="st">&quot;Presidente&quot;</span>) <span class="co"># Obrigatório especificar o cargo.</span>
+
+<span class="kw">View</span>(elpres_<span class="dv">14</span>)</code></pre></div>
+<p>Esta função permite também consultar o resultado por diferentes agregações políticas: <code>Candidato</code>, <code>Partido</code>, <code>Coligação</code> e <code>Consolidado da Eleição</code>. Cada uma delas agrega os votos e outras informações. Por exemplo, caso seja feita um requisição para agregação política <code>Partido</code>, será retornado os votos obtidos e a coligação da qual o partido fez parte, além de outras informações.</p>
+<p>A agregação política <code>Consolidado da Eleição</code> possui informações um tanto quanto diferente das outras. Ela não retorna os votos de um candidato, partido ou coligação. Nela, você pode encontrar dados de <strong>comparecimento</strong>, <strong>votos válidos</strong>, <strong>votos brancos e nulos</strong>. Veja:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">elpres_14_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">get_elections</span>(<span class="dt">year =</span> <span class="dv">2014</span>, <span class="co"># Obrigatório.</span>
+                             <span class="dt">position =</span> <span class="st">&quot;Presidente&quot;</span>, <span class="co"># Obrigatório.</span>
+                             <span class="dt">regional_aggregation =</span> <span class="st">&quot;Estado&quot;</span>, <span class="co"># Opcional: dados agregados por estado. Quando este parâmetro não é informado, retorna dados agregados por município.</span>
+                             <span class="dt">political_aggregation =</span> <span class="st">&quot;Consolidado&quot;</span>) <span class="co"># Opcional: agregação política Consolidado da Eleição. Quando não informado este parâmetro, a requisição retorna dados agregados por candidato.</span>
+
+<span class="kw">View</span>(elpres_14_<span class="dv">2</span>)</code></pre></div>
+</div>
+<div id="filiados-get_filiates" class="section level3">
+<h3><span class="header-section-number">4.2.5</span> Filiados <code>get_filiates</code></h3>
+<p>Retorna os dados dos filiados conforme declarado pelos partidos. É preciso informar o <strong>estado</strong> (parâmetro <code>state</code>) e o <strong>partido</strong> (parâmetro <code>party</code>) do qual se deseja consultar a lista de filiados.</p>
+<p>Exemplo: filiados ao partido NOVO no estado da Bahia:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">novoBA &lt;-<span class="st"> </span><span class="kw">get_filiates</span>(<span class="dt">state=</span><span class="st">&quot;BA&quot;</span>, <span class="co"># Obrigatório. Sigla do Estado.</span>
+                       <span class="dt">party =</span> <span class="st">&quot;NOVO&quot;</span>) <span class="co"># Obrigatório. Sigla do partido.</span></code></pre></div>
+<p>Estes dados foram atualizados pela última vez em nosso repositório em novembro de 2018 e será atualizado anualmente.</p>
+</div>
+<div id="bens-de-candidatos-get_assets" class="section level3">
+<h3><span class="header-section-number">4.2.6</span> Bens de candidatos <code>get_assets</code></h3>
+<p>Recupera os bens declarados ao TSE pelos candidatos em cada eleição. Neste caso, o único parâmetro obrigatório é o <strong>ano</strong> (<code>year</code>).</p>
+<p>Exemplo: Bens declarados pelos candidatos do Piauí em 2018:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bensPiaui2018 &lt;-<span class="st"> </span><span class="kw">get_assets</span>(<span class="dt">year =</span> <span class="dv">2018</span>, <span class="co"># Obrigatório: ano da eleição</span>
+                            <span class="dt">state =</span> <span class="st">&quot;PI&quot;</span>) <span class="co"># Opcional: receber apenas dados do estado do Piauí. Quando não informato este parâmetro, retorna os bens declarados por todos candidatos no país em 2018.</span></code></pre></div>
+</div>
+<div id="secretarios-get_secretaries" class="section level3">
+<h3><span class="header-section-number">4.2.7</span> Secretários <code>get_secretaries</code></h3>
+<p>A função <code>get_secretaries</code> recupera informações sobre ocupantes de cargos do primeiro escalão dos governos estaduais e do Distrito Federal. (Para mais informações sobre esses dados, inéditos do CepespData/FGV, <a href="http://cepespdata.io/about-state-secretaries">clique aqui</a>).</p>
+<p>Nessa função, o único parâmetro obrigatório é o <strong>estado</strong> (<code>state</code>). É possível ainda filtrar o banco por nome do(a) secretário(a) e/ou período de governo no momento da requisição, preenchendo os parâmetros <code>name</code> e <code>period</code>, respectivamente.</p>
+<p>Exemplo: Todas as secretáias e secretários estaduais de São Paulo entre 1998 e 2002:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">secSP &lt;-<span class="st"> </span><span class="kw">get_secretaries</span>(<span class="dt">state =</span> <span class="st">&quot;SP&quot;</span>, <span class="co"># Obrigatório: Estado. </span>
+                         <span class="dt">name =</span> <span class="ot">NULL</span>, <span class="co"># Obrigatório. NULL para receber todos ou parte do nome para fitrar.</span>
+                         <span class="dt">period =</span> <span class="st">&quot;1998-2002&quot;</span>) <span class="co"># Opcional: indicar o quadriênio de interesse.</span></code></pre></div>
+<p>Caso não seja informado o parâmetro <code>period</code>, a consulta retornará todos os períodos disponíveis.</p>
+</div>
+</div>
+<div id="utilizando-codigos-ao-inves-de-nomes" class="section level2">
+<h2><span class="header-section-number">4.3</span> Utilizando códigos ao invés de nomes</h2>
+<p>Ao invés de escrever os nomes das posições desejadas, uma alternativa é fornecer o código do cargo. Essa solução pode se demonstrar mais rápida com o tempo, uma vez que escrever os nomes é relativamente mais demorado e, caso digitado errado, levará a um erro durante a execução da função.</p>
+<p>Os códigos estão disponíveis na nossa página do <a href="https://github.com/Cepesp-Fgv/cepesp-rest/blob/master/EleicoesPorCargo_BETA.md">GitHub</a>.</p>
+<p>Vamos ver um exemplo. Suponhamos que estamos interessados nas eleições para prefeito ocorridas em <strong>2012</strong>. O código do cargo para prefeito é <strong>11</strong>. Sabendo disso, basta fornecer os valores desejados para a função e executá-la.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">candpref_<span class="dv">12</span> &lt;-<span class="st"> </span><span class="kw">get_candidates</span>(<span class="dt">year =</span> <span class="dv">2012</span>, <span class="dt">position =</span> <span class="dv">11</span>)
+<span class="kw">View</span>(candpref_<span class="dv">12</span>)</code></pre></div>
+</div>
+<div id="filtrando-resultados" class="section level2">
+<h2><span class="header-section-number">4.4</span> Filtrando resultados</h2>
+<p>Por padrão, as funções do <strong>cepespR</strong> retornam todas colunas disponíveis como também todos os partidos, candidatos e estados. A fim de reduzir o tamanho da tabela, é possível selecionar valores específicos para essas consultas e, assim, obter resultados menores e mais fáceis de se trabalhar.</p>
+<div id="selecionando-partidos-candidatos-e-estados" class="section level3">
+<h3><span class="header-section-number">4.4.1</span> Selecionando partidos, candidatos e Estados</h3>
+<p>Para limitar os resultados a valores específicos (um estado, um partido ou um candidato, por exemplo), basta acrescentar os parâmetros <code>state</code>, <code>party</code> ou <code>candidate_number</code> e alterá-los de acordo com o interesse.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Variável</th>
+<th>Parâmetro</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Estado</td>
+<td>state</td>
+</tr>
+<tr class="even">
+<td>Partido</td>
+<td>party</td>
+</tr>
+<tr class="odd">
+<td>Número do Candidato</td>
+<td>candidate_number</td>
+</tr>
+</tbody>
+</table>
+<p>Para mostrar apenas os resultados do Rio Grande do Sul (RS), por exemplo, acrescente o parâmetro <code>state</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">elpres_14_RS &lt;-<span class="st"> </span><span class="kw">get_elections</span>(<span class="dt">year=</span><span class="dv">2014</span>,
+                              <span class="dt">position=</span><span class="st">&quot;Presidente&quot;</span>, 
+                              <span class="dt">regional_aggregation=</span><span class="st">&quot;Estado&quot;</span>,
+                              <span class="dt">political_aggregation=</span><span class="st">&quot;Partido&quot;</span>, 
+                              <span class="dt">state=</span><span class="st">&quot;RS&quot;</span>)
+
+<span class="kw">View</span>(elpres_14_RS)</code></pre></div>
+<p>Para mostrar apenas os resultados referentes ao PT (13), por exemplo, acrescente o parâmetro <code>party</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">elpres_14_PT &lt;-<span class="st"> </span><span class="kw">get_elections</span>(<span class="dt">year=</span><span class="dv">2014</span>, <span class="co"># Obrigatório: ano da eleição.</span>
+                              <span class="dt">position=</span><span class="st">&quot;Presidente&quot;</span>, <span class="co"># Obrigatório: cargo disputado.</span>
+                              <span class="dt">regional_aggregation=</span><span class="st">&quot;Estado&quot;</span>, <span class="co"># Opcional: votos agregados por estado.</span>
+                              <span class="dt">political_aggregation=</span><span class="st">&quot;Partido&quot;</span>, <span class="co"># Opcional: votos agregados por partido.</span>
+                              <span class="dt">party=</span><span class="st">&quot;13&quot;</span>) <span class="co"># Opcional: filtro para partido.</span>
+
+<span class="kw">View</span>(elpres_14_PT)</code></pre></div>
+<p>Para mostrar apenas os resultados referentes ao candidato 2511, por exemplo, acrescente o parâmetro <code>candidate_number</code>. Vamos escrever os parâmetros usando os códigos. Para o cargo de deputado federal, o código é 6; para a agregação regional por UF, o código é 2; e para a agregação política por candidato, o código é 2:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">eldepfed_<span class="dv">2511</span> &lt;-<span class="st"> </span><span class="kw">get_elections</span>(<span class="dt">year=</span><span class="dv">2014</span>, <span class="co"># Obrigatório: ano da eleição.</span>
+                               <span class="dt">position=</span><span class="dv">6</span>, <span class="co"># Obrigatório: cargo disputado.</span>
+                               <span class="dt">regional_aggregation=</span><span class="dv">2</span>, <span class="co"># Opcional: votos agregados por estado.</span>
+                               <span class="dt">political_aggregation=</span><span class="dv">2</span>, <span class="co"># Opcional: votos agregados por candidato.</span>
+                               <span class="dt">candidate_number=</span><span class="dv">2511</span>) <span class="co"># Opcional: filtro para candidato.</span>
+
+<span class="kw">View</span>(eldepfed_<span class="dv">2511</span>)</code></pre></div>
+<p>Outro exemplo: obter o total de votos que os candidatos a prefeito eleitos pelo MDB no Rio de Janeiro.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">prefeitosMDBrio &lt;-<span class="st"> </span><span class="kw">get_elections</span>(<span class="dt">year=</span><span class="dv">2012</span>, <span class="co"># Obrigatório: ano da eleição.</span>
+                                 <span class="dt">position=</span><span class="st">&quot;Prefeito&quot;</span>, <span class="co"># Obrigatório: cargo disputado.</span>
+                                 <span class="dt">regional_aggregation=</span><span class="st">&quot;Estado&quot;</span>, <span class="co"># Opcional: votos agregados por estado.</span>
+                                 <span class="dt">political_aggregation=</span><span class="st">&quot;Partido&quot;</span>, <span class="co"># Opcional: votos agregados por partido.</span>
+                                 <span class="dt">state =</span> <span class="st">&quot;RJ&quot;</span>, <span class="co"># Opcional: receber apenas dados do estado do RJ.</span>
+                                 <span class="dt">party =</span> <span class="dv">15</span>, <span class="co"># Opcional: receber apenas dados do MDB.</span>
+                                 <span class="dt">only_elected =</span> T) <span class="co"># Opcional: receber apenas os eleitos.</span></code></pre></div>
+</div>
+<div id="selecionando-colunas" class="section level3">
+<h3><span class="header-section-number">4.4.2</span> Selecionando colunas</h3>
+<p>Por padrão, as funções do <strong>cepespR</strong> retornam todas as colunas disponíveis, mas é possível limitar o tamanho das tabelas para apenas a quantidade de variáveis desejadas.</p>
+<p><strong>Passo 1: Visualizar quais são as colunas-padrão</strong></p>
+<p>Existem duas maneiras de realizar esse procedimento. Em primeiro lugar, você pode acessar a nossa página do <a href="https://github.com/Cepesp-Fgv/cepesp-rest">GitHub</a> e selecionar a consulta desejada. Lá você poderá ver quais colunas são retornadas para cada requisição e escolher as pretendidas. Em segunda lugar, é possível realizar esse procedimento dentro do <code>R</code>, mediante a função <code>names</code>.</p>
+<p>Na função <code>get_candidates</code>, por exemplo, as colunas padrões são:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(<span class="kw">get_candidates</span>(<span class="dt">year =</span> <span class="dv">2014</span>, <span class="dt">position =</span> <span class="st">&quot;Presidente&quot;</span>))</code></pre></div>
+<p>Note que uma lista de 46 colunas apareceu no seu console. E para as outras funções?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Lista as colunas da função get_coalitions</span>
+<span class="kw">names</span>(<span class="kw">get_coalitions</span>(<span class="dt">year =</span> <span class="dv">2014</span>, <span class="dt">position =</span> <span class="st">&quot;Presidente&quot;</span>))
+
+<span class="co">#Lista as colunas da função get_votes</span>
+<span class="kw">names</span>(<span class="kw">get_votes</span>(<span class="dt">year =</span> <span class="dv">2014</span>, <span class="dt">position =</span> <span class="st">&quot;Presidente&quot;</span>))
+
+<span class="co">#Lista as colunas da função get_elections</span>
+<span class="kw">names</span>(<span class="kw">get_elections</span>(<span class="dt">year =</span> <span class="dv">2014</span>, <span class="dt">position =</span> <span class="st">&quot;Presidente&quot;</span>))</code></pre></div>
+<p>E assim sucessivamente. Você também pode ver todas as colunas disponíveis para cada banco de dados do CepespData no nosso <a href="http://cepespdata.io/static/docs/cepespdata_dicionario_publico.xlsx">Dicionário de Variáveis</a>.</p>
+<p><strong>Passo 2: Criar uma lista com o nome das colunas que desejamos</strong></p>
+<p>Se queremos analisar os dados referentes aos votos, por exemplo, poderíamos reduzir nosso banco de dados às seguintes colunas:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">minhas_colunas &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="st">&quot;NUMERO_CANDIDATO&quot;</span>, <span class="st">&quot;UF&quot;</span>, <span class="st">&quot;QTDE_VOTOS&quot;</span>, <span class="st">&quot;COD_MUN_IBGE&quot;</span>)</code></pre></div>
+<p><strong>Passo 3: Acrescentar o parâmetro <code>columns_list</code> a nossa função</strong></p>
+<p>Indicamos a lista criada com o nome das colunas:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vtpres_14_new &lt;-<span class="st"> </span><span class="kw">get_votes</span>(<span class="dt">year =</span> <span class="st">&quot;2014&quot;</span>, <span class="co"># Obrigatório: indicar o ano da eleição.</span>
+                           <span class="dt">position =</span> <span class="st">&quot;Presidente&quot;</span>, <span class="co"># Obrigatório: indicar o cargo de interesse.</span>
+                           <span class="dt">regional_aggregation =</span> <span class="st">&quot;Municipio&quot;</span>, <span class="co"># Opcional: dados agregados por município.</span>
+                           <span class="dt">columns_list =</span> minhas_colunas) <span class="co"># Opcional: restringir a requisiçãi às colunas de interesse.</span>
+
+<span class="kw">View</span>(vtpres_14_new)</code></pre></div>
+<p>Repare que, em primeiro lugar, criamos um objeto chamado <code>minhas_colunas</code>, contendo os nomes das variáveis de nosso interesse. Em seguida, indicamos este novo objeto <code>minhas_colunas</code> no parâmetro <code>columns_list</code> dentro da função <code>get_votes</code>.</p>
+<p>Outra maneira de selecionar as colunas de interesse é através da função <code>subset</code>. Para isto, basta:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">elpres_14_ &lt;-<span class="st"> </span><span class="kw">subset</span>(elpres_14_<span class="dv">2</span>, <span class="dt">select =</span> <span class="kw">c</span>(<span class="st">&quot;ANO_ELEICAO&quot;</span>, <span class="st">&quot;QT_VOTOS_BRANCOS&quot;</span>, <span class="st">&quot;QT_VOTOS_NULOS&quot;</span>))
+
+<span class="kw">View</span>(elpres_14_)</code></pre></div>
+<p>Note que a função foi escrita na seguinte ordem:</p>
+<pre><code>&lt;nome do novo banco de dados&gt; &lt;- subset(&lt;nome do antigo data frame&gt;, select = c(&lt;nomes das colunas de interesse&gt;))</code></pre>
+</div>
+<div id="informacoes-para-mais-de-um-ano" class="section level3">
+<h3><span class="header-section-number">4.4.3</span> Informações para mais de um ano</h3>
+<p>Todas as requisições aceitam que se consulte mais de um ano de uma vez. Para isso, basta informar entre parênteses os anos a serem consultados e separá-los por vírgulas – tomando o cuidado de informar anos eleitorais válidos.</p>
+<p>Exemplo: Todos os prefeitos eleitos pelo PMDB no Rio de Janeiro entre 2008 e 2016:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">prefsPMDBrio &lt;-<span class="st"> </span><span class="kw">get_elections</span>(<span class="dt">year=</span><span class="st">&quot;2008,2012,2016&quot;</span>, <span class="co"># Indica os três anos que queremos</span>
+                                   <span class="dt">position=</span><span class="st">&quot;Prefeito&quot;</span>,
+                                   <span class="dt">regional_aggregation=</span><span class="st">&quot;Municipality&quot;</span>,
+                                   <span class="dt">political_aggregation=</span><span class="st">&quot;Candidate&quot;</span>,
+                                   <span class="dt">state =</span> <span class="st">&quot;RJ&quot;</span>,
+                                   <span class="dt">party =</span> <span class="st">&quot;15&quot;</span>,
+                                   <span class="dt">only_elected =</span> T)</code></pre></div>
+</div>
+<div id="informacoes-para-mais-de-um-cargo" class="section level3">
+<h3><span class="header-section-number">4.4.4</span> Informações para mais de um cargo</h3>
+<p>Para conseguir os resultados para mais de um cargo, é preciso fazer um <em>for loop</em> para cada um dos cargos e empilhar os resultados no formato de um banco de dados (<code>data.frame</code>). Essa mesma lógica se aplica também para recuperar os dados de mais de um partido ou mais de um estado (uma UF) na função <code>get_filiates</code>.</p>
+<p>Exemplo: Todos os prefeitos e vereadores eleitos pelo PMDB no Rio de Janeiro entre 2008 e 2012:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Criando um vetor com cada cargo requisitado separado por v?rgula e entre aspas:</span>
+lista.cargos &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Vereador&quot;</span>,<span class="st">&quot;Prefeito&quot;</span>) 
+
+<span class="co"># Criando um dataframe vazio para receber os dados:</span>
+bancocompleto &lt;-<span class="st"> </span><span class="kw">data.frame</span>() 
+
+<span class="co"># Pedindo para que a requisição seja feita para cargo da lista, um por vez, até o final da lista:</span>
+<span class="cf">for</span>(cargo <span class="cf">in</span> lista.cargos){  
+  <span class="co"># Salvando a requisição num banco temporário:</span>
+  bancotemporario &lt;-<span class="st"> </span><span class="kw">get_elections</span>(<span class="dt">year=</span><span class="st">&quot;2008,2012,2016&quot;</span>, <span class="co"># Requisição de dados para os três anos de interesse.</span>
+                                   <span class="dt">position=</span>cargo, <span class="co"># Será preenchido com um cargo da lista de cargos por vez.</span>
+                                   <span class="dt">regional_aggregation=</span><span class="st">&quot;Municipality&quot;</span>, <span class="co"># Dados agregados por município.</span>
+                                   <span class="dt">political_aggregation=</span><span class="st">&quot;Candidate&quot;</span>, <span class="co"># Dados agregados por candidato.</span>
+                                   <span class="dt">state =</span> <span class="st">&quot;RJ&quot;</span>, <span class="co"># Requisição apenas dos candidatos do estado do Rio de Janeiro.</span>
+                                   <span class="dt">party =</span> <span class="st">&quot;15&quot;</span>, <span class="co"># Requisição apenas dos candidatos do PMDB.</span>
+                                   <span class="dt">only_elected =</span> T) <span class="co"># Filtrar: apenas candidatos eleitos</span>
+  
+  <span class="co"># Empilhando os dados temporários no banco de dados completo:   </span>
+  bancocompleto &lt;-<span class="st"> </span><span class="kw">rbind</span>(bancocompleto,bancotemporario) 
+
+  <span class="co"># Removendo o banco temporário com os dados parciais:</span>
+  <span class="kw">rm</span>(bancotemporario) 
+}</code></pre></div>
+</div>
+<div id="cache-das-consultas" class="section level3">
+<h3><span class="header-section-number">4.4.5</span> Cache das consultas</h3>
+<p>A cada consulta feita na API, o banco de dados pedido será construído e baixado em sua máquina. Para limitar a banda consumida e agilizar as requisições mais comuns, é possível salvar uma cópia dos dados em sua máquina. (Você poderá deletá-la manualmente depois, caso queira atualizar a requisição).</p>
+<p>Para isso, basta incluir o parâmetro <code>cached = T</code> ao final de qualquer uma das funções disponíveis. Assim, uma cópia dos dados será salva em “/static/cache” no seu diretório de trabalho e estará disponível automaticamente quando repetir a consulta. Por exemplo:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pslAC&lt;-<span class="st"> </span><span class="kw">get_filiates</span>(<span class="dt">state=</span><span class="st">&quot;AC&quot;</span>,
+                     <span class="dt">party =</span> <span class="st">&quot;PSL&quot;</span>,
+                     <span class="dt">cached =</span> T) <span class="co"># Parâmetro cached marcado como &quot;TRUE&quot; -- salva uma cópia no seu computador.</span></code></pre></div>
+</div>
+</div>
+<div id="sobrevoando-os-dados" class="section level2">
+<h2><span class="header-section-number">4.5</span> Sobrevoando os dados</h2>
+<p>Uma das vantagem de se utilizar o R é que podemos criar tabelas de frequência com uma certa facilidade, útil para sobrevoar rapidamente variáveis qualitativas (categóricas).</p>
+<p>Caso você queira, por exemplo, ver a distribuição de <strong>gênero</strong> (DESCRICAO_SEXO) ou de <strong>partidos</strong> (SIGLA_PARTIDO) entre todos os candidatos, podemos utilizar a função <code>table</code> da seguinte maneira:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(candpres_<span class="dv">14</span><span class="op">$</span>DESCRICAO_SEXO)
+<span class="kw">table</span>(candpres_<span class="dv">14</span><span class="op">$</span>SIGLA_PARTIDO)</code></pre></div>
+<p>Suponha agora que você tem interesse na quantidade de candidatas do sexo feminino para as eleições a prefeito de 2016. A função abaixo retorna a frequência absoluta de homens e mulheres:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">elpref_<span class="dv">16</span> &lt;-<span class="st"> </span><span class="kw">get_elections</span>(<span class="dt">year=</span><span class="dv">2016</span>, <span class="dt">position=</span><span class="st">&quot;Prefeito&quot;</span>, <span class="dt">regional_aggregation=</span><span class="st">&quot;Municipio&quot;</span>, <span class="dt">political_aggregation=</span><span class="st">&quot;Candidato&quot;</span>)
+
+<span class="kw">table</span>(elpref_<span class="dv">16</span><span class="op">$</span>DESCRICAO_SEXO)</code></pre></div>
+<p>E para as eleições a deputado federal em 2014? Quantas mulheres se candidataram neste ano? Veja:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">eldepfed_<span class="dv">14</span> &lt;-<span class="st"> </span><span class="kw">get_elections</span>(<span class="dt">year=</span><span class="dv">2014</span>, 
+                             <span class="dt">position=</span><span class="st">&quot;Deputado Federal&quot;</span>, 
+                             <span class="dt">regional_aggregation=</span><span class="st">&quot;Estado&quot;</span>,
+                             <span class="dt">political_aggregation=</span><span class="st">&quot;Candidato&quot;</span>)
+
+<span class="kw">table</span>(eldepfed_<span class="dv">14</span><span class="op">$</span>DESCRICAO_SEXO)</code></pre></div>
+<p>Outra função que pode ser executada para análises rápidas é a <code>summary</code>. Com ela, podemos obter a média, o desvio-padrão e outros estatísticas descritivas de uma variável quantitativa. No exemplo abaixo, temos a <strong>média de idade</strong> (IDADE_DATA_ELEICAO) dos candidatos.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(candpres_<span class="dv">14</span><span class="op">$</span>IDADE_DATA_ELEICAO)</code></pre></div>
+<p>Note que a função foi escrita assim:</p>
+<pre><code>table(&lt;nome do data frame&gt;$&lt;variável do data frame em que estou interessado&gt;)</code></pre>
+<p>Para variáveis quantitativas (contínuas), podemos usar a função <code>summary</code>. Esta função retorna média, mediana, mínimo e máximo das variáveis. Veja:</p>
+<p>Suponhamos que estamos interessados na média das idades dos candidatos nas eleições a presidente de 2014. Veja:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(elpres_<span class="dv">14</span><span class="op">$</span>IDADE_DATA_ELEICAO)</code></pre></div>
+<p>Note que a função <code>summary</code> funciona de maneira similar a <code>table</code>:</p>
+<pre><code>summary( &lt;nome do data frame&gt;$&lt;nome da variável do data frame em que estou interessado&gt;)</code></pre>
+</div>
+<div id="salvando-os-resultados" class="section level2">
+<h2><span class="header-section-number">4.6</span> Salvando os resultados</h2>
+<p>Para salvar os <em>data frames</em> gerados neste script em formato <code>.csv</code>, basta usar a função abaixo <code>write.csv2</code>.</p>
+<p>A função está organizada da seguinte maneira:</p>
+<pre><code>write.csv2( &lt;nome do data frame que quero exportar&gt;, &lt;nome que quero dar ao meu arquivo&gt;.csv)</code></pre>
+<p>Por exemplo:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">write.csv2</span>(elpres_<span class="dv">14</span>, <span class="st">&quot;eleicoes_presidente_2014.csv&quot;</span>)</code></pre></div>
+<p>Você também pode salvar os arquivos em outros formatos, como arquivos próprios de <strong>SPSS</strong> e <strong>Stata</strong>. Para isso, vamos usar os pacotes <code>haven</code>.</p>
+<p>Instalando o pacote:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;haven&quot;</span>)</code></pre></div>
+<p>Salvando o arquivo:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Salvando o arquivo em SAV (para SPSS):</span>
+haven<span class="op">::</span><span class="kw">write_sav</span>(<span class="dt">data =</span> elpres_<span class="dv">14</span>, <span class="co"># Indicando qual objeto do meu ambiente R quero salvar</span>
+                 <span class="dt">path =</span> <span class="st">&quot;eleicoes_presidente_2014.sav&quot;</span>) <span class="co"># Indicando em que pasta e com que nome salvar o arquivo.</span>
+
+<span class="co"># Salvando o arquivo em DTA (para Stata):</span>
+haven<span class="op">::</span><span class="kw">write_dta</span>(<span class="dt">data =</span> elpres_<span class="dv">14</span>, <span class="co"># Indicando qual objeto do meu ambiente R quero salvar</span>
+                 <span class="dt">path =</span> <span class="st">&quot;eleicoes_presidente_2014.sav&quot;</span>, <span class="co"># Indicando em que pasta e com que nome salvar o arquivo.</span>
+                 <span class="dt">version =</span> <span class="dv">14</span>) <span class="co"># Indicando a versão do Stata com a qual meu arquivo deve ser compatível</span></code></pre></div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="o-que-e-o-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="api-r-exercicios-para-praticar.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

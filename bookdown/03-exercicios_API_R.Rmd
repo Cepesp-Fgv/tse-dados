@@ -1,0 +1,243 @@
+# API R: Exercícios para praticar
+
+Você também pode [clicar aqui](http://www.cepespdata.io/static/docs/API_CEPESPData_abraji2019.pdf) para fazer download do documento PDF com os exercícios abaixo.
+
+**Questão 1.** Para cada uma das questões numeradas abaixo, responda:
+
+- Qual função do __cepespR__ você utilizaria?
+
+- Quais são os parâmetros que você deve informar?
+
+- Seria preciso fazer outras operações no banco? Quais? 
+
+    **1.1.** Quantos votos na legenda o PSL teve em 2018 para Deputado Federal? E em 2014? Houve aumento?
+    
+    **1.2.** Quantas governadoras foram eleitas nas últimas quatro eleições?
+    
+    **1.3.** Quantas mulheres negras (pretas ou pardas) concorreram ao cargo de prefeita em 2016 no Brasil?
+    
+    **1.4.** Quantas pessoas que eram filiadas ao PCO no Estado de Alagoas se desfiliaram do partido ou tiveram sua filiação cancelada?
+    
+    **1.5.** Considerando os candidatos a vereador no Rio Grande do Sul em 2012, qual é o partido com o maior valor total de bens declarados? 
+
+
+**Trabalhando com outras bases de dados a partir do código do IBGE**
+
+Uma das vantagens de utilizar os dados eleitorais do CepespData é já ter pronta a compatibilização entre o código do município do TSE e o código das regiões administrativas do IBGE.
+
+Assim, podemos juntar os dados eleitorais do CepespData com qualquer outro que tenha o código do IBGE em poucas linhas de programação. 
+
+Nesse exemplo, vamos explorar como juntar os dados do CepespData com os [dados dos beneficiários do Programa Bolsa Família em 2016](http://dados.gov.br/dataset/bolsa-familia-misocial) e das [estimativas populacionais do IBGE enviadas ao TCU de 2016](https://www.ibge.gov.br/estatisticas/sociais/populacao/9103-estimativas-de-populacao.html?=&t=downloads). 
+
+Os dados pré-processados em `.csv` podem ser baixados [clicando aqui](https://drive.google.com/open?id=1lZUEJrmlaOTONBGI_3aUZPnMlA_rp3jD).
+
+A pergunta que queremos responder é: 
+
+**Questão 2.** Existe correlação entre a porcentagem de votos do PT num município e a porcentagem de famílias do Programa Bolsa Família em 2016?
+
+*Lembrando: que correlação não é a mesma coisa que causa! O foco aqui é o trabalho com os dados e não as conclusões. Para afirmar que o Programa Bolsa Família melhora o resultado eleitoral do PT, precisaríamos de uma análise muito mais sofisticada que a proposta nesse exercício.*
+
+Passo a passo:
+
+2.1. Baixe os dados do Programa Bolsa FamÍlia (`pbf_2016.csv`) e abra no R. Dica: veja como utilizar a função `read.csv2()`. Inspecione quais são as variáveis no banco.
+ 
+2.2. Baixe os dados da população do IBGE (`pop_ibge_2016.csv`) e abra no R. Inspecione quais são as variáveis no banco.
+ 
+2.3. Utilizando o **cepespR**, construa um banco de dados que tenha a quantidade de votos por município por partido para o cargo de prefeito no ano de 2016.
+ 
+2.4. Crie uma variável que indique a porcentagem de votos recebida por partido por município.
+ 
+2.5. Junte o banco de população com os dados do Bolsa Família utilizando o código do IBGE. *Dica: Verifique se o tipo da variável do código do IBGE nos dos bancos são iguais. Caso contrário, uniformize-as. Também veja quantos dígitos o código possui -- em alguns bancos, o código do IBGE vem com o dígito verificador, que pode ser descartado sem problemas. Se for preciso descartá-lo, procure como usar a função* `substr()`. *Guarde em uma nova variável este código de município com um dígito a menos.* 
+ 
+2.6. Verifique se o *join* foi feito corretamente explorando o banco com o comando `summary()`. Não podemos ter NA's!
+ 
+2.7. Nesse novo banco, crie uma variável que indique o número de famílias benefiárias a cada 1000 habitantes.
+ 
+2.8. Agora, junte o banco com a variável do item 7 ao banco com as porcentagens de voto. *Dica: lembre-se de usar a variável do código do IBGE com o mesmo número de digitos.*
+ 
+2.9. Faça um gráfico de dispersão simples usando a função `plot()` entre as variáveis de famílias beneficiárias e a porcentagem de votos para candidatos do PT. Parece haver correlação?
+ 
+## Respostas aos exercícios
+
+Você também pode [clicar aqui](http://www.cepespdata.io/static/docs/API_CEPESPData_abraji2019_respostas.pdf) para fazer download do documento PDF com as respostas abaixo.
+ 
+1.1. Quantos votos na legenda o PSL teve em 2018 para Deputado Federal? E em 2014? Houve aumento?
+
+```{r,eval = FALSE}
+lista.colunas <- list("ANO_ELEICAO","NUMERO_CANDIDATO","QTDE_VOTOS")
+
+votosPSL <- get_elections(year="2014,2018",
+                          position="Deputado Federal",
+                          regional_aggregation="Brasil",
+                          candidate_number = "17",
+                          columns_list = lista.colunas)
+print(votosPSL)
+```
+
+1.2. Quantas governadoras foram eleitas nas últimas quatro eleições?
+
+```{r,eval = FALSE}
+lista.colunas <- list("ANO_ELEICAO","SIGLA_UE","NUMERO_CANDIDATO","QTDE_VOTOS","DESCRICAO_SEXO")
+
+governadoras <- get_elections(year="2006,2010,2014,2018",
+                              position="Governador",
+                              regional_aggregation="Brasil",
+                              only_elected = T,
+                              columns_list = lista.colunas)
+
+governadoras %>%
+  group_by(DESCRICAO_SEXO) %>%
+  summarise(n = n())
+
+```
+
+1.3. Quantas mulheres negras (pretas ou pardas) concorreram ao cargo de prefeita em 2016 no Brasil?
+
+```{r,eval = FALSE}
+lista.colunas <- list("ANO_ELEICAO","DESCRICAO_COR_RACA","QTDE_VOTOS","DESCRICAO_SEXO")
+
+prefeitasnegras <- get_elections(year="2016",
+                                 position="Prefeito",
+                                 columns_list = lista.colunas)
+
+prefeitasnegras %>%
+  filter(DESCRICAO_COR_RACA %in% c("PRETA","PARDA")) %>%
+  group_by(DESCRICAO_SEXO,DESCRICAO_COR_RACA) %>%
+  summarise(n = n())
+
+```
+
+
+1.4. Quantas pessoas que eram filiadas ao PCO no Estado de Alagoas se desfiliaram do partido ou tiveram sua filiação cancelada?
+
+```{r,eval = FALSE}
+
+filiadosAL <- get_filiates(state='AL',party ='PCO')
+
+filiadosAL %>%
+  group_by(SITUACAO_REGISTRO) %>%
+  summarise(n = n())
+  
+
+```
+
+
+1.5. Considerando os candidatos a vereador no Rio Grande do Sul em 2012, qual é o partido com o maior valor total de bens declarados? 
+
+```{r,eval = FALSE}
+lista.colunas <- list("NUMERO_PARTIDO","SIGLA_PARTIDO","VALOR_BEM")
+
+bens_vereadores <- get_assets(year=2012,
+                              state = "RS",
+                              columns_list = lista.colunas)
+
+bens_vereadores %>%
+  mutate(valor = gsub("[.]","",VALOR_BEM), #remove o ponto do numeral
+         valor = as.numeric(sub(",", ".", valor))) %>% #transforma a v?rgula em ponto 
+  group_by(SIGLA_PARTIDO) %>%
+  summarise(total = sum(valor)) %>%
+  top_n(1,total)
+  
+```
+
+**2. Trabalhando com outras bases de dados a partir do código do IBGE**
+
+2.1. Baixe os dados do Programa Bolsa Família (`pbf_2016.csv`) e abra no R. Dica: veja como utilizar a função `read.csv2()`. Inspecione quais são as variáveis no banco.
+ 
+```{r,eval=F}
+pbf <- read.csv2("pbf_2016.csv",stringsAsFactors = F)
+glimpse(pbf)
+```
+
+2.2. Baixe os dados da população do IBGE (`pop_ibge_2016.csv`) e abra no R. Inspecione quais são as variáveis no banco.
+ 
+```{r,eval=F}
+pop <- read.csv2("pop_ibge_2016.csv",stringsAsFactors = F)
+glimpse(pop)
+```
+
+2.3. Utilizando o **cepespR**, construa um banco de dados que tenha a quantidade de votos por município por partido para o cargo de prefeito no ano de 2016.
+ 
+```{r,eval=F}
+lista.colunas <- list("NUMERO_CANDIDATO","QTDE_VOTOS","COD_MUN_IBGE")
+
+votos <- get_votes(year=2016,
+                   position = "Prefeito",
+                   columns_list = lista.colunas)
+```
+
+2.4. Crie uma variável que indique a porcentagem de votos recebida por partido por município.
+
+```{r,eval=F}
+# Fazendo os totais de votos por município:
+votos_totais <- votos %>%
+  group_by(COD_MUN_IBGE) %>%
+  summarise(votosmun = sum(QTDE_VOTOS))
+
+# Juntando os totais e criando a variável com a porcentagem:
+votos <- votos %>%
+  left_join(votos_totais,by="COD_MUN_IBGE") %>%
+  mutate(pct_votos = 100*(QTDE_VOTOS/votosmun))
+
+summary(votos$pct_votos)
+```
+  
+2.5. Junte o banco de população com os dados do Bolsa Família utilizando o código do IBGE. *Dica: Verifique se o tipo da variável do código do IBGE nos dos bancos são iguais. Caso contrário, uniformize-as. Também veja quantos dígitos o código possui -- em alguns bancos, o código do IBGE vem com o dígito verificador, que pode ser descartado sem problemas. Se for preciso descartá-lo, procure como usar a função* `substr()` *e guarde-a numa nova variável.* 
+
+```{r,eval=F}
+# Vendo como é a variável do código do IBGE de cada um dos bancos:
+summary(pbf$cod_ibge)
+summary(pop$cod_mun)
+# Ambas são numéricas, mas há diferença no número de dígitos.
+# O banco com os dados da população possui um dígito a mais. 
+
+# Criando uma nova variável do código com 6 dígitos, para ficar igual ao do PBF:
+pop <- pop %>%
+  mutate(cod_mun2 = as.numeric(substr(cod_mun, start = 1, stop = 6)))
+
+# Fazendo o join:
+bd_join <- pop %>%
+  left_join(pbf, by = c("cod_mun2" = "cod_ibge"))
+
+```
+ 
+2.6. Verifique se o *join* foi feito corretamente explorando o banco com o comando `summary()`. Não podemos ter NA's!
+ 
+```{r,eval=F}
+# Testando se não perdemos ou ganhamos linhas no join:
+nrow(bd_join) == nrow(pbf)
+nrow(bd_join) == nrow(pop)
+
+# Checando se todas as variáveis estão completas:
+summary(bd_join)
+```
+ 
+2.7. Nesse novo banco, crie uma variável que indique o número de famílias benefiárias a cada 1000 habitantes.
+ 
+```{r,eval=F}
+bd_join <- bd_join %>%
+  mutate(familias_1000hab = (qtd_familias_beneficiarias_bolsa_familia/pop_estimada)*1000)
+
+summary(bd_join$familias_1000hab)
+```
+ 
+2.8. Agora, junte o banco com a variável do item 7 ao banco com as porcentagens de voto. *Dica: lembre-se de usar a variável do código do IBGE com o mesmo número de digitos.*
+ 
+```{r,eval=F}
+
+votos_completo <- votos %>%
+  mutate(cod_mun = COD_MUN_IBGE) %>% 
+  left_join(bd_join, by="cod_mun")
+
+nrow(votos_completo) == nrow(votos)
+```
+ 
+2.9. Faça um gráfico de dispersão simples usando a função `plot()` entre as variáveis de famílias beneficiárias e a porcentagem de votos para candidatos do PT. Parece haver correlação?
+ 
+```{r,eval=F}
+votosPT <- votos_completo %>%
+  filter(NUMERO_CANDIDATO == 13)
+
+plot(votosPT$familias_1000hab,votosPT$pct_votos)
+
+```

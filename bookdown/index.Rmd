@@ -1,0 +1,35 @@
+---
+title: "Como usar o CepespData/FGV"
+author: "Equipe CepespData/FGV"
+site: bookdown::bookdown_site
+documentclass: book
+date: "Setembro/2019"
+urlcolor: blue
+output:
+  bookdown::gitbook: default
+  #bookdown::pdf_book: default
+---
+
+# O CepespData
+
+O CepespData permite acessar, baixar e manipular dados eleitorais de 1998 a 2018 tratados e mesclados a partir dos dados obtidos no repositório do Tribunal Superior Eleitoral (TSE), bem como gerados por pesquisadores associados ao Centro de Política e Economia do Setor Público da Fundação Getulio Vargas (Cepesp/FGV). Este tutorial explica **como usar o CepespData**.
+
+Há várias formas de acessar os dados do CepespData: manualmente, por meio do próprio site, ou por meio das APIs, que permitem a requisição de dados de forma mais automatizada e estruturada (API R, API Python, API REST).
+
+Aqui vamos mostrar passo a passo como acessar esses dados de todas essas formas. Este tutorial se divide nas seguintes seções:
+
+2. **Como usar o site** [cepespdata.io](cepespdata.io) para baixar os dados de forma mais eficiente para as análises desejadas.
+
+3. **O que é o R?**
+
+4. **Como usar a API R** do CepespData para acessar os dados eleitorais.
+
+5. **API R: Exercícios para praticar**.
+
+6. **Como manipular os dados no R**.
+
+7. **Como visualizar os dados no R**.
+
+8. **Como usar a API REST** do CepespData para acessar dados eleitorais.
+
+9. **Documentos auxiliares** para facilitar a utilização do CepespData.

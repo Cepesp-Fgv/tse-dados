@@ -1,0 +1,71 @@
+# Como manipular os dados no R
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      eval = FALSE)
+```
+
+Transformações de bancos de dados podem ser realizadas com funções presentes no pacote _dplyr_. Execute o código abaixo no seu R a fim de que possamos utilizá-lo nos exemplos desse tutorial.
+
+```{r}
+install.packages("dplyr")
+```
+
+Este tutorial não tem como objetivo ensinar a linguagem de programação R, mas fornecer um __esqueleto__ para algumas análises simples, que podem ser feitas em alguns minutos.
+
+## Filtrar
+
+Ao realizar uma requisição no CepespData, a função escolhida irá retornar todas as observações condizentes com os parâmetros informados. Contudo, nem sempre queremos todas as observações, mas apenas um conjunto específico. 
+
+Por exemplo, talvez nós desejemos todos os candidatos negros que concorreram a Deputado Federal em 2018, com a função `filter`.
+
+```{r}
+library(cepespR)
+library(dplyr)
+
+el2018 <- get_elections(2018, 6, regional_aggregation = 0)
+```
+
+Uma vez que você tenha feito a requisição do banco e salvado a tabela em um objeto (`el2018`), podemos aplicar a função. É importante notar que, ao comparar valores no R, utilizamos dois sinais de igual `==`. 
+
+```{r}
+cand_negros_2018 <- el2018 %>% 
+  filter(CODIGO_COR_RACA == '02' | CODIGO_COR_RACA == '03') # Selecionando candidatos pretos e pardos (códigos 2 e 3, respectivamente).
+
+# Vejamos como ficou o banco de dados:
+View(cand_negros_2018)
+
+```
+
+Repare no uso do `%>%` (leia-se _pipe_). O _pipe_ nos permite concatenar a execução de diversas funções, de tal maneira que seja mais fácil realizar operações "simultâneas" em um banco de dados. Por exemplo, podemos filtrar os candidatos negros eleitos, e em seguida, tabelar o banco de dados para ver qual a frequência de homens e mulheres dentro deste grupo:
+
+```{r}
+tabela_sexo_negros_eleitos <- el2018 %>% 
+  filter(CODIGO_COR_RACA == '02' | CODIGO_COR_RACA == '03') %>%
+  filter(DESC_SIT_TOT_TURNO == 'ELEITO POR QP' | DESC_SIT_TOT_TURNO == 'ELEITO POR MEDIA')
+  
+table(tabela_sexo_negros_eleitos$DESCRICAO_SEXO)
+
+```
+
+## Selecionar e Ordenar
+
+Também é possível selecionar algumas variáveis por meio da função `select` e ordená-las com a função `arrange`. Digamos, por exemplo, que você queira saber quais foram os deputados federais mais votados no estado de São Paulo. Em primeiro lugar, podemos fazer uma requisição no `get_votes`, utilizando o estado como agregação regional.
+
+```{r}
+library(cepespR)
+library(dplyr)
+
+cand_2014 <- get_elections(2014, 6, regional_aggregation = "Estado")
+
+cand_2014_sp <- cand_2014 %>% 
+  filter(UF == "SP")
+```
+
+Uma vez com o nossa tabela filtrada, basta apenas ordenar os resultados. A fim de facilitar a leitura, podemos selecionar apenas as colunas relevantes. No caso, iremos utilizar a sigla do partido, o nome do candidato e a quantidade de votos.
+
+```{r}
+cand_2014_sp %>% 
+  select(SIGLA_PARTIDO, NOME_CANDIDATO, QTDE_VOTOS) %>% 
+  arrange(desc(QTDE_VOTOS))
+```

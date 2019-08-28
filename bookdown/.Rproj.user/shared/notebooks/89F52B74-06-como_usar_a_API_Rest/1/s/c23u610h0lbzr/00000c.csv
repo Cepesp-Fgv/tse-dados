@@ -1,0 +1,17 @@
+"0","requis2_df <- httr::content(requis2, 'parsed')
+"
+"2","Parsed with column specification:
+cols(
+  ANO_ELEICAO = [32mcol_double()[39m,
+  NUM_TURNO = [32mcol_double()[39m,
+  SIGLA_UE = [31mcol_character()[39m,
+  DESCRICAO_CARGO = [31mcol_character()[39m,
+  SIGLA_PARTIDO = [31mcol_character()[39m,
+  NUMERO_CANDIDATO = [32mcol_double()[39m,
+  CPF_CANDIDATO = [32mcol_double()[39m,
+  NOME_URNA_CANDIDATO = [31mcol_character()[39m,
+  DESCRICAO_SEXO = [31mcol_character()[39m,
+  DESCRICAO_COR_RACA = [31mcol_character()[39m,
+  DESC_SIT_TOT_TURNO = [31mcol_character()[39m
+)
+"

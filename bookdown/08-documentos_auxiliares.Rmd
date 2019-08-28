@@ -1,0 +1,11 @@
+# Documentos auxiliares
+
+Não se esqueça que nossos [documentos auxiliares](http://www.cepespdata.io/documentacao) podem ajudar a selecionar e manipular seus dados de interesse no CepespData. São eles:
+
+- [Dicionário de variáveis](http://www.cepespdata.io/static/docs/cepespdata_dicionario_publico.xlsx) do CepespData, que indica o nome e descrição das variáveis que constam em cada um dos bancos de dados, em Português e Inglês.
+
+- Tabela que relaciona os [códigos de municípios do TSE e do IBGE](http://www.cepespdata.io/static/docs/cod_municipios.csv)
+
+- Tabelas com o número de vagas concorridas por eleição a [Senador](http://www.cepespdata.io/static/docs/vagas_senadores.csv), [Deputado Federal e Estadual](http://www.cepespdata.io/static/docs/vagas_deputados_fed_est.csv) e a [Vereador](http://www.cepespdata.io/static/docs/vagas_vereadores.csv) -- esta última por município.
+
+- [Codebook](http://www.cepesp.io/dados/) com os códigos das categorias de cada variável e as respectivas descrições.

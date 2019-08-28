@@ -1,0 +1,99 @@
+# Como usar o site
+
+O site do [Cepespdata/FGV](cepespdata.io) permite acessar manualmente, em uma interface gráfica e amigável, os dados eleitorais. 
+
+É possível selecionar colunas, agregar por diferentes níveis regionais (de seção eleitoral a Brasil) ou de agregação política (candidato, partido, coligação) e filtrar os dados de acordo com o interesse.
+
+A seguir, apresentamos os bancos de dados hoje disponíveis no [cepespdata.io](cepespdata.io) e os que serão disponibilizados em breve, e as principais ferramentas para manipulação dos dados no próprio site.
+
+## Bancos de dados disponíveis no site do Cepespdata
+
+### Resultados de eleições por cargo
+
+Este é o banco mais completo do Cepespdata/FGV. Nele estão mesclados os bancos de **Votos**, **Perfil dos candidatos** e **Coligações** do TSE, em um longo trabalho para a criação de identificador único de candidatos, partidos e coligações que permitissem unir os bancos sem perder ou multiplicar votos. Assim contém todas as colunas desses três bancos de dados, conforme descrito nos três tópicos a seguir.
+
+Acesse aqui os [Resultados de eleições por cargo](http://cepespdata.io/consulta/tse).
+
+### Perfil dos candidatos
+
+O banco [Perfil dos candidatos](http://cepespdata.io/consulta/candidatos) contém dados referentes à identificação do candidato (Nome, número de do título eleitoral, CPF, e-mail, Nome de urna), ao perfil etário (idade e data de nascimento), perfil de gênero (sexo), étnico-racial, de escolaridade (grau de instrução) e ocupacional (profissão), à filiação partidária e ao local de de nascimento. Veja a lista completa das variáveis no [Dicionário de Variáveis do Cepespdata/FGV](http://cepespdata.io/static/docs/cepespdata_dicionario_publico.xlsx).
+
+### Coligações
+
+[A consulta às coligações](http://cepespdata.io/consulta/legendas) permite relacionar cada partido à coligação de que participou, bem como à composição dessa coligação, ou seja, quais partidos a compunham.
+
+### Votos
+
+[A consulta aos votos](http://cepespdata.io/consulta/votos) liga o número do candidato à quantidade de votos. Não é possível ver outros dados pessoais do candidato, como nome ou nome de urna neste banco. Para isso, acesse a consulta mais completa: [Resultados de eleições por cargo](http://cepespdata.io/consulta/tse).
+
+### Resumo das eleições
+
+O [Resumo da eleição](http://cepespdata.io/consulta/tse?agregacao_politica=4) é uma consulta parecida com os [Resultados de eleições por cargo](http://cepespdata.io/consulta/tse), porém mostra algumas medidas síntese da eleição, como quantidade de comparecimentos e de abstenções, de votos nominais e de legenda, quantidade de votos nulos e brancos. Está disponível para todos os cargos e para as diferentes agregações regionais.
+
+### Bens de Candidatos
+
+O banco de [bens de candidatos](http://cepespdata.io/consulta/bem_candidato) permite acessar todos os bens declarados pelos candidatos ao TSE de 2006 a 2018, isto é, descrição do bem, tipo de bem, valor declarado etc. 
+
+É necessário escolher o(s) ano(s) desejado(s) para realizar a consulta. Ainda não é possível buscar diretamente por CPF ou Título de Eleitor. Assim, antes de consultar, é bom ter em mãos os anos no qual um candidato concorreu. 
+
+O filtro por UF é opcional. Neste caso, tenha em mãos também o estado no qual determinado candidato concorreu.
+
+É possível filtrar o cargo desejado. Para encontrar candidatos que concorreram a Presidente, por exemplo, basta filtrar diretamente a coluna SIGLA_UE, inserindo no campo de busca o texto `BR`, ou, na coluna DESCRICAO_CARGO, o texto `PRESIDENTE`.
+
+### Filiados
+
+[O banco de filiados](http://cepespdata.io/consulta/filiados) contém a lista completa de filiados por Partido e Unidade Federativa (UF). É possível identificar o filiado (pelo nome e número de eleitor -- neste banco chamado de "número de inscrição"), localizar o filiado até o nível da Seção Eleitoral em que o filiado está registrado, município (inclusive com o código do IBGE) etc., e saber as datas de filiação, desfiliação, regularização da filiação e cancelamento. 
+
+Há problemas de consistência dos dados, como pessoas filiadas a dois partidos ao mesmo tempo, o que já vem do banco original do TSE. A equipe Cepespdata/FGV está trabalhando no aperfeiçoamento deste banco para a correção destas inconsistências.
+
+### Secretários
+
+[O banco de secretários](http://cepespdata.io/consulta/secretarios) contém atualmente dados de secretários estaduais e do Distrito Federal. Estão disponíveis dados de data de entrada e saída do governo, se o secretário era já funcionário público no momento da nomeação, nome da pasta que assumiu, se era filiado a algum partido, e outras informações pessoais como profissão anterior.
+
+Este é o único banco que não estava originalmente disponível no repositório do TSE. Este é um banco original do Cepespdata/FGV, construído a partir da coleta feita por pesquisadores associados e colaboradores da Rede Federativa de Pesquisadores em Diários Oficiais e outras fontes documentais, além de juntar estes com dados disponíveis na Relação Anual de Informações Sociais (RAIS) do Ministério da Economia. Você pode ler mais sobre o projeto [aqui](http://cepespdata.io/about-state-secretaries).
+
+### Bancos a serem disponibilizados
+
+Os bancos de doações de campanha, despesas eleitorais e de diretórios dos partidos serão disponibilizados em breve.
+
+## Ferramentas
+
+### Seleção dos Anos
+
+É possível selecionar mais de um ano ao mesmo tempo, pressionando a tecla `Shift` ou `Ctrl`.
+
+### Seleção de colunas
+
+As consultas no [cepespdata.io](cepespdata.io) permitem selecionar colunas de interesse do(a) usuário(a). Cada banco de dados já vem com algumas colunas-padrão selecionadas, mas não todas. 
+
+Por exemplo, a consulta [Resultado de eleições por cargo](http://cepespdata.io/consulta/tse) não vem com as colunas grau de instrução ou estado civil do candidato automaticamente selecionadas. Caso queira acessar tais informações, basta ir até o botão branco e azul **Selecionar colunas** no canto inferior esquerdo dos painel com os parâmetros da consulta, selecionar as colunas de interesse e clicar em **Atualizar tabela** (botão verde no canto inferior direito).
+
+### Filtro de colunas
+
+Selecionadas as colunas de interesse, é possível também filtrar o banco de dados a partir dos atributos de um candidato, de um partido, da região geográfica de interesse etc. Basta escrever o que deseja filtrar no campo abaixo do nome da coluna do atributo a filtrar e clicar no símbolo da lupa. Por exemplo, se desejo filtrar candidatos do PSOL a Deputado Federal em 2018, basta escrever `PSOL` no campo abaixo de SIGLA_PARTIDO.
+
+É possível **filtrar mais de uma categoria** de uma mesma coluna. Por exemplo, candidatos negros (isto é, pretos e pardos) a Deputado Federal em 2018 podem ser filtrados no banco [Perfil dos candidatos](http://cepespdata.io/consulta/candidatos) ou [Resultados de eleições por cargo](http://cepespdata.io/consulta/tse) da seguinte forma:
+
+- selecionar o cargo `Deputado Federal` e o ano `2018` 
+
+- caso esteja trabalhando com a consulta [Resultados de eleições por cargo](http://cepespdata.io/consulta/tse) e não [Perfil dos candidatos](http://cepespdata.io/consulta/candidatos), selecionar a agregação regional `Brasil` ou `UF`, a Agregação Política `Candidato`
+
+- incluir a coluna DESCRICAO_COR_RACA por meio do botão **Selecionar colunas**
+
+- feita a consulta desta forma, filtrar a coluna DESCRICAO_COR_RACA inserindo o texto `(PRETA|PARDA)` logo abaixo do nome da coluna.
+
+### Agregação Política
+
+Esta função está disponível apenas nas consultas [Resumo da eleição](http://cepespdata.io/consulta/tse?agregacao_politica=4) e [Resultado de eleições por cargo](http://cepespdata.io/consulta/tse). Ela permite que os dados sejam agregados por `Candidato`, `Partido` ou `Coligação`. Assim, é possível, por exemplo, somar os votos de uma determinada coligação (somando os votos nominais recebidos por candidatos dos partidos participantes da coligação e os votos na legenda desses mesmos partidos) em todo o Brasil, em determinado estado ou município, conforme o tópico **Agregação Regional** a seguir.
+
+### Agregação Regional 
+
+A agregação regional dos dados está disponível nas consultas [Resumo da eleição](http://cepespdata.io/consulta/tse?agregacao_politica=4), [Votos](http://cepespdata.io/consulta/votos) e [Resultado de eleições por cargo](http://cepespdata.io/consulta/tse). Ela permite agregar os votos de um candidato, partido ou coligação por seção de votação (`Votação Seção`), `Micro Região`, `Macro Região`, zona elitoral (`Zona`), `Município`, estado (`UF`) ou para o Brasil inteiro (`Brasil`).
+
+É possível, por exemplo, obter todos os votos do PSL para Deputado Estadual ao selecionar, na consulta **Resultado de eleições por cargo**, Agregação Regional `Brasil` e Agregação Política `Partido` e, em seguida, filtrar a coluna SIGLA_PARTIDO com o texto `PSL`.
+
+### Download dos dados
+
+É possível baixar os dados em CSV, já agregados e filtrados para tê-los salvos, ou para trabalhar localmente, em seu próprio computador. Basta clicar no botão verde **CSV** no canto superior direito da tabela, depois que a consulta já estiver pronta e aparecendo na sua tela.
+
+O arquivo CSV pode ser aberto por diversos *softwares* (programas), como MS Excel, R, Python, e editores de texto como Notepad (Windows) ou Gedit (Linux).

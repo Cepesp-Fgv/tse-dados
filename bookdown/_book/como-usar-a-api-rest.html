@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>8 Como usar a API REST | Como usar o CepespData/FGV</title>
+  <meta name="description" content="8 Como usar a API REST | Como usar o CepespData/FGV">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="8 Como usar a API REST | Como usar o CepespData/FGV" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="8 Como usar a API REST | Como usar o CepespData/FGV" />
+  
+  
+  
+
+<meta name="author" content="Equipe CepespData/FGV">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="como-visualizar-dados-no-r.html">
+<link rel="next" href="documentos-auxiliares.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> O CepespData</a></li>
+<li class="chapter" data-level="2" data-path="como-usar-o-site.html"><a href="como-usar-o-site.html"><i class="fa fa-check"></i><b>2</b> Como usar o site</a><ul>
+<li class="chapter" data-level="2.1" data-path="como-usar-o-site.html"><a href="como-usar-o-site.html#bancos-de-dados-disponiveis-no-site-do-cepespdata"><i class="fa fa-check"></i><b>2.1</b> Bancos de dados disponíveis no site do Cepespdata</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="como-usar-o-site.html"><a href="como-usar-o-site.html#resultados-de-eleicoes-por-cargo"><i class="fa fa-check"></i><b>2.1.1</b> Resultados de eleições por cargo</a></li>
+<li class="chapter" data-level="2.1.2" data-path="como-usar-o-site.html"><a href="como-usar-o-site.html#perfil-dos-candidatos"><i class="fa fa-check"></i><b>2.1.2</b> Perfil dos candidatos</a></li>
+<li class="chapter" data-level="2.1.3" data-path="como-usar-o-site.html"><a href="como-usar-o-site.html#coligacoes"><i class="fa fa-check"></i><b>2.1.3</b> Coligações</a></li>
+<li class="chapter" data-level="2.1.4" data-path="como-usar-o-site.html"><a href="como-usar-o-site.html#votos"><i class="fa fa-check"></i><b>2.1.4</b> Votos</a></li>
+<li class="chapter" data-level="2.1.5" data-path="como-usar-o-site.html"><a href="como-usar-o-site.html#resumo-das-eleicoes"><i class="fa fa-check"></i><b>2.1.5</b> Resumo das eleições</a></li>
+<li class="chapter" data-level="2.1.6" data-path="como-usar-o-site.html"><a href="como-usar-o-site.html#bens-de-candidatos"><i class="fa fa-check"></i><b>2.1.6</b> Bens de Candidatos</a></li>
+<li class="chapter" data-level="2.1.7" data-path="como-usar-o-site.html"><a href="como-usar-o-site.html#filiados"><i class="fa fa-check"></i><b>2.1.7</b> Filiados</a></li>
+<li class="chapter" data-level="2.1.8" data-path="como-usar-o-site.html"><a href="como-usar-o-site.html#secretarios"><i class="fa fa-check"></i><b>2.1.8</b> Secretários</a></li>
+<li class="chapter" data-level="2.1.9" data-path="como-usar-o-site.html"><a href="como-usar-o-site.html#bancos-a-serem-disponibilizados"><i class="fa fa-check"></i><b>2.1.9</b> Bancos a serem disponibilizados</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="como-usar-o-site.html"><a href="como-usar-o-site.html#ferramentas"><i class="fa fa-check"></i><b>2.2</b> Ferramentas</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="como-usar-o-site.html"><a href="como-usar-o-site.html#selecao-dos-anos"><i class="fa fa-check"></i><b>2.2.1</b> Seleção dos Anos</a></li>
+<li class="chapter" data-level="2.2.2" data-path="como-usar-o-site.html"><a href="como-usar-o-site.html#selecao-de-colunas"><i class="fa fa-check"></i><b>2.2.2</b> Seleção de colunas</a></li>
+<li class="chapter" data-level="2.2.3" data-path="como-usar-o-site.html"><a href="como-usar-o-site.html#filtro-de-colunas"><i class="fa fa-check"></i><b>2.2.3</b> Filtro de colunas</a></li>
+<li class="chapter" data-level="2.2.4" data-path="como-usar-o-site.html"><a href="como-usar-o-site.html#agregacao-politica"><i class="fa fa-check"></i><b>2.2.4</b> Agregação Política</a></li>
+<li class="chapter" data-level="2.2.5" data-path="como-usar-o-site.html"><a href="como-usar-o-site.html#agregacao-regional"><i class="fa fa-check"></i><b>2.2.5</b> Agregação Regional</a></li>
+<li class="chapter" data-level="2.2.6" data-path="como-usar-o-site.html"><a href="como-usar-o-site.html#download-dos-dados"><i class="fa fa-check"></i><b>2.2.6</b> Download dos dados</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="o-que-e-o-r.html"><a href="o-que-e-o-r.html"><i class="fa fa-check"></i><b>3</b> O que é o R?</a><ul>
+<li class="chapter" data-level="3.1" data-path="o-que-e-o-r.html"><a href="o-que-e-o-r.html#instalando-o-r-e-o-rstudio"><i class="fa fa-check"></i><b>3.1</b> Instalando o R e o RStudio</a></li>
+<li class="chapter" data-level="3.2" data-path="o-que-e-o-r.html"><a href="o-que-e-o-r.html#onde-estudar-r"><i class="fa fa-check"></i><b>3.2</b> Onde estudar R?</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="como-usar-a-api-r.html"><a href="como-usar-a-api-r.html"><i class="fa fa-check"></i><b>4</b> Como usar a API R</a><ul>
+<li class="chapter" data-level="4.1" data-path="como-usar-a-api-r.html"><a href="como-usar-a-api-r.html#instalando-o-cepespr"><i class="fa fa-check"></i><b>4.1</b> Instalando o CepespR</a></li>
+<li class="chapter" data-level="4.2" data-path="como-usar-a-api-r.html"><a href="como-usar-a-api-r.html#explorando-as-funcoes-do-cepespr"><i class="fa fa-check"></i><b>4.2</b> Explorando as funções do <em>cepespR</em></a><ul>
+<li class="chapter" data-level="4.2.1" data-path="como-usar-a-api-r.html"><a href="como-usar-a-api-r.html#perfil-dos-candidatos-get_candidates"><i class="fa fa-check"></i><b>4.2.1</b> Perfil dos candidatos <code>get_candidates</code></a></li>
+<li class="chapter" data-level="4.2.2" data-path="como-usar-a-api-r.html"><a href="como-usar-a-api-r.html#votos-por-eleicao-get_votes"><i class="fa fa-check"></i><b>4.2.2</b> Votos por eleição <code>get_votes</code></a></li>
+<li class="chapter" data-level="4.2.3" data-path="como-usar-a-api-r.html"><a href="como-usar-a-api-r.html#coligacoes-get_coalitions"><i class="fa fa-check"></i><b>4.2.3</b> Coligações <code>get_coalitions</code></a></li>
+<li class="chapter" data-level="4.2.4" data-path="como-usar-a-api-r.html"><a href="como-usar-a-api-r.html#resultado-de-eleicoes-por-cargo-get_elections"><i class="fa fa-check"></i><b>4.2.4</b> Resultado de eleições por cargo <code>get_elections</code></a></li>
+<li class="chapter" data-level="4.2.5" data-path="como-usar-a-api-r.html"><a href="como-usar-a-api-r.html#filiados-get_filiates"><i class="fa fa-check"></i><b>4.2.5</b> Filiados <code>get_filiates</code></a></li>
+<li class="chapter" data-level="4.2.6" data-path="como-usar-a-api-r.html"><a href="como-usar-a-api-r.html#bens-de-candidatos-get_assets"><i class="fa fa-check"></i><b>4.2.6</b> Bens de candidatos <code>get_assets</code></a></li>
+<li class="chapter" data-level="4.2.7" data-path="como-usar-a-api-r.html"><a href="como-usar-a-api-r.html#secretarios-get_secretaries"><i class="fa fa-check"></i><b>4.2.7</b> Secretários <code>get_secretaries</code></a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="como-usar-a-api-r.html"><a href="como-usar-a-api-r.html#utilizando-codigos-ao-inves-de-nomes"><i class="fa fa-check"></i><b>4.3</b> Utilizando códigos ao invés de nomes</a></li>
+<li class="chapter" data-level="4.4" data-path="como-usar-a-api-r.html"><a href="como-usar-a-api-r.html#filtrando-resultados"><i class="fa fa-check"></i><b>4.4</b> Filtrando resultados</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="como-usar-a-api-r.html"><a href="como-usar-a-api-r.html#selecionando-partidos-candidatos-e-estados"><i class="fa fa-check"></i><b>4.4.1</b> Selecionando partidos, candidatos e Estados</a></li>
+<li class="chapter" data-level="4.4.2" data-path="como-usar-a-api-r.html"><a href="como-usar-a-api-r.html#selecionando-colunas"><i class="fa fa-check"></i><b>4.4.2</b> Selecionando colunas</a></li>
+<li class="chapter" data-level="4.4.3" data-path="como-usar-a-api-r.html"><a href="como-usar-a-api-r.html#informacoes-para-mais-de-um-ano"><i class="fa fa-check"></i><b>4.4.3</b> Informações para mais de um ano</a></li>
+<li class="chapter" data-level="4.4.4" data-path="como-usar-a-api-r.html"><a href="como-usar-a-api-r.html#informacoes-para-mais-de-um-cargo"><i class="fa fa-check"></i><b>4.4.4</b> Informações para mais de um cargo</a></li>
+<li class="chapter" data-level="4.4.5" data-path="como-usar-a-api-r.html"><a href="como-usar-a-api-r.html#cache-das-consultas"><i class="fa fa-check"></i><b>4.4.5</b> Cache das consultas</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="como-usar-a-api-r.html"><a href="como-usar-a-api-r.html#sobrevoando-os-dados"><i class="fa fa-check"></i><b>4.5</b> Sobrevoando os dados</a></li>
+<li class="chapter" data-level="4.6" data-path="como-usar-a-api-r.html"><a href="como-usar-a-api-r.html#salvando-os-resultados"><i class="fa fa-check"></i><b>4.6</b> Salvando os resultados</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="api-r-exercicios-para-praticar.html"><a href="api-r-exercicios-para-praticar.html"><i class="fa fa-check"></i><b>5</b> API R: Exercícios para praticar</a><ul>
+<li class="chapter" data-level="5.1" data-path="api-r-exercicios-para-praticar.html"><a href="api-r-exercicios-para-praticar.html#respostas-aos-exercicios"><i class="fa fa-check"></i><b>5.1</b> Respostas aos exercícios</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="como-manipular-os-dados-no-r.html"><a href="como-manipular-os-dados-no-r.html"><i class="fa fa-check"></i><b>6</b> Como manipular os dados no R</a><ul>
+<li class="chapter" data-level="6.1" data-path="como-manipular-os-dados-no-r.html"><a href="como-manipular-os-dados-no-r.html#filtrar"><i class="fa fa-check"></i><b>6.1</b> Filtrar</a></li>
+<li class="chapter" data-level="6.2" data-path="como-manipular-os-dados-no-r.html"><a href="como-manipular-os-dados-no-r.html#selecionar-e-ordenar"><i class="fa fa-check"></i><b>6.2</b> Selecionar e Ordenar</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="como-visualizar-dados-no-r.html"><a href="como-visualizar-dados-no-r.html"><i class="fa fa-check"></i><b>7</b> Como visualizar dados no R</a><ul>
+<li class="chapter" data-level="7.1" data-path="como-visualizar-dados-no-r.html"><a href="como-visualizar-dados-no-r.html#graficos"><i class="fa fa-check"></i><b>7.1</b> Gráficos</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="como-visualizar-dados-no-r.html"><a href="como-visualizar-dados-no-r.html#grafico-de-barras"><i class="fa fa-check"></i><b>7.1.1</b> Gráfico de Barras</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="como-usar-a-api-rest.html"><a href="como-usar-a-api-rest.html"><i class="fa fa-check"></i><b>8</b> Como usar a API REST</a><ul>
+<li class="chapter" data-level="8.1" data-path="como-usar-a-api-rest.html"><a href="como-usar-a-api-rest.html#estrutura-das-resquisicoes"><i class="fa fa-check"></i><b>8.1</b> Estrutura das resquisições</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="como-usar-a-api-rest.html"><a href="como-usar-a-api-rest.html#api-rest-no-navegador"><i class="fa fa-check"></i><b>8.1.1</b> API Rest no navegador</a></li>
+<li class="chapter" data-level="8.1.2" data-path="como-usar-a-api-rest.html"><a href="como-usar-a-api-rest.html#api-rest-no-r"><i class="fa fa-check"></i><b>8.1.2</b> API Rest no R</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="documentos-auxiliares.html"><a href="documentos-auxiliares.html"><i class="fa fa-check"></i><b>9</b> Documentos auxiliares</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Como usar o CepespData/FGV</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="como-usar-a-api-rest" class="section level1">
+<h1><span class="header-section-number">8</span> Como usar a API REST</h1>
+<p>A <a href="https://github.com/Cepesp-Fgv/cepesp-rest">API Rest</a> é outra forma de acessar os dados do CepespData e pode ser utilizada em diferentes <em>softwares</em> ou programas.</p>
+<p>Aqui vamos mostrar como fazer a requisição usando apenas o navegador, o <em>web browser</em>, e usando o <strong>R</strong>.</p>
+<div id="estrutura-das-resquisicoes" class="section level2">
+<h2><span class="header-section-number">8.1</span> Estrutura das resquisições</h2>
+<p>A estrutura da consulta no browser é:</p>
+<pre><code>cepesp.io/api/consulta/athena/query?table=&lt;TABELA&gt;&amp;&lt;ARGUMENTOS&gt;</code></pre>
+<p>O argumento <code>table</code> indica qual é a base de dados que se deseja acessar: <code>tse</code> (banco <strong>Resultado de eleições por cargo</strong>), <code>candidatos</code> (banco <strong>Perfil de candidatos</strong>), <code>legendas</code> (<strong>Coligações</strong>), <code>votos</code> (banco de <strong>Votos</strong>), <code>bem_candidato</code> (<strong>Bens de candidatos</strong>), <code>secretarios</code> (<strong>Secretários</strong>) ou <code>filiados</code> (<strong>Filiados</strong>).</p>
+<p>Os demais argumentos (<code>&lt;ARGUMENTOS&gt;</code> acima) possíveis são:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Argumentos</th>
+<th>Bases de dados que suportam este argumento</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>anos</td>
+<td>tse, candidatos, legendas, votos, bem_candidato</td>
+</tr>
+<tr class="even">
+<td>cargo</td>
+<td>tse, candidatos, legendas, votos</td>
+</tr>
+<tr class="odd">
+<td>agregacao_regional</td>
+<td>tse, votos</td>
+</tr>
+<tr class="even">
+<td>agregacao_politica</td>
+<td>tse</td>
+</tr>
+<tr class="odd">
+<td>uf_filter</td>
+<td>tse, votos, bem_candidato, filiados</td>
+</tr>
+<tr class="even">
+<td>mun_filter</td>
+<td>tse, votos</td>
+</tr>
+<tr class="odd">
+<td>only_elected</td>
+<td>tse, candidatos</td>
+</tr>
+<tr class="even">
+<td>brancos</td>
+<td>tse, votos</td>
+</tr>
+<tr class="odd">
+<td>nulos</td>
+<td>tse, votos</td>
+</tr>
+<tr class="even">
+<td>name_filter</td>
+<td>secretarios</td>
+</tr>
+<tr class="odd">
+<td>goverment_period</td>
+<td>secretarios</td>
+</tr>
+<tr class="even">
+<td>party</td>
+<td>filiados</td>
+</tr>
+</tbody>
+</table>
+<p>Além disso, caso as colunas desejadas não estajam na lista de colunas-padrão da consulta de determinado banco, é possível selecionar colunas acrescentando o texto <code>&amp;c[]=&lt;COLUNA&gt;</code> ao final do link de requisição, e/ou filtrar colunas, acrescentando o texto <code>&amp;filters[&lt;COLUNA&gt;]=&lt;VALOR&gt;</code>. <em>Atenção: garanta que a coluna a ser filtrada foi devidamente selecionada.</em></p>
+<p>Por exemplo, para filtrar candidatos(as) à Presidência em 2018 que se declaram pretos(as), utilizamos o seguinte link:</p>
+<pre><code>cepesp.io/api/consulta/athena/query?table=candidatos&amp;anos=2014&amp;cargo=1&amp;c[]=ANO_ELEICAO&amp;c[]=NUM_TURNO&amp;c[]=SIGLA_UE&amp;c[]=DESCRICAO_CARGO&amp;c[]=SIGLA_PARTIDO&amp;c[]=NUMERO_CANDIDATO&amp;c[]=CPF_CANDIDATO&amp;c[]=NOME_URNA_CANDIDATO&amp;c[]=DESCRICAO_SEXO&amp;c[]=DESCRICAO_COR_RACA&amp;c[]=DESC_SIT_TOT_TURNO&amp;filters[DESCRICAO_COR_RACA]=PRETA</code></pre>
+<p>É possível acessar a lista de colunas disponíveis para cada banco de dados no nosso <a href="http://www.cepespdata.io/static/docs/cepespdata_dicionario_publico.xlsx">dicionário de variáveis</a> ou no <a href="https://github.com/Cepesp-Fgv/tse-dados/wiki/Colunas">nosso GitHub</a>.</p>
+<div id="api-rest-no-navegador" class="section level3">
+<h3><span class="header-section-number">8.1.1</span> API Rest no navegador</h3>
+<p>Quando se insere o link conforme a estrutura descrita acima no navegador, a requisição deve ser bem-sucedida. Isso pode ser verificado por meio do aviso <code>last_status:&quot;SUCCEEDED&quot;</code> que deverá aparecer no canto superior esquerdo tela.</p>
+<p>Neste caso, guarde o número do <code>id</code> devolvido pela consulta. No caso da consulta do exemplo cima: <code>id: 7738</code>.</p>
+<p>Finalmente, faça o download da requisição em formato CSV inserindo o link <code>cepesp.io/api/consulta/athena/result?id=&lt;ID&gt;&amp;ignore_version=true</code> em seu navegador, mas substituindo o termo <code>&lt;ID&gt;</code> pelo número de <code>id</code> recuperado na consulta acima. No nosso exemplo: <code>7738</code>. Ou seja, neste caso, o link a ser inserido seria:</p>
+<pre><code>cepesp.io/api/consulta/athena/result?id=7738&amp;ignore_version=true</code></pre>
+</div>
+<div id="api-rest-no-r" class="section level3">
+<h3><span class="header-section-number">8.1.2</span> API Rest no R</h3>
+<p>Utilizar a API Rest no R permite importar dados de forma mais automática e estruturada, diretamente para o ambiente <strong>R</strong>, onde eles podem ser manipulados de acordo com seu interesse.</p>
+<p>Para usar a API Rest por meio do R, você vai precisar instalar os pacotes <code>httr</code> e <code>jasonlite</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;httr&quot;</span>)
+<span class="kw">install.packages</span>(<span class="st">&quot;jsonlite&quot;</span>)</code></pre></div>
+<p>Em seguida, vamos requerir a utilização dos pacotes:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(<span class="st">&quot;httr&quot;</span>)
+<span class="kw">require</span>(<span class="st">&quot;jsonlite&quot;</span>)</code></pre></div>
+<p>E depois fazer a requisição utilizando a estrutura descrita acima em <strong>Estrutura das resquisições</strong>. Vamos usar um exemplo:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Definindo link da requisição:</span>
+link &lt;-<span class="st"> &quot;cepesp.io/api/consulta/athena/query?table=candidatos&amp;anos=2014&amp;cargo=1&amp;c[]=ANO_ELEICAO&amp;c[]=NUM_TURNO&amp;c[]=SIGLA_UE&amp;c[]=DESCRICAO_CARGO&amp;c[]=SIGLA_PARTIDO&amp;c[]=NUMERO_CANDIDATO&amp;c[]=CPF_CANDIDATO&amp;c[]=NOME_URNA_CANDIDATO&amp;c[]=DESCRICAO_SEXO&amp;c[]=DESCRICAO_COR_RACA&amp;c[]=DESC_SIT_TOT_TURNO&amp;filters[DESCRICAO_COR_RACA]=PRETA&quot;</span>
+
+<span class="co"># Fazendo requisição:</span>
+call &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw">GET</span>(<span class="st">&quot;cepesp.io/api/consulta/athena/query?table=candidatos&amp;anos=2014&amp;cargo=1&amp;c[]=ANO_ELEICAO&amp;c[]=NUM_TURNO&amp;c[]=SIGLA_UE&amp;c[]=DESCRICAO_CARGO&amp;c[]=SIGLA_PARTIDO&amp;c[]=NUMERO_CANDIDATO&amp;c[]=CPF_CANDIDATO&amp;c[]=NOME_URNA_CANDIDATO&amp;c[]=DESCRICAO_SEXO&amp;c[]=DESCRICAO_COR_RACA&amp;c[]=DESC_SIT_TOT_TURNO&amp;filters[DESCRICAO_COR_RACA]=PRETA&quot;</span>)
+
+<span class="co"># Transformando a lista em texto:</span>
+call_text &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw">content</span>(call, <span class="st">&#39;text&#39;</span>)
+
+<span class="co"># Abrindo a nossa lista JSON:</span>
+call_json &lt;-<span class="st"> </span><span class="kw">fromJSON</span>(call_text, <span class="dt">flatten =</span> <span class="ot">TRUE</span>) 
+<span class="kw">View</span>(call_json) <span class="co"># Aqui conseguimos acessar o id que contém a nossa requisição, que pode ser acessado no:</span>
+call_json<span class="op">$</span>id
+
+<span class="co"># Assim vamos importar o banco desejado inserindo o nosso id na requisição do resultado da consulta:</span>
+requis &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw">GET</span>(<span class="kw">paste0</span>(<span class="st">&#39;cepesp.io/api/consulta/athena/result?id=&#39;</span>,call_json<span class="op">$</span>id,<span class="st">&#39;&amp;ignore_version=true&#39;</span>))
+
+<span class="co"># Transformando a requisição em formato de banco de dados:</span>
+requis_df &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw">content</span>(requis, <span class="st">&#39;parsed&#39;</span>)</code></pre></div>
+<p>Assim, o objeto final <code>requis_df</code> deve conter o banco de dados desejado, que pode ser manipulado dentro do seu ambiente R e salvo conforme interesse. Veja as seções 3 e 4 deste tutorial para mais detalhes sobre a utilização do R.</p>
+<p>Para mais detalhes sobre a API Rest do CepespData/FGV, consulte nossa página no <a href="https://github.com/Cepesp-Fgv/cepesp-rest/">GitHub</a>.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="como-visualizar-dados-no-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="documentos-auxiliares.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

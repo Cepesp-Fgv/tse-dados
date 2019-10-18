@@ -45,13 +45,13 @@ cp .env.example .env
 
 Pronto! Agora já pode iniciar a aplicação
 
-## Running Web Server
+## Rodando o Servidor Web (CepespData)
 ```bash
 FLASK_APP=web/application.py python -m flask run
 ```
 
-## Running ETL
-First, edit the `etl/config.py` with the necessary options
+## Rodando o ETL
+Antes de dite o arquivo `etl/config.py` com as configurações necessárias.
 ```bash
 python -c "from etl.run import run; run()"
 ```

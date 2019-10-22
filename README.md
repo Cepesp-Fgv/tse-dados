@@ -6,13 +6,55 @@ Além de facilitar o acesso aos dados eleitorais, temos o objetivo de criar um r
 
 Sugestões, correções e demais contribuições são bem-vidas.
 
-### Instalação:
-Abra o Terminal(MacOS) ou o CMD (Windows)  e execute o seguinte codigo:
+## Pré-requisitos
+- Python 3.6 ou mais recente
 
+## Instalação
+
+Primeiro, você precisa instalar a ferramenta [virtualenv](https://virtualenv.pypa.io/en/latest/installation/)
+```bash
+pip install virtualenv
+```
+
+E então, criar um ambiente virtual.
+```bash
+cd /caminho/para/o/tse-dados
+virtualenv .venv --python=python3
+```
+
+Para ativar o seu ambiente virtual recém criado:
+
+- No Linux/MacOS:
+    ```bash
+    source .venv/bin/activate
+    ```
+- No Windows:
+    ```bash
+    ./.venv/Scripts/activate
+    ```
+
+Instale os módulos requeridos pelo sistema.
+```bash
 pip install -r requirements.txt
+```
 
-Caso não tenha o pip instalado, siga esse tuturial:
-http://willemallan.com.br/2012/02/instalando-pip-no-windows/
+Crie um arquivo `.env` e edite-o
+```bash
+cp .env.example .env
+```
+
+Pronto! Agora já pode iniciar a aplicação
+
+## Rodando o Servidor Web (CepespData)
+```bash
+FLASK_APP=web/application.py python -m flask run
+```
+
+## Rodando o ETL
+Antes de dite o arquivo `etl/config.py` com as configurações necessárias.
+```bash
+python -c "from etl.run import run; run()"
+```
 
 ### Fonte Original dos Dados:
 

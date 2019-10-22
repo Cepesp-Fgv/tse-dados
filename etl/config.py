@@ -22,10 +22,10 @@ load_dotenv(dotenv_path=os.path.join(base, '../.env'))
 
 OUTPUT = os.path.join(base, 'output')
 AUX_MUN = os.path.join(base, 'aux_mun_code.csv.gz')
-YEARS = [2000]
-JOBS = [11]
-DATABASES = ["detalhe"]
-UF = []
+YEARS = [1998, 2002, 2006]
+JOBS = [8]
+DATABASES = ["votos", "candidatos", "legendas"]
+UF = ["DF"]
 FIXES = [
     AppendExtraJobs2014(os.path.join(base, 'candidatos_2014_semvotos.gz')),
     DescricaoEleicaoFix2014(),

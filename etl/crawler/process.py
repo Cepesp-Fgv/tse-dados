@@ -20,11 +20,11 @@ class CrawlTSEDataProcess:
             'JOBS': jobs,
             'YEARS': years,
             'DATABASES': [
-                #"odsele/votacao_secao",
-                #"eleicoes/eleicoes2012/votosecao",
-                #"bem_candidato",
+                "odsele/votacao_secao",
+                "eleicoes/eleicoes2012/votosecao",
+                "bem_candidato",
                 "odsele/detalhe_votacao_secao",
-                #"eleitorado/filiados"
+                "eleitorado/filiados"
             ],
 
             'ITEM_PIPELINES': {

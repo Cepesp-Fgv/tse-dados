@@ -1,6 +1,6 @@
 from etl.process.CreateAthenaTables import CreateAthenaTables, LoadAthenaPartitions
 
-APP_ENV = 'test'
+APP_ENV = 'master'
 ATHENA_DATABASE = 'cepesp_' + APP_ENV
 ATHENA_BUCKET = 'cepesp-athena'
 ATHENA_BUCKET_FOLDER = 'source-' + APP_ENV

@@ -9,7 +9,7 @@
 
   h2 {
     margin-bottom: 30px;
-    color: #1f366a;
+    color: $secondary;
     font-size: 25px;
     line-height: 28px;
     font-weight: bolder;
@@ -19,8 +19,63 @@
 
   h4 {
     min-height: 35px;
-    color: #1f366a;
+    color: $secondary;
     font-size: 16px;
+  }
+
+  .home-navigation {
+    margin-top: 30px;
+    height: 40px;
+    background-color: $secondary;
+    width: 100%;
+    border-radius: 2px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+
+    .navigation-circle {
+      background-color: #fff;
+      border-radius: 60px;
+      width: 60px;
+      height: 60px;
+      align-self: flex-start;
+      padding: 10px 8px;
+      margin-top: -10px;
+      margin-left: -10px;
+
+      img {
+        width: 38px;
+        height: 38px;
+      }
+    }
+
+    ul {
+      list-style: none;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      padding: 10px 20px;
+      flex: auto;
+
+      li {
+        color: #fff;
+        display: flex;
+        font-size: 14px;
+
+        @include media-breakpoint-down(md) {
+          font-size: 12px !important;
+        }
+
+        a {
+          color: #fff;
+          text-decoration: none;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
   }
 
   .home-link {
@@ -57,7 +112,7 @@
         background-size: 15px;
         background: url("/static/images/icons/blue-arrow.png") no-repeat 100% 50%;
         font-family: 'Gotham Medium', sans-serif;
-        color: #1897d5;
+        color: $primary;
         font-size: 11px;
         line-height: 14px;
         font-weight: 700;
@@ -66,6 +121,7 @@
     }
 
   }
+
 
   @include media-breakpoint-up(sm) {
     .no-padding-left {

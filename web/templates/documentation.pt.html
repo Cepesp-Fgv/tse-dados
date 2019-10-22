@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+    <div class="row mt-4">
+        <div class="col-md-12">
+
+            <h1>Documentação</h1>
+            <hr>
+
+            <ul class="list-group">
+                <li class="list-group-item">
+                    Dicionário de variáveis:
+                    <ul>
+                        <li>
+                            <a href="/static/docs/cepespdata_dicionario_publico.xlsx" download>
+                                <i class="fa fa-file-excel-o mr-2"></i> cepespdata_dicionario_publico.xlsx
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="list-group-item">
+                    Tabelas auxiliares:
+                    <ul>
+                        <li>
+                            <a href="/static/docs/cod_municipios.csv" download>
+                                <i class="fa fa-file-excel-o mr-2"></i> cod_municipios.csv
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/static/docs/vagas_senadores.csv" download>
+                                <i class="fa fa-file-excel-o mr-2"></i> vagas_senadores.csv
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/static/docs/vagas_deputados_fed_est.csv" download>
+                                <i class="fa fa-file-excel-o mr-2"></i> vagas_deputados_fed_est.csv
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/static/docs/vagas_vereadores.csv" download>
+                                <i class="fa fa-file-excel-o mr-2"></i> vagas_vereadores.csv
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="list-group-item">
+                    Tutorial API R:
+                    <ul>
+                        <li>
+                            <a href="/static/docs/API_CEPESPData_abraji2019.pdf" download>
+                                <i class="fa fa-file-pdf-o mr-2"></i> API_CEPESPData_abraji2019.pdf
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/static/docs/API_CEPESPData_abraji2019_respostas.pdf" download>
+                                <i class="fa fa-file-pdf-o mr-2"></i> API_CEPESPData_abraji2019_respostas.pdf
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+
+{% endblock %}

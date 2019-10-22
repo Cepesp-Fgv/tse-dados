@@ -2,7 +2,7 @@
 
 {% block content %}
 
-    <form action="/consulta/tse" method="get" style="min-height: 600px">
+    <form action="/consulta/tse2" method="get" style="min-height: 600px">
 
         <div class="row mt-4">
             <div class="col-12">
@@ -19,20 +19,20 @@
                         <div class="row">
                             <div class="form-group col-md-3 col-xs-12">
                                 <label for="job-input">{{ gettext('pages.query.office') }}:</label>
-                                <select name="cargo" id="job-input" class="form-control" required>
-                                    <option value="1" {% if options.job == 1 %}
+                                <select name="cargo" id="job-input" class="form-control" multiple required>
+                                    <option value="1" {% if 1 in options.jobs %}
                                             selected{% endif %}>{{ gettext('query.job.1') }}</option>
-                                    <option value="3" {% if options.job == 3 %}
+                                    <option value="3" {% if 3 in options.jobs %}
                                             selected{% endif %}>{{ gettext('query.job.3') }}</option>
-                                    <option value="5" {% if options.job == 5 %}
+                                    <option value="5" {% if 5 in options.jobs %}
                                             selected{% endif %}>{{ gettext('query.job.5') }}</option>
-                                    <option value="6" {% if options.job == 6 %}
+                                    <option value="6" {% if 6 in options.jobs %}
                                             selected{% endif %}>{{ gettext('query.job.6') }}</option>
-                                    <option value="7" {% if options.job == 7 %}
+                                    <option value="7" {% if 7 in options.jobs %}
                                             selected{% endif %}>{{ gettext('query.job.7') }}</option>
-                                    <option value="11" {% if options.job == 11 %}
+                                    <option value="11" {% if 11 in options.jobs %}
                                             selected{% endif %}>{{ gettext('query.job.11') }}</option>
-                                    <option value="13" {% if options.job == 13 %}
+                                    <option value="13" {% if 13 in options.jobs %}
                                             selected{% endif %}>{{ gettext('query.job.13') }}</option>
                                 </select>
                             </div>
@@ -76,7 +76,7 @@
                             </div>
                             <div class="form-group col-md-3 col-xs-12">
                                 <label for="year-input">{{ gettext('pages.query.year') }}:</label>
-                                <select name="anos" id="year-input" class="form-control" multiple required>
+                                <select name="anos" id="year-input" class="form-control not-change-year" multiple required>
                                     {% for x in years %}
                                         <option value="{{ x }}"{% if x in options.years %}
                                                 selected{% endif %}>{{ x }}</option>

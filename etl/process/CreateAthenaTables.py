@@ -25,6 +25,10 @@ class CreateAthenaTables:
         self.client = AthenaDatabaseClient(self.database, self.bucket, "results")
 
     def create_detalhe(self):
+        for aggregation in self.aggregations.keys():
+            self.create_detalhe_reg(aggregation)
+
+    def create_detalhe_reg(self, reg):
         # <editor-fold desc="detalhe = {...}" defaultstate="collapsed">
         detalhe = {
 
@@ -212,11 +216,11 @@ class CreateAthenaTables:
 
         }
         # </editor-fold>
-        for (aggregation, columns) in detalhe.items():
-            name = self.aggregations[aggregation]
-            table = f"detalhe_{name}"
-            folder = f"detalhe/{name}"
-            self._create_table(table, columns, folder, ['p_ano', 'p_cargo'])
+        columns = detalhe[reg]
+        name = self.aggregations[reg]
+        table = f"detalhe_{name}"
+        folder = f"detalhe/{name}"
+        self._create_table(table, columns, folder, ['p_ano', 'p_cargo'])
 
     def create_candidatos(self):
         # <editor-fold desc="self._create_table('candidatos', [...])" defaultstate="collapsed">

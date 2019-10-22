@@ -91,10 +91,9 @@ class AthenaDatabaseClient:
         return s3_obj['Body']
 
     def read(self, query_id, nrows=None, skiprows=0) -> pd.DataFrame:
-        file_path = f"s3://{self.output_bucket}/{self.output_directory}/{query_id}.csv"
-        header = pd.read_csv(file_path, sep=',', dtype=str, nrows=0)
-        columns = [c.upper() for c in header.columns.tolist()]
-        df = pd.read_csv(file_path, sep=',', dtype=str, names=columns, nrows=nrows, skiprows=1 + skiprows)
+        s3_obj = self._get_obj(query_id)
+        df = pd.read_csv(s3_obj['Body'], sep=',', header=0, dtype=str, nrows=nrows, skiprows=skiprows)
+        df.columns = [x.upper() for x in df.columns]
 
         return df
 

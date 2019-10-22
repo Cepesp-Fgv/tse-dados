@@ -1,63 +1,96 @@
 import axios from 'axios';
 
-function getQuery(params) {
-    let promise = axios.get('/api/consulta/athena/query', {
+async function getQuery(params) {
+    let response = await axios.get('/api/consulta/athena/query', {
         params,
         paramsSerializer: (p) => $.param(p),
     });
-    
-    return promise.then((response) => {
-        return {
-            id: response.data.id,
-            sql: response.data.sql,
-            name: response.data.name,
-            table: params.table,
-            start: params.start,
-            length: params.length
-        };
-    });
+
+    return {
+        id: response.data.id,
+        sql: response.data.sql,
+        name: response.data.name,
+        table: params.table,
+        start: params.start,
+        length: params.length
+    };
 }
 
-function getStatus(query_id) {
+async function getStatus(query_id) {
     let params = {id: query_id};
-    let promise = axios.get('/api/consulta/athena/status', {params});
-    
-    return promise.then((response) => {
-        let {status, message} = response.data;
-        return [status, message];
-    });
+    let response = await axios.get('/api/consulta/athena/status', {params});
+    let {status, message} = response.data;
+
+    return [status, message];
 }
 
-function getResult(query_id, start, length) {
+async function getResult(query_id, start, length, format) {
     let params = {
         id: query_id,
         start: start,
         length: length,
-        format: 'json',
+        format: format || 'json',
         ignore_version: true
     };
-    let promise = axios.get('/api/consulta/athena/result', {params});
+    let response = await axios.get('/api/consulta/athena/result', {params});
 
-    return promise.then((response) => {
-        return response.data;
-    });
+    return response.data;
 }
 
-function getColumns(params) {
-    let promise = axios.get('/api/consulta/athena/columns', {
+async function getColumns(params) {
+    let response = await axios.get('/api/consulta/athena/columns', {
         params,
         paramsSerializer: (p) => $.param(p),
     });
 
-    return promise.then((response) => {
-        return {
-            'columns': response.data.columns || [],
-            'translated_columns': response.data.translated_columns || {},
-            'default_columns': response.data.default_columns || [],
-            'descriptions': response.data.descriptions || {},
-        }
-    });
+    return {
+        'columns': response.data.columns || [],
+        'translated_columns': response.data.translated_columns || {},
+        'default_columns': response.data.default_columns || [],
+        'descriptions': response.data.descriptions || {},
+    }
 }
+
+
+async function runQuery(params, onStatusUpdateCallback, sleepDelay) {
+    let info = await startQuery(params, onStatusUpdateCallback, sleepDelay);
+    let results = await getResult(info.id, info.start, info.length, params.format);
+    return {info, results};
+}
+
+
+async function startQuery(params, onStatusUpdateCallback, sleepDelay) {
+    let info = await getQuery(params);
+    let status = "QUEUED";
+    let message = "";
+    let sleep = sleepDelay || 1000;
+    let total = 0;
+
+    while (status === "RUNNING" || status === "QUEUED") {
+        if (onStatusUpdateCallback) onStatusUpdateCallback(status, message, total);
+
+        await wait(sleep); total += sleep;
+
+        let [newStatus, newMessage] = await getStatus(info.id);
+        status = newStatus;
+        message = newMessage;
+    }
+
+    if (onStatusUpdateCallback) onStatusUpdateCallback(status, message, total);
+
+    return info;
+}
+
+
+async function lambdaQuery(params) {
+    let response = await axios.get('https://api.cepespdata.io/api/query/result', {
+        params,
+        paramsSerializer: (p) => $.param(p),
+    });
+
+    return response.data;
+}
+
 
 function getYears(job) {
     switch (parseInt(job)) {
@@ -81,4 +114,4 @@ function getYears(job) {
     }
 }
 
-export default {getQuery, getStatus, getResult, getYears, getColumns};
+export default {getQuery, getStatus, getResult, getYears, getColumns, runQuery, startQuery, lambdaQuery};

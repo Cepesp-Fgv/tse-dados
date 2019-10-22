@@ -42,18 +42,8 @@
 
                     </div>
 
-                    <div class="card-footer">
-                        <button class="btn btn-success" type="submit">
-                            <i class="fa fa-play mr-2"></i>
-                            {{ gettext('pages.home.query') }}
-                        </button>
+                    {% include "partials/query-footer.html" %}
 
-                        <button class="btn btn-outline-primary" type="button" data-target="#columns-modal"
-                                data-toggle="modal">
-                            <i class="fa fa-list mr-md-2"></i>
-                            {{ gettext('pages.query.add-columns') }}
-                        </button>
-                    </div>
                 </div>
 
                 {% include "partials/table-result.html" %}
@@ -75,6 +65,7 @@
         var TRANSLATED_COLUMNS = {{ options.translated_columns|tojson }};
         var DEFAULT_FILTERS = {{ options.filters|tojson }};
         var LANG = '{{ lang }}';
+        var QUERY_MODE = '{{ mode }}';
         var TABLE = 'filiados';
 
         {% if show %}

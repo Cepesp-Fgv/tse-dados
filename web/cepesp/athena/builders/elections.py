@@ -2,176 +2,177 @@ from web.cepesp.utils.request import trim
 from web.cepesp.athena.builders.base import AthenaBuilder
 from web.cepesp.columns.tse import ElectionsColumnsSelector
 
+votos_cols = {
+
+    # BR
+    0: [
+        "ANO_ELEICAO",
+        "NUM_TURNO",
+        "DESCRICAO_ELEICAO",
+        "CODIGO_CARGO",
+        "DESCRICAO_CARGO",
+        "NUMERO_CANDIDATO",
+        "QTDE_VOTOS",
+    ],
+
+    # MACRO
+    1: [
+        "ANO_ELEICAO",
+        "CODIGO_MACRO",
+        "NOME_MACRO",
+        "NUM_TURNO",
+        "DESCRICAO_ELEICAO",
+        "CODIGO_CARGO",
+        "DESCRICAO_CARGO",
+        "NUMERO_CANDIDATO",
+        "QTDE_VOTOS"
+    ],
+
+    # UF
+    2: [
+        "ANO_ELEICAO",
+        "UF",
+        "NOME_UF",
+        "CODIGO_MACRO",
+        "NOME_MACRO",
+        "NUM_TURNO",
+        "DESCRICAO_ELEICAO",
+        "CODIGO_CARGO",
+        "DESCRICAO_CARGO",
+        "NUMERO_CANDIDATO",
+        "QTDE_VOTOS"
+    ],
+
+    # MESO
+    4: [
+        "ANO_ELEICAO",
+        "CODIGO_MESO",
+        "NOME_MESO",
+        "UF",
+        "NOME_UF",
+        "CODIGO_MACRO",
+        "NOME_MACRO",
+        "NUM_TURNO",
+        "DESCRICAO_ELEICAO",
+        "CODIGO_CARGO",
+        "DESCRICAO_CARGO",
+        "NUMERO_CANDIDATO",
+        "QTDE_VOTOS"
+    ],
+
+    # MICRO
+    5: [
+        "ANO_ELEICAO",
+        "CODIGO_MICRO",
+        "NOME_MICRO",
+        "CODIGO_MESO",
+        "NOME_MESO",
+        "UF",
+        "NOME_UF",
+        "CODIGO_MACRO",
+        "NOME_MACRO",
+        "NUM_TURNO",
+        "DESCRICAO_ELEICAO",
+        "CODIGO_CARGO",
+        "DESCRICAO_CARGO",
+        "NUMERO_CANDIDATO",
+        "QTDE_VOTOS"
+    ],
+
+    # MUNICIPIO
+    6: [
+        "ANO_ELEICAO",
+        "COD_MUN_TSE",
+        "COD_MUN_IBGE",
+        "NOME_MUNICIPIO",
+        "CODIGO_MICRO",
+        "NOME_MICRO",
+        "CODIGO_MESO",
+        "NOME_MESO",
+        "UF",
+        "NOME_UF",
+        "CODIGO_MACRO",
+        "NOME_MACRO",
+        "NUM_TURNO",
+        "DESCRICAO_ELEICAO",
+        "CODIGO_CARGO",
+        "DESCRICAO_CARGO",
+        "NUMERO_CANDIDATO",
+        "QTDE_VOTOS"
+    ],
+
+    # MUNZONA
+    7: [
+        "ANO_ELEICAO",
+        "NUM_ZONA",
+        "COD_MUN_TSE",
+        "COD_MUN_IBGE",
+        "NOME_MUNICIPIO",
+        "CODIGO_MICRO",
+        "NOME_MICRO",
+        "CODIGO_MESO",
+        "NOME_MESO",
+        "UF",
+        "NOME_UF",
+        "CODIGO_MACRO",
+        "NOME_MACRO",
+        "NUM_TURNO",
+        "DESCRICAO_ELEICAO",
+        "CODIGO_CARGO",
+        "DESCRICAO_CARGO",
+        "NUMERO_CANDIDATO",
+        "QTDE_VOTOS"
+    ],
+
+    # ZONA
+    8: [
+        "ANO_ELEICAO",
+        "NUM_ZONA",
+        "CODIGO_MICRO",
+        "NOME_MICRO",
+        "CODIGO_MESO",
+        "NOME_MESO",
+        "UF",
+        "NOME_UF",
+        "CODIGO_MACRO",
+        "NOME_MACRO",
+        "NUM_TURNO",
+        "DESCRICAO_ELEICAO",
+        "CODIGO_CARGO",
+        "DESCRICAO_CARGO",
+        "NUMERO_CANDIDATO",
+        "QTDE_VOTOS"
+    ],
+
+    # VOTACAO SECAO
+    9: [
+        "ANO_ELEICAO",
+        "NUM_SECAO",
+        "NUM_ZONA",
+        "CODIGO_MICRO",
+        "NOME_MICRO",
+        "CODIGO_MESO",
+        "NOME_MESO",
+        "UF",
+        "NOME_UF",
+        "CODIGO_MACRO",
+        "NOME_MACRO",
+        "COD_MUN_TSE",
+        "COD_MUN_IBGE",
+        "NOME_MUNICIPIO",
+        "NUM_TURNO",
+        "DESCRICAO_ELEICAO",
+        "CODIGO_CARGO",
+        "DESCRICAO_CARGO",
+        "NUMERO_CANDIDATO",
+        "QTDE_VOTOS"
+    ]
+
+}
+
 
 class ElectionsQueryBuilder(AthenaBuilder):
     # region Columns
-    votos = {
-
-        # BR
-        0: [
-            "ANO_ELEICAO",
-            "NUM_TURNO",
-            "DESCRICAO_ELEICAO",
-            "CODIGO_CARGO",
-            "DESCRICAO_CARGO",
-            "NUMERO_CANDIDATO",
-            "QTDE_VOTOS",
-        ],
-
-        # MACRO
-        1: [
-            "ANO_ELEICAO",
-            "CODIGO_MACRO",
-            "NOME_MACRO",
-            "NUM_TURNO",
-            "DESCRICAO_ELEICAO",
-            "CODIGO_CARGO",
-            "DESCRICAO_CARGO",
-            "NUMERO_CANDIDATO",
-            "QTDE_VOTOS"
-        ],
-
-        # UF
-        2: [
-            "ANO_ELEICAO",
-            "UF",
-            "NOME_UF",
-            "CODIGO_MACRO",
-            "NOME_MACRO",
-            "NUM_TURNO",
-            "DESCRICAO_ELEICAO",
-            "CODIGO_CARGO",
-            "DESCRICAO_CARGO",
-            "NUMERO_CANDIDATO",
-            "QTDE_VOTOS"
-        ],
-
-        # MESO
-        4: [
-            "ANO_ELEICAO",
-            "CODIGO_MESO",
-            "NOME_MESO",
-            "UF",
-            "NOME_UF",
-            "CODIGO_MACRO",
-            "NOME_MACRO",
-            "NUM_TURNO",
-            "DESCRICAO_ELEICAO",
-            "CODIGO_CARGO",
-            "DESCRICAO_CARGO",
-            "NUMERO_CANDIDATO",
-            "QTDE_VOTOS"
-        ],
-
-        # MICRO
-        5: [
-            "ANO_ELEICAO",
-            "CODIGO_MICRO",
-            "NOME_MICRO",
-            "CODIGO_MESO",
-            "NOME_MESO",
-            "UF",
-            "NOME_UF",
-            "CODIGO_MACRO",
-            "NOME_MACRO",
-            "NUM_TURNO",
-            "DESCRICAO_ELEICAO",
-            "CODIGO_CARGO",
-            "DESCRICAO_CARGO",
-            "NUMERO_CANDIDATO",
-            "QTDE_VOTOS"
-        ],
-
-        # MUNICIPIO
-        6: [
-            "ANO_ELEICAO",
-            "COD_MUN_TSE",
-            "COD_MUN_IBGE",
-            "NOME_MUNICIPIO",
-            "CODIGO_MICRO",
-            "NOME_MICRO",
-            "CODIGO_MESO",
-            "NOME_MESO",
-            "UF",
-            "NOME_UF",
-            "CODIGO_MACRO",
-            "NOME_MACRO",
-            "NUM_TURNO",
-            "DESCRICAO_ELEICAO",
-            "CODIGO_CARGO",
-            "DESCRICAO_CARGO",
-            "NUMERO_CANDIDATO",
-            "QTDE_VOTOS"
-        ],
-
-        # MUNZONA
-        7: [
-            "ANO_ELEICAO",
-            "NUM_ZONA",
-            "COD_MUN_TSE",
-            "COD_MUN_IBGE",
-            "NOME_MUNICIPIO",
-            "CODIGO_MICRO",
-            "NOME_MICRO",
-            "CODIGO_MESO",
-            "NOME_MESO",
-            "UF",
-            "NOME_UF",
-            "CODIGO_MACRO",
-            "NOME_MACRO",
-            "NUM_TURNO",
-            "DESCRICAO_ELEICAO",
-            "CODIGO_CARGO",
-            "DESCRICAO_CARGO",
-            "NUMERO_CANDIDATO",
-            "QTDE_VOTOS"
-        ],
-
-        # ZONA
-        8: [
-            "ANO_ELEICAO",
-            "NUM_ZONA",
-            "CODIGO_MICRO",
-            "NOME_MICRO",
-            "CODIGO_MESO",
-            "NOME_MESO",
-            "UF",
-            "NOME_UF",
-            "CODIGO_MACRO",
-            "NOME_MACRO",
-            "NUM_TURNO",
-            "DESCRICAO_ELEICAO",
-            "CODIGO_CARGO",
-            "DESCRICAO_CARGO",
-            "NUMERO_CANDIDATO",
-            "QTDE_VOTOS"
-        ],
-
-        # VOTACAO SECAO
-        9: [
-            "ANO_ELEICAO",
-            "NUM_SECAO",
-            "NUM_ZONA",
-            "CODIGO_MICRO",
-            "NOME_MICRO",
-            "CODIGO_MESO",
-            "NOME_MESO",
-            "UF",
-            "NOME_UF",
-            "CODIGO_MACRO",
-            "NOME_MACRO",
-            "COD_MUN_TSE",
-            "COD_MUN_IBGE",
-            "NOME_MUNICIPIO",
-            "NUM_TURNO",
-            "DESCRICAO_ELEICAO",
-            "CODIGO_CARGO",
-            "DESCRICAO_CARGO",
-            "NUMERO_CANDIDATO",
-            "QTDE_VOTOS"
-        ]
-
-    }
 
     candidatos = [
         'SIGLA_UE',
@@ -246,18 +247,27 @@ class ElectionsQueryBuilder(AthenaBuilder):
 
     def _build_inner_query(self):
         reg = self.arg('reg')
+        pol = self.arg('pol')
         years = "', '".join(map(str, self.arg('years')))
 
-        columns = [c for c in self.votos[reg] if c != 'QTDE_VOTOS']
+        columns = [c for c in votos_cols[reg] if c != 'QTDE_VOTOS']
+        if pol != 2:
+            columns = [c for c in columns if c != 'NUMERO_CANDIDATO']
+
         group_columns = ", ".join(map(str, range(1, len(columns) + 2)))
         columns = ", ".join([f"{c} AS {c}" for c in columns])
+        extra_columns = [
+            "SUBSTRING(NUMERO_CANDIDATO, 1, 2) AS NUMERO_PARTIDO",
+            "MAX(ID_LEGENDA) AS ID_LEGENDA",
+            "SUM(QTDE_VOTOS) AS QTDE_VOTOS"
+        ]
+        if pol == 2:
+            extra_columns = ["ID_CANDIDATO"] + extra_columns
+
+        extra_columns = ", ".join(extra_columns)
 
         return f'''
-            SELECT {columns},
-                ID_CANDIDATO,
-                SUBSTRING(NUMERO_CANDIDATO, 1, 2) AS NUMERO_PARTIDO,
-                MAX(ID_LEGENDA) AS ID_LEGENDA,
-                SUM(QTDE_VOTOS) AS QTDE_VOTOS
+            SELECT {columns}, {extra_columns}
             FROM {self.table_name('votos')}
             WHERE {self._build_filter_job()}
             AND p_ano IN (\'{years}\')
@@ -302,7 +312,7 @@ class ElectionsQueryBuilder(AthenaBuilder):
     def _map_column(self, column):
         reg = self.arg('reg')
         pol = self.arg('pol')
-        if column in (self.votos[reg] + ['ID_CANDIDATO', 'ID_LEGENDA']):
+        if column in (votos_cols[reg] + ['ID_CANDIDATO', 'ID_LEGENDA']):
             return f"v.{column}"
         elif column in self.candidatos and pol == 2:
             return f"c.{column}"
@@ -337,6 +347,98 @@ class ElectionsQueryBuilder(AthenaBuilder):
             return "WHERE " + "\n AND ".join(where)
         else:
             return ""
+    # endregion
+
+
+class ElectionsCoalitionsQueryBuilder(AthenaBuilder):
+    # region Columns
+
+    coligacao = [
+        "SIGLA_UE",
+        "DESCRICAO_UE",
+        "SIGLA_COLIGACAO",
+        "NOME_COLIGACAO",
+        "COMPOSICAO_COLIGACAO",
+    ]
+
+    # endregion
+
+    def __init__(self, **options):
+        super().__init__(**options)
+        self.selector = ElectionsColumnsSelector(3, self.arg('reg'), self.arg('job'))
+
+    def build(self):
+        vot_table = self.table_name('votos')
+        columns = self._build_select()
+        group_columns = ", ".join(map(str, range(1, len(columns))))
+        columns = ", ".join(columns)
+
+        return f'''
+            SELECT {columns}
+            FROM {vot_table} as v
+            LEFT JOIN legendas as l ON v.ID_LEGENDA = l.ID_LEGENDA AND v.ANO_ELEICAO = l.ANO_ELEICAO
+            {self._build_where()}
+            GROUP BY {group_columns}
+            {self._build_order_by()}
+        '''
+
+    def _build_select(self):
+        columns = self.selected_columns()
+
+        for i in range(len(columns)):
+            if columns[i] == "QTDE_VOTOS":
+                columns[i] = "SUM(v.QTDE_VOTOS) AS QTDE_VOTOS"
+            else:
+                columns[i] = f"{self._map_column(columns[i])} AS {columns[i]}"
+
+        return columns
+
+    def _map_column(self, column):
+        reg = self.arg('reg')
+        if column in (votos_cols[reg] + ['ID_LEGENDA']):
+            return f"v.{column}"
+        elif column in self.coligacao:
+            return f"l.{column}"
+        else:
+            return column
+
+    # region def _build_where(self): [...]
+    def _build_where(self):
+        where = self._build_base_filters()
+
+        years = "', '".join(map(str, self.arg('years')))
+        where.append(f"v.p_ano IN (\'{years}\')")
+
+        job = self.arg('job')
+        if job == 7:
+            where.append("(v.p_cargo = '7' OR v.p_cargo = '8')")
+        else:
+            where.append(f"(v.p_cargo = '{job}')")
+
+        reg = self.arg('reg')
+        uf = self.opt('uf_filter')
+        if reg >= 2 and uf:
+            years = self.arg('years')
+            if 2018 in years or 2014 in years or 2002 in years:
+                return where.append(f"UF = '{uf}'")
+            else:
+                return where.append(f"p_uf = '{uf}'")
+
+        where.append("v.NUMERO_CANDIDATO <> '97'")
+
+        if not self.opt('brancos', True):
+            where.append("v.NUMERO_CANDIDATO <> '95'")
+
+        if not self.opt('nulos', True):
+            where.append("v.NUMERO_CANDIDATO <> '96'")
+
+        if self.opt('turno'):
+            where.append(f"v.NUM_TURNO = \'{self.options['turno']}\'")
+
+        if self.opt('mun_filter'):
+            where.append(f"v.COD_MUN_TSE = \'{self.options['mun_filter']}\'")
+
+        return "WHERE " + "\n AND ".join(where)
     # endregion
 
 

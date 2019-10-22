@@ -43,13 +43,16 @@ $(() => {
 });
 
 jobInput.change(function () {
+    if (yearInput.hasClass('not-change-year'))
+        return;
+
     let cargo = $(this).val();
     let selected = yearInput.val();
     let years = cepesp.getYears(cargo);
     yearInput.html('');
 
     for (let i = 0; i < years.length; i++) {
-        let s = selected.includes(parseInt(years[i])) ? ' selected' : '';
+        let s = selected.indexOf(`${years[i]}`) !== -1 ? 'selected' : '';
         yearInput.append(`<option value="${years[i]}" ${s}>${years[i]}</option>`);
     }
 });
@@ -147,10 +150,11 @@ function toggleUfFilter() {
 }
 
 function toggleBrancosNulos() {
-    if (parseInt(politicalAggregationInput.val()) === 4) {
-        brancosNulosRegion.hide('slow');
-    } else {
+    let pol = parseInt(politicalAggregationInput.val())
+    if (pol === 2 || pol == 1) {
         brancosNulosRegion.show('slow');
+    } else {
+        brancosNulosRegion.hide('slow');
     }
 }
 
@@ -202,12 +206,22 @@ function headerCol(i) {
     return table.find('th:eq(' + i + ')');
 }
 
-function download(queryId) {
+function downloadWithAthenas(queryId) {
     toastr.success('Your query download has began, please wait for a few minute...', 'Downloading CSV');
 
     $.fileDownload('/api/consulta/athena/result', {
         data: {id: queryId, ignore_version: true}
     });
+}
+
+function downloadWithLambda() {
+    let data = getQueryData();
+    data.length = -1;
+    data.start = 0;
+    data.format = 'csv';
+    toastr.success('Your query download has began, please wait for a few minute...', 'Downloading CSV');
+
+    $.fileDownload('https://api.cepespdata.io/api/query', {data});
 }
 
 function downloadSql() {
@@ -276,11 +290,13 @@ function getQueryData(dataTable) {
 
     q.table = window.TABLE;
     q.draw = dt.draw;
-    q.start = dt.start;
-    q.length = dt.length;
+    q.start = 0;
+    q.length = 25;
     q.format = "json";
-    q.cargo = jobInput.val();
     q.c = getSelectedColumns();
+
+    if (jobInput.length > 0)
+        q.cargo = jobInput.val();
 
     if (yearInput.length > 0)
         q.anos = yearInput.val();
@@ -332,51 +348,9 @@ function getQueryData(dataTable) {
 
     q.lang = LANG;
 
+    q.mode = QUERY_MODE || "athenas";
+
     return q;
-}
-
-
-function showQueryResult(query, callback, status, sleep, message) {
-    status = status || "QUEUED";
-    sleep = sleep || 1000;
-
-    if (status === "RUNNING" || status === "QUEUED") {
-
-        downloadBtn.prop('disabled', true);
-
-        wait(sleep).then(() => {
-            cepesp
-                .getStatus(query.id)
-                .then(function ([new_status, new_message]) {
-                    showQueryResult(query, callback, new_status, sleep * 2, new_message);
-                })
-                .catch(showErrorResult);
-        })
-
-    } else if (status === "SUCCEEDED") {
-
-        downloadBtn
-            .unbind('click')
-            .prop('disabled', false)
-            .click(() => download(query.id));
-
-        progressMessage.hide();
-        completeMessage.show();
-
-        cepesp
-            .getResult(query.id, query.start, query.length)
-            .catch(showErrorResult)
-            .then(function (data) {
-
-                $('#query-table_wrapper').fadeIn();
-                completeMessage.fadeOut();
-                callback(data);
-
-            });
-
-    } else {
-        showErrorResult(new Error(message));
-    }
 }
 
 function showErrorResult(error) {
@@ -400,6 +374,18 @@ function showErrorResult(error) {
 }
 
 
+function onQueryStatusUpdate(status, message, elapsed) {
+    if (status === "RUNNING" || status === "QUEUED") {
+        downloadBtn.prop('disabled', true).unbind('click');
+    } else if (status === "SUCCEEDED") {
+        progressMessage.hide();
+        completeMessage.show();
+    } else {
+        showErrorResult(new Error(message));
+    }
+}
+
+
 function initializeTable() {
 
     let cols = [];
@@ -415,18 +401,43 @@ function initializeTable() {
         ajax: function (params, callback) {
             $('#query-table_wrapper').fadeOut();
             progressMessage.fadeIn();
-            cepesp
-                .getQuery(getQueryData(params))
-                .catch(showErrorResult)
-                .then(function (query) {
-                    showQueryResult(query, callback);
+
+            if (QUERY_MODE === "lambda") {
+                downloadBtn.prop('disabled', false).unbind('click').click((e) => {
+                    e.preventDefault();
+                    downloadWithLambda();
                 });
+
+                cepesp
+                    .lambdaQuery(getQueryData(params))
+                    .catch(showErrorResult)
+                    .then(function (data) {
+                        $('#query-table_wrapper').fadeIn();
+                        progressMessage.fadeOut();
+                        callback(data);
+                    });
+            } else  {
+                cepesp
+                    .runQuery(getQueryData(params), onQueryStatusUpdate)
+                    .catch(showErrorResult)
+                    .then(function ({info, results}) {
+                        $('#query-table_wrapper').fadeIn();
+                        completeMessage.fadeOut();
+                        callback(results);
+
+                        downloadBtn.prop('disabled', false).unbind('click').click((e) => {
+                            e.preventDefault();
+                            downloadWithAthenas(info.id);
+                        });
+
+                    });
+            }
         },
         processing: true,
         ordering: false,
         serverSide: true,
         columns: cols,
-        pagingType: 'simple_numbers',
+        paging: false,
         bInfo: false,
         responsive: false,
         initComplete: function () {

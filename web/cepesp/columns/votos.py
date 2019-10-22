@@ -3,8 +3,6 @@ class VotesColumnsSelector:
 
         # BR
         0: [
-            "DATA_GERACAO",
-            "HORA_GERACAO",
             "ANO_ELEICAO",
             "NUM_TURNO",
             "DESCRICAO_ELEICAO",
@@ -16,8 +14,6 @@ class VotesColumnsSelector:
 
         # MACRO
         1: [
-            "DATA_GERACAO",
-            "HORA_GERACAO",
             "ANO_ELEICAO",
             "CODIGO_MACRO",
             "NOME_MACRO",
@@ -31,8 +27,6 @@ class VotesColumnsSelector:
 
         # UF
         2: [
-            "DATA_GERACAO",
-            "HORA_GERACAO",
             "ANO_ELEICAO",
             "UF",
             "NOME_UF",
@@ -49,8 +43,6 @@ class VotesColumnsSelector:
 
         # MESO
         4: [
-            "DATA_GERACAO",
-            "HORA_GERACAO",
             "ANO_ELEICAO",
             "CODIGO_MESO",
             "NOME_MESO",
@@ -69,8 +61,6 @@ class VotesColumnsSelector:
 
         # MICRO
         5: [
-            "DATA_GERACAO",
-            "HORA_GERACAO",
             "ANO_ELEICAO",
             "CODIGO_MICRO",
             "NOME_MICRO",
@@ -91,8 +81,6 @@ class VotesColumnsSelector:
 
         # MUNICIPIO
         6: [
-            "DATA_GERACAO",
-            "HORA_GERACAO",
             "ANO_ELEICAO",
             "COD_MUN_TSE",
             "COD_MUN_IBGE",
@@ -116,8 +104,6 @@ class VotesColumnsSelector:
 
         # MUNZONA
         7: [
-            "DATA_GERACAO",
-            "HORA_GERACAO",
             "ANO_ELEICAO",
             "NUM_ZONA",
             "COD_MUN_TSE",
@@ -142,8 +128,6 @@ class VotesColumnsSelector:
 
         # ZONA
         8: [
-            "DATA_GERACAO",
-            "HORA_GERACAO",
             "ANO_ELEICAO",
             "NUM_ZONA",
             "CODIGO_MICRO",
@@ -165,8 +149,6 @@ class VotesColumnsSelector:
 
         # VOTACAO SECAO
         9: [
-            "DATA_GERACAO",
-            "HORA_GERACAO",
             "ANO_ELEICAO",
             "NUM_SECAO",
             "NUM_ZONA",

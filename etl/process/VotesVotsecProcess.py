@@ -88,6 +88,9 @@ class VotesVotsecProcess:
         else:
             idx = ["ANO_ELEICAO", "CODIGO_CARGO", "NUMERO_CANDIDATO", "NUM_TURNO", "SIGLA_UE"]
 
+        if item['uf'] == 'DF':
+            df.loc[df['CODIGO_CARGO'] == '8', 'SIGLA_UE'] = 'DF'
+
         cand = cand.drop_duplicates(idx)
 
         df = df.set_index(idx)

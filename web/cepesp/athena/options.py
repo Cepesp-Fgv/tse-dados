@@ -12,7 +12,8 @@ from web.cepesp.columns.secretarios import SecretariesColumnsSelector
 from werkzeug.exceptions import BadRequest
 
 from web.cepesp.utils.data import JOBS, REG, POL
-from web.cepesp.utils.request import get_request_years, get_selected_columns, get_request_filters, request_get
+from web.cepesp.utils.request import get_request_years, get_selected_columns, get_request_filters, request_get, \
+    request_get_list
 
 
 class AthenaQueryOptions:
@@ -22,6 +23,7 @@ class AthenaQueryOptions:
         self.reg = request_get('agregacao_regional', 0, int)
         self.pol = request_get('agregacao_politica', 2, int)
         self.job = request_get('cargo', 1, int)
+        self.jobs = request_get_list('cargo', int)
         self.years = get_request_years(self.job) if self.table != 'filiados' else None
         self.uf_filter = request_get('uf_filter', request_get('uf'))
         self.mun_filter = request_get('mun_filter', request_get('mun'))

@@ -88,7 +88,7 @@ msgid "pages.home.party_affiliation"
 msgstr "Party affiliation"
 
 msgid "pages.home.party_affiliation.description"
-msgstr "Browse party affiliation lists. Available by party and state."
+msgstr "Browse party affiliates. Optional filter for state is available. Cepespdata/FGV party affiliation data last updated in November 2018. Updates of this database happens annually."
 
 msgid "pages.home.state_secretaries"
 msgstr "State secretaries"
@@ -147,6 +147,18 @@ msgstr "Browse different electoral datasets by office. Aggregations of votes can
 msgid "pages.home.query"
 msgstr "Browse"
 
+msgid "pages.home.getting-started"
+msgstr "Getting started"
+
+msgid "pages.home.aux-tables"
+msgstr "Auxiliary tables"
+
+msgid "pages.home.var-dict"
+msgstr "Variables dictionary"
+
+msgid "pages.home.read-me"
+msgstr "Read me"
+
 msgid "pages.votosmun.title"
 msgstr "Votes"
 
@@ -163,7 +175,7 @@ msgid "pages.filiados.title"
 msgstr "Party affiliation data"
 
 msgid "pages.filiados.description"
-msgstr "Browse party affiliates. Optional filter for state is available."
+msgstr "Browse party affiliates. Optional filter for state is available. Cepespdata/FGV party affiliation data last updated in November 2018. Updates of this database happens annually."
 
 #: templates/query.html:40
 msgid "pages.query.office"
@@ -171,6 +183,9 @@ msgstr "Office"
 
 msgid "pages.query.job"
 msgstr "Position"
+
+msgid "pages.query.preview"
+msgstr "Preview"
 
 #: templates/query.html:53
 msgid "pages.query.regional"
@@ -263,6 +278,9 @@ msgstr "Cepesp Data"
 
 msgid "layout.menu.tutorial"
 msgstr "Tutorial"
+
+msgid "layout.menu.documentation"
+msgstr "Documentation"
 
 #: templates/layout.html:64
 

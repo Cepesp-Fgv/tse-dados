@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+  <loc>http://cepespdata.io/</loc>
+  <lastmod>2019-08-10T20:53:19+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>http://cepespdata.io/sobre</loc>
+  <lastmod>2019-08-10T20:53:19+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://cepespdata.io/consulta/tse</loc>
+  <lastmod>2019-08-10T20:53:19+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://cepespdata.io/consulta/candidatos</loc>
+  <lastmod>2019-08-10T20:53:19+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://cepespdata.io/consulta/legendas</loc>
+  <lastmod>2019-08-10T20:53:19+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://cepespdata.io/consulta/votos</loc>
+  <lastmod>2019-08-10T20:53:19+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://cepespdata.io/consulta/bem_candidato</loc>
+  <lastmod>2019-08-10T20:53:19+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://cepespdata.io/consulta/filiados</loc>
+  <lastmod>2019-08-10T20:53:19+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://cepespdata.io/consulta/secretarios</loc>
+  <lastmod>2019-08-10T20:53:19+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://cepespdata.io/consulta/tse?agregacao_politica=4</loc>
+  <lastmod>2019-08-10T20:53:19+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://cepespdata.io/others</loc>
+  <lastmod>2019-08-10T20:53:19+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://cepespdata.io/about-state-secretaries</loc>
+  <lastmod>2019-08-10T20:53:19+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+
+
+</urlset>

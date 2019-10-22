@@ -741,8 +741,6 @@ class ElectionsColumnsSelector:
             'ANO_ELEICAO',
             'NUM_TURNO',
             'DESCRICAO_ELEICAO',
-            'SIGLA_UE',
-            'DESCRICAO_UE',
             'CODIGO_CARGO',
             'DESCRICAO_CARGO',
             'SIGLA_COLIGACAO',
@@ -758,8 +756,6 @@ class ElectionsColumnsSelector:
             'CODIGO_MACRO',
             'NOME_MACRO',
             'DESCRICAO_ELEICAO',
-            'SIGLA_UE',
-            'DESCRICAO_UE',
             'CODIGO_CARGO',
             'DESCRICAO_CARGO',
             'SIGLA_COLIGACAO',
@@ -777,8 +773,6 @@ class ElectionsColumnsSelector:
             'CODIGO_MACRO',
             'NOME_MACRO',
             'DESCRICAO_ELEICAO',
-            'SIGLA_UE',
-            'DESCRICAO_UE',
             'CODIGO_CARGO',
             'DESCRICAO_CARGO',
             'SIGLA_COLIGACAO',
@@ -798,8 +792,6 @@ class ElectionsColumnsSelector:
             'CODIGO_MACRO',
             'NOME_MACRO',
             'DESCRICAO_ELEICAO',
-            'SIGLA_UE',
-            'DESCRICAO_UE',
             'CODIGO_CARGO',
             'DESCRICAO_CARGO',
             'SIGLA_COLIGACAO',
@@ -821,8 +813,6 @@ class ElectionsColumnsSelector:
             'CODIGO_MACRO',
             'NOME_MACRO',
             'DESCRICAO_ELEICAO',
-            'SIGLA_UE',
-            'DESCRICAO_UE',
             'CODIGO_CARGO',
             'DESCRICAO_CARGO',
             'SIGLA_COLIGACAO',
@@ -847,8 +837,6 @@ class ElectionsColumnsSelector:
             'CODIGO_MACRO',
             'NOME_MACRO',
             'DESCRICAO_ELEICAO',
-            'SIGLA_UE',
-            'DESCRICAO_UE',
             'CODIGO_CARGO',
             'DESCRICAO_CARGO',
             'SIGLA_COLIGACAO',
@@ -873,8 +861,6 @@ class ElectionsColumnsSelector:
             'CODIGO_MACRO',
             'NOME_MACRO',
             'DESCRICAO_ELEICAO',
-            'SIGLA_UE',
-            'DESCRICAO_UE',
             'CODIGO_CARGO',
             'DESCRICAO_CARGO',
             'SIGLA_COLIGACAO',
@@ -897,8 +883,6 @@ class ElectionsColumnsSelector:
             'CODIGO_MACRO',
             'NOME_MACRO',
             'DESCRICAO_ELEICAO',
-            'SIGLA_UE',
-            'DESCRICAO_UE',
             'CODIGO_CARGO',
             'DESCRICAO_CARGO',
             'SIGLA_COLIGACAO',
@@ -924,8 +908,6 @@ class ElectionsColumnsSelector:
             'CODIGO_MACRO',
             'NOME_MACRO',
             'DESCRICAO_ELEICAO',
-            'SIGLA_UE',
-            'DESCRICAO_UE',
             'CODIGO_CARGO',
             'DESCRICAO_CARGO',
             'SIGLA_COLIGACAO',
@@ -1169,7 +1151,7 @@ class ElectionsColumnsSelector:
         elif self.pol == 1:
             return self.columns_legenda_list[self.reg] + ["ID_LEGENDA"]
         elif self.pol == 3:
-            return self.columns_coligacao_list[self.reg] + ["ID_LEGENDA"]
+            return self.columns_coligacao_list[self.reg]
         elif self.pol == 4:
             return self.columns_detalhe_list[self.reg]
 
@@ -1229,5 +1211,4 @@ class ElectionsColumnsSelector:
             return ["QTDE_VOTOS"]
 
     def order_by_columns(self):
-        return ['UF', 'NUM_ZONA', 'NUM_TURNO', 'SIGLA_PARTIDO', 'NOME_CANDIDATO', 'COMPOSICAO_COLIGACAO',
-                'COMPOSICAO_COLIGACAO', 'COD_MUN_IBGE']
+        return ['UF', 'NUM_ZONA', 'NUM_TURNO', 'SIGLA_PARTIDO', 'NOME_CANDIDATO', 'COMPOSICAO_COLIGACAO', 'COD_MUN_IBGE']

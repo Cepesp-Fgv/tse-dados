@@ -88,7 +88,7 @@ msgid "pages.home.party_affiliation"
 msgstr "Filiados"
 
 msgid "pages.home.party_affiliation.description"
-msgstr "Contém a lista de filiadas e filiados a cada partido para o ano e nível territorial desejado.										"
+msgstr "Consulta à lista de filiados de cada partido, com filtro opcional por estado. Última atualização dos dados de filiação no Cepespdata/FGV: novembro/2018. A atualização da base de filiados ocorrerá anualmente."
 
 msgid "pages.home.state_secretaries"
 msgstr "Secretários"
@@ -147,6 +147,18 @@ msgstr "Consulta às bases de dados relativas às eleições especificando um ca
 msgid "pages.home.query"
 msgstr "Consultar"
 
+msgid "pages.home.getting-started"
+msgstr "Como começar"
+
+msgid "pages.home.aux-tables"
+msgstr "Tabelas auxiliares"
+
+msgid "pages.home.var-dict"
+msgstr "Dicionário de variáveis"
+
+msgid "pages.home.read-me"
+msgstr "Leia-me"
+
 #: templates/query.html:27
 msgid "pages.query.title"
 msgstr "Resultados das eleições por cargo"
@@ -154,6 +166,9 @@ msgstr "Resultados das eleições por cargo"
 #: templates/query.html:33
 msgid "pages.query.description"
 msgstr "Este formulário permite efetuar consultas às bases de dados relativas as eleições especificando um cargo eletivo. As consultas podem ser também agregadas por partido e nível regional."
+
+msgid "pages.query.preview"
+msgstr "Pré-visualizar"
 
 msgid "pages.votosmun.title"
 msgstr "Votos"
@@ -171,7 +186,7 @@ msgid "pages.filiados.title"
 msgstr "Filiados"
 
 msgid "pages.filiados.description"
-msgstr "Consulta à lista de filiados de cada partido, com filtro opcional por estado."
+msgstr "Consulta à lista de filiados de cada partido, com filtro opcional por estado. Última atualização dos dados de filiação no Cepespdata/FGV: novembro/2018. A atualização da base de filiados ocorrerá anualmente."
 
 #: templates/query.html:40
 msgid "pages.query.office"
@@ -271,6 +286,9 @@ msgstr "Cepesp Data"
 
 msgid "layout.menu.tutorial"
 msgstr "Tutorial"
+
+msgid "layout.menu.documentation"
+msgstr "Documentação"
 
 #: templates/layout.html:69
 msgid "layout.menu.integration"
@@ -1060,7 +1078,7 @@ msgid "pages.candidates.description"
 msgstr "Consulta às informações de perfil de candidato e situação eleitoral"
 
 msgid "pages.secretarios.title"
-msgstr "Consultar secretários"
+msgstr "Secretários"
 
 msgid "pages.secretarios.description"
 msgstr "Consulta à lista de secretários estaduais por período e estado. Para saber mais sobre os dados, consulte a <a href=\"/about-state-secretaries\">descrição do projeto</a>."

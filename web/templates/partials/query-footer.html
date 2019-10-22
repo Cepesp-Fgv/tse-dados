@@ -1,0 +1,25 @@
+<div class="card-footer d-flex flex-row">
+
+    <div class="input-group">
+        <div class="input-group-append">
+            <span class="input-group-text d-none d-md-block"> <i class="fa fa-play"></i></span>
+            <span class="input-group-text d-none d-lg-block"> <small>{{ gettext('pages.query.preview') }}:</small> </span>
+        </div>
+        <div class="input-group-append">
+            <button class="btn {% if mode == "athenas" %} btn-primary {% else %} btn-outline-primary {% endif %}" type="submit" name="mode" value="athenas">
+                AWS Athenas
+            </button>
+
+            <button class="btn {% if mode == "lambda" %} btn-success {% else %} btn-outline-success {% endif %}" type="submit" name="mode" value="lambda">
+                AWS Lambda
+            </button>
+        </div>
+    </div>
+
+    <button class="btn btn-outline-primary align-end" style="width: 300px" type="button" data-target="#columns-modal"
+            data-toggle="modal">
+        <i class="fa fa-list mr-md-2"></i>
+        {{ gettext('pages.query.add-columns') }}
+    </button>
+
+</div>

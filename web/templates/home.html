@@ -8,12 +8,26 @@
                 <img src="{{ 'images/logoFapesp.png'|asset }}" alt="" height="25px"/>
                 <h2>CEPESP DATA</h2>
                 <div class="row">
+
                     <div class="col-md-10">
                         <p class="text-justify">
                             {{ gettext('pages.home.welcome-description') }}
                         </p>
 
-                        <div class="row" style="margin-top: 80px">
+                        <div class="home-navigation d-none d-sm-flex">
+                            <div class="navigation-circle">
+                                <img src="{{ 'images/icons/getting-started.png'|asset }}" alt=""/>
+                            </div>
+                            <ul>
+                                <li><b>Material de apoio: </b></li>
+                                <li><a href="https://cepesp-fgv.github.io/tse-dados/">{{ gettext('pages.home.getting-started') }}</a></li>
+                                <li><a href="http://www.cepesp.io/dados/">{{ gettext('pages.home.read-me') }}</a></li>
+                                <li><a href="/static/docs/cepespdata_dicionario_publico.xlsx" download>{{ gettext('pages.home.var-dict') }}</a></li>
+                                <li><a href="/documentacao">{{ gettext('pages.home.aux-tables') }}</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="row" style="margin-top: 10px">
                             <div class="col-md-4 col-lg-3" style="margin-top: 20px">
                                 <h4>{{ gettext('pages.home.elections') }}</h4>
 
@@ -111,8 +125,7 @@
 
                                 <a href="/consulta/secretarios" class="home-link"
                                    data-toggle="tooltip" data-placement="left"
-                                   title="{{ gettext('pages.home.state_secretaries.description') }}"
-                                >
+                                   title="{{ gettext('pages.home.state_secretaries.description') }}">
                                     <div class="home-link-header">
                                         <img src="{{ 'images/icons/state_secretaries_v2.png'|asset }}" alt=""/>
                                     </div>
@@ -178,7 +191,6 @@
                                 </a>
                             </div>
                         </div>
-                        </p>
                     </div>
 
                 </div>

@@ -30,7 +30,7 @@ def request_get_list(key, item_type: Type = str, split=None, default=None):
 
     value = request.args.getlist(key)
     if value and len(items) == 0:
-        items = [item_type(escape(item)) for item in value if split not in item]
+        items = [item_type(escape(item)) for item in value]
 
     value = request.args.get(key)
     if split and value:

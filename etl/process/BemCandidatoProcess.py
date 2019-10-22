@@ -2,8 +2,7 @@ import os
 from _csv import QUOTE_ALL
 from glob import glob
 import pandas as pd
-
-from utils.data import resolve_conflicts
+from etl.process.utillities import resolve_conflicts
 
 
 class BemCandidatoProcess:

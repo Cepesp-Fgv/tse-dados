@@ -1,8 +1,5 @@
-import gzip
 from _csv import QUOTE_ALL
 from io import BytesIO
-from tempfile import NamedTemporaryFile
-from flask import jsonify
 import pandas as pd
 from flask import send_file
 

@@ -30,7 +30,7 @@
     "datatables.net-responsive-bs4": "^2.2.3",
     "font-awesome": "^4.7.0",
     "fuse.js": "^3.4.4",
-    "jquery": "^3.3.1",
+    "jquery": "^3.4.0",
     "jquery-file-download": "^1.4.6",
     "popper.js": "^1.14.7",
     "toastr": "^2.1.4"
